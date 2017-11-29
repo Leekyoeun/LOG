@@ -1,27 +1,23 @@
 package com.hongsup.explog.view.sign;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.hongsup.explog.R;
-import com.hongsup.explog.domain.ResponseBody;
-import com.hongsup.explog.domain.User;
+import com.hongsup.explog.data.domain.ResponseBody;
+import com.hongsup.explog.data.domain.User;
+import com.hongsup.explog.service.ServiceGenerator;
+import com.hongsup.explog.service.SignAPI;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.Body;
-import retrofit2.http.POST;
 
 public class SignUpActivity extends AppCompatActivity {
     @BindView(R.id.btnSignUp)
@@ -54,7 +50,7 @@ public class SignUpActivity extends AppCompatActivity {
                 user.username = etNickName.getText().toString();
                 user.img_profile = null;
 
-                SignUpAPI signUpAPI = SignUpAPI.retrofit.create(SignUpAPI.class);
+                SignAPI signUpAPI = ServiceGenerator.create(SignAPI.class);
 
                 Call<ResponseBody> call = signUpAPI.insertUser(user);
                 call.enqueue(new Callback<ResponseBody>() {
@@ -76,22 +72,4 @@ public class SignUpActivity extends AppCompatActivity {
         });
     }
 
-    interface SignUpAPI{
-        String signUpUrl = "http://explog-project-dev.ap-northeast-2.elasticbeanstalk.com";
-
-        @POST("/member/signup/")
-        public Call<ResponseBody> insertUser(
-                @Body User user
-        );
-
-        Gson gson = new GsonBuilder()
-                .serializeNulls()
-                .setLenient()
-                .create();
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(signUpUrl)
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build();
-    }
 }
