@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/signLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="com.hongsup.explog.view.sign.SignInActivity">
+
+    <ImageView
+        android:id="@+id/imgSign"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Logo -->
+    <TextView
+        android:layout_width="270dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:gravity="center"
+        android:text="@string/explog"
+        android:textColor="@color/colorMain"
+        android:textSize="45sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.2" />
+
+    <!-- 로그인 및 회원가입 Layout-->
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.8">
+
+        <!-- 로그인 Button Layout-->
+        <LinearLayout
+            android:id="@+id/startLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btnFacebook"
+                android:layout_width="270dp"
+                android:layout_height="40dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/btn_sign_facebook_selecter"
+                android:text="@string/sign_facebook"
+                android:textColor="@color/colorWhite" />
+
+            <Button
+                android:id="@+id/btnEmail"
+                android:layout_width="270dp"
+                android:layout_height="40dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/btn_sign_email_selecter"
+                android:text="@string/sign_email"
+                android:textColor="@color/colorWhite" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/inputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <!-- style 과 app:theme 둘 다 지정해야 한다.-->
+            <!-- style 만으로는 colorControlNormal 과 colorControlActivated 의 적용이 안됨.-->
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/editEmail"
+                style="@style/SignEditText"
+                android:layout_width="270dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:hint="Email"
+                android:inputType="textEmailSubject"
+                app:backgroundTint="@color/colorMain"
+                android:singleLine="true" />
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/editPassword"
+                style="@style/SignEditText"
+                android:layout_width="270dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:hint="Password"
+                app:backgroundTint="@color/colorMain"
+                android:inputType="textPassword"
+                android:singleLine="true" />
+
+            <Button
+                android:id="@+id/btnStart"
+                android:layout_width="270dp"
+                android:layout_height="40dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/btn_sign_email_selecter"
+                android:text="@string/sign_start"
+                android:textColor="@color/colorWhite" />
+
+        </LinearLayout>
+
+        <!-- 회원가입 Layout-->
+        <View
+            android:layout_width="270dp"
+            android:layout_height="1dp"
+            android:layout_margin="5dp"
+            android:background="#7FFFFFFF" />
+
+        <TextView
+            android:id="@+id/txtSignUp"
+            android:layout_width="270dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:text="@string/txt_sing_up"
+            android:textColor="@color/colorWhite"
+            android:textStyle="italic" />
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
