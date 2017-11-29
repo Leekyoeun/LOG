@@ -1,4 +1,4 @@
-package com.hongsup.explog.domain;
+package com.hongsup.explog.data.domain;
 
 public class User {
     public String password1;
