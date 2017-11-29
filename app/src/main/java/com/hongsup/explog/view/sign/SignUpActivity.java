@@ -6,7 +6,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.hongsup.explog.R;
 import com.hongsup.explog.data.domain.ResponseBody;
 import com.hongsup.explog.data.domain.User;
@@ -30,6 +33,10 @@ public class SignUpActivity extends AppCompatActivity {
     EditText etPasswordConfirm;
     @BindView(R.id.etNickName)
     EditText etNickName;
+    @BindView(R.id.imgProfile)
+    ImageView imgProfile;
+    @BindView(R.id.imgBackground)
+    ImageView imgBackground;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,9 +44,26 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
         ButterKnife.bind(this);
         setListener();
+        setBackground();
+    }
+
+    private void setBackground(){
+        Glide.with(this)
+                .load(R.drawable.signup)
+                .fitCenter()
+                .centerCrop()
+                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                .into(imgBackground);
     }
 
     private void setListener(){
+        imgProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //ContentResolver를 이용하여 사진 불러오기 해야 함
+            }
+        });
+
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
