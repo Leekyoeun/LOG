@@ -1,4 +1,4 @@
-package com.hongsup.explog;
+package com.hongsup.explog.view.sign;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import android.widget.EditText;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.hongsup.explog.R;
 import com.hongsup.explog.domain.ResponseBody;
 import com.hongsup.explog.domain.User;
 
