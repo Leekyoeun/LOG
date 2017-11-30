@@ -1,4 +1,4 @@
-package com.hongsup.explog.data.domain;
+package com.hongsup.explog.data.sign;
 
 import com.google.gson.annotations.Expose;
 

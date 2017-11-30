@@ -1,7 +1,7 @@
 package com.hongsup.explog.service;
 
-import com.hongsup.explog.data.domain.SignIn;
-import com.hongsup.explog.data.domain.SignUp;
+import com.hongsup.explog.data.sign.SignIn;
+import com.hongsup.explog.data.sign.SignUp;
 
 import io.reactivex.Observable;
 import retrofit2.Response;

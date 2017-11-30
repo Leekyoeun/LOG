@@ -25,7 +25,7 @@ public class ServiceGenerator {
      * Retrofit2 생성
      *
      * @param className
-     * @param gson : 변경되는 gson을 보내는 매개변수
+     * @param gson : Custom Gson 객체
      * @param <I>
      * @return
      */
@@ -35,7 +35,6 @@ public class ServiceGenerator {
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
-
         return retrofit.create(className);
     }
 
