@@ -1,4 +1,4 @@
-package com.hongsup.explog.view.sign;
+package com.hongsup.explog.view.splash;
 
 import android.content.Intent;
 import android.os.Build;
@@ -9,6 +9,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.hongsup.explog.R;
+import com.hongsup.explog.view.signin.SignInActivity;
 
 public class SplashActivity extends AppCompatActivity {
 

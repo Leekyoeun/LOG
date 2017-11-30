@@ -1,9 +1,10 @@
 package com.hongsup.explog.service;
 
-import com.hongsup.explog.data.domain.ResponseBody;
-import com.hongsup.explog.data.domain.User;
+import com.hongsup.explog.data.sign.SignIn;
+import com.hongsup.explog.data.sign.SignUp;
 
-import retrofit2.Call;
+import io.reactivex.Observable;
+import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
 
@@ -14,8 +15,16 @@ import retrofit2.http.POST;
 public interface SignAPI {
 
     @POST("/member/signup/")
-    Call<ResponseBody> insertUser(
-            @Body User user
-    );
+    Observable<Response<SignUp>> singUp(@Body SignUp signUp);
+
+//    @POST("/member/signup/")
+//    Call<SignUp> singUp(@Body User user);
+
+    @POST("/member/login/")
+    Observable<Response<SignIn>> signIn(@Body SignIn signIn);
+
+//    @POST("/login/")
+//    Call<SingIn> singIn(@Body User user);
+
 
 }

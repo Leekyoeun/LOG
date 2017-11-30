@@ -6,4 +6,6 @@
     <string name="sign_start">시작하기</string>
     <string name="txt_sing_up">아직 회원이 아니신가요?　<b><u>이메일</u></b>로 회원가입</string>
     <string name="explog"><b>E x p l o g</b></string>
+    <string name="sign_up">회원가입</string>
+
 </resources>
