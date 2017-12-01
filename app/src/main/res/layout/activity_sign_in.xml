@@ -5,8 +5,7 @@
     android:id="@+id/signLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context="com.hongsup.explog.view.sign.SignInActivity">
+    tools:context="com.hongsup.explog.view.signin.SignInActivity">
 
     <ImageView
         android:id="@+id/imgSign"
@@ -133,5 +132,6 @@
             android:textColor="@color/colorWhite"
             android:textStyle="italic" />
     </LinearLayout>
+
 
 </android.support.constraint.ConstraintLayout>

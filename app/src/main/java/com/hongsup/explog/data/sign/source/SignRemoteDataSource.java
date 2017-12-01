@@ -40,7 +40,7 @@ public class SignRemoteDataSource implements SignSource{
 
     @Override
     public Observable<Response<SignUp>> singUp(SignUp signUp) {
-        return signUpAPI.singUp(signUp);
+        return signUpAPI.signUp(signUp);
     }
 
     @Override
