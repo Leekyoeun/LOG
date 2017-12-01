@@ -3,6 +3,7 @@
     package="com.hongsup.explog">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -24,8 +25,11 @@
             android:name=".view.signin.SignInActivity"
             android:theme="@style/NoStatusBarTheme"
             android:windowSoftInputMode="adjustResize"></activity>
-        <activity android:name=".view.signup.SignUpActivity" />
+        <activity android:name=".view.signup.SignUpActivity"
+            android:theme="@style/NoStatusBarTheme"/>
         <activity android:name=".view.main.MainActivity"></activity>
+        <activity android:name=".view.gallery.GalleryActivity"
+            android:theme="@style/NoStatusBarThemeForGallery"/>
     </application>
 
 </manifest>
