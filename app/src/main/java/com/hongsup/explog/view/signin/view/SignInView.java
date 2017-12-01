@@ -19,8 +19,8 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.hongsup.explog.R;
 import com.hongsup.explog.data.sign.SignIn;
 import com.hongsup.explog.view.main.MainActivity;
-import com.hongsup.explog.view.signup.SignUpActivity;
 import com.hongsup.explog.view.signin.contract.SignInContract;
+import com.hongsup.explog.view.signup.SignUpActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -113,8 +113,8 @@ public class SignInView implements SignInContract.iView {
         startLayout.setVisibility(View.GONE);
         inputLayout.setVisibility(View.VISIBLE);
         changeEditTextBias(true);
-    }
 
+    }
     @OnClick(R.id.btnStart)
     public void singIn() {
         if(TextUtils.isEmpty(editEmail.getText().toString())){

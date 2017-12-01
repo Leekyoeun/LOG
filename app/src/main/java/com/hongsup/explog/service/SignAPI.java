@@ -15,7 +15,7 @@ import retrofit2.http.POST;
 public interface SignAPI {
 
     @POST("/member/signup/")
-    Observable<Response<SignUp>> singUp(@Body SignUp signUp);
+    Observable<Response<SignUp>> signUp(@Body SignUp signUp);
 
 //    @POST("/member/signup/")
 //    Call<SignUp> singUp(@Body User user);

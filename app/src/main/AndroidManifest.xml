@@ -14,18 +14,36 @@
         <activity
             android:name=".view.splash.SplashActivity"
             android:theme="@style/SplashTheme">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+        </activity>
+        <activity
+            android:name=".view.signin.SignInActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".view.signup.SignUpActivity" />
+        <activity
+            android:name=".view.main.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <!--<intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>-->
+        </activity>
+        <activity
+            android:name=".view.sample.SampleActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".view.signin.SignInActivity"
-            android:theme="@style/NoStatusBarTheme"
-            android:windowSoftInputMode="adjustResize"></activity>
-        <activity android:name=".view.signup.SignUpActivity" />
-        <activity android:name=".view.main.MainActivity"></activity>
     </application>
 
 </manifest>
