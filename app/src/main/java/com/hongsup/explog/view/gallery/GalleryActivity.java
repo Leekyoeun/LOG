@@ -137,7 +137,6 @@ public class GalleryActivity extends BaseActivity implements GalleryListener {
         Log.d("클릭되었습니다", "클릭");
 
         Photo photo = galleryAdapter.getPhotoList().get(position);
-
         List<Photo> selectPhotoList = galleryAdapter.getSelectPhotoList();
 
         if (selectPhotoList.contains(photo)) {
@@ -145,6 +144,11 @@ public class GalleryActivity extends BaseActivity implements GalleryListener {
         } else {
             galleryAdapter.addSelectPhotoList(photo);
         }
+
+        if(selectPhotoList.size()==2){
+            galleryAdapter.removeSelectPhotoList(galleryAdapter.getSelectPhotoList().get(0));
+        }
+
     }
 
     @Override
