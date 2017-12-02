@@ -74,11 +74,11 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.Holder> 
      */
     public void addSelectPhotoList(Photo photo) {
         // 10 보다 작을 때
-        if(selectPhotoList.size() < 1){
+        if (selectPhotoList.size() < 10) {
             selectPhotoList.add(photo);
             notifyItemChanged(photoList.indexOf(photo));
             galleryListener.changeView(selectPhotoList.size());
-        }else{
+        } else {
             galleryListener.selectError();
         }
     }
@@ -117,6 +117,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.Holder> 
             holder.setLayout(View.INVISIBLE);
         }
     }
+
     @Override
     public int getItemCount() {
         return photoList.size();
@@ -149,7 +150,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.Holder> 
         }
 
         void setImageView(String path) {
-            Log.e("GalleryActivity", "setImageView: 호출 " );
+            Log.e("GalleryActivity", "setImageView: 호출 ");
             Glide.with(context)
                     .load(path)
                     .centerCrop()

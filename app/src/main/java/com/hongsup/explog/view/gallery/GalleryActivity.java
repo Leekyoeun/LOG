@@ -62,6 +62,7 @@ public class GalleryActivity extends BaseActivity implements GalleryListener {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+        
 
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
