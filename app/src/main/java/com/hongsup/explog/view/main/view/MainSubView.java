@@ -1,14 +1,11 @@
 package com.hongsup.explog.view.main.view;
 
 import android.content.Context;
-import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,8 +34,6 @@ public class MainSubView extends FrameLayout {
     public RecyclerView recyclerView;
     @BindView(R.id.relativeLayout)
     public RelativeLayout relativeLayout;
-    @BindView(R.id.nestedScrollView)
-    NestedScrollView nestedScrollView;
 
     public MainSubView(@NonNull Context context) {
         super(context);
@@ -59,19 +54,6 @@ public class MainSubView extends FrameLayout {
     }
 
     private void process() {
-
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            nestedScrollView.setOnScrollChangeListener(new OnScrollChangeListener() {
-                @Override
-                public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-                    Log.e(TAG, "onScrollChange: scrollX" + scrollX);
-                    Log.e(TAG, "onScrollChange: scrollY" + scrollY);
-                    Log.e(TAG, "onScrollChange: oldScrollX" + oldScrollX);
-                    Log.e(TAG, "onScrollChange: oldScrollY" + oldScrollY);
-                }
-            });
-        }
 
         List<String> data = new ArrayList<>();
 

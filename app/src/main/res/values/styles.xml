@@ -1,31 +1,35 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorWhite</item>
-        <item name="colorPrimaryDark">@color/colorWhite</item>
+        <item name="colorPrimaryDark">@android:color/transparent</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorAccent">@color/colorMain</item>
     </style>
 
-    <style name="AppTheme.NoActionBar">
+    <style name="AppTheme.NoStatusBar">
         <!--Theme 의 StatusBar 투명하게 처리하기 위한 방법-->
-        <item name="android:windowContentOverlay">@null</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:windowContentOverlay">@null</item>
         <item name="windowActionBarOverlay">true</item>
     </style>
 
     <!-- EditText 스타일 지정-->
     <style name="SignEditText" parent="Widget.AppCompat.EditText">
         <item name="colorControlNormal">@color/colorMain</item> <!--포커스 되어있지 않은 경우의 밑줄 부분-->
-        <item name="colorControlActivated">@color/colorMain</item> <!--손끝으로 터치되어 있는 부분. text selection handle라고 부른다고 한다-->
-        <item name="android:textCursorDrawable">@color/colorMain</item> <!--커서 색. drawable 지정되지만, 색을 설정하는것도 된다-->
+        <item name="colorControlActivated">@color/colorMain
+        </item> <!--손끝으로 터치되어 있는 부분. text selection handle라고 부른다고 한다-->
+        <item name="android:textCursorDrawable">@color/colorMain
+        </item> <!--커서 색. drawable 지정되지만, 색을 설정하는것도 된다-->
         <item name="android:textColor">@color/colorWhite</item> <!--텍스트 색-->
         <item name="android:textColorHint">@color/colorMain</item> <!--입력전의 Hint (포커스 Holder)-->
         <item name="android:textColorHighlight">@color/colorMain</item> <!--텍스트 선택색-->
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" >
+    </style>
 </resources>
