@@ -64,6 +64,8 @@ public class SignInView implements SignInContract.iView {
     @BindView(R.id.progressBarLayout)
     RelativeLayout progressBarLayout;
 
+    private boolean startFlag;
+
     private View view;
     private Context context;
     private SignInContract.iPresenter presenter;
@@ -121,11 +123,6 @@ public class SignInView implements SignInContract.iView {
     @Override
     public void setPresenter(SignInContract.iPresenter presenter) {
         this.presenter = presenter;
-
-
-        /**
-         * 데이터를 로드하는 구간이 있으면 여기서 로드한다.
-         */
     }
 
     @Override
@@ -150,6 +147,21 @@ public class SignInView implements SignInContract.iView {
         ((Activity) context).finish();
     }
 
+    @Override
+    public boolean isInputEmail() {
+        return startFlag;
+    }
+
+    @Override
+    public void layoutReset() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            TransitionManager.beginDelayedTransition(signLayout);
+        }
+        startLayout.setVisibility(View.VISIBLE);
+        inputLayout.setVisibility(View.GONE);
+        startFlag = false;
+    }
+
     @OnTextChanged(value = R.id.editEmail, callback = OnTextChanged.Callback.TEXT_CHANGED)
     public void detectEmailChange(CharSequence charSequence, int i, int i1, int i2) {
         if (VerificationUtil.isValidEmail(charSequence.toString())) {
@@ -160,7 +172,6 @@ public class SignInView implements SignInContract.iView {
     public void detectPasswordChange(CharSequence charSequence, int i, int i1, int i2) {
         if (VerificationUtil.isValidPassword(charSequence.toString())) {
         }
-        ;
     }
 
     @OnClick(R.id.btnFacebook)
@@ -183,6 +194,7 @@ public class SignInView implements SignInContract.iView {
         }
         startLayout.setVisibility(View.GONE);
         inputLayout.setVisibility(View.VISIBLE);
+        startFlag = true;
     }
 
     @OnClick(R.id.btnStart)
@@ -257,7 +269,6 @@ public class SignInView implements SignInContract.iView {
             TransitionManager.beginDelayedTransition(signLayout);
         }
 
-
         if (flag) {
             ConstraintSet set = new ConstraintSet();
             set.clone(signLayout);
@@ -269,6 +280,5 @@ public class SignInView implements SignInContract.iView {
             set.setVerticalBias(R.id.linearLayout, 0.8F);
             set.applyTo(signLayout);
         }
-
     }
 }
