@@ -7,7 +7,7 @@ import com.google.gson.GsonBuilder;
 import com.hongsup.explog.data.sign.SignIn;
 import com.hongsup.explog.data.sign.SignUp;
 import com.hongsup.explog.service.ServiceGenerator;
-import com.hongsup.explog.service.SignAPI;
+import com.hongsup.explog.service.api.SignAPI;
 
 import io.reactivex.Observable;
 import retrofit2.Response;

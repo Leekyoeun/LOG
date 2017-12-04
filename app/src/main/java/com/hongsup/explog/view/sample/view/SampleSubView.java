@@ -1,20 +1,15 @@
 package com.hongsup.explog.view.sample.view;
 
 import android.content.Context;
-import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.hongsup.explog.R;
@@ -35,10 +30,6 @@ public class SampleSubView extends FrameLayout {
 
     @BindView(R.id.recyclerView)
     public RecyclerView recyclerView;
-    @BindView(R.id.relativeLayout)
-    public RelativeLayout relativeLayout;
-    @BindView(R.id.nestedScrollView)
-    NestedScrollView nestedScrollView;
 
     public SampleSubView(@NonNull Context context) {
         super(context);
@@ -60,19 +51,6 @@ public class SampleSubView extends FrameLayout {
 
     private void process() {
 
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            nestedScrollView.setOnScrollChangeListener(new OnScrollChangeListener() {
-                @Override
-                public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-                    Log.e(TAG, "onScrollChange: scrollX" + scrollX);
-                    Log.e(TAG, "onScrollChange: scrollY" + scrollY);
-                    Log.e(TAG, "onScrollChange: oldScrollX" + oldScrollX);
-                    Log.e(TAG, "onScrollChange: oldScrollY" + oldScrollY);
-                }
-            });
-        }
-
         List<String> data = new ArrayList<>();
 
         for (int i = 0; i < 100; i++) {
@@ -86,14 +64,14 @@ public class SampleSubView extends FrameLayout {
         customAdapter.setData(data);
 
         // One View 에 대한 로직 처리
-        ViewTreeObserver viewTreeObserver = relativeLayout.getViewTreeObserver();
+        /*ViewTreeObserver viewTreeObserver = relativeLayout.getViewTreeObserver();
         viewTreeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
                 relativeLayout.setY(200);
                 relativeLayout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
             }
-        });
+        });*/
 
     }
 

@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.RelativeLayout;
 
 import com.hongsup.explog.R;
 import com.hongsup.explog.view.main.adapter.MainViewPagerAdapter;
@@ -24,8 +23,6 @@ import static android.content.ContentValues.TAG;
 
 public class MainView implements MainContract.iView {
 
-    @BindView(R.id.relativeLayout)
-    RelativeLayout relativeLayout;
     @BindView(R.id.viewPager)
     ViewPager viewPager;
 

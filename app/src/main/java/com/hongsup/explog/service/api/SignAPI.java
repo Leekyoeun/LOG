@@ -1,4 +1,4 @@
-package com.hongsup.explog.service;
+package com.hongsup.explog.service.api;
 
 import com.hongsup.explog.data.sign.SignIn;
 import com.hongsup.explog.data.sign.SignUp;

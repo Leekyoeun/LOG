@@ -1,8 +1,11 @@
 package com.hongsup.explog.view.sample.view;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -19,10 +22,12 @@ import butterknife.ButterKnife;
 
 public class SampleView implements SampleContract.iView {
 
-    @BindView(R.id.collapsingToolbarLayout)
-    CollapsingToolbarLayout collapsingToolbarLayout;
+/*    @BindView(R.id.collapsingToolbarLayout)
+    CollapsingToolbarLayout collapsingToolbarLayout;*/
     @BindView(R.id.viewPager)
     ViewPager viewPager;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
 
     private View view;
     private Context context;
@@ -32,12 +37,13 @@ public class SampleView implements SampleContract.iView {
         this.context = context;
         view = LayoutInflater.from(context).inflate(R.layout.activity_sample, null);
         ButterKnife.bind(this, view);
-
         initView();
-
     }
 
     private void initView() {
+        toolbar = view.findViewById(R.id.toolbar);
+        ((AppCompatActivity)context).setSupportActionBar(toolbar);
+        ((AppCompatActivity)context).getSupportActionBar().setTitle("");
         SampleViewPagerAdapter sampleViewPagerAdapter = new SampleViewPagerAdapter(context);
         viewPager.setAdapter(sampleViewPagerAdapter);
     }
