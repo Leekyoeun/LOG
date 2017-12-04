@@ -37,7 +37,6 @@ public class ServiceGenerator {
         return retrofit.create(className);
     }
 
-
     /**
      * Retrofit2 생성
      *

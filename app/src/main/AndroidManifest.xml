@@ -12,22 +12,34 @@
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity
             android:name=".view.splash.SplashActivity"
             android:theme="@style/SplashTheme">
+        </activity>
+
+        <activity
+            android:name=".view.signin.SignInActivity"
+            android:theme="@style/AppTheme.NoStatusBar" />
+
+        <activity
+            android:name=".view.main.MainActivity"
+            android:theme="@style/AppTheme.NoStatusBar">
+        </activity>
+
+        <activity
+            android:name=".view.sample.SampleActivity"
+            android:theme="@style/AppTheme.NoStatusBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".view.signin.SignInActivity"
-            android:theme="@style/NoStatusBarTheme"
-            android:windowSoftInputMode="adjustResize"></activity>
+
         <activity android:name=".view.signup.SignUpActivity"
             android:theme="@style/NoStatusBarTheme"/>
-        <activity android:name=".view.main.MainActivity"></activity>
+
         <activity android:name=".view.gallery.GalleryActivity"
             android:theme="@style/NoStatusBarThemeForGallery"/>
     </application>
