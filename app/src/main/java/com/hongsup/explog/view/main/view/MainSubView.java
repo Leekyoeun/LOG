@@ -9,9 +9,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.hongsup.explog.R;
@@ -32,8 +30,6 @@ public class MainSubView extends FrameLayout {
 
     @BindView(R.id.recyclerView)
     public RecyclerView recyclerView;
-    @BindView(R.id.relativeLayout)
-    public RelativeLayout relativeLayout;
 
     public MainSubView(@NonNull Context context) {
         super(context);
@@ -66,16 +62,6 @@ public class MainSubView extends FrameLayout {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         customAdapter.setData(data);
-
-        // One View 에 대한 로직 처리
-        ViewTreeObserver viewTreeObserver = relativeLayout.getViewTreeObserver();
-        viewTreeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                //relativeLayout.setY(1500);
-                relativeLayout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-            }
-        });
 
     }
 
