@@ -7,5 +7,9 @@
     <string name="txt_sing_up">아직 회원이 아니신가요?　<b><u>이메일</u></b>로 회원가입</string>
     <string name="explog"><b>E x p l o g</b></string>
     <string name="sign_up">회원가입</string>
+    <string name="title_newspeed">뉴스피드</string>
+    <string name="title_search">검색</string>
+    <string name="title_notification">알림</string>
+    <string name="title_profile">프로필</string>
 
 </resources>

@@ -95,4 +95,7 @@ public class ServiceGenerator {
 
         return retrofit.create(className);
     }
+
+
+
 }
