@@ -3,7 +3,7 @@
     package="com.hongsup.explog">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -16,7 +16,6 @@
         <activity
             android:name=".view.splash.SplashActivity"
             android:theme="@style/SplashTheme">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,25 +23,37 @@
             </intent-filter>
         </activity>
 
+        <!-- 로그인 페이지 -->
         <activity
             android:name=".view.signin.SignInActivity"
+            android:theme="@style/AppTheme.NoStatusBar"
+            android:windowSoftInputMode="adjustResize"/>
+
+        <!--회원가입 페이지 -->
+        <activity
+            android:name=".view.signup.SignUpActivity"
             android:theme="@style/AppTheme.NoStatusBar" />
 
+        <!-- 갤러리 페이지 -->
+        <activity
+            android:name=".view.gallery.GalleryActivity"
+            android:theme="@style/NoStatusBarThemeForGallery" />
+
+        <!-- 메인 페이지 -->
         <activity
             android:name=".view.main.MainActivity"
-            android:theme="@style/AppTheme.NoStatusBar">
-        </activity>
-
-        <activity
-            android:name=".view.sample.SampleActivity"
-            android:theme="@style/AppTheme.NoStatusBar">
-        </activity>
-
-        <activity android:name=".view.signup.SignUpActivity"
             android:theme="@style/AppTheme.NoStatusBar"/>
 
-        <activity android:name=".view.gallery.GalleryActivity"
-            android:theme="@style/NoStatusBarThemeForGallery"/>
+        <!-- 메인 페이지 -->
+        <activity
+            android:name=".view.main2.Main2Activity"
+            android:theme="@style/AppTheme.NoStatusBar"/>
+
+        <!-- Test 페이지 -->
+        <activity
+            android:name=".view.sample.SampleActivity"
+            android:theme="@style/AppTheme.NoStatusBar"/>
+
     </application>
 
 </manifest>

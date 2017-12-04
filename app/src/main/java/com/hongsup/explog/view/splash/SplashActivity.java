@@ -36,7 +36,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void run() {
                 // 자동 로그인 처리
-                if("true".equals(PreferenceUtil.getString(SplashActivity.this, "AutoSignIn"))){
+                /*if("true".equals(PreferenceUtil.getString(SplashActivity.this, "AutoSignIn"))){
                     SignIn user = new SignIn();
                     user.setEmail(PreferenceUtil.getString(SplashActivity.this, "Email"));
                     user.setPassword(PreferenceUtil.getString(SplashActivity.this, "password"));
@@ -49,7 +49,11 @@ public class SplashActivity extends AppCompatActivity {
                     Intent intent = new Intent(SplashActivity.this, SignInActivity.class);
                     startActivity(intent);
                     finish();
-                }
+                }*/
+                Intent intent = new Intent(SplashActivity.this, SignInActivity.class);
+                startActivity(intent);
+                finish();
+
             }
         }, 2000);
     }
