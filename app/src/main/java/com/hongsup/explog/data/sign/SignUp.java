@@ -20,7 +20,7 @@ public class SignUp {
     @Expose(serialize = true, deserialize = true)
     private String email;
 
-    @Expose(serialize = true, deserialize = true)
+    @Expose(serialize = false, deserialize = true)
     private String img_profile;
 
     @Expose(serialize = false, deserialize = true)

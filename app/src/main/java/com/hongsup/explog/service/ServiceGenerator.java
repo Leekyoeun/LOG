@@ -25,6 +25,22 @@ public class ServiceGenerator {
      * Retrofit2 생성
      *
      * @param className
+     * @param <I>
+     * @return
+     */
+    public static <I> I create(Class<I> className) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(SERVER_URL)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        return retrofit.create(className);
+    }
+
+    /**
+     * Retrofit2 생성
+     *
+     * @param className
      * @param gson : Custom Gson 객체
      * @param <I>
      * @return

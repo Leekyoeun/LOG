@@ -3,6 +3,8 @@ package com.hongsup.explog.view.signup.view;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -12,13 +14,17 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.hongsup.explog.R;
+import com.hongsup.explog.data.photo.Photo;
 import com.hongsup.explog.data.sign.SignUp;
+import com.hongsup.explog.util.VerificationUtil;
+import com.hongsup.explog.view.gallery.GalleryActivity;
 import com.hongsup.explog.view.signin.SignInActivity;
 import com.hongsup.explog.view.signup.contract.SignUpContract;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnTextChanged;
 
 /**
  * Created by Android Hong on 2017-11-30.
@@ -44,6 +50,8 @@ public class SignUpView implements SignUpContract.iView{
     private Context context;
     private View view;
     private SignUpContract.iPresenter presenter;
+    private static final int REQ_GALLERY = 999;
+    Photo photo;
 
     public SignUpView(Context context){
         this.context = context;
@@ -87,6 +95,16 @@ public class SignUpView implements SignUpContract.iView{
         ((Activity)context).finish();
     }
 
+    @Override
+    public void setImageView(Photo photo) {
+        this.photo = photo;
+        Glide.with(context)
+        .load(photo.getImagePath())
+        .centerCrop()
+        .into(imgProfile);
+    }
+
+
     private void setBackground() {
         Glide.with(context)
                 .load(R.drawable.signup)
@@ -96,20 +114,91 @@ public class SignUpView implements SignUpContract.iView{
                 .into(imgBackground);
     }
 
+//    @OnTextChanged(value = R.id.etEmail, callback = OnTextChanged.Callback.TEXT_CHANGED)
+//    public void detectEmailChange(CharSequence charSequence, int i, int i1, int i2){
+//        if(VerificationUtil.isValidEmail(charSequence.toString())){
+//        };
+//    }
+//
+//    @OnTextChanged(value = R.id.etPassword, callback = OnTextChanged.Callback.TEXT_CHANGED)
+//    public void detectPasswordChange(CharSequence charSequence, int i, int i1, int i2){
+//        if(VerificationUtil.isValidPassword(charSequence.toString())){
+//        };
+//    }
+//
+//    @OnTextChanged(value = R.id.etPasswordConfirm, callback = OnTextChanged.Callback.TEXT_CHANGED)
+//    public void detectSecondPasswordChange(CharSequence charSequence, int i, int i1, int i2){
+//        if(VerificationUtil.isValidPassword(charSequence.toString())){
+//        };
+//    }
+//
+//    @OnTextChanged(value = R.id.etNickName, callback = OnTextChanged.Callback.TEXT_CHANGED)
+//    public void detectNameChange(CharSequence charSequence, int i, int i1, int i2){
+//        if(VerificationUtil.isValidName(charSequence.toString())){
+//        };
+//    }
+
     @OnClick(R.id.imgProfile)
     public void getImage(){
         //ContentResolver 를 이용하여 사진 불러오기 해야 함
+        Intent intent = new Intent(context, GalleryActivity.class);
+        ((Activity) context).startActivityForResult(intent, REQ_GALLERY);
     }
 
     @OnClick(R.id.btnSignUp)
     public void setSignUp(){
+
+        if(TextUtils.isEmpty(etEmail.getText().toString())){
+            etEmail.setError("Email 을 입력하세요.");
+            return;
+        }
+
+        if(TextUtils.isEmpty(etPassword.getText().toString())){
+            etPassword.setError("Password 를 입력하세요.");
+            return;
+        }
+
+        if(TextUtils.isEmpty(etPasswordConfirm.getText().toString())){
+            etPasswordConfirm.setError("Password 를 입력하세요.");
+            return;
+        }
+
+        if(TextUtils.isEmpty(etNickName.getText().toString())){
+            etNickName.setError("Nickname을 입력하세요.");
+            return;
+        }
+
+        if(VerificationUtil.isValidEmail(etEmail.getText().toString())){
+            etEmail.setError("Email 형식이 맞지 않습니다.");
+            return;
+        }
+
+        if(VerificationUtil.isValidPassword(etPassword.getText().toString())){
+            etPassword.setError("Password 형식이 맞지 않습니다.");
+            return;
+        }
+
+        if(VerificationUtil.isValidPassword(etPasswordConfirm.getText().toString())){
+            etPasswordConfirm.setError("Password 형식이 맞지 않습니다.");
+            return;
+        }
+
+        if(VerificationUtil.isValidName(etNickName.getText().toString())){
+            etNickName.setError("NickName 형식이 맞지 않습니다.");
+            return;
+        }
+
         SignUp signUp = new SignUp();
         signUp.setEmail(etEmail.getText().toString());
         signUp.setPassword1(etPassword.getText().toString());
         signUp.setPassword2(etPasswordConfirm.getText().toString());
         signUp.setUsername(etNickName.getText().toString());
-        signUp.setImg_profile(null);
+        if(photo!=null) {
+            signUp.setImg_profile(photo.getImagePath());
+        }
+        Log.e("setSignUp", "setSignUp: " + signUp.toString() );
 
         presenter.setSignUp(signUp);
     }
+
 }

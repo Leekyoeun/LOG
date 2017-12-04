@@ -10,21 +10,25 @@ import android.text.TextUtils;
 import android.transition.TransitionManager;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.hongsup.explog.R;
 import com.hongsup.explog.data.sign.SignIn;
-import com.hongsup.explog.view.main.MainActivity;
+import com.hongsup.explog.util.VerificationUtil;
+import com.hongsup.explog.view.main2.Main2Activity;
 import com.hongsup.explog.view.signup.SignUpActivity;
 import com.hongsup.explog.view.signin.contract.SignInContract;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnTextChanged;
 
 /**
  * Created by Android Hong on 2017-11-30.
@@ -48,6 +52,8 @@ public class SignInView implements SignInContract.iView {
     EditText editEmail;
     @BindView(R.id.editPassword)
     EditText editPassword;
+    @BindView(R.id.btnFacebook)
+    Button btnFacebook;
 
     private View view;
     private Context context;
@@ -94,7 +100,26 @@ public class SignInView implements SignInContract.iView {
 
     @Override
     public void goMain() {
-        Intent intent = new Intent(context, MainActivity.class);
+        Intent intent = new Intent(context, Main2Activity.class);
+        context.startActivity(intent);
+        ((Activity) context).finish();
+    }
+
+    @OnTextChanged(value = R.id.editEmail, callback = OnTextChanged.Callback.TEXT_CHANGED)
+    public void detectEmailChange(CharSequence charSequence, int i, int i1, int i2){
+        if(VerificationUtil.isValidEmail(charSequence.toString())){
+        };
+    }
+
+    @OnTextChanged(value = R.id.editPassword, callback = OnTextChanged.Callback.TEXT_CHANGED)
+    public void detectPasswordChange(CharSequence charSequence, int i, int i1, int i2){
+        if(VerificationUtil.isValidPassword(charSequence.toString())){
+        };
+    }
+
+    @OnClick(R.id.btnFacebook)
+    public void goToMain(){
+        Intent intent = new Intent(context, Main2Activity.class);
         context.startActivity(intent);
         ((Activity) context).finish();
     }
@@ -124,6 +149,16 @@ public class SignInView implements SignInContract.iView {
 
         if(TextUtils.isEmpty(editPassword.getText().toString())){
             editPassword.setError("Password 를 입력하세요.");
+            return;
+        }
+
+        if(VerificationUtil.isValidEmail(editEmail.getText().toString())){
+            editEmail.setError("Email 형식이 맞지 않습니다.");
+            return;
+        }
+
+        if(VerificationUtil.isValidPassword(editPassword.getText().toString())){
+            editPassword.setError("Password 형식이 맞지 않습니다.");
             return;
         }
 
