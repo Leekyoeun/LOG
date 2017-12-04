@@ -9,7 +9,10 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.hongsup.explog.R;
+import com.hongsup.explog.data.sign.SignIn;
+import com.hongsup.explog.util.PreferenceUtil;
 import com.hongsup.explog.view.signin.SignInActivity;
+import com.hongsup.explog.view.signin.presenter.SignInPresenter;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -32,16 +35,21 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-
                 // 자동 로그인 처리
-                if(true){
+                if("true".equals(PreferenceUtil.getString(SplashActivity.this, "AutoSignIn"))){
+                    SignIn user = new SignIn();
+                    user.setEmail(PreferenceUtil.getString(SplashActivity.this, "Email"));
+                    user.setPassword(PreferenceUtil.getString(SplashActivity.this, "password"));
+                    SignInPresenter presenter = new SignInPresenter(SplashActivity.this);
+                    presenter.getSignIn(user);
+//                    Intent intent = new Intent(SplashActivity.this, SignInActivity.class);
+//                    startActivity(intent);
+                    finish();
+                }else{
                     Intent intent = new Intent(SplashActivity.this, SignInActivity.class);
                     startActivity(intent);
                     finish();
-                }else{
-
                 }
-
             }
         }, 2000);
     }

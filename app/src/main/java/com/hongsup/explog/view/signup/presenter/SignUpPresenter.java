@@ -81,8 +81,5 @@ public class SignUpPresenter implements SignUpContract.iPresenter {
                     view.showError();
                     view.hideProgress();
                 });
-
     }
-
-
 }

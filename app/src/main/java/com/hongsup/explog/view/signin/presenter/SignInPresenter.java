@@ -1,9 +1,11 @@
 package com.hongsup.explog.view.signin.presenter;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.hongsup.explog.data.sign.SignIn;
 import com.hongsup.explog.data.sign.source.SignRepository;
+import com.hongsup.explog.util.PreferenceUtil;
 import com.hongsup.explog.view.signin.contract.SignInContract;
 
 import io.reactivex.Observable;
@@ -19,9 +21,11 @@ public class SignInPresenter implements SignInContract.iPresenter {
 
     private SignInContract.iView view;
     private SignRepository repository;
+    Context context;
 
-    public SignInPresenter() {
+    public SignInPresenter(Context context) {
         repository = SignRepository.getInstance();
+        this.context = context;
     }
 
     @Override
@@ -48,6 +52,9 @@ public class SignInPresenter implements SignInContract.iPresenter {
                             /**
                              * 값을 넘겨주거나, SharedPreference 에 Token, Email, img_path, NickName 을 저장한다.
                              */
+                            PreferenceUtil.setValue(context, "Email", signIn.getEmail());
+                            PreferenceUtil.setValue(context, "password", signIn.getPassword());
+                            PreferenceUtil.setValue(context, "AutoSignIn", "true");
                             view.goMain();
                         }
                     }else{
