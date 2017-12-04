@@ -63,8 +63,6 @@ public class SignInView implements SignInContract.iView {
     View line;
     @BindView(R.id.progressBarLayout)
     RelativeLayout progressBarLayout;
-    @BindView(R.id.txtSignUp)
-    TextView txtSignUp;
 
     private View view;
     private Context context;
