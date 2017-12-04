@@ -21,7 +21,7 @@ public class SignInActivity extends AppCompatActivity {
         }
 
         SignInContract.iView signInView = new SignInView(this);
-        SignInContract.iPresenter signInPresenter = new SignInPresenter();
+        SignInContract.iPresenter signInPresenter = new SignInPresenter(this);
 
         signInPresenter.attachView(signInView);
         signInView.setPresenter(signInPresenter);
