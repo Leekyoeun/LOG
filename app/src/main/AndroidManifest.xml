@@ -15,7 +15,7 @@
 
         <activity
             android:name=".view.splash.SplashActivity"
-            android:theme="@style/SplashTheme">
+            android:theme="@style/AppTheme.SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -44,7 +44,7 @@
             android:name=".view.main.MainActivity"
             android:theme="@style/AppTheme.NoStatusBar"/>
 
-        <!-- 메인 페이지 -->
+        <!-- 메인2 페이지 -->
         <activity
             android:name=".view.main2.Main2Activity"
             android:theme="@style/AppTheme.NoStatusBar"/>

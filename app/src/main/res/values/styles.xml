@@ -3,7 +3,7 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light">
         <!-- Customize your theme here. -->
         <item name="colorPrimaryDark">@android:color/transparent</item>
-        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimary">@color/colorMain</item>
         <item name="colorAccent">@color/colorMain</item>
     </style>
 
@@ -11,6 +11,13 @@
         <!--Theme 의 StatusBar 투명하게 처리하기 위한 방법-->
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="windowActionBarOverlay">true</item>
+    </style>
+
+    <style name="AppTheme.SplashTheme">
+        <item name="android:windowBackground">@color/colorWhite</item>
+        <item name="android:windowNoTitle">true</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="windowActionBarOverlay">true</item>
     </style>

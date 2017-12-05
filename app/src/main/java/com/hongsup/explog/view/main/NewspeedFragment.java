@@ -1,0 +1,56 @@
+package com.hongsup.explog.view.main;
+
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import com.hongsup.explog.R;
+import com.hongsup.explog.view.sample.adapter.SampleViewPagerAdapter;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+/**
+ * Created by Android Hong on 2017-12-05.
+ */
+
+public class NewspeedFragment extends Fragment {
+    @BindView(R.id.viewPager)
+    ViewPager viewPager;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+
+    private View view;
+
+    public NewspeedFragment() {
+        // Required empty public constructor
+    }
+
+    // Fragment 의 경우 onCreate 에서 View 의 작업을 하면 안되고
+    // onCreateView 에서 View 의 작업을 해줘야 한다.
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        view = inflater.inflate(R.layout.activity_sample, container, false);
+        ButterKnife.bind(this, view);
+        initView();
+        return view;
+    }
+
+    private void initView() {
+        toolbar = view.findViewById(R.id.toolbar);
+        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("");
+        SampleViewPagerAdapter sampleViewPagerAdapter = new SampleViewPagerAdapter(getActivity());
+        viewPager.setAdapter(sampleViewPagerAdapter);
+    }
+
+
+}
+

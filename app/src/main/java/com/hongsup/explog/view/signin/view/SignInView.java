@@ -10,7 +10,6 @@ import android.support.constraint.ConstraintSet;
 import android.text.TextUtils;
 import android.transition.TransitionManager;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -19,16 +18,15 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.hongsup.explog.R;
 import com.hongsup.explog.data.sign.SignIn;
 import com.hongsup.explog.util.VerificationUtil;
-import com.hongsup.explog.view.main2.Main2Activity;
-import com.hongsup.explog.view.signup.SignUpActivity;
+import com.hongsup.explog.view.main.MainActivity;
 import com.hongsup.explog.view.signin.contract.SignInContract;
+import com.hongsup.explog.view.signup.SignUpActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -89,7 +87,6 @@ public class SignInView implements SignInContract.iView {
                 int keyboard_height;
                 Rect outGlobalRect = new Rect();
                 Rect outWindowRect = new Rect();
-                Rect lineRect = new Rect();
                 DisplayMetrics metrics = new DisplayMetrics();
                 ((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(metrics);
                 // 실제 레이아웃 사이즈 가져오기
@@ -142,7 +139,7 @@ public class SignInView implements SignInContract.iView {
 
     @Override
     public void goMain() {
-        Intent intent = new Intent(context, Main2Activity.class);
+        Intent intent = new Intent(context, MainActivity.class);
         context.startActivity(intent);
         ((Activity) context).finish();
     }
@@ -176,7 +173,7 @@ public class SignInView implements SignInContract.iView {
 
     @OnClick(R.id.btnFacebook)
     public void goToMain() {
-        Intent intent = new Intent(context, Main2Activity.class);
+        Intent intent = new Intent(context, MainActivity.class);
         context.startActivity(intent);
         ((Activity) context).finish();
     }
