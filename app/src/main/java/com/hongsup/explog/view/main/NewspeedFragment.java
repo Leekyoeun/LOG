@@ -1,6 +1,7 @@
 package com.hongsup.explog.view.main;
 
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +25,8 @@ public class NewspeedFragment extends Fragment {
     ViewPager viewPager;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+    @BindView(R.id.appBar)
+    AppBarLayout appBarLayout;
 
     private View view;
 
@@ -37,7 +40,7 @@ public class NewspeedFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.activity_sample, container, false);
+        view = inflater.inflate(R.layout.view_newspeed, container, false);
         ButterKnife.bind(this, view);
         initView();
         return view;

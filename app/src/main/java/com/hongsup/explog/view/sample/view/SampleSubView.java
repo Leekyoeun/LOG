@@ -42,7 +42,7 @@ public class SampleSubView extends FrameLayout {
     }
 
     private void initView() {
-        View view = LayoutInflater.from(getContext()).inflate(R.layout.activity_main_sub, null);
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.view_newspeed_item, null);
         ButterKnife.bind(this, view);
         // 로직 처리
         process();
@@ -60,9 +60,7 @@ public class SampleSubView extends FrameLayout {
         CustomAdapter customAdapter = new CustomAdapter();
         recyclerView.setAdapter(customAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
         customAdapter.setData(data);
-
         // One View 에 대한 로직 처리
         /*ViewTreeObserver viewTreeObserver = relativeLayout.getViewTreeObserver();
         viewTreeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {

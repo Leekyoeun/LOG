@@ -8,7 +8,7 @@
 
     <com.hongsup.explog.view.main.CustomTabLayout
         android:id="@+id/tabLayout"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -16,7 +16,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:tabGravity="center"
         app:tabIndicatorColor="@android:color/transparent"
-        app:tabMode="scrollable">
+        app:tabMode="scrollable"
+        app:tabTextColor="@android:color/black">
 
         <android.support.design.widget.TabItem
             android:layout_width="100dp"
@@ -59,6 +60,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
         android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -69,7 +71,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
-        android:layout_marginTop="8dp"
         android:gravity="center"
         android:text="TextView"
         android:textSize="35dp"

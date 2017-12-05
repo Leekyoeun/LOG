@@ -36,7 +36,7 @@ public class MainView implements MainContract.iView, BottomNavigationView.OnNavi
 
     public MainView(Context context) {
         this.context = context;
-        view = LayoutInflater.from(context).inflate(R.layout.activity_main2, null);
+        view = LayoutInflater.from(context).inflate(R.layout.activity_main, null);
         ButterKnife.bind(this, view);
         initView();
     }
@@ -57,20 +57,23 @@ public class MainView implements MainContract.iView, BottomNavigationView.OnNavi
         this.presenter = presenter;
     }
 
-
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         frameLayout.removeAllViews();
         switch (id) {
             case R.id.navigation_newspeed:
-                // 좀 더 쉽게 표현하면
+                // View 가 이미 있는지 체크
                 frameLayout.addView(new NewspeedView(context));
+
                 /*
+                // 좀 더 쉽게 표현하면
                 ((AppCompatActivity)context).getSupportFragmentManager()
                         .beginTransaction()
                         .add(R.id.frameLayout, new NewspeedFragment())
-                        .commit();*/
+                        .commit();
+                */
+
                 return true;
             case R.id.navigation_search:
                 return true;

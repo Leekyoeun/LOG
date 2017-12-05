@@ -1,8 +1,6 @@
 package com.hongsup.explog.view.sample.view;
 
-import android.app.Activity;
 import android.content.Context;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -35,7 +33,7 @@ public class SampleView implements SampleContract.iView {
 
     public SampleView(Context context) {
         this.context = context;
-        view = LayoutInflater.from(context).inflate(R.layout.activity_sample, null);
+        view = LayoutInflater.from(context).inflate(R.layout.view_newspeed, null);
         ButterKnife.bind(this, view);
         initView();
     }
