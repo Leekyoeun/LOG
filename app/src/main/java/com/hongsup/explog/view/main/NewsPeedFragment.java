@@ -20,17 +20,18 @@ import butterknife.ButterKnife;
  * Created by Android Hong on 2017-12-05.
  */
 
-public class NewspeedFragment extends Fragment {
+public class NewsPeedFragment extends Fragment {
+
     @BindView(R.id.viewPager)
     ViewPager viewPager;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @BindView(R.id.appBar)
+    @BindView(R.id.appBarLayout)
     AppBarLayout appBarLayout;
 
     private View view;
 
-    public NewspeedFragment() {
+    public NewsPeedFragment() {
         // Required empty public constructor
     }
 

@@ -44,7 +44,7 @@ public class MainView implements MainContract.iView, BottomNavigationView.OnNavi
     private void initView() {
         navigation.setOnNavigationItemSelectedListener(this);
         disableShiftMode(navigation);
-        frameLayout.addView(new NewspeedView(context));
+        frameLayout.addView(new NewsPeedView(context));
     }
 
     @Override
@@ -64,13 +64,13 @@ public class MainView implements MainContract.iView, BottomNavigationView.OnNavi
         switch (id) {
             case R.id.navigation_newspeed:
                 // View 가 이미 있는지 체크
-                frameLayout.addView(new NewspeedView(context));
+                frameLayout.addView(new NewsPeedView(context));
 
                 /*
                 // 좀 더 쉽게 표현하면
                 ((AppCompatActivity)context).getSupportFragmentManager()
                         .beginTransaction()
-                        .add(R.id.frameLayout, new NewspeedFragment())
+                        .add(R.id.frameLayout, new NewsPeedFragment())
                         .commit();
                 */
 

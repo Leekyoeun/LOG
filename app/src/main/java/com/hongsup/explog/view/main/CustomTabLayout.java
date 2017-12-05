@@ -12,6 +12,7 @@ import android.view.ViewGroup;
  */
 
 public class CustomTabLayout  extends TabLayout {
+
     public CustomTabLayout(Context context) {
         super(context);
     }
