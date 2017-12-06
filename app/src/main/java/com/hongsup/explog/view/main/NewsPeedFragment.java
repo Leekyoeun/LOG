@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hongsup.explog.R;
-import com.hongsup.explog.view.sample.adapter.SampleViewPagerAdapter;
+import com.hongsup.explog.view.main.adapter.NewsPeedViewPagerAdapter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -49,10 +49,10 @@ public class NewsPeedFragment extends Fragment {
 
     private void initView() {
         toolbar = view.findViewById(R.id.toolbar);
-        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("");
-        SampleViewPagerAdapter sampleViewPagerAdapter = new SampleViewPagerAdapter(getActivity());
-        viewPager.setAdapter(sampleViewPagerAdapter);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("");
+        NewsPeedViewPagerAdapter newsPeedViewPagerAdapter = new NewsPeedViewPagerAdapter(getActivity());
+        viewPager.setAdapter(newsPeedViewPagerAdapter);
     }
 
 

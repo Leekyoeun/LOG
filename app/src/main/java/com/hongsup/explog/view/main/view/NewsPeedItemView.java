@@ -1,4 +1,4 @@
-package com.hongsup.explog.view.sample.view;
+package com.hongsup.explog.view.main.view;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -24,19 +24,19 @@ import butterknife.ButterKnife;
  * Created by Android Hong on 2017-11-30.
  */
 
-public class SampleSubView extends FrameLayout {
+public class NewsPeedItemView extends FrameLayout {
 
     private static final String TAG = "MainSubView";
 
     @BindView(R.id.recyclerView)
     public RecyclerView recyclerView;
 
-    public SampleSubView(@NonNull Context context) {
+    public NewsPeedItemView(@NonNull Context context) {
         super(context);
         initView();
     }
 
-    public SampleSubView(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public NewsPeedItemView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         initView();
     }
@@ -61,6 +61,7 @@ public class SampleSubView extends FrameLayout {
         recyclerView.setAdapter(customAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         customAdapter.setData(data);
+
         // One View 에 대한 로직 처리
         /*ViewTreeObserver viewTreeObserver = relativeLayout.getViewTreeObserver();
         viewTreeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
