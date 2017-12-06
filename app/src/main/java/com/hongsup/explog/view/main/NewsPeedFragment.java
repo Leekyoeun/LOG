@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hongsup.explog.R;
-import com.hongsup.explog.view.main.adapter.NewsPeedViewPagerAdapter;
+import com.hongsup.explog.view.newspeed.adapter.NewsPeedViewPagerAdapter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

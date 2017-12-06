@@ -7,18 +7,19 @@
     android:layout_marginBottom="50dp"
     android:background="@android:color/transparent">
 
-    <com.hongsup.explog.view.main.CustomTabLayout
+    <com.hongsup.explog.view.custom.CustomTabLayout
         android:id="@+id/topTabLayout"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="75dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.45"
+        app:layout_constraintVertical_bias="0.38"
         app:tabGravity="center"
         app:tabIndicatorColor="@android:color/transparent"
+        app:tabMinWidth="120dp"
         app:tabMode="scrollable" />
 
     <ImageView
@@ -29,7 +30,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.39999998" />
 
     <TextView
         android:id="@+id/textTopTitle"

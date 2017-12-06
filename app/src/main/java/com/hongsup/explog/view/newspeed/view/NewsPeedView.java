@@ -1,4 +1,4 @@
-package com.hongsup.explog.view.main.view;
+package com.hongsup.explog.view.newspeed.view;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
@@ -18,7 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hongsup.explog.R;
-import com.hongsup.explog.view.main.adapter.NewsPeedViewPagerAdapter;
+import com.hongsup.explog.view.newspeed.adapter.NewsPeedViewPagerAdapter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -96,7 +96,7 @@ public class NewsPeedView extends FrameLayout {
              * TabLayout Icon 설정부분
              */
             if (tab != null){
-                ImageView myCustomIcon = (ImageView) LayoutInflater.from(context).inflate(R.layout.item_tab, topTabLayout, false);
+                ImageView myCustomIcon = (ImageView) LayoutInflater.from(context).inflate(R.layout.item_tab, null);
                 myCustomIcon.setImageDrawable(getResources().getDrawable(R.drawable.ic_australia));
                 tab.setText("");
                 tab.setCustomView(myCustomIcon);
@@ -106,6 +106,7 @@ public class NewsPeedView extends FrameLayout {
 
 
     private void initListener() {
+
 
         /**
          * ViewPager 의 index 가 0일때
@@ -153,7 +154,7 @@ public class NewsPeedView extends FrameLayout {
                     toolbarLayout.setVisibility(VISIBLE);
                 } else {
                     // 다를 경우 Toolbar 에 있는 Layout 을 감춘다.
-                    toolbarLayout.setVisibility(GONE);
+                    toolbarLayout.setVisibility(INVISIBLE);
                 }
 
                 // 밀려 올라가는 작업 해줘야 한다.
@@ -161,6 +162,9 @@ public class NewsPeedView extends FrameLayout {
                 // Alpha 조절하는 구역
                 float ratio = (float) verticalOffset / (float) appBarLayout.getTotalScrollRange();
                 newsPeedTopLayout.setAlpha(1 + ratio);
+
+                // ImageView Blur 처리
+                //imgBackground.setAlpha(1+ratio);
             }
         });
     }

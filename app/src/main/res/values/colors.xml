@@ -3,12 +3,11 @@
     <color name="colorPrimary">#4A99D5</color>
     <color name="colorPrimaryDark">#337CBA</color>
     <color name="colorAccent">#673AB7</color>
-
     <color name="colorWhite">#FFFFFF</color>
-
     <color name="colorMain">#337CBA</color>
-
     <color name="colorAlter">#FFAAAAFF</color>
+    <color name="colorMainTint">#99BCBCBC</color>
+    <color name="colorLightGray">#dcdcdc</color>
 
-    <color name="colorNavi">#FFB6B6B6</color>
+
 </resources>

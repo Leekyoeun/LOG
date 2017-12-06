@@ -1,4 +1,4 @@
-package com.hongsup.explog.view.main.adapter;
+package com.hongsup.explog.view.newspeed.adapter;
 
 import android.content.Context;
 import android.os.Parcelable;
@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hongsup.explog.R;
-import com.hongsup.explog.view.main.view.NewsPeedItemView;
+import com.hongsup.explog.view.newspeed.view.NewsPeedItemView;
 
 import java.util.ArrayList;
 import java.util.List;

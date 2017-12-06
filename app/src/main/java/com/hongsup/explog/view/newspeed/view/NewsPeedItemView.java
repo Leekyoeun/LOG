@@ -1,4 +1,4 @@
-package com.hongsup.explog.view.main.view;
+package com.hongsup.explog.view.newspeed.view;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

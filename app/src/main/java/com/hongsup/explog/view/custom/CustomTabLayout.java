@@ -1,4 +1,4 @@
-package com.hongsup.explog.view.main;
+package com.hongsup.explog.view.custom;
 
 import android.content.Context;
 import android.support.design.widget.TabLayout;

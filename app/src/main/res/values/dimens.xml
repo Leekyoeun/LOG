@@ -3,4 +3,5 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="view_newspeed_top_title">32sp</dimen>
+    <dimen name="view_newspped_toolbar_title">18sp</dimen>
 </resources>
