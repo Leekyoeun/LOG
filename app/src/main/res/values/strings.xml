@@ -4,13 +4,19 @@
     <string name="sign_email">Start with Email</string>
     <string name="sign_start">Start</string>
     <string name="txt_sing_up">Sign up for <b><u>email</u></b></string>
-    <string name="explog"><b>E x p l o g</b></string>
+    <string name="explog"><b>E X P L O G</b></string>
     <string name="sign_up">Sign Up</string>
-    <string name="title_activity_main2">Main2Activity</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
+    <string name="title_home" translatable="false">Home</string>
+    <string name="title_dashboard" translatable="false">Dashboard</string>
     <string name="title_newspeed">Newspeed</string>
     <string name="title_search">Search</string>
     <string name="title_notification">Notification</string>
     <string name="title_profile">Profile</string>
+    <string name="title_post">Post</string>
+    
+    <string name="africa">AFRICA</string>
+    <string name="asia">ASIA</string>
+    <string name="europe">EUROPE</string>
+    <string name="americas">AMERICA</string>
+    <string name="oceania">OCEANIA</string>
 </resources>
