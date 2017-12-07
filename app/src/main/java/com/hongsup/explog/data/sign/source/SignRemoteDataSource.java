@@ -7,7 +7,7 @@ import com.google.gson.GsonBuilder;
 import com.hongsup.explog.data.sign.SignIn;
 import com.hongsup.explog.data.sign.SignUp;
 import com.hongsup.explog.service.ServiceGenerator;
-import com.hongsup.explog.service.SignAPI;
+import com.hongsup.explog.service.api.SignAPI;
 
 import java.io.File;
 import java.util.HashMap;
@@ -47,11 +47,11 @@ public class SignRemoteDataSource implements SignSource {
     @Override
     public Observable<Response<SignUp>> singUp(SignUp signUp) {
 
-        signUpAPI = ServiceGenerator.create(SignAPI.class);
+        signUpAPI = ServiceGenerator.create(SignAPI.class, true);
 
         Map<String, RequestBody> requestBodyMap = new HashMap<>();
-        requestBodyMap.put("password1", toRequestBody(signUp.getPassword1()));
-        requestBodyMap.put("password2", toRequestBody(signUp.getPassword2()));
+        //백엔드쪽 데이터 파라미터 수정에 의해 password1, password2가 password 하나로 합쳐짐 12/5
+        requestBodyMap.put("password", toRequestBody(signUp.getPassword()));
         requestBodyMap.put("email", toRequestBody(signUp.getEmail()));
         requestBodyMap.put("username", toRequestBody(signUp.getUsername()));
 

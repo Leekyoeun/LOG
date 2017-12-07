@@ -52,13 +52,23 @@ public class SignInPresenter implements SignInContract.iPresenter {
                             /**
                              * 값을 넘겨주거나, SharedPreference 에 Token, Email, img_path, NickName 을 저장한다.
                              */
+
+                            System.out.println("body="+data.body().toString());
+
                             PreferenceUtil.setValue(context, "Email", signIn.getEmail());
                             PreferenceUtil.setValue(context, "password", signIn.getPassword());
                             PreferenceUtil.setValue(context, "AutoSignIn", "true");
+                            // Token 값, profile_img url값 받아 SharedPreference에 넣음 12/5 * null값이 들어가도 상관 없음
+                            PreferenceUtil.setValue(context, "token", data.body().getToken());
+                            PreferenceUtil.setValue(context, "img_profile", data.body().getProfile_img());
+
+
                             view.goMain();
                         }
                     }else{
                         Log.e("SignInActivity", "getSignIn: Error");
+                        view.hideProgress();
+                        view.showError();
                     }
 
                 }, throwable -> {

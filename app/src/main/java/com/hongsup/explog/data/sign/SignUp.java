@@ -20,17 +20,15 @@ public class SignUp {
     @Expose(serialize = true, deserialize = true)
     private String email;
 
-    @Expose(serialize = false, deserialize = true)
+    @Expose(serialize = true, deserialize = false)
     private String img_profile;
 
     @Expose(serialize = false, deserialize = true)
     private String token;
 
+    //백엔드쪽 데이터 파라미터 수정에 의해 password1, password2가 password 하나로 합쳐짐 12/5
     @Expose(serialize = true, deserialize = true)
-    private String password1;
-
-    @Expose(serialize = true, deserialize = true)
-    private String password2;
+    private String password;
 
     @Expose(serialize = false, deserialize = true)
     private String non_field_errors;
@@ -83,20 +81,13 @@ public class SignUp {
         this.token = token;
     }
 
-    public String getPassword1() {
-        return password1;
+    //백엔드쪽 데이터 파라미터 수정에 의해 password1, password2가 password 하나로 합쳐짐 12/5
+    public String getPassword() {
+        return password;
     }
 
-    public void setPassword1(String password1) {
-        this.password1 = password1;
-    }
-
-    public String getPassword2() {
-        return password2;
-    }
-
-    public void setPassword2(String password2) {
-        this.password2 = password2;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getNon_field_errors() {
@@ -107,6 +98,7 @@ public class SignUp {
         this.non_field_errors = non_field_errors;
     }
 
+    //백엔드쪽 데이터 파라미터 수정에 의해 password1, password2가 password 하나로 합쳐짐
     @Override
     public String toString() {
         return "SignUp{" +
@@ -116,8 +108,7 @@ public class SignUp {
                 ", email='" + email + '\'' +
                 ", img_profile='" + img_profile + '\'' +
                 ", token='" + token + '\'' +
-                ", password1='" + password1 + '\'' +
-                ", password2='" + password2 + '\'' +
+                ", password='" + password + '\'' +
                 ", non_field_errors='" + non_field_errors + '\'' +
                 '}';
     }

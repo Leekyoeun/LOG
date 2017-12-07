@@ -24,13 +24,12 @@ import com.hongsup.explog.view.signup.contract.SignUpContract;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.OnTextChanged;
 
 /**
  * Created by Android Hong on 2017-11-30.
  */
 
-public class SignUpView implements SignUpContract.iView{
+public class SignUpView implements SignUpContract.iView {
 
     @BindView(R.id.btnSignUp)
     Button btnSignUp;
@@ -53,13 +52,14 @@ public class SignUpView implements SignUpContract.iView{
     private static final int REQ_GALLERY = 999;
     Photo photo;
 
-    public SignUpView(Context context){
+    public SignUpView(Context context) {
         this.context = context;
         view = LayoutInflater.from(context).inflate(R.layout.activity_sign_up, null);
         /**
          * ButterKnife Binding
          */
         ButterKnife.bind(this, view);
+        setProfileBackground();
         setBackground();
     }
 
@@ -92,16 +92,24 @@ public class SignUpView implements SignUpContract.iView{
     public void goSignIn() {
         Intent intent = new Intent(context, SignInActivity.class);
         context.startActivity(intent);
-        ((Activity)context).finish();
+        ((Activity) context).finish();
     }
 
     @Override
     public void setImageView(Photo photo) {
         this.photo = photo;
         Glide.with(context)
-        .load(photo.getImagePath())
-        .centerCrop()
-        .into(imgProfile);
+                .load(photo.getImagePath())
+                .centerCrop()
+                .into(imgProfile);
+    }
+
+    private void setProfileBackground(){
+        Glide.with(context)
+                .load(android.R.drawable.ic_input_add)
+                .fitCenter()
+                .centerCrop()
+                .into(imgProfile);
     }
 
 
@@ -139,66 +147,76 @@ public class SignUpView implements SignUpContract.iView{
 //    }
 
     @OnClick(R.id.imgProfile)
-    public void getImage(){
+    public void getImage() {
         //ContentResolver 를 이용하여 사진 불러오기 해야 함
         Intent intent = new Intent(context, GalleryActivity.class);
         ((Activity) context).startActivityForResult(intent, REQ_GALLERY);
     }
 
     @OnClick(R.id.btnSignUp)
-    public void setSignUp(){
+    public void setSignUp() {
 
-        if(TextUtils.isEmpty(etEmail.getText().toString())){
+        if (TextUtils.isEmpty(etEmail.getText().toString())) {
             etEmail.setError("Email 을 입력하세요.");
             return;
         }
 
-        if(TextUtils.isEmpty(etPassword.getText().toString())){
+        if (TextUtils.isEmpty(etPassword.getText().toString())) {
             etPassword.setError("Password 를 입력하세요.");
             return;
         }
 
-        if(TextUtils.isEmpty(etPasswordConfirm.getText().toString())){
+        if (TextUtils.isEmpty(etPasswordConfirm.getText().toString())) {
             etPasswordConfirm.setError("Password 를 입력하세요.");
             return;
         }
 
-        if(TextUtils.isEmpty(etNickName.getText().toString())){
+        if (TextUtils.isEmpty(etNickName.getText().toString())) {
             etNickName.setError("Nickname을 입력하세요.");
             return;
         }
 
-        if(VerificationUtil.isValidEmail(etEmail.getText().toString())){
+        if (VerificationUtil.isValidEmail(etEmail.getText().toString())) {
             etEmail.setError("Email 형식이 맞지 않습니다.");
             return;
         }
 
-        if(VerificationUtil.isValidPassword(etPassword.getText().toString())){
+        if (VerificationUtil.isValidPassword(etPassword.getText().toString())) {
             etPassword.setError("Password 형식이 맞지 않습니다.");
             return;
         }
 
-        if(VerificationUtil.isValidPassword(etPasswordConfirm.getText().toString())){
+        if (VerificationUtil.isValidPassword(etPasswordConfirm.getText().toString())) {
             etPasswordConfirm.setError("Password 형식이 맞지 않습니다.");
             return;
         }
 
-        if(VerificationUtil.isValidName(etNickName.getText().toString())){
+        if (VerificationUtil.isValidName(etNickName.getText().toString())) {
             etNickName.setError("NickName 형식이 맞지 않습니다.");
             return;
         }
+      
+        /**
+         * 백엔드쪽 데이터 파라미터 수정에 의해 password1, password2가 password 하나로 합쳐짐 12/5
+         * password 유효성 검사 추가 12/5
+         */
+        if(etPassword.getText().toString().equals(etPasswordConfirm.getText().toString())) {
+            SignUp signUp = new SignUp();
+            signUp.setEmail(etEmail.getText().toString());
+            signUp.setPassword(etPassword.getText().toString());
+            signUp.setUsername(etNickName.getText().toString());
+            if (photo != null) {
+                signUp.setImg_profile(photo.getImagePath());
+            }
+            Log.e("setSignUp", "setSignUp: " + signUp.toString());
 
-        SignUp signUp = new SignUp();
-        signUp.setEmail(etEmail.getText().toString());
-        signUp.setPassword1(etPassword.getText().toString());
-        signUp.setPassword2(etPasswordConfirm.getText().toString());
-        signUp.setUsername(etNickName.getText().toString());
-        if(photo!=null) {
-            signUp.setImg_profile(photo.getImagePath());
+            presenter.setSignUp(signUp);
+        }else{
+            //Dialog를 띄워도 될 것 같음
+            if(VerificationUtil.isValidPassword(etPasswordConfirm.getText().toString())){
+                etPasswordConfirm.setError("Password가 일치하지 않습니다");
+            }
         }
-        Log.e("setSignUp", "setSignUp: " + signUp.toString() );
-
-        presenter.setSignUp(signUp);
     }
 
 }
