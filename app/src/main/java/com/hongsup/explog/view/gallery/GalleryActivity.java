@@ -18,15 +18,14 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 
 import com.hongsup.explog.R;
 import com.hongsup.explog.data.photo.Photo;
+import com.hongsup.explog.view.base.BaseActivity;
 
 import java.util.ArrayList;
 import java.util.List;

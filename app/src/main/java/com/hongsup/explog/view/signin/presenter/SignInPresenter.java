@@ -59,6 +59,8 @@ public class SignInPresenter implements SignInContract.iPresenter {
                         }
                     }else{
                         Log.e("SignInActivity", "getSignIn: Error");
+                        view.hideProgress();
+                        view.showError();
                     }
 
                 }, throwable -> {
