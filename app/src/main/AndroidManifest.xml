@@ -34,16 +34,11 @@
             android:name=".view.signup.SignUpActivity"
             android:theme="@style/AppTheme.NoStatusBar" />
 
-        <!-- 갤러리 페이지 -->
-        <activity
-            android:name=".view.gallery.GalleryActivity"
-            android:theme="@style/NoStatusBarThemeForGallery" />
-
         <!-- 메인 페이지 -->
         <activity
             android:name=".view.main.MainActivity"
             android:theme="@style/AppTheme.NoStatusBar"/>
-
+      
         <!-- 메인2 페이지 -->
         <activity
             android:name=".view.main2.Main2Activity"
@@ -54,6 +49,9 @@
             android:name=".view.sample.SampleActivity"
             android:theme="@style/AppTheme.NoStatusBar"/>
 
+        <!-- 갤러리 페이지 -->
+        <activity android:name=".view.gallery.GalleryActivity"
+            android:theme="@style/AppTheme.NoStatusBar"/>
     </application>
 
 </manifest>

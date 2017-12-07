@@ -1,4 +1,4 @@
-package com.hongsup.explog.service;
+package com.hongsup.explog.service.api;
 
 import android.net.Uri;
 import android.support.annotation.Nullable;

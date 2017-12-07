@@ -9,14 +9,20 @@ import com.google.gson.annotations.SerializedName;
 
 public class SignIn {
 
-    @Expose(serialize = false, deserialize = false)
+    @Expose(serialize = false, deserialize = true)
     private int code;
+
+    //@Expose(serialize = false, deserialize = true)
 
     @Expose(serialize = false, deserialize = true)
     private String token;
 
+    // 사진 이미지 경로 받을 field 추가 12/5
+    @Expose(serialize = false, deserialize = true)
+    private String profile_img;
+
     @SerializedName("email")
-    @Expose(serialize = true, deserialize = false)
+    @Expose(serialize = true, deserialize = true)
     private String email;
 
     @SerializedName("password")
@@ -79,6 +85,15 @@ public class SignIn {
         this.message = message;
     }
 
+    // 사진 이미지 경로 받을 field 추가 12/5
+    public String getProfile_img() {
+        return profile_img;
+    }
+
+    public void setProfile_img(String profile_img) {
+        this.profile_img = profile_img;
+    }
+
     @Override
     public String toString() {
         return "SignIn{" +
@@ -86,7 +101,7 @@ public class SignIn {
                 ", token='" + token + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", user=" + user +
+                ", profile_img=" + profile_img +
                 ", message='" + message + '\'' +
                 '}';
     }

@@ -59,6 +59,7 @@ public class SignUpView implements SignUpContract.iView {
          * ButterKnife Binding
          */
         ButterKnife.bind(this, view);
+        setProfileBackground();
         setBackground();
     }
 
@@ -99,6 +100,14 @@ public class SignUpView implements SignUpContract.iView {
         this.photo = photo;
         Glide.with(context)
                 .load(photo.getImagePath())
+                .centerCrop()
+                .into(imgProfile);
+    }
+
+    private void setProfileBackground(){
+        Glide.with(context)
+                .load(android.R.drawable.ic_input_add)
+                .fitCenter()
                 .centerCrop()
                 .into(imgProfile);
     }
@@ -186,18 +195,28 @@ public class SignUpView implements SignUpContract.iView {
             etNickName.setError("NickName 형식이 맞지 않습니다.");
             return;
         }
+      
+        /**
+         * 백엔드쪽 데이터 파라미터 수정에 의해 password1, password2가 password 하나로 합쳐짐 12/5
+         * password 유효성 검사 추가 12/5
+         */
+        if(etPassword.getText().toString().equals(etPasswordConfirm.getText().toString())) {
+            SignUp signUp = new SignUp();
+            signUp.setEmail(etEmail.getText().toString());
+            signUp.setPassword(etPassword.getText().toString());
+            signUp.setUsername(etNickName.getText().toString());
+            if (photo != null) {
+                signUp.setImg_profile(photo.getImagePath());
+            }
+            Log.e("setSignUp", "setSignUp: " + signUp.toString());
 
-        SignUp signUp = new SignUp();
-        signUp.setEmail(etEmail.getText().toString());
-        signUp.setPassword1(etPassword.getText().toString());
-        signUp.setPassword2(etPasswordConfirm.getText().toString());
-        signUp.setUsername(etNickName.getText().toString());
-        if (photo != null) {
-            signUp.setImg_profile(photo.getImagePath());
+            presenter.setSignUp(signUp);
+        }else{
+            //Dialog를 띄워도 될 것 같음
+            if(VerificationUtil.isValidPassword(etPasswordConfirm.getText().toString())){
+                etPasswordConfirm.setError("Password가 일치하지 않습니다");
+            }
         }
-        Log.e("setSignUp", "setSignUp: " + signUp.toString());
-
-        presenter.setSignUp(signUp);
     }
 
 }
