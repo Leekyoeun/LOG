@@ -3,7 +3,7 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
-    <!-- NewsPeed Top-->
+    <!-- view_newspeed_top.xml-->
     <dimen name="view_newspeed_top_title">32sp</dimen>
     <dimen name="view_newspeed_top_tab_height">75dp</dimen>
     <dimen name="view_newspeed_top_tab_width">120dp</dimen>
@@ -11,11 +11,12 @@
     <dimen name="view_newspeed_top_layout_margin">50dp</dimen>
     <dimen name="view_newspped_top_basic_margin">24dp</dimen>
 
-    <!-- NewsPeed Toolbar -->
+    <!-- view_newspeed_toolbar.xml -->
     <dimen name="view_newspped_toolbar_title">18sp</dimen>
     <dimen name="view_newspped_toolbar_size">84dp</dimen>
     <dimen name="view_newspped_over_top">200dp</dimen>
-    <!-- Item Post -->
+
+    <!-- item_post.xml -->
     <dimen name="item_post_image_height">150dp</dimen>
     <dimen name="item_post_image_margin">20dp</dimen>
     <dimen name="item_post_title">16sp</dimen>

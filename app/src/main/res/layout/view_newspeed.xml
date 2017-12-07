@@ -39,6 +39,7 @@
                 android:layout_height="@dimen/view_newspped_toolbar_size"
                 app:contentInsetStart="0dp"
                 app:layout_collapseMode="pin"
+                android:fitsSystemWindows="true"
                 app:popupTheme="@style/AppTheme.PopupOverlay">
 
                 <!-- Toolbar 안에 들어가는 내용 -->

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+    <!-- 배경화면 View -->
     <ImageView
         android:id="@+id/imgProfile"
         android:layout_width="match_parent"
@@ -17,6 +18,7 @@
         android:src="@drawable/sign"
         android:tint="@color/colorPostTint" />
 
+    <!--Title ( 타이틀 ) -->
     <TextView
         android:id="@+id/textTitle"
         android:layout_width="wrap_content"
@@ -35,8 +37,9 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.14999998" />
+        app:layout_constraintVertical_bias="0.15" />
 
+    <!-- Date ( 날짜 ) -->
     <TextView
         android:id="@+id/textDate"
         android:layout_width="wrap_content"
@@ -53,6 +56,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textTitle"
         app:layout_constraintVertical_bias="0.100000024" />
 
+    <!-- Write ( 작성자 ) -->
     <TextView
         android:id="@+id/textWriter"
         android:layout_width="wrap_content"
@@ -66,8 +70,10 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textDate"
-        app:layout_constraintVertical_bias="0.1" />
+        app:layout_constraintVertical_bias="0.1"
+        android:paddingStart="@dimen/item_post_image_margin" />
 
+    <!-- 좋아요, 댓글 갯수 보여주는 Layout -->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

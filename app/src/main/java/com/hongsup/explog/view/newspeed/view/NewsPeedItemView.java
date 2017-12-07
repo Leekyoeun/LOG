@@ -46,11 +46,12 @@ public class NewsPeedItemView extends FrameLayout {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.view_newspeed_bottom, null);
         ButterKnife.bind(this, view);
         // 로직 처리
-        process();
+        initAdapter();
+
         addView(view);
     }
 
-    private void process() {
+    private void initAdapter() {
 
         List<String> data = new ArrayList<>();
 
@@ -61,19 +62,11 @@ public class NewsPeedItemView extends FrameLayout {
         CustomAdapter customAdapter = new CustomAdapter();
         recyclerView.setAdapter(customAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        /*
+        RecyclerView 사이에 여백 주는 Code
+         */
         recyclerView.addItemDecoration(new PostItemDivider(48));
         customAdapter.setData(data);
-
-        // One View 에 대한 로직 처리
-        /*ViewTreeObserver viewTreeObserver = relativeLayout.getViewTreeObserver();
-        viewTreeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                relativeLayout.setY(200);
-                relativeLayout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-            }
-        });*/
-
     }
 
     class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> {
