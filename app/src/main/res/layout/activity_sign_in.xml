@@ -90,7 +90,8 @@
                 android:hint="Email"
                 android:inputType="textEmailSubject"
                 app:backgroundTint="@color/colorMain"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:text="ama@ama.com"/>
 
             <android.support.v7.widget.AppCompatEditText
                 android:id="@+id/editPassword"
@@ -101,7 +102,8 @@
                 android:hint="Password"
                 app:backgroundTint="@color/colorMain"
                 android:inputType="textPassword"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:text="12341234"/>
 
             <Button
                 android:id="@+id/btnStart"

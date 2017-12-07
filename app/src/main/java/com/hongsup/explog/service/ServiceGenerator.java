@@ -4,6 +4,8 @@ package com.hongsup.explog.service;
  * Created by Android Hong on 2017-11-29.
  */
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -82,6 +84,7 @@ public class ServiceGenerator {
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .build();
+
         }else{
             gson = new GsonBuilder()
                     .excludeFieldsWithoutExposeAnnotation()
@@ -92,7 +95,6 @@ public class ServiceGenerator {
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .build();
         }
-
         return retrofit.create(className);
     }
 
