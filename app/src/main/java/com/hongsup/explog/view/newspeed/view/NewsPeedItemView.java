@@ -13,6 +13,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.hongsup.explog.R;
+import com.hongsup.explog.view.custom.PostItemDivider;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +43,7 @@ public class NewsPeedItemView extends FrameLayout {
     }
 
     private void initView() {
-        View view = LayoutInflater.from(getContext()).inflate(R.layout.view_newspeed_item, null);
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.view_newspeed_bottom, null);
         ButterKnife.bind(this, view);
         // 로직 처리
         process();
@@ -60,6 +61,7 @@ public class NewsPeedItemView extends FrameLayout {
         CustomAdapter customAdapter = new CustomAdapter();
         recyclerView.setAdapter(customAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.addItemDecoration(new PostItemDivider(48));
         customAdapter.setData(data);
 
         // One View 에 대한 로직 처리
@@ -80,14 +82,15 @@ public class NewsPeedItemView extends FrameLayout {
 
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(android.R.layout.simple_list_item_1, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_post, parent, false);
             return new ViewHolder(view);
         }
 
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
             String text = stringList.get(position);
-            holder.setTextView(text);
+            if(holder != null)
+                holder.setTextView(text);
         }
 
         public void setData(List<String> data) {
@@ -105,12 +108,15 @@ public class NewsPeedItemView extends FrameLayout {
 
             public ViewHolder(View itemView) {
                 super(itemView);
-                textView = itemView.findViewById(android.R.id.text1);
+                textView = itemView.findViewById(R.id.textTitle);
             }
 
             public void setTextView(String text) {
                 textView.setText(text);
             }
+
         }
+
+
     }
 }

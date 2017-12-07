@@ -6,8 +6,11 @@
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorMain">#337CBA</color>
     <color name="colorAlter">#FFAAAAFF</color>
-    <color name="colorMainTint">#99BCBCBC</color>
+    <color name="colorMainTint">#99787878</color>
+    <color name="colorPostTint">#99505050</color>
+
     <color name="colorLightGray">#dcdcdc</color>
 
+    <color name="colorGray">#A0A0A0</color>
 
 </resources>

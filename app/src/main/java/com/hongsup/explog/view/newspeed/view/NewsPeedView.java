@@ -76,13 +76,21 @@ public class NewsPeedView extends FrameLayout {
         ButterKnife.bind(this, view);
 
         /**
+         * 동적으로 OverLayTop 을 적용
+         */
+        /*
+        CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) viewPager.getLayoutParams();
+        AppBarLayout.ScrollingViewBehavior behavior = (AppBarLayout.ScrollingViewBehavior) params.getBehavior();
+        behavior.setOverlayTop(200); // Note: in pixels
+        */
+
+        /**
          * ViewPager 설정
          */
         NewsPeedViewPagerAdapter newsPeedViewPagerAdapter = new NewsPeedViewPagerAdapter(context);
         viewPager.setAdapter(newsPeedViewPagerAdapter);
         addView(view);
     }
-
 
     private void initTabLayout() {
         // TabLayout - ViewPager 연결
@@ -95,7 +103,7 @@ public class NewsPeedView extends FrameLayout {
             /**
              * TabLayout Icon 설정부분
              */
-            if (tab != null){
+            if (tab != null) {
                 ImageView myCustomIcon = (ImageView) LayoutInflater.from(context).inflate(R.layout.item_tab, null);
                 myCustomIcon.setImageDrawable(getResources().getDrawable(R.drawable.ic_australia));
                 tab.setText("");
@@ -111,8 +119,8 @@ public class NewsPeedView extends FrameLayout {
         /**
          * ViewPager 의 index 가 0일때
          */
-        if(viewPager.getCurrentItem() == 0){
-            String title = (String)toolbarTabLayout.getTabAt(0).getText();
+        if (viewPager.getCurrentItem() == 0) {
+            String title = (String) toolbarTabLayout.getTabAt(0).getText();
             SpannableString content = new SpannableString(title);
             content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
             textTopTitle.setText(content);
@@ -128,7 +136,7 @@ public class NewsPeedView extends FrameLayout {
 
             @Override
             public void onPageSelected(int position) {
-                String title = (String)toolbarTabLayout.getTabAt(position).getText();
+                String title = (String) toolbarTabLayout.getTabAt(position).getText();
                 SpannableString content = new SpannableString(title);
                 content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
                 textTopTitle.setText(content);
@@ -162,10 +170,8 @@ public class NewsPeedView extends FrameLayout {
                 // Alpha 조절하는 구역
                 float ratio = (float) verticalOffset / (float) appBarLayout.getTotalScrollRange();
                 newsPeedTopLayout.setAlpha(1 + ratio);
-
-                // ImageView Blur 처리
-                //imgBackground.setAlpha(1+ratio);
             }
         });
     }
+
 }
