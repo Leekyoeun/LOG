@@ -2,6 +2,8 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <!--Toolbar fitsSystemWindows-->
+    <dimen name="toolbar_size">80dp</dimen>
 
     <!-- view_newspeed_top.xml-->
     <dimen name="view_newspeed_top_title">32sp</dimen>

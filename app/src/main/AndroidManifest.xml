@@ -15,13 +15,12 @@
         <activity
             android:name=".view.splash.SplashActivity"
             android:theme="@style/AppTheme.SplashTheme">
-            <!--
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            -->
+
         </activity>
 
         <!-- 로그인 페이지 -->
@@ -45,15 +44,16 @@
             android:name=".view.gallery.GalleryActivity"
             android:theme="@style/AppTheme.NoStatusBar" />
 
+        <!-- POST DETAIL 페이지 -->
+        <activity
+            android:name=".view.postdetail.PostDetailActivity"
+            android:theme="@style/AppTheme.NoStatusBar" />
+
         <!-- POST 페이지 -->
         <activity
-            android:name=".view.post.PostActivity"
+            android:name=".view.post.view.PostActivity"
             android:theme="@style/AppTheme.NoStatusBar" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

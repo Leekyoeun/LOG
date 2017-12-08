@@ -167,6 +167,12 @@ public class NewsPeedView extends FrameLayout {
 
                 // 밀려 올라가는 작업 해줘야 한다.
 
+                /*
+                Log.e(TAG, "onOffsetChanged: " + viewPager.getY() );
+                Log.e(TAG, "onOffsetChanged: " + newsPeedTopLayout.getY() +", " + newsPeedTopLayout.getHeight() );
+                */
+
+
                 // Alpha 조절하는 구역
                 float ratio = (float) verticalOffset / (float) appBarLayout.getTotalScrollRange();
                 newsPeedTopLayout.setAlpha(1 + ratio);
