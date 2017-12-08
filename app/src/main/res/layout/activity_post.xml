@@ -25,68 +25,73 @@
             android:textColor="@color/colorWhite" />
     </android.support.v7.widget.Toolbar>
 
-
-    <RelativeLayout
-        android:id="@+id/coverLayout"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentTop="true">
-
-        <ImageView
-            android:id="@+id/imgCover"
-            android:layout_width="match_parent"
-            android:layout_height="420dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:scaleType="centerCrop"
-            android:src="@drawable/sign"
-            android:tint="@color/colorPostTint" />
-
-        <EditText
-            android:id="@+id/editTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:inputType="text"
-            android:maxLines="2"
-            android:text="타이틀ㅃ쀼쀼쀼쀼"
-            android:textAlignment="center"
-            android:textColor="@color/colorWhite"
-            android:textSize="36dp" />
-
+        android:layout_height="wrap_content">
 
         <RelativeLayout
-            android:id="@+id/relativeLayout"
+            android:id="@+id/coverLayout"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_below="@id/imgCover"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp">
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
 
-            <Button
-                android:id="@+id/btnChangeCover"
-                android:layout_width="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true">
+
+            <ImageView
+                android:id="@+id/imgCover"
+                android:layout_width="match_parent"
+                android:layout_height="420dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/sign"
+                android:tint="@color/colorPostTint" />
+
+            <EditText
+                android:id="@+id/editTitle"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:background="?android:attr/selectableItemBackground"
-                android:drawableLeft="@drawable/ic_insert_photo_gray_24dp"
-                android:drawablePadding="8dp"
-                android:drawableStart="@drawable/ic_insert_photo_gray_24dp"
-                android:padding="8dp"
-                android:text="@string/cover_change"
-                android:textColor="@color/colorGray" />
+                android:layout_centerVertical="true"
+                android:inputType="text"
+                android:maxLines="2"
+                android:text="타이틀ㅃ쀼쀼쀼쀼"
+                android:textAlignment="center"
+                android:textColor="@color/colorWhite"
+                android:textSize="36dp" />
+
+
+            <RelativeLayout
+                android:id="@+id/relativeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_below="@id/imgCover"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <Button
+                    android:id="@+id/btnChangeCover"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:drawableLeft="@drawable/ic_insert_photo_gray_24dp"
+                    android:drawablePadding="8dp"
+                    android:drawableStart="@drawable/ic_insert_photo_gray_24dp"
+                    android:padding="8dp"
+                    android:text="@string/cover_change"
+                    android:textColor="@color/colorGray" />
+            </RelativeLayout>
+
         </RelativeLayout>
 
-    </RelativeLayout>
+    </ScrollView>
 
 
 </RelativeLayout>
