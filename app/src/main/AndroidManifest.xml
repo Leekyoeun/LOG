@@ -53,7 +53,7 @@
         <activity
             android:name=".view.post.view.PostActivity"
             android:theme="@style/AppTheme.NoStatusBar"
-            android:windowSoftInputMode="adjustPan">
+            android:windowSoftInputMode="adjustResize">
 
         </activity>
     </application>

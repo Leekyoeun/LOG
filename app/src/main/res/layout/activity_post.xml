@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:fitsSystemWindows="true"
     tools:context="com.hongsup.explog.view.post.view.PostActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/toolbar_size"
-        android:elevation="2dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:fitsSystemWindows="true"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="?attr/actionBarSize"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:elevation="2dp">
 
         <TextView
             android:id="@+id/textCount"
@@ -25,62 +25,68 @@
             android:textColor="@color/colorWhite" />
     </android.support.v7.widget.Toolbar>
 
+
     <RelativeLayout
         android:id="@+id/coverLayout"
         android:layout_width="match_parent"
-        android:layout_height="380dp"
-        app:layout_constraintBottom_toTopOf="@+id/relativeLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true">
 
         <ImageView
             android:id="@+id/imgCover"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="420dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
             android:scaleType="centerCrop"
             android:src="@drawable/sign"
             android:tint="@color/colorPostTint" />
 
         <EditText
+            android:id="@+id/editTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
+            android:inputType="text"
             android:maxLines="2"
             android:text="타이틀ㅃ쀼쀼쀼쀼"
             android:textAlignment="center"
             android:textColor="@color/colorWhite"
             android:textSize="36dp" />
 
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_below="@id/imgCover"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+            <Button
+                android:id="@+id/btnChangeCover"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:background="?android:attr/selectableItemBackground"
+                android:drawableLeft="@drawable/ic_insert_photo_gray_24dp"
+                android:drawablePadding="8dp"
+                android:drawableStart="@drawable/ic_insert_photo_gray_24dp"
+                android:padding="8dp"
+                android:text="@string/cover_change"
+                android:textColor="@color/colorGray" />
+        </RelativeLayout>
+
     </RelativeLayout>
 
 
-    <RelativeLayout
-        android:id="@+id/relativeLayout"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/coverLayout">
-
-        <Button
-            android:id="@+id/btnChangeCover"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:background="?android:attr/selectableItemBackground"
-            android:drawableLeft="@drawable/ic_insert_photo_gray_24dp"
-            android:drawablePadding="8dp"
-            android:drawableStart="@drawable/ic_insert_photo_gray_24dp"
-            android:padding="8dp"
-            android:text="표지 변경"
-            android:textColor="@color/colorGray" />
-    </RelativeLayout>
-
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>
