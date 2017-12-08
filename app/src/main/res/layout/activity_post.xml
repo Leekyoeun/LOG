@@ -11,9 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/toolbar_size"
         android:elevation="2dp"
-        android:fitsSystemWindows="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:fitsSystemWindows="true"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
@@ -32,7 +32,8 @@
         app:layout_constraintBottom_toTopOf="@+id/relativeLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
         <ImageView
             android:id="@+id/imgCover"
@@ -40,7 +41,7 @@
             android:layout_height="wrap_content"
             android:scaleType="centerCrop"
             android:src="@drawable/sign"
-            android:tint="@color/colorPostTint"/>
+            android:tint="@color/colorPostTint" />
 
         <EditText
             android:layout_width="match_parent"
@@ -48,10 +49,10 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
+            android:maxLines="2"
             android:text="타이틀ㅃ쀼쀼쀼쀼"
             android:textAlignment="center"
             android:textColor="@color/colorWhite"
-            android:maxLines="2"
             android:textSize="36dp" />
 
     </RelativeLayout>
