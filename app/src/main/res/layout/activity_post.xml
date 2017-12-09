@@ -14,7 +14,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:elevation="2dp">
+        android:elevation="2dp"
+        android:fitsSystemWindows="true">
 
         <TextView
             android:id="@+id/textCount"
@@ -23,33 +24,36 @@
             android:layout_gravity="center"
             android:text="뿌잉뿌잉"
             android:textColor="@color/colorWhite" />
+
     </android.support.v7.widget.Toolbar>
 
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
 
         <RelativeLayout
             android:id="@+id/coverLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true">
+            android:focusableInTouchMode="true"
+            android:focusable="true">
 
             <ImageView
                 android:id="@+id/imgCover"
                 android:layout_width="match_parent"
-                android:layout_height="420dp"
+                android:layout_height="380dp"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
                 android:scaleType="centerCrop"
                 android:src="@drawable/sign"
                 android:tint="@color/colorPostTint" />
 
-            <EditText
+            <com.hongsup.explog.view.custom.BackPressEditText
                 android:id="@+id/editTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
