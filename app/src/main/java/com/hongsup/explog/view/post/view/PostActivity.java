@@ -12,17 +12,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hongsup.explog.R;
-import com.hongsup.explog.view.custom.BackPressEditText;
+import com.hongsup.explog.view.custom.LimitedEditText;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 
 public class PostActivity extends AppCompatActivity {
 
     private static final String TAG = "PostActivity";
 
-    BackPressEditText editTitle;
+    LimitedEditText editTitle;
     ScrollView scrollView;
     RelativeLayout relativeLayout;
-
     TextView textCount, textStartDate, textEndDate;
 
     @Override
@@ -84,6 +83,12 @@ public class PostActivity extends AppCompatActivity {
                 /**
                  * focus 있을 경우
                  * ScrollView 하단으로 스크롤하는 메소드
+                 *
+                 * 수정사항 )
+                 *
+                 * scollView 를 움직일 경우
+                 * focus 의 문제로 인해?
+                 * 뒤로가기를 눌렀을 시에도 focus 가 있는 경우가 있다.
                  */
                 if (hasFocus) {
                     scrollView.postDelayed(new Runnable() {

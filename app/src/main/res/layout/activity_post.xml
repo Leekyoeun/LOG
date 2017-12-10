@@ -68,7 +68,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true">
 
-                    <com.hongsup.explog.view.custom.BackPressEditText
+                    <com.hongsup.explog.view.custom.LimitedEditText
                         android:id="@+id/editTitle"
                         style="@style/CoverEditText"
                         android:layout_width="match_parent"
@@ -81,7 +81,7 @@
                         android:maxLines="2"
                         android:text="타이틀ㅃ쀼쀼쀼쀼"
                         android:textAlignment="center"
-                        android:textSize="36dp" />
+                        android:textSize="36sp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
