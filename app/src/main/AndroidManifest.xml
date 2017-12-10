@@ -52,8 +52,7 @@
         <!-- POST 페이지 -->
         <activity
             android:name=".view.post.view.PostActivity"
-            android:theme="@style/AppTheme.NoStatusBar"
-            android:windowSoftInputMode="adjustResize">
+            android:theme="@style/AppTheme.NoStatusBar">
 
         </activity>
     </application>

@@ -6,20 +6,24 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hongsup.explog.R;
+import com.hongsup.explog.view.custom.BackPressEditText;
+import com.jakewharton.rxbinding2.widget.RxTextView;
 
 public class PostActivity extends AppCompatActivity {
 
     private static final String TAG = "PostActivity";
 
-    EditText editTitle;
+    BackPressEditText editTitle;
     ScrollView scrollView;
     RelativeLayout relativeLayout;
+
+    TextView textCount, textStartDate, textEndDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +32,7 @@ public class PostActivity extends AppCompatActivity {
         initToolbar();
         initView();
         initListener();
+        setTextCount();
     }
 
     private void initToolbar() {
@@ -53,6 +58,23 @@ public class PostActivity extends AppCompatActivity {
         scrollView = findViewById(R.id.scrollView);
         editTitle = findViewById(R.id.editTitle);
         relativeLayout = findViewById(R.id.relativeLayout);
+        textCount = findViewById(R.id.textCount);
+        textStartDate = findViewById(R.id.textStartDate);
+        textEndDate = findViewById(R.id.textEndDate);
+    }
+
+    private void setTextCount() {
+        //textCount.setText(editTitle.getText().toString().length() + "/50");
+
+        RxTextView.textChangeEvents(editTitle)
+                .subscribe(ch -> {
+                    if (ch.text().length() > 0) {
+                        textCount.setVisibility(View.VISIBLE);
+                        textCount.setText(ch.text().length() + "/50");
+                    } else {
+                        textCount.setVisibility(View.GONE);
+                    }
+                });
     }
 
     private void initListener() {
@@ -67,13 +89,15 @@ public class PostActivity extends AppCompatActivity {
                     scrollView.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            scrollView.fullScroll(View.FOCUS_DOWN);
+                            scrollView.smoothScrollBy(0, scrollView.getHeight());
+                            editTitle.requestFocusFromTouch();
                         }
-                    }, 250);
+                    }, 280);
                 }
             }
         });
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

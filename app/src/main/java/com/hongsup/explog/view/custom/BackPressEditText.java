@@ -12,21 +12,26 @@ import android.widget.EditText;
 
 @SuppressLint("AppCompatCustomView")
 public class BackPressEditText extends EditText {
+
     public BackPressEditText(Context context) {
         super(context);
+        this.setBackground(null);
     }
 
     public BackPressEditText(Context context, AttributeSet attrs) {
         super(context, attrs);
+        this.setBackground(null);
     }
 
     public BackPressEditText(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+
     }
 
     @Override
     public boolean onKeyPreIme(int key_code, KeyEvent event) {
-        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP)
+        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK
+                && event.getAction() == KeyEvent.ACTION_UP)
             this.clearFocus();
 
         return super.onKeyPreIme(key_code, event);
