@@ -13,7 +13,9 @@ import android.widget.FrameLayout;
 
 import com.hongsup.explog.R;
 import com.hongsup.explog.view.main.contract.MainContract;
+import com.hongsup.explog.view.myinfo.MyInfoLayout;
 import com.hongsup.explog.view.newspeed.view.NewsPeedView;
+import com.hongsup.explog.view.search.SearchView;
 
 import java.lang.reflect.Field;
 
@@ -58,6 +60,7 @@ public class MainView implements MainContract.iView, BottomNavigationView.OnNavi
         this.presenter = presenter;
     }
 
+    int current_id = -1;
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
@@ -77,12 +80,14 @@ public class MainView implements MainContract.iView, BottomNavigationView.OnNavi
 
                 return true;
             case R.id.navigation_search:
+                frameLayout.addView(new SearchView(context));
                 return true;
             case R.id.navigation_post:
                 return true;
             case R.id.navigation_notification:
                 return true;
             case R.id.navigation_profile:
+                frameLayout.addView(new MyInfoLayout(context));
                 return true;
         }
         return false;

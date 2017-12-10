@@ -4,6 +4,8 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -11,22 +13,31 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.hongsup.explog.R;
 import com.hongsup.explog.view.search.dao.HistoryDAO;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnTextChanged;
+
 /**
  * Created by 정인섭 on 2017-12-08.
  */
 
 public class SearchView extends FrameLayout implements SearchRecyclerAdapter.ListAction {
+    @BindView(R.id.editSearch)
     EditText editSearch;
-    RecyclerView recyclerView;
+    @BindView(R.id.recyclerSearchHistory)
+    RecyclerView recyclerSearchHistory;
+    @BindView(R.id.imgDeleteTextSearch)
+    ImageView imgDeleteTextSearch;
     SearchRecyclerAdapter searchRecyclerAdapter;
     HistoryDAO dao;
-    ImageView imgDeleteTextSearch;
+
     public SearchView(@NonNull Context context) {
         super(context);
         init();
@@ -36,9 +47,7 @@ public class SearchView extends FrameLayout implements SearchRecyclerAdapter.Lis
 
     private void init() {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.view_search, null);
-        editSearch = view.findViewById(R.id.editSearch);
-        recyclerView = view.findViewById(R.id.recyclerSearchHistory);
-        imgDeleteTextSearch = view.findViewById(R.id.imgDeleteTextSearch);
+        ButterKnife.bind(this, view);
 
         dao = new HistoryDAO(getContext());
         setListener();
@@ -46,7 +55,7 @@ public class SearchView extends FrameLayout implements SearchRecyclerAdapter.Lis
         addView(view);
     }
 
-    private void insert(){
+    private void insert() {
         String word = editSearch.getText().toString();
         HistoryDAO dao = new HistoryDAO(getContext());
         String deleteQuery = "delete from history where word = '" + word + "'";
@@ -57,16 +66,12 @@ public class SearchView extends FrameLayout implements SearchRecyclerAdapter.Lis
         Log.d("SearchView", "readQuery() 작동");
     }
 
-    private void setListener(){
+    private void setListener() {
         editSearch.setOnKeyListener(new OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if(!"".equals(editSearch.getText().toString()) && keyCode==KeyEvent.KEYCODE_ENTER && event.getAction()== KeyEvent.ACTION_UP){
+                if (!"".equals(editSearch.getText().toString()) && keyCode == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_UP) {
                     insert();
-                    editSearch.setText("");
-                }else if("".equals(editSearch.getText().toString()) && keyCode==KeyEvent.KEYCODE_ENTER && event.getAction()== KeyEvent.ACTION_UP){
-                    Log.d("작동작동", "작동");
-                    //editSearch.setSelection(editSearch.length());
                     editSearch.setText("");
                 }
                 return false;
@@ -83,21 +88,51 @@ public class SearchView extends FrameLayout implements SearchRecyclerAdapter.Lis
         imgDeleteTextSearch.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!"".equals(editSearch.getText().toString())){
+                if (!"".equals(editSearch.getText().toString())) {
                     editSearch.setText("");
                 }
             }
         });
+
+        TextWatcher textWatcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                if("".equals(editSearch.getText().toString())){
+                    Log.d("확인", "onTextChanged: ");
+                }
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        };
+
+        editSearch.addTextChangedListener(textWatcher);
+
+
+
+    }
+    @OnTextChanged(value = R.id.editSearch, callback = OnTextChanged.Callback.TEXT_CHANGED)
+    public void textChangeListener () {
+
+
     }
 
-    private void setRecyclerView(){
+    private void setRecyclerView() {
         searchRecyclerAdapter = new SearchRecyclerAdapter(this);
-        recyclerView.setAdapter(searchRecyclerAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerSearchHistory.setAdapter(searchRecyclerAdapter);
+        recyclerSearchHistory.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
-    private void readList(){
-        searchRecyclerAdapter.notifier(dao.read());
+    private void readList() {
+        searchRecyclerAdapter.historyNotifier(dao.read());
     }
 
     @Override
