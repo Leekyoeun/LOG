@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:fitsSystemWindows="true"
-    tools:context="com.hongsup.explog.view.post.view.PostActivity">
+    tools:context="com.hongsup.explog.view.post.PostActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -23,7 +22,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="뿌잉뿌잉"
             android:textColor="@color/colorWhite"
             android:textSize="12sp" />
 
@@ -78,10 +76,11 @@
                         android:layout_marginBottom="20dp"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
+                        android:maxLength="50"
                         android:maxLines="2"
-                        android:text="타이틀ㅃ쀼쀼쀼쀼"
+                        android:hint="여행 제목을 작성해주세요!"
                         android:textAlignment="center"
-                        android:textSize="36sp" />
+                        android:textSize="30sp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -97,17 +96,15 @@
                             android:layout_gravity="center"
                             android:background="@drawable/border_cover_textdateview"
                             android:gravity="center"
-                            android:text="2017.11.11"
                             android:textColor="@color/colorWhite"
                             android:textSize="12sp" />
 
                         <TextView
                             android:layout_width="25dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_gravity="center"
                             android:gravity="center"
-                            android:text="-"
-
+                            android:text="@string/cover_hyphen"
                             android:textColor="@color/colorWhite" />
 
                         <TextView
@@ -117,7 +114,7 @@
                             android:layout_gravity="center"
                             android:background="@drawable/border_cover_textdateview"
                             android:gravity="center"
-                            android:text="2017.11.17"
+                            android:text="@string/txt_end_date"
                             android:textColor="@color/colorWhite"
                             android:textSize="12sp" />
 

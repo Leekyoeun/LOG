@@ -18,6 +18,8 @@
     <string name="title_profile">Profile</string>
     <string name="title_post">Post</string>
 
+    <string name="txt_end_date">End Date</string>
+
     <string name="africa">AFRICA</string>
     <string name="asia">ASIA</string>
     <string name="europe">EUROPE</string>
@@ -25,4 +27,5 @@
     <string name="oceania">OCEANIA</string>
 
     <string name="cover_change">COVER CHANGE</string>
+    <string name="cover_hyphen">-</string>
 </resources>

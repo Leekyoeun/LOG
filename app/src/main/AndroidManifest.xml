@@ -20,7 +20,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
 
         <!-- 로그인 페이지 -->
@@ -42,7 +41,7 @@
         <!-- 갤러리 페이지 -->
         <activity
             android:name=".view.gallery.GalleryActivity"
-            android:theme="@style/AppTheme.NoStatusBar" />
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <!-- POST DETAIL 페이지 -->
         <activity
@@ -51,7 +50,7 @@
 
         <!-- POST 페이지 -->
         <activity
-            android:name=".view.post.view.PostActivity"
+            android:name=".view.post.PostActivity"
             android:theme="@style/AppTheme.NoStatusBar">
 
         </activity>

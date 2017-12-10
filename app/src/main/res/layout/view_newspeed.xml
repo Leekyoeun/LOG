@@ -29,7 +29,6 @@
             android:layout_height="match_parent"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:statusBarScrim="@color/colorPrimaryDark"
-            app:scrimAnimationDuration="0"
             app:titleEnabled="false">
 
             <!-- Toolbar 영역-->

@@ -92,24 +92,22 @@ public class LimitedEditText extends EditText {
             @Override
             public void afterTextChanged(Editable s) {
 
-            /* turning off listener */
+                /* turning off listener */
                 removeTextChangedListener(this);
 
-            /* handling lines limit exceed */
+                /* handling lines limit exceed */
                 if (LimitedEditText.this.getLineCount() > maxLines) {
                     LimitedEditText.this.setText(text);
                     LimitedEditText.this.setSelection(beforeCursorPosition);
                 }
 
-            /* handling character limit exceed */
+                /* handling character limit exceed */
                 if (s.toString().length() > maxCharacters) {
                     LimitedEditText.this.setText(text);
                     LimitedEditText.this.setSelection(beforeCursorPosition);
-                    Toast.makeText(context, "text too long", Toast.LENGTH_SHORT)
-                            .show();
                 }
 
-            /* turning on listener */
+                /* turning on listener */
                 addTextChangedListener(this);
 
             }

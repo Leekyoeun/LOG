@@ -13,9 +13,9 @@ import com.hongsup.explog.view.signup.view.SignUpView;
 
 import java.util.ArrayList;
 
-public class SignUpActivity extends AppCompatActivity {
-    private static final int REQ_GALLERY = 999;
+import static com.hongsup.explog.data.Const.REQ_GALLERY;
 
+public class SignUpActivity extends AppCompatActivity {
     SignUpContract.iView signUpView;
 
     @Override

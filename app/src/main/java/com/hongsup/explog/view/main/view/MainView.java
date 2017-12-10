@@ -15,7 +15,7 @@ import android.widget.FrameLayout;
 import com.hongsup.explog.R;
 import com.hongsup.explog.view.main.contract.MainContract;
 import com.hongsup.explog.view.newspeed.view.NewsPeedView;
-import com.hongsup.explog.view.post.view.PostActivity;
+import com.hongsup.explog.view.post.PostActivity;
 
 import java.lang.reflect.Field;
 
