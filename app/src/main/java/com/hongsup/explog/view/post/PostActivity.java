@@ -17,7 +17,7 @@ import com.hongsup.explog.view.post.listener.PostContentListener;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class PostActivity extends AppCompatActivity implements PostContentListener{
+public class PostActivity extends AppCompatActivity implements PostContentListener {
 
     ImageView imgCover;
     TextView textTitle, textDate, textWriter;
@@ -62,16 +62,15 @@ public class PostActivity extends AppCompatActivity implements PostContentListen
         Intent intent = getIntent();
         Post post = (Post) intent.getSerializableExtra("POST");
 
-        if(post.getPostContentList() == null || post.getPostContentList().size() == 0){
-
-        }
-
         /**
          * 데이터를 Adapter 에 넘겨준다.
          */
+        if (post != null) {
+            /*if(post.getPostContentList() == null || post.getPostContentList().size() == 0){
 
+            }*/
+        }
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
