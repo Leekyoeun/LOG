@@ -10,19 +10,15 @@ import com.hongsup.explog.view.signin.view.SignInView;
 
 public class SignInActivity extends AppCompatActivity {
 
-    SignInContract.iView signInView;
+    private SignInContract.iView signInView;
+    private SignInContract.iPresenter signInPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        /*
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-        }*/
-
         signInView = new SignInView(this);
-        SignInContract.iPresenter signInPresenter = new SignInPresenter(this);
+        signInPresenter = new SignInPresenter(this);
 
         signInPresenter.attachView(signInView);
         signInView.setPresenter(signInPresenter);

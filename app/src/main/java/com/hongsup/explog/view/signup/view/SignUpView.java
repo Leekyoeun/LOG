@@ -25,6 +25,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.hongsup.explog.data.Const.REQ_GALLERY;
+
 /**
  * Created by Android Hong on 2017-11-30.
  */
@@ -49,7 +51,7 @@ public class SignUpView implements SignUpContract.iView {
     private Context context;
     private View view;
     private SignUpContract.iPresenter presenter;
-    private static final int REQ_GALLERY = 999;
+
     Photo photo;
 
     public SignUpView(Context context) {

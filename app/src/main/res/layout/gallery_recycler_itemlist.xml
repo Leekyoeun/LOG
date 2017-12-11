@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-    <RelativeLayout
-    android:padding="1dp"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="120dp"
-    android:layout_width="match_parent" xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:padding="1dp">
 
     <ImageView
-        android:layout_height="match_parent"
+        android:id="@+id/imgPhoto"
         android:layout_width="match_parent"
-        android:scaleType="fitXY"
-        android:id="@+id/imgPhoto"/>
+        android:layout_height="match_parent"
+        android:scaleType="fitXY" />
 
 
     <FrameLayout
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"
-        android:background="#404286f4"
         android:id="@+id/layoutSelect"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#404286f4"
         android:visibility="invisible">
 
         <TextView
@@ -32,6 +32,6 @@
             android:text="123"
             android:textColor="#FFFFFF" />
 
-</FrameLayout>
+    </FrameLayout>
 
 </RelativeLayout>

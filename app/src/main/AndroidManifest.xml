@@ -4,7 +4,6 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
     <application
         android:allowBackup="true"
         android:icon="@drawable/logo"
@@ -26,9 +25,9 @@
         <activity
             android:name=".view.signin.SignInActivity"
             android:theme="@style/AppTheme.NoStatusBar"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustResize"/>
 
-        <!-- 회원가입 페이지 -->
+        <!--회원가입 페이지 -->
         <activity
             android:name=".view.signup.SignUpActivity"
             android:theme="@style/AppTheme.NoStatusBar" />
@@ -36,17 +35,28 @@
         <!-- 메인 페이지 -->
         <activity
             android:name=".view.main.MainActivity"
-            android:theme="@style/AppTheme.NoStatusBar" />
+            android:theme="@style/AppTheme.NoStatusBar"/>
 
         <!-- 갤러리 페이지 -->
-        <activity
-            android:name=".view.gallery.GalleryActivity"
-            android:theme="@style/AppTheme.NoStatusBar" />
+        <activity android:name=".view.gallery.GalleryActivity"
+            android:theme="@style/AppTheme.NoStatusBar"/>
 
         <!-- 세팅 페이지 -->
         <activity
             android:name=".view.setting.SettingActivity"
             android:theme="@style/AppTheme" />
+
+        <!-- POST DETAIL 페이지 -->
+        <activity
+            android:name=".view.postdetail.PostDetailActivity"
+            android:theme="@style/AppTheme.NoStatusBar" />
+
+        <!-- POST 페이지 -->
+        <activity
+            android:name=".view.post.PostActivity"
+            android:theme="@style/AppTheme.NoStatusBar">
+
+        </activity>
     </application>
 
 </manifest>
