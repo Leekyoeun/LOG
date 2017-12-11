@@ -11,6 +11,7 @@
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity
             android:name=".view.splash.SplashActivity"
             android:theme="@style/AppTheme.SplashTheme">
@@ -46,17 +47,17 @@
             android:name=".view.setting.SettingActivity"
             android:theme="@style/AppTheme" />
 
-        <!-- POST DETAIL 페이지 -->
+        <!-- POST 페이지 -->
         <activity
-            android:name=".view.postdetail.PostDetailActivity"
+            android:name=".view.cover.CoverActivity"
             android:theme="@style/AppTheme.NoStatusBar" />
 
-        <!-- POST 페이지 -->
+        <!-- POST DETAIL 페이지 -->
         <activity
             android:name=".view.post.PostActivity"
             android:theme="@style/AppTheme.NoStatusBar">
-
         </activity>
+
     </application>
 
 </manifest>
