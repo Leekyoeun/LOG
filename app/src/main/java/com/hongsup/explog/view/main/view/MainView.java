@@ -14,7 +14,9 @@ import android.widget.FrameLayout;
 
 import com.hongsup.explog.R;
 import com.hongsup.explog.view.main.contract.MainContract;
+import com.hongsup.explog.view.myinfo.MyInfoLayout;
 import com.hongsup.explog.view.newspeed.view.NewsPeedView;
+import com.hongsup.explog.view.search.SearchView;
 import com.hongsup.explog.view.post.PostActivity;
 
 import java.lang.reflect.Field;
@@ -70,6 +72,7 @@ public class MainView implements MainContract.iView, BottomNavigationView.OnNavi
                 frameLayout.addView(new NewsPeedView(context));
                 return true;
             case R.id.navigation_search:
+                frameLayout.addView(new SearchView(context));
                 return true;
             case R.id.navigation_post:
                 // View 가 이미 있는지 체크
@@ -79,6 +82,7 @@ public class MainView implements MainContract.iView, BottomNavigationView.OnNavi
             case R.id.navigation_notification:
                 return true;
             case R.id.navigation_profile:
+                frameLayout.addView(new MyInfoLayout(context));
                 return true;
         }
         return false;
