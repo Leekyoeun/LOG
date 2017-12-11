@@ -35,7 +35,7 @@
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="84dp"
+                android:layout_height="@dimen/view_newspped_toolbar_size"
                 app:contentInsetStart="0dp"
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/AppTheme.PopupOverlay">
@@ -54,7 +54,7 @@
         android:layout_height="match_parent"
         android:background="@android:color/transparent"
         android:elevation="2dp"
-        app:behavior_overlapTop="250dp"
+        app:behavior_overlapTop="@dimen/view_newspped_over_top"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <!-- 하단 흰색 View -->

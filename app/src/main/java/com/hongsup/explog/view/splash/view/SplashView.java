@@ -3,32 +3,12 @@ package com.hongsup.explog.view.splash.view;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
-import android.support.constraint.ConstraintLayout;
-import android.support.constraint.ConstraintSet;
-import android.text.TextUtils;
-import android.transition.TransitionManager;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.hongsup.explog.R;
-import com.hongsup.explog.data.sign.SignIn;
-import com.hongsup.explog.util.VerificationUtil;
-import com.hongsup.explog.view.main2.Main2Activity;
-import com.hongsup.explog.view.signin.contract.SignInContract;
-import com.hongsup.explog.view.signup.SignUpActivity;
+import com.hongsup.explog.view.main.MainActivity;
 import com.hongsup.explog.view.splash.contract.SplashContract;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.OnTextChanged;
 
 /**
  * Created by Android Hong on 2017-11-30.
@@ -78,7 +58,7 @@ public class SplashView implements SplashContract.iView {
 
     @Override
     public void goMain() {
-        Intent intent = new Intent(context, Main2Activity.class);
+        Intent intent = new Intent(context, MainActivity.class);
         context.startActivity(intent);
         ((Activity) context).finish();
     }

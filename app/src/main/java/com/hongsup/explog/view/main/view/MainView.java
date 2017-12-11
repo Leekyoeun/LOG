@@ -2,6 +2,7 @@ package com.hongsup.explog.view.main.view;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.internal.BottomNavigationMenuView;
@@ -14,6 +15,7 @@ import android.widget.FrameLayout;
 import com.hongsup.explog.R;
 import com.hongsup.explog.view.main.contract.MainContract;
 import com.hongsup.explog.view.newspeed.view.NewsPeedView;
+import com.hongsup.explog.view.post.PostActivity;
 
 import java.lang.reflect.Field;
 
@@ -66,19 +68,13 @@ public class MainView implements MainContract.iView, BottomNavigationView.OnNavi
             case R.id.navigation_newspeed:
                 // View 가 이미 있는지 체크
                 frameLayout.addView(new NewsPeedView(context));
-
-                /*
-                // 좀 더 쉽게 표현하면
-                ((AppCompatActivity)context).getSupportFragmentManager()
-                        .beginTransaction()
-                        .add(R.id.frameLayout, new NewsPeedFragment())
-                        .commit();
-                */
-
                 return true;
             case R.id.navigation_search:
                 return true;
             case R.id.navigation_post:
+                // View 가 이미 있는지 체크
+                Intent intent = new Intent(context, PostActivity.class);
+                context.startActivity(intent);
                 return true;
             case R.id.navigation_notification:
                 return true;
