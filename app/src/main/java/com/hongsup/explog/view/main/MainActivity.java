@@ -19,6 +19,9 @@ public class MainActivity extends AppCompatActivity {
         mainPresenter.attachView(mainView);
         mainView.setPresenter(mainPresenter);
 
+        /* Animation 삭제 */
+        overridePendingTransition(0,0);
+
         setContentView(mainView.getView());
     }
 }

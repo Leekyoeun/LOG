@@ -9,10 +9,12 @@ import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.hongsup.explog.view.main.MainActivity;
 import com.hongsup.explog.R;
 import com.hongsup.explog.data.sign.SignIn;
 import com.hongsup.explog.data.sign.source.SignRepository;
 import com.hongsup.explog.util.PreferenceUtil;
+import com.hongsup.explog.view.main.MainActivity;
 import com.hongsup.explog.view.signin.SignInActivity;
 import com.hongsup.explog.view.signin.presenter.SignInPresenter;
 import com.hongsup.explog.view.splash.contract.SplashContract;

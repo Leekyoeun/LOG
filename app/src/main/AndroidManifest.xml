@@ -4,7 +4,6 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
     <application
         android:allowBackup="true"
         android:icon="@drawable/logo"
@@ -12,7 +11,6 @@
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
             android:name=".view.splash.SplashActivity"
             android:theme="@style/AppTheme.SplashTheme">
@@ -38,20 +36,27 @@
         <activity
             android:name=".view.main.MainActivity"
             android:theme="@style/AppTheme.NoStatusBar"/>
-      
-        <!-- 메인2 페이지 -->
-        <activity
-            android:name=".view.main2.Main2Activity"
-            android:theme="@style/AppTheme.NoStatusBar"/>
-
-        <!-- Test 페이지 -->
-        <activity
-            android:name=".view.sample.SampleActivity"
-            android:theme="@style/AppTheme.NoStatusBar"/>
 
         <!-- 갤러리 페이지 -->
         <activity android:name=".view.gallery.GalleryActivity"
             android:theme="@style/AppTheme.NoStatusBar"/>
+
+        <!-- 세팅 페이지 -->
+        <activity
+            android:name=".view.setting.SettingActivity"
+            android:theme="@style/AppTheme" />
+
+        <!-- POST DETAIL 페이지 -->
+        <activity
+            android:name=".view.postdetail.PostDetailActivity"
+            android:theme="@style/AppTheme.NoStatusBar" />
+
+        <!-- POST 페이지 -->
+        <activity
+            android:name=".view.post.PostActivity"
+            android:theme="@style/AppTheme.NoStatusBar">
+
+        </activity>
     </application>
 
 </manifest>

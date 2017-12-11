@@ -20,7 +20,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.hongsup.explog.R;
 import com.hongsup.explog.data.sign.SignIn;
 import com.hongsup.explog.util.VerificationUtil;
-import com.hongsup.explog.view.main2.Main2Activity;
+import com.hongsup.explog.view.main.MainActivity;
 import com.hongsup.explog.view.signin.contract.SignInContract;
 import com.hongsup.explog.view.signup.SignUpActivity;
 import com.hongsup.explog.view.splash.contract.SplashContract;
@@ -78,7 +78,7 @@ public class SplashView implements SplashContract.iView {
 
     @Override
     public void goMain() {
-        Intent intent = new Intent(context, Main2Activity.class);
+        Intent intent = new Intent(context, MainActivity.class);
         context.startActivity(intent);
         ((Activity) context).finish();
     }

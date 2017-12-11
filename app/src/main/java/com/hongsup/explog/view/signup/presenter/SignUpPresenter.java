@@ -1,21 +1,14 @@
 package com.hongsup.explog.view.signup.presenter;
 
-import android.net.Uri;
 import android.util.Log;
 
 import com.hongsup.explog.data.sign.SignUp;
 import com.hongsup.explog.data.sign.source.SignRepository;
 import com.hongsup.explog.view.signup.contract.SignUpContract;
 
-import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
-
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
-import okhttp3.MediaType;
-import okhttp3.RequestBody;
 import retrofit2.Response;
 
 /**
@@ -38,7 +31,6 @@ public class SignUpPresenter implements SignUpContract.iPresenter {
 
     @Override
     public void setSignUp(SignUp signUp) {
-
         view.showProgress();
         /**
          * Observable Pattern 으로 한 경우
