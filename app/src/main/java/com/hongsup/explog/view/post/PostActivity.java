@@ -2,7 +2,6 @@ package com.hongsup.explog.view.post;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.graphics.ColorFilter;
 import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
@@ -10,7 +9,6 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,7 +18,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.hongsup.explog.R;
@@ -29,6 +26,7 @@ import com.hongsup.explog.util.DateUtil;
 import com.hongsup.explog.util.DialogUtil;
 import com.hongsup.explog.view.custom.LimitedEditText;
 import com.hongsup.explog.view.gallery.GalleryActivity;
+import com.hongsup.explog.view.postdetail.PostDetailActivity;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 
 import java.util.ArrayList;
@@ -148,9 +146,11 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
         int id = item.getItemId();
         switch (id) {
             case R.id.action_ok:
-                Toast.makeText(this, "클릭", Toast.LENGTH_SHORT).show();
-                break;
+                Intent intent = new Intent(PostActivity.this, PostDetailActivity.class);
+                startActivity(intent);
 
+                // finish();
+                break;
         }
         return true;
     }
