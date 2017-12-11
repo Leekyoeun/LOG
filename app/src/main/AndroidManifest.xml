@@ -46,12 +46,12 @@
 
         <!-- POST 페이지 -->
         <activity
-            android:name=".view.post.PostActivity"
+            android:name=".view.cover.CoverActivity"
             android:theme="@style/AppTheme.NoStatusBar" />
 
         <!-- POST DETAIL 페이지 -->
         <activity
-            android:name=".view.postdetail.PostDetailActivity"
+            android:name=".view.post.PostActivity"
             android:theme="@style/AppTheme.NoStatusBar">
         </activity>
 

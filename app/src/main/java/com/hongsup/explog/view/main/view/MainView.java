@@ -15,7 +15,7 @@ import android.widget.FrameLayout;
 import com.hongsup.explog.R;
 import com.hongsup.explog.view.main.contract.MainContract;
 import com.hongsup.explog.view.newspeed.view.NewsPeedView;
-import com.hongsup.explog.view.post.PostActivity;
+import com.hongsup.explog.view.cover.CoverActivity;
 
 import java.lang.reflect.Field;
 
@@ -73,7 +73,7 @@ public class MainView implements MainContract.iView, BottomNavigationView.OnNavi
                 return true;
             case R.id.navigation_post:
                 // View 가 이미 있는지 체크
-                Intent intent = new Intent(context, PostActivity.class);
+                Intent intent = new Intent(context, CoverActivity.class);
                 context.startActivity(intent);
                 return true;
             case R.id.navigation_notification:

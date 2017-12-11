@@ -27,5 +27,11 @@
     <string name="oceania">OCEANIA</string>
 
     <string name="cover_change">COVER CHANGE</string>
+    <string name="cover_hash">TAG</string>
     <string name="cover_hyphen">-</string>
+
+    <string name="menu_cover_ok">OK</string>
+
+    <string name="menu_post_cover_change">Cover/Tag Modify</string>
+    <string name="menu_post_delete">Delete</string>
 </resources>
