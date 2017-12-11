@@ -40,7 +40,7 @@
 
         <!-- 갤러리 페이지 -->
         <activity android:name=".view.gallery.GalleryActivity"
-            android:theme="@style/AppTheme.NoStatusBar"/>
+            android:theme="@style/AppTheme.NoActionBar"/>
 
         <!-- 세팅 페이지 -->
         <activity

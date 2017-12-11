@@ -5,7 +5,7 @@
     <!--Toolbar fitsSystemWindows-->
     <dimen name="toolbar_size">80dp</dimen>
 
-    <!-- view_newspeed_top.xml-->
+    <!-- view_newspeed_header.xml -->
     <dimen name="view_newspeed_top_title">32sp</dimen>
     <dimen name="view_newspeed_top_tab_height">75dp</dimen>
     <dimen name="view_newspeed_top_tab_width">120dp</dimen>
@@ -27,5 +27,5 @@
 
     <!-- view_myinfo.xml-->
     <dimen name="view_myinfo_toolbar">286dp</dimen>
-    <dimen name = "view_myinfo_layout_height">110dp</dimen>
+    <dimen name="view_myinfo_layout_height">110dp</dimen>
 </resources>

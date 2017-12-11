@@ -10,7 +10,7 @@
 
     <!-- 상단 TabLayout-->
     <include
-        layout="@layout/view_newspeed_top"
+        layout="@layout/view_newspeed_header"
         android:fitsSystemWindows="true" />
 
     <!-- Scroll 에 필요한 AppBarLayout -->
