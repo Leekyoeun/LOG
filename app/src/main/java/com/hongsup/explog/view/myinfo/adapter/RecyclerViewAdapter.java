@@ -1,4 +1,4 @@
-package com.hongsup.explog.view.myinfo.recyclerview;
+package com.hongsup.explog.view.myinfo.adapter;
 
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.RecyclerView;
@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.hongsup.explog.R;
 
@@ -22,14 +21,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public MyHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = null;
         switch(viewType){
-            case HEADER :
-                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.myinfo_header, parent, false);
-                view.setTag("gg");
+
+            case CONTENT :
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_myinfo_recycler_itemlist, parent, false);
                 break;
-                
-//            case CONTENT :
-//                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.myinfo_content, parent, false);
-//                break;
         }
         
         return new MyHolder(view);
@@ -37,11 +32,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public int getItemViewType(int position) {
-        if(position==0){
-            return HEADER;
-        }else{
+
             return CONTENT;
-        }
+
     }
 
     @Override
@@ -50,23 +43,16 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public int getItemCount() {
-        return 1;
+        return 4;
     }
 
     class MyHolder extends RecyclerView.ViewHolder{
         TabLayout tabLayout;
         Button button;
 
-        public MyHolder(View itemView) {
+        public MyHolder(final View itemView) {
             super(itemView);
-            tabLayout = itemView.findViewById(R.id.tabLayoutMyInfo);
-            button = itemView.findViewById(R.id.button);
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(itemView.getContext(), "첫번째", Toast.LENGTH_SHORT).show();
-                }
-            });
+
 //            tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
 //                @Override
 //                public void onTabSelected(TabLayout.Tab tab) {

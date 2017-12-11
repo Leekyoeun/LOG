@@ -99,7 +99,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.Holder> 
 
     @Override
     public Holder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.gallery_recycler_itemlist, parent, false);
         return new Holder(view);
     }
 
