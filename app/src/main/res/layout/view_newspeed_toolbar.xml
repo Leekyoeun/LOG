@@ -10,6 +10,7 @@
     android:orientation="vertical"
     android:visibility="invisible"
     android:weightSum="3">
+
     <TextView
         android:id="@+id/toolbarTitle"
         android:layout_width="wrap_content"
@@ -28,6 +29,7 @@
         app:tabTextColor="@color/colorLightGray"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        app:tabIndicatorColor="@color/colorWhite"
         android:layout_weight="1.4">
     </com.hongsup.explog.view.custom.CustomTabLayout>
 </LinearLayout>

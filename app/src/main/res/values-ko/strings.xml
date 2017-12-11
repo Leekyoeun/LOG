@@ -25,4 +25,10 @@
     <string name="oceania">오세아니아</string>
 
     <string name="cover_change">표지 번경</string>
+    <string name="cover_hash">태그</string>
+
+    <string name="menu_cover_ok">확인</string>
+
+    <string name="menu_post_cover_change">표지/태그 수정</string>
+    <string name="menu_post_delete">여행기 삭제</string>
 </resources>

@@ -2,21 +2,21 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light">
         <!-- Customize your theme here. -->
-        <item name="colorPrimaryDark">@android:color/transparent</item>
-        <item name="colorPrimary">@color/colorMain</item>
-        <item name="colorAccent">@color/colorMain</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
 
     <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/colorWhite</item>
         <item name="colorPrimaryDark">@color/colorWhite</item>
+        <item name="colorPrimary">@color/colorWhite</item>
         <item name="colorAccent">@color/colorMain</item>
-
         <item name="android:windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
     </style>
 
     <style name="AppTheme.NoStatusBar">
+        <item name="colorPrimaryDark">@android:color/transparent</item>
         <!--Theme 의 StatusBar 투명하게 처리하기 위한 방법-->
         <item name="android:windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
@@ -62,15 +62,14 @@
     <!-- Cover EditText Style-->
     <style name="CoverEditText" parent="Widget.AppCompat.EditText">
         <item name="colorControlNormal">@android:color/transparent</item> <!--포커스 되어있지 않은 경우의 밑줄 부분-->
-        <item name="colorControlActivated">@color/colorMain</item> <!--손끝으로 터치되어 있는 부분. text selection handle라고 부른다고 한다-->
-        <item name="android:textCursorDrawable">@color/colorMain</item> <!--커서 색. drawable 지정되지만, 색을 설정하는것도 된다-->
+        <item name="colorControlActivated">@color/colorAccent</item> <!--손끝으로 터치되어 있는 부분. text selection handle라고 부른다고 한다-->
+        <item name="android:textCursorDrawable">@color/colorAccent</item> <!--커서 색. drawable 지정되지만, 색을 설정하는것도 된다-->
         <item name="android:textColor">@color/colorWhite</item> <!--텍스트 색-->
         <item name="android:textColorHint">@color/colorLightGray</item> <!--입력전의 Hint (포커스 Holder)-->
-        <item name="android:textColorHighlight">@color/colorMain</item> <!--텍스트 선택색-->
+        <item name="android:textColorHighlight">@color/colorAccent</item> <!--텍스트 선택색-->
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" >
-    </style>
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>
