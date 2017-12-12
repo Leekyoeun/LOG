@@ -8,34 +8,30 @@ import com.hongsup.explog.data.post.Content;
 import com.hongsup.explog.view.post.listener.PostContentListener;
 
 /**
- * Created by Android Hong on 2017-12-11.
+ * Created by Android Hong on 2017-12-12.
  */
 
-public class PathViewHolder extends PostViewHolder {
+public class InitViewHolder extends PostViewHolder {
 
-    private int position;
-    private PostContentListener postContentListener;
+    private TextView textWriter;
 
-    private TextView textPath;
-
-    public PathViewHolder(View itemView) {
+    public InitViewHolder(View itemView) {
         super(itemView);
-        textPath = itemView.findViewById(R.id.textPath);
+        textWriter = itemView.findViewById(R.id.textWriter);
     }
 
     @Override
     public void setListener(PostContentListener listener) {
-        this.postContentListener = postContentListener;
+
     }
 
     @Override
     public void setPosition(int position) {
-        this.position = position;
+
     }
 
     @Override
     public void bind(Content data) {
-        String path = data.getLat() +" . " + data.getLng();
-        textPath.setText(path);
+        textWriter.setText("안녕하세요. @이흥기!" );
     }
 }

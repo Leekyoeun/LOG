@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,6 +24,7 @@ public class PostActivity extends AppCompatActivity implements PostContentListen
     TextView textTitle, textDate, textWriter;
     CircleImageView imgProfile;
     RecyclerView recyclerView;
+    PostAdapter postAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +34,7 @@ public class PostActivity extends AppCompatActivity implements PostContentListen
         initToolbar();
         initView();
         initAdapter();
-        setData();
+        loadData();
     }
 
     private void initToolbar() {
@@ -40,6 +42,13 @@ public class PostActivity extends AppCompatActivity implements PostContentListen
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private void initView() {
@@ -52,24 +61,71 @@ public class PostActivity extends AppCompatActivity implements PostContentListen
     }
 
     private void initAdapter() {
-        PostAdapter postAdapter = new PostAdapter(this, true);
+        postAdapter = new PostAdapter(this, true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(postAdapter);
     }
 
-    private void setData() {
+    private void loadData() {
 
         Intent intent = getIntent();
         Post post = (Post) intent.getSerializableExtra("POST");
 
-        /**
-         * 데이터를 Adapter 에 넘겨준다.
-         */
-        if (post != null) {
-            /*if(post.getPostContentList() == null || post.getPostContentList().size() == 0){
+        if(post != null){
+            // Cover 에서 작성한 경우
+            textTitle.setText(post.getTitle());
 
-            }*/
+            if(getResources().getString(R.string.txt_end_date).equals(post.getEndDate())){
+                textDate.setText(post.getStartDate());
+            }else{
+                textDate.setText(post.getStartDate() + " - " + post.getEndDate());
+            }
+            postAdapter.setInitData();
+
+        }else{
+            // Post Item 을 클릭했을 경우
+            // 데이터를 로드한다.
         }
+
+        /*if (post != null) {
+            // Cover 작성한 후
+            postAdapter.setInitData();
+        }else{
+            // Cover 작성이 아닌 Post Item 을 클릭했을 경우
+            List<PostContent> postContentList = new ArrayList<>();
+            for(int i = 0 ; i<100; i++){
+                PostContent postContent;
+                Content content;
+                if(i % 3 == 0){
+                    postContent = new PostContent();
+                    postContent.setContentType(Const.CONTENT_TYPE_TEXT);
+                    content = new Content();
+                    content.setPk(i);
+                    content.setContent("하이하이하이" + i);
+                    postContent.setContent(content);
+                    postContentList.add(postContent);
+                }else if(i % 3 == 1){
+                    postContent = new PostContent();
+                    postContent.setContentType(Const.CONTENT_TYPE_PHOTO);
+                    content = new Content();
+                    content.setPk(i);
+                    content.setPhotoPath("뿌잉뿌잉"  + i);
+                    postContent.setContent(content);
+                    postContentList.add(postContent);
+                }else if(i % 3 == 2){
+                    postContent = new PostContent();
+                    postContent.setContentType(Const.CONTENT_TYPE_PATH);
+                    content = new Content();
+                    content.setPk(i);
+                    content.setLng(i*2);
+                    content.setLat(i*2);
+                    postContent.setContent(content);
+                    postContentList.add(postContent);
+                }
+            }
+            postAdapter.setData(postContentList);
+        }*/
+
     }
 
     @Override

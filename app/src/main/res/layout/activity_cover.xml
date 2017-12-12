@@ -171,10 +171,6 @@
                     android:text="@string/cover_change"
                     android:textColor="@color/colorGray" />
             </RelativeLayout>
-
         </RelativeLayout>
-
     </ScrollView>
-
-
 </RelativeLayout>

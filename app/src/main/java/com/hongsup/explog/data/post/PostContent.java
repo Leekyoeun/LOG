@@ -2,11 +2,13 @@ package com.hongsup.explog.data.post;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by Android Hong on 2017-12-11.
  */
 
-public class PostContent {
+public class PostContent implements Serializable{
 
     @SerializedName("post")
     private int post;
@@ -14,6 +16,8 @@ public class PostContent {
     private int order;
     @SerializedName("content_type")
     private String contentType;
+    @SerializedName("content")
+    private Content content;
 
     public int getPost() {
         return post;
@@ -37,5 +41,13 @@ public class PostContent {
 
     public void setContentType(String contentType) {
         this.contentType = contentType;
+    }
+
+    public Content getContent() {
+        return content;
+    }
+
+    public void setContent(Content content) {
+        this.content = content;
     }
 }

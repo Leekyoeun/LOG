@@ -22,6 +22,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.hongsup.explog.R;
 import com.hongsup.explog.data.photo.Photo;
+import com.hongsup.explog.data.post.Post;
 import com.hongsup.explog.util.DateUtil;
 import com.hongsup.explog.util.DialogUtil;
 import com.hongsup.explog.view.custom.LimitedEditText;
@@ -159,8 +160,15 @@ public class CoverActivity extends AppCompatActivity implements View.OnClickList
         switch (id) {
             case R.id.action_ok:
 
-                startActivity(item.getIntent());
 
+
+                Post post = new Post();
+                post.setStartDate(textStartDate.getText().toString());
+                post.setEndDate(textEndDate.getText().toString());
+                post.setTitle(editTitle.getText().toString());
+                item.getIntent().putExtra("POST", post);
+                startActivity(item.getIntent());
+                finish();
                 /*
                  데이터를 서버에 올린다.
 
@@ -170,7 +178,7 @@ public class CoverActivity extends AppCompatActivity implements View.OnClickList
                  4. 종료날짜
 
                  */
-                // finish();
+
                 break;
         }
         return true;

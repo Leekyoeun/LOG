@@ -3,13 +3,14 @@ package com.hongsup.explog.data.post;
 import com.google.gson.annotations.SerializedName;
 import com.hongsup.explog.data.sign.Author;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by Android Hong on 2017-12-11.
  */
 
-public class Post {
+public class Post implements Serializable {
 
     @SerializedName("pk")
     private int pk;
@@ -21,6 +22,8 @@ public class Post {
     private String startDate;
     @SerializedName("end_date")
     private String endDate;
+    @SerializedName("cover_path")
+    private String coverPath;
     @SerializedName("created_at")
     private String createdAt;
     @SerializedName("continent")
@@ -92,4 +95,11 @@ public class Post {
         this.postContentList = postContentList;
     }
 
+    public String getCoverPath() {
+        return coverPath;
+    }
+
+    public void setCoverPath(String coverPath) {
+        this.coverPath = coverPath;
+    }
 }
