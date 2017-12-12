@@ -1,5 +1,6 @@
 package com.hongsup.explog.view.post.adapter.viewholder;
 
+import android.content.Context;
 import android.view.View;
 import android.widget.TextView;
 
@@ -18,9 +19,16 @@ public class TextViewHolder extends PostViewHolder {
 
     private TextView textContent;
 
+    private Context context;
+
     public TextViewHolder(View itemView) {
         super(itemView);
         textContent = itemView.findViewById(R.id.textContent);
+    }
+
+    @Override
+    public void setContext(Context context) {
+        this.context = context;
     }
 
     @Override

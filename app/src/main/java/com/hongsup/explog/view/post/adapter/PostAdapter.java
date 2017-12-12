@@ -2,10 +2,12 @@ package com.hongsup.explog.view.post.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.hongsup.explog.R;
 import com.hongsup.explog.data.Const;
 import com.hongsup.explog.data.post.PostContent;
 import com.hongsup.explog.view.post.adapter.viewholder.PostViewHolder;
@@ -44,9 +46,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostViewHolder> {
     @Override
     public void onBindViewHolder(PostViewHolder holder, int position) {
         PostContent postContent = postContentList.get(position);
+        holder.setContext(context);
         holder.setPosition(position);
-        holder.bind(postContent.getContent());
         holder.setListener(postContentListener);
+        holder.bind(postContent.getContent());
     }
 
     @Override

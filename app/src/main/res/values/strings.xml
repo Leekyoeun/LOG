@@ -33,5 +33,5 @@
     <string name="menu_cover_ok">OK</string>
 
     <string name="menu_post_cover_change">Cover/Tag Modify</string>
-    <string name="menu_post_delete">Delete</string>
+    <string name="menu_post_delete">Post Delete</string>
 </resources>

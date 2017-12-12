@@ -1,5 +1,6 @@
 package com.hongsup.explog.view.post.adapter.viewholder;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
@@ -15,6 +16,8 @@ public abstract class PostViewHolder extends RecyclerView.ViewHolder {
     public PostViewHolder(View itemView) {
         super(itemView);
     }
+
+    public abstract void setContext(Context context);
 
     public abstract void setListener(PostContentListener listener);
 

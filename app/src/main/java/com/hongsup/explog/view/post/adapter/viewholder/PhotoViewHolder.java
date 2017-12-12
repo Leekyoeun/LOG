@@ -1,8 +1,11 @@
 package com.hongsup.explog.view.post.adapter.viewholder;
 
+import android.content.Context;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.hongsup.explog.R;
 import com.hongsup.explog.data.post.Content;
 import com.hongsup.explog.view.post.listener.PostContentListener;
@@ -16,11 +19,18 @@ public class PhotoViewHolder extends PostViewHolder {
     private int position;
     private PostContentListener postContentListener;
 
-    private TextView textPhoto;
+    private ImageView imgPhoto;
+
+    private Context context;
 
     public PhotoViewHolder(View itemView) {
         super(itemView);
-        textPhoto = itemView.findViewById(R.id.textPhoto);
+        imgPhoto = itemView.findViewById(R.id.imgPhoto);
+    }
+
+    @Override
+    public void setContext(Context context) {
+        this.context = context;
     }
 
     @Override
@@ -35,7 +45,9 @@ public class PhotoViewHolder extends PostViewHolder {
 
     @Override
     public void bind(Content data) {
-        String photoText = data.getPhotoPath();
-        textPhoto.setText(photoText);
+        Glide.with(context)
+                .load(R.drawable.main)
+                .into(imgPhoto);
+
     }
 }

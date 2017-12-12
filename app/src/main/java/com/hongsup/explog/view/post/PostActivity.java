@@ -12,9 +12,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hongsup.explog.R;
+import com.hongsup.explog.data.Const;
+import com.hongsup.explog.data.post.Content;
 import com.hongsup.explog.data.post.Post;
+import com.hongsup.explog.data.post.PostContent;
 import com.hongsup.explog.view.post.adapter.PostAdapter;
 import com.hongsup.explog.view.post.listener.PostContentListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -68,9 +74,10 @@ public class PostActivity extends AppCompatActivity implements PostContentListen
 
     private void loadData() {
 
+
         Intent intent = getIntent();
         Post post = (Post) intent.getSerializableExtra("POST");
-
+/*
         if(post != null){
             // Cover 에서 작성한 경우
             textTitle.setText(post.getTitle());
@@ -86,11 +93,12 @@ public class PostActivity extends AppCompatActivity implements PostContentListen
             // Post Item 을 클릭했을 경우
             // 데이터를 로드한다.
         }
+*/
 
-        /*if (post != null) {
+       /* if (post != null) {
             // Cover 작성한 후
             postAdapter.setInitData();
-        }else{
+        }else{*/
             // Cover 작성이 아닌 Post Item 을 클릭했을 경우
             List<PostContent> postContentList = new ArrayList<>();
             for(int i = 0 ; i<100; i++){
@@ -124,7 +132,7 @@ public class PostActivity extends AppCompatActivity implements PostContentListen
                 }
             }
             postAdapter.setData(postContentList);
-        }*/
+       // }
 
     }
 
@@ -133,6 +141,4 @@ public class PostActivity extends AppCompatActivity implements PostContentListen
         getMenuInflater().inflate(R.menu.menu_post, menu);
         return true;
     }
-
-
 }

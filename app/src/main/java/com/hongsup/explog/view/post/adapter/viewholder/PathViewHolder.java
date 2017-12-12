@@ -1,7 +1,8 @@
 package com.hongsup.explog.view.post.adapter.viewholder;
 
+import android.content.Context;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.ImageView;
 
 import com.hongsup.explog.R;
 import com.hongsup.explog.data.post.Content;
@@ -15,12 +16,18 @@ public class PathViewHolder extends PostViewHolder {
 
     private int position;
     private PostContentListener postContentListener;
+    private Context context;
 
-    private TextView textPath;
+    private ImageView imgPath;
 
     public PathViewHolder(View itemView) {
         super(itemView);
-        textPath = itemView.findViewById(R.id.textPath);
+        imgPath = itemView.findViewById(R.id.imgPhoto);
+    }
+
+    @Override
+    public void setContext(Context context) {
+        this.context = context;
     }
 
     @Override
@@ -36,6 +43,6 @@ public class PathViewHolder extends PostViewHolder {
     @Override
     public void bind(Content data) {
         String path = data.getLat() +" . " + data.getLng();
-        textPath.setText(path);
+        imgPath.setBackgroundResource(R.drawable.ic_home);
     }
 }

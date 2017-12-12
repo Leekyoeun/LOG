@@ -160,13 +160,13 @@ public class CoverActivity extends AppCompatActivity implements View.OnClickList
         switch (id) {
             case R.id.action_ok:
 
-
-
                 Post post = new Post();
                 post.setStartDate(textStartDate.getText().toString());
                 post.setEndDate(textEndDate.getText().toString());
                 post.setTitle(editTitle.getText().toString());
                 item.getIntent().putExtra("POST", post);
+
+
                 startActivity(item.getIntent());
                 finish();
                 /*
