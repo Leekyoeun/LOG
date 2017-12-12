@@ -73,7 +73,7 @@ public class ServiceGenerator {
                     /*
                      excludeFieldsWithoutExposeAnnotation() : Annotation 속성을 설정한 것을 적용하는 메소드
                      */
-                    .excludeFieldsWithoutExposeAnnotation()
+                    //.excludeFieldsWithoutExposeAnnotation()
                     /*
                      serializeNulls() : 속성이 null 일 경우 "속성명" : null 로 보내는 메소드
                      */

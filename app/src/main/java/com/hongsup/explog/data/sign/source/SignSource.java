@@ -5,6 +5,7 @@ import android.net.Uri;
 import com.hongsup.explog.data.photo.Photo;
 import com.hongsup.explog.data.sign.SignIn;
 import com.hongsup.explog.data.sign.SignUp;
+import com.hongsup.explog.data.sign.SignUpResponse;
 
 import java.util.Map;
 
@@ -25,7 +26,7 @@ public interface SignSource {
      * @param signUp
      * @return
      */
-    Observable<Response<SignUp>> singUp(SignUp signUp);
+    Observable<Response<SignUpResponse>> singUp(SignUp signUp);
 
     /**
      * SignIn 메소드

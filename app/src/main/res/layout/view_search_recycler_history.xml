@@ -18,5 +18,5 @@
         android:layout_height="wrap_content"
         android:layout_gravity="right|center_vertical"
         android:layout_marginRight="10dp"
-        app:srcCompat="@drawable/ic_highlight_off_black_24dp" />
+        app:srcCompat="@drawable/ic_clear_gray_16dp" />
 </FrameLayout>

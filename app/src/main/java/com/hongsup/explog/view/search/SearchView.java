@@ -1,5 +1,6 @@
 package com.hongsup.explog.view.search;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,15 +11,13 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.hongsup.explog.R;
-import com.hongsup.explog.view.search.dao.HistoryDAO;
-
-import java.util.ArrayList;
+import com.hongsup.explog.data.search.dao.SearchHistoryDAO;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -36,28 +35,29 @@ public class SearchView extends FrameLayout implements SearchRecyclerAdapter.Lis
     @BindView(R.id.imgDeleteTextSearch)
     ImageView imgDeleteTextSearch;
     SearchRecyclerAdapter searchRecyclerAdapter;
-    HistoryDAO dao;
+    SearchHistoryDAO dao;
 
     public SearchView(@NonNull Context context) {
         super(context);
-        init();
+        init(context);
         setRecyclerView();
         readList();
+
+
     }
 
-    private void init() {
+    private void init(Context context) {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.view_search, null);
         ButterKnife.bind(this, view);
-
-        dao = new HistoryDAO(getContext());
+        dao = new SearchHistoryDAO(getContext());
         setListener();
-
         addView(view);
+        ((Activity)context).getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
     }
 
     private void insert() {
         String word = editSearch.getText().toString();
-        HistoryDAO dao = new HistoryDAO(getContext());
+        SearchHistoryDAO dao = new SearchHistoryDAO(getContext());
         String deleteQuery = "delete from history where word = '" + word + "'";
         String insertquery = "insert into history(word)" + " values('" + word + "')";
         dao.readQuery(deleteQuery);

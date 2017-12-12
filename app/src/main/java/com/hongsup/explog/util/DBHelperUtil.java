@@ -1,4 +1,4 @@
-package com.hongsup.explog.view.search;
+package com.hongsup.explog.util;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -8,22 +8,22 @@ import android.database.sqlite.SQLiteOpenHelper;
  * Created by 정인섭 on 2017-12-08.
  */
 
-public class DBHelper extends SQLiteOpenHelper {
+public class DBHelperUtil extends SQLiteOpenHelper {
 
     private static final String DB_NAME = "sqlite.db";
     private static final int DB_VERSION = 1;
 
-    private static DBHelper instance = null;
+    private static DBHelperUtil instance = null;
 
-    public static DBHelper getInstsance(Context context){
+    public static DBHelperUtil getInstsance(Context context){
         if(instance==null){
-            instance = new DBHelper(context);
+            instance = new DBHelperUtil(context);
         }
 
         return instance;
     }
 
-    public DBHelper(Context context){
+    public DBHelperUtil(Context context){
         super(context, DB_NAME, null, DB_VERSION);
     }
 

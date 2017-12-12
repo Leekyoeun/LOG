@@ -1,6 +1,7 @@
 package com.hongsup.explog.view.main.view;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import com.hongsup.explog.R;
+import com.hongsup.explog.view.main.MainActivity;
 import com.hongsup.explog.view.main.contract.MainContract;
 import com.hongsup.explog.view.myinfo.MyInfoLayout;
 import com.hongsup.explog.view.newspeed.view.NewsPeedView;
