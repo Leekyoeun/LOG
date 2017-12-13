@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -86,8 +87,8 @@ public class SignUpView implements SignUpContract.iView {
     }
 
     @Override
-    public void showError() {
-
+    public void showError(String text) {
+        Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -157,7 +158,6 @@ public class SignUpView implements SignUpContract.iView {
 
     @OnClick(R.id.btnSignUp)
     public void setSignUp() {
-
         if (TextUtils.isEmpty(etEmail.getText().toString())) {
             etEmail.setError("Email 을 입력하세요.");
             return;

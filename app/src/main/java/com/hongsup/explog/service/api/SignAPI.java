@@ -1,8 +1,7 @@
 package com.hongsup.explog.service.api;
 
 import com.hongsup.explog.data.sign.SignIn;
-import com.hongsup.explog.data.sign.SignUp;
-import com.hongsup.explog.data.sign.SignUpResponse;
+import com.hongsup.explog.data.user.User;
 
 import java.util.Map;
 
@@ -20,21 +19,11 @@ import retrofit2.http.PartMap;
 
 public interface SignAPI {
 
-    @POST("/member/signup/")
-    Observable<Response<SignUpResponse>> signUp(@Body SignUp signUp);
-
     @Multipart
     @POST("/member/signup/")
-    Observable<Response<SignUpResponse>> signUp(@PartMap Map<String, RequestBody> signUpMap);
-
-//    @POST("/member/signup/")
-//    Call<SignUp> singUp(@Body User user);
+    Observable<Response<User>> signUp(@PartMap Map<String, RequestBody> signUpMap);
 
     @POST("/member/login/")
-    Observable<Response<SignIn>> signIn(@Body SignIn signIn);
-
-//    @POST("/login/")
-//    Call<SingIn> singIn(@Body User user);
-
+    Observable<Response<User>> signIn(@Body SignIn signIn);
 
 }

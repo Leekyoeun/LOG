@@ -22,6 +22,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.hongsup.explog.R;
 import com.hongsup.explog.data.photo.Photo;
+import com.hongsup.explog.data.post.Post;
 import com.hongsup.explog.util.DateUtil;
 import com.hongsup.explog.util.DialogUtil;
 import com.hongsup.explog.view.custom.LimitedEditText;
@@ -33,7 +34,7 @@ import java.util.ArrayList;
 
 import static com.hongsup.explog.data.Const.REQ_GALLERY;
 
-public class CoverActivity extends AppCompatActivity implements View.OnClickListener{
+public class CoverActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = "PostActivity";
 
@@ -46,17 +47,22 @@ public class CoverActivity extends AppCompatActivity implements View.OnClickList
     DatePickerDialog dialog;
     Button btnChangeCover;
     ImageView imgCover;
+    Menu menu;
+    Intent postIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cover);
+
+        postIntent = new Intent(CoverActivity.this, PostActivity.class);
+
         initToolbar();
         initView();
         initListener();
-        setTextCount();
         setStartDate();
     }
+
     private void initToolbar() {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -85,7 +91,6 @@ public class CoverActivity extends AppCompatActivity implements View.OnClickList
         textEndDate = findViewById(R.id.textEndDate);
         btnChangeCover = findViewById(R.id.btnChangeCover);
         imgCover = findViewById(R.id.imgCover);
-
     }
 
     private void setTextCount() {
@@ -94,8 +99,10 @@ public class CoverActivity extends AppCompatActivity implements View.OnClickList
                     if (ch.text().length() > 0) {
                         textCount.setVisibility(View.VISIBLE);
                         textCount.setText(ch.text().length() + "/50");
+                        changeMenu(R.id.action_ok, true);
                     } else {
                         textCount.setVisibility(View.GONE);
+                        changeMenu(R.id.action_ok, false);
                     }
                 });
     }
@@ -137,7 +144,13 @@ public class CoverActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        this.menu = menu;
         getMenuInflater().inflate(R.menu.menu_cover, menu);
+
+        /*
+          메뉴를 생성한 후 Title 에 대한 유효성 검사를 진행
+         */
+        setTextCount();
         return true;
     }
 
@@ -146,10 +159,26 @@ public class CoverActivity extends AppCompatActivity implements View.OnClickList
         int id = item.getItemId();
         switch (id) {
             case R.id.action_ok:
-                Intent intent = new Intent(CoverActivity.this, PostActivity.class);
-                startActivity(intent);
 
-                // finish();
+                Post post = new Post();
+                post.setStartDate(textStartDate.getText().toString());
+                post.setEndDate(textEndDate.getText().toString());
+                post.setTitle(editTitle.getText().toString());
+                item.getIntent().putExtra("POST", post);
+
+
+                startActivity(item.getIntent());
+                finish();
+                /*
+                 데이터를 서버에 올린다.
+
+                 1. Cover Image
+                 2. editTitle
+                 3. 시작날짜
+                 4. 종료날짜
+
+                 */
+
                 break;
         }
         return true;
@@ -158,16 +187,16 @@ public class CoverActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View view) {
         int id = view.getId();
-        switch (id){
+        switch (id) {
             case R.id.textStartDate:
                 dialog = DialogUtil.showDatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                        textStartDate.setText(String.format("%d.%d.%d", year, month+1, day));
+                        textStartDate.setText(String.format("%d.%d.%d", year, month + 1, day));
                     }
-                },textStartDate.getText().toString());
+                }, textStartDate.getText().toString());
 
-                if(endFlag){
+                if (endFlag) {
                     /**
                      *  최대 날짜 설정
                      */
@@ -177,13 +206,13 @@ public class CoverActivity extends AppCompatActivity implements View.OnClickList
                 dialog.show();
                 break;
             case R.id.textEndDate:
-                dialog  = DialogUtil.showDatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+                dialog = DialogUtil.showDatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                         endFlag = true;
-                        textEndDate.setText(String.format("%d.%d.%d", year, month+1, day));
+                        textEndDate.setText(String.format("%d.%d.%d", year, month + 1, day));
                     }
-                },textEndDate.getText().toString());
+                }, textEndDate.getText().toString());
 
                 /**
                  * 최소 날짜 설정
@@ -203,10 +232,10 @@ public class CoverActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch(requestCode){
-            case REQ_GALLERY :
-                if(resultCode == RESULT_OK){
-                    if(data != null) {
+        switch (requestCode) {
+            case REQ_GALLERY:
+                if (resultCode == RESULT_OK) {
+                    if (data != null) {
                         ArrayList<Photo> photoList = (ArrayList<Photo>) data.getSerializableExtra("PHOTO");
 
                         Glide.with(this)
@@ -217,6 +246,25 @@ public class CoverActivity extends AppCompatActivity implements View.OnClickList
 
                     }
                 }
+        }
+    }
+
+    /**
+     * editTitle 변화에 대한 Menu 변환
+     *
+     * @param id Menu Resource ID
+     * @param check flag
+     */
+    private void changeMenu(int id, boolean check) {
+        MenuItem item = menu.findItem(id);
+        if (check) {
+            item.setIcon(R.drawable.ic_check_white_24dp);
+            item.setIntent(postIntent);
+            item.setEnabled(true);
+        } else {
+            item.setIcon(R.drawable.ic_check_gray_24dp);
+            item.setIntent(null);
+            item.setEnabled(false);
         }
     }
 }

@@ -138,7 +138,10 @@
                     android:background="?android:attr/selectableItemBackground"
                     android:drawableLeft="@drawable/ic_hashtag_gray_24dp"
                     android:drawableStart="@drawable/ic_hashtag_gray_24dp"
-                    android:padding="8dp"
+                    android:paddingBottom="8dp"
+                    android:paddingLeft="8dp"
+                    android:paddingStart="8dp"
+                    android:paddingTop="8dp"
                     android:text="@string/cover_hash"
                     android:textColor="@color/colorGray" />
 
@@ -168,10 +171,6 @@
                     android:text="@string/cover_change"
                     android:textColor="@color/colorGray" />
             </RelativeLayout>
-
         </RelativeLayout>
-
     </ScrollView>
-
-
 </RelativeLayout>

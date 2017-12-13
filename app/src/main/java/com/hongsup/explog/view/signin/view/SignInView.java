@@ -13,11 +13,13 @@ import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -62,6 +64,8 @@ public class SignInView implements SignInContract.iView {
     @BindView(R.id.progressBarLayout)
     RelativeLayout progressBarLayout;
 
+    InputMethodManager imm;
+
     private boolean startFlag;
 
     private View view;
@@ -71,6 +75,9 @@ public class SignInView implements SignInContract.iView {
     public SignInView(Context context) {
         this.context = context;
         view = LayoutInflater.from(context).inflate(R.layout.activity_sign_in, null);
+
+        // 키보드 관련 객체
+        imm = (InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE);
         /**
          * ButterKnife Binding
          */
@@ -133,8 +140,8 @@ public class SignInView implements SignInContract.iView {
     }
 
     @Override
-    public void showError() {
-
+    public void showError(String text) {
+        Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -215,6 +222,9 @@ public class SignInView implements SignInContract.iView {
             editPassword.setError("Password 형식이 맞지 않습니다.");
             return;
         }
+
+        imm.hideSoftInputFromWindow(editEmail.getWindowToken(), 0);
+        imm.hideSoftInputFromWindow(editPassword.getWindowToken(), 0);
 
         SignIn user = new SignIn();
         user.setEmail(editEmail.getText().toString());
