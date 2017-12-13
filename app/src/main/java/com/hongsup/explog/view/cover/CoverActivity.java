@@ -22,7 +22,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.hongsup.explog.R;
 import com.hongsup.explog.data.photo.Photo;
-import com.hongsup.explog.data.post.Post;
+import com.hongsup.explog.data.post.PostCover;
 import com.hongsup.explog.util.DateUtil;
 import com.hongsup.explog.util.DialogUtil;
 import com.hongsup.explog.view.custom.LimitedEditText;
@@ -160,7 +160,7 @@ public class CoverActivity extends AppCompatActivity implements View.OnClickList
         switch (id) {
             case R.id.action_ok:
 
-                Post post = new Post();
+                PostCover post = new PostCover();
                 post.setStartDate(textStartDate.getText().toString());
                 post.setEndDate(textEndDate.getText().toString());
                 post.setTitle(editTitle.getText().toString());

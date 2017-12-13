@@ -3,13 +3,15 @@ package com.hongsup.explog.data.user;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by 정인섭 on 2017-12-11.
  *
  * Modify by Android Hong on 2017-12-13
  */
 
-public class User {
+public class User implements Serializable{
     @SerializedName("pk")
     private int pk;
     @SerializedName("username")

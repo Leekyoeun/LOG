@@ -76,15 +76,6 @@ public class NewsPeedView extends FrameLayout {
         ButterKnife.bind(this, view);
 
         /**
-         * 동적으로 OverLayTop 을 적용
-         */
-        /*
-        CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) viewPager.getLayoutParams();
-        AppBarLayout.ScrollingViewBehavior behavior = (AppBarLayout.ScrollingViewBehavior) params.getBehavior();
-        behavior.setOverlayTop(200); // Note: in pixels
-        */
-
-        /**
          * ViewPager 설정
          */
         NewsPeedViewPagerAdapter newsPeedViewPagerAdapter = new NewsPeedViewPagerAdapter(context);
@@ -114,8 +105,6 @@ public class NewsPeedView extends FrameLayout {
 
 
     private void initListener() {
-
-
         /**
          * ViewPager 의 index 가 0일때
          */
@@ -165,19 +154,11 @@ public class NewsPeedView extends FrameLayout {
                     toolbarLayout.setVisibility(INVISIBLE);
                 }
 
-                // 밀려 올라가는 작업 해줘야 한다.
-
-                /*
-                Log.e(TAG, "onOffsetChanged: " + viewPager.getY() );
-                Log.e(TAG, "onOffsetChanged: " + newsPeedTopLayout.getY() +", " + newsPeedTopLayout.getHeight() );
-                */
-
-
+                // 밀려 올라가는 작업 해줘야 한다.c
                 // Alpha 조절하는 구역
                 float ratio = (float) verticalOffset / (float) appBarLayout.getTotalScrollRange();
                 newsPeedTopLayout.setAlpha(1 + ratio);
             }
         });
     }
-
 }

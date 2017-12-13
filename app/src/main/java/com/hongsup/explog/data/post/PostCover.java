@@ -4,17 +4,16 @@ import com.google.gson.annotations.SerializedName;
 import com.hongsup.explog.data.user.User;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * Created by Android Hong on 2017-12-11.
  */
 
-public class Post implements Serializable {
+public class PostCover implements Serializable {
 
     @SerializedName("pk")
     private int pk;
-    @SerializedName("Author")
+    @SerializedName("author")
     private User author;
     @SerializedName("title")
     private String title;
@@ -28,8 +27,8 @@ public class Post implements Serializable {
     private String createdAt;
     @SerializedName("continent")
     private String continent;
-    @SerializedName("post_content")
-    private List<PostContent> postContentList;
+    @SerializedName("num_liked")
+    private int likeCount;
 
     public int getPk() {
         return pk;
@@ -87,19 +86,19 @@ public class Post implements Serializable {
         this.continent = continent;
     }
 
-    public List<PostContent> getPostContentList() {
-        return postContentList;
-    }
-
-    public void setPostContentList(List<PostContent> postContentList) {
-        this.postContentList = postContentList;
-    }
-
     public String getCoverPath() {
         return coverPath;
     }
 
     public void setCoverPath(String coverPath) {
         this.coverPath = coverPath;
+    }
+
+    public int getLikeCount() {
+        return likeCount;
+    }
+
+    public void setLikeCount(int likeCount) {
+        this.likeCount = likeCount;
     }
 }

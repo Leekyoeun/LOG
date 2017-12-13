@@ -23,11 +23,12 @@
     <string name="africa">AFRICA</string>
     <string name="asia">ASIA</string>
     <string name="europe">EUROPE</string>
-    <string name="americas">AMERICA</string>
+    <string name="north_americas">NORTH AMERICA</string>
+    <string name="south_americas">SOUTH AMERICA</string>
     <string name="oceania">OCEANIA</string>
 
     <string name="cover_change">COVER CHANGE</string>
-    <string name="cover_hash">TAG</string>
+    <string name="cover_area">AREA</string>
     <string name="cover_hyphen">-</string>
 
     <string name="menu_cover_ok">OK</string>

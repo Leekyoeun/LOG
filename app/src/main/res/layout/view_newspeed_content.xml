@@ -3,12 +3,14 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/transparent"
-    android:paddingLeft="10dp"
-    android:paddingRight="10dp">
+    android:background="@android:color/transparent">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        />
+
+    <!-- RecyclerView Animation -->
+    <!-- android:layoutAnimation="@anim/layout_animation_fall_down" -->
 </android.support.design.widget.CoordinatorLayout>
