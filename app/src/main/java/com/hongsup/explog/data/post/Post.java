@@ -1,7 +1,7 @@
 package com.hongsup.explog.data.post;
 
 import com.google.gson.annotations.SerializedName;
-import com.hongsup.explog.data.sign.Author;
+import com.hongsup.explog.data.user.User;
 
 import java.io.Serializable;
 import java.util.List;
@@ -15,7 +15,7 @@ public class Post implements Serializable {
     @SerializedName("pk")
     private int pk;
     @SerializedName("Author")
-    private Author author;
+    private User author;
     @SerializedName("title")
     private String title;
     @SerializedName("start_date")
@@ -39,11 +39,11 @@ public class Post implements Serializable {
         this.pk = pk;
     }
 
-    public Author getAuthor() {
+    public User getAuthor() {
         return author;
     }
 
-    public void setAuthor(Author author) {
+    public void setAuthor(User author) {
         this.author = author;
     }
 

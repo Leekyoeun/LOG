@@ -1,15 +1,10 @@
 package com.hongsup.explog.data.sign.source;
 
-import android.net.Uri;
-
 import com.hongsup.explog.data.sign.SignIn;
 import com.hongsup.explog.data.sign.SignUp;
-import com.hongsup.explog.data.sign.SignUpResponse;
-
-import java.util.Map;
+import com.hongsup.explog.data.user.User;
 
 import io.reactivex.Observable;
-import okhttp3.RequestBody;
 import retrofit2.Response;
 
 /**
@@ -33,12 +28,12 @@ public class SignRepository implements SignSource {
     }
 
     @Override
-    public Observable<Response<SignUpResponse>> singUp(SignUp signUp) {
+    public Observable<Response<User>> singUp(SignUp signUp) {
         return signRemoteDataSource.singUp(signUp);
     }
 
     @Override
-    public Observable<Response<SignIn>> signIn(SignIn signIn) {
+    public Observable<Response<User>> signIn(SignIn signIn) {
         return signRemoteDataSource.signIn(signIn);
     }
 }
