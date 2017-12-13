@@ -1,10 +1,10 @@
-package com.hongsup.explog.view.search.dao;
+package com.hongsup.explog.data.search.dao;
 
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.hongsup.explog.view.search.DBHelper;
+import com.hongsup.explog.util.DBHelperUtil;
 
 import java.util.ArrayList;
 
@@ -12,11 +12,11 @@ import java.util.ArrayList;
  * Created by 정인섭 on 2017-12-08.
  */
 
-public class HistoryDAO {
+public class SearchHistoryDAO {
 
-    DBHelper helper;
-    public HistoryDAO(Context context){
-        helper = new DBHelper(context);
+    DBHelperUtil helper;
+    public SearchHistoryDAO(Context context){
+        helper = new DBHelperUtil(context);
     }
 
     public void readQuery(String query){

@@ -6,9 +6,10 @@ package com.hongsup.explog.data;
 
 public class Const {
 
-    public static final String SERVER_URL = "http://explog-project-dev.ap-northeast-2.elasticbeanstalk.com";
+    public static final String SERVER_URL = "http://explog-shz.ap-northeast-2.elasticbeanstalk.com";
 
     public static final int REQ_GALLERY = 101;
+
 
     public static final int VIEW_TYPE_INIT = 0;
     public static final int VIEW_TYPE_TEXT = 1;
