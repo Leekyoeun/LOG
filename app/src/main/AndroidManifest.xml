@@ -27,9 +27,7 @@
         <activity
             android:name=".view.signin.SignInActivity"
             android:theme="@style/AppTheme.NoStatusBar"
-            android:windowSoftInputMode="adjustResize">
-
-        </activity>
+            android:windowSoftInputMode="adjustResize"></activity>
 
         <!-- 회원가입 페이지 -->
         <activity
@@ -42,9 +40,8 @@
             android:theme="@style/AppTheme.NoStatusBar" />
 
         <!-- 갤러리 페이지 -->
-        <activity
-            android:name=".view.gallery.GalleryActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".view.gallery.GalleryActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
 
         <!-- 세팅 페이지 -->
         <activity
@@ -55,7 +52,7 @@
         <activity
             android:name=".view.cover.CoverActivity"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustResize"/>
 
         <!-- POST 페이지 -->
         <activity
@@ -64,7 +61,7 @@
 
         <!-- Profile edit 페이지 -->
         <activity android:name=".view.setting.editprofile.EditProfileActivity" />
-        <activity android:name=".view.setting.alarmsetting.AlarmSettingActivity" />
+        <activity android:name=".view.setting.alarmsetting.AlarmSettingActivity"></activity>
     </application>
 
 </manifest>
