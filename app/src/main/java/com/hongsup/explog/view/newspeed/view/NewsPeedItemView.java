@@ -43,7 +43,7 @@ public class NewsPeedItemView extends FrameLayout {
     }
 
     private void initView() {
-        View view = LayoutInflater.from(getContext()).inflate(R.layout.view_newspeed_bottom, null);
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.view_newspeed_content, null);
         ButterKnife.bind(this, view);
         // 로직 처리
         initAdapter();

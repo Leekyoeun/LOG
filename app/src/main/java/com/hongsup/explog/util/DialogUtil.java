@@ -1,8 +1,10 @@
 package com.hongsup.explog.util;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.util.Log;
 import android.widget.DatePicker;
 import android.widget.Toast;
@@ -20,6 +22,14 @@ public class DialogUtil {
 
     private static Calendar cal = Calendar.getInstance();
 
+    /**
+     * Date 를 선택하는 Dialog 호출
+     *
+     * @param context
+     * @param listener
+     * @param date
+     * @return
+     */
     public static DatePickerDialog showDatePickerDialog(Context context, DatePickerDialog.OnDateSetListener listener, String date) {
         DatePickerDialog dialog;
         String[] str_date = date.split("\\.");
@@ -40,5 +50,21 @@ public class DialogUtil {
         }
 
         return dialog;
+    }
+
+    /**
+     * Alert 를 선택한는 다이얼로그
+     *
+     * @param context
+     * @param listener
+     * @return
+     */
+    public static AlertDialog showAlertDialog(Context context, DialogInterface.OnClickListener listener){
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        /*
+         setItems( 아이템의 목록, 클릭했을 경우에 대한 리스너 )
+         */
+        builder.setItems(new String[]{"item", "item2"}, listener);
+        return builder.create();
     }
 }
