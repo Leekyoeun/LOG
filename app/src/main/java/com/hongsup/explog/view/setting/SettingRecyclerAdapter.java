@@ -10,11 +10,11 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.hongsup.explog.R;
+import com.hongsup.explog.data.user.source.UserRepository;
+import com.hongsup.explog.util.PreferenceUtil;
 import com.hongsup.explog.view.setting.alarmsetting.AlarmSettingActivity;
 import com.hongsup.explog.view.setting.editprofile.EditProfileActivity;
 
@@ -102,6 +102,11 @@ public class SettingRecyclerAdapter extends RecyclerView.Adapter<SettingRecycler
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
                                                 //sharedPreference에 있는 값 다 삭제
+
+                                                PreferenceUtil.removeAllValue(itemView.getContext());
+                                                UserRepository.getInstance().clearUser();
+                                                mList[mList.length-1] = "";
+                                                mType[mType.length-1] = 0;
 
                                             }
                                         })
