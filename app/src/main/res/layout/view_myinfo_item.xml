@@ -11,6 +11,5 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:clipChildren="false"
-        android:clipToPadding="false"
-        tools:listitem="@layout/myinfo_header" />
+        android:clipToPadding="false"/>
 </FrameLayout>
