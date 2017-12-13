@@ -17,7 +17,7 @@ public interface SignUpContract {
 
         void showProgress();
         void hideProgress();
-        void showError();
+        void showError(String text);
 
         void goSignIn();
 

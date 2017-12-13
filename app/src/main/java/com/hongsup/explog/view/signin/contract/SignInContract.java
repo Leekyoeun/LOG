@@ -16,7 +16,7 @@ public interface SignInContract {
 
         void showProgress();
         void hideProgress();
-        void showError();
+        void showError(String text);
 
         // Main 으로 가는 메소드
         void goMain();

@@ -1,12 +1,10 @@
 package com.hongsup.explog.data.sign.source;
 
-import android.util.Log;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.hongsup.explog.data.sign.SignIn;
 import com.hongsup.explog.data.sign.SignUp;
-import com.hongsup.explog.data.sign.SignUpResponse;
+import com.hongsup.explog.data.user.User;
 import com.hongsup.explog.service.ServiceGenerator;
 import com.hongsup.explog.service.api.SignAPI;
 
@@ -16,11 +14,8 @@ import java.util.Map;
 
 import io.reactivex.Observable;
 import okhttp3.MediaType;
-import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Response;
-
-import static android.content.ContentValues.TAG;
 
 /**
  * Created by Android Hong on 2017-11-30.
@@ -30,13 +25,19 @@ public class SignRemoteDataSource implements SignSource {
 
     private static SignRemoteDataSource instance;
 
+    /*
     private SignAPI signUpAPI;
     private SignAPI signInAPI;
+    */
+    private SignAPI signAPI;
 
     private SignRemoteDataSource() {
         // Service 생성
+        /*
         signUpAPI = ServiceGenerator.create(SignAPI.class, createGson(true));
         signInAPI = ServiceGenerator.create(SignAPI.class, createGson(false));
+        */
+        signAPI = ServiceGenerator.create(SignAPI.class);
     }
 
     public static SignRemoteDataSource getInstance() {
@@ -46,24 +47,17 @@ public class SignRemoteDataSource implements SignSource {
     }
 
     @Override
-    public Observable<Response<SignUpResponse>> singUp(SignUp signUp) {
-
-        signUpAPI = ServiceGenerator.create(SignAPI.class, true);
+    public Observable<Response<User>> singUp(SignUp signUp) {
 
         Map<String, RequestBody> requestBodyMap = new HashMap<>();
         //백엔드쪽 데이터 파라미터 수정에 의해 password1, password2가 password 하나로 합쳐짐 12/5
-        requestBodyMap.put("password", toRequestBody(signUp.getPassword()));
         requestBodyMap.put("email", toRequestBody(signUp.getEmail()));
+        requestBodyMap.put("password", toRequestBody(signUp.getPassword()));
         requestBodyMap.put("username", toRequestBody(signUp.getUsername()));
-
-
-        Log.e(TAG, "singUp: " + signUp.getImg_profile() );
-        Log.e(TAG, "singUp: " + signUp.toString() );
 
         if(signUp.getImg_profile() != null){
             File file = new File(signUp.getImg_profile());
             // create RequestBody instance from file
-            Log.e(TAG, "singUp: " + file.getName() );
             RequestBody requestFile = RequestBody.create(MediaType.parse("image/*"), file);
             requestBodyMap.put("img_profile\"; filename=\""+file.getName(), requestFile);
         }else{
@@ -71,15 +65,14 @@ public class SignRemoteDataSource implements SignSource {
             requestBodyMap.put("img_profile\"; filename=\"", requestFile);
         }
 
-        return signUpAPI.signUp(requestBodyMap);
-
-        //return signUpAPI.signUp(signUp);
-
+        //return signUpAPI.signUp(requestBodyMap);
+        return signAPI.signUp(requestBodyMap);
     }
 
     @Override
-    public Observable<Response<SignIn>> signIn(SignIn signIn) {
-        return signInAPI.signIn(signIn);
+    public Observable<Response<User>> signIn(SignIn signIn) {
+        //return signInAPI.signIn(signIn);
+        return signAPI.signIn(signIn);
     }
 
     private Gson createGson(boolean nullCheck) {
@@ -102,7 +95,6 @@ public class SignRemoteDataSource implements SignSource {
                     .excludeFieldsWithoutExposeAnnotation();
         }
         Gson gson = gsonBuilder.create();
-        Log.e(TAG, "create Gson: " + gson.toString());
         return gson;
     }
 
