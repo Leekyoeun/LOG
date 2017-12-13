@@ -7,29 +7,24 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hongsup.explog.R;
-import com.hongsup.explog.view.newspeed.view.NewsPeedItemView;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.hongsup.explog.view.newspeeditem.contract.NewsPeedItemContract;
+import com.hongsup.explog.view.newspeeditem.presenter.NewsPeedItemPresenter;
+import com.hongsup.explog.view.newspeeditem.view.NewsPeedItemView;
 
 /**
  * Created by Android Hong on 2017-11-30.
  */
 
-public class NewsPeedViewPagerAdapter extends PagerAdapter{
+public class NewsPeedViewPagerAdapter extends PagerAdapter {
 
-    private static final int COUNT = 5;
+    private static final int COUNT = 6;
     private Context context;
-    private List<View> views;
+
+    private NewsPeedItemContract.iPresenter newsPeedItemPresenter;
+    private NewsPeedItemContract.iView newsPeedItemView;
 
     public NewsPeedViewPagerAdapter(Context context) {
         this.context = context;
-        views = new ArrayList<>(COUNT);
-        views.add(new NewsPeedItemView(context));
-        views.add(new NewsPeedItemView(context));
-        views.add(new NewsPeedItemView(context));
-        views.add(new NewsPeedItemView(context));
-        views.add(new NewsPeedItemView(context));
     }
 
     @Override
@@ -39,7 +34,12 @@ public class NewsPeedViewPagerAdapter extends PagerAdapter{
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        View view = views.get(position);
+        newsPeedItemPresenter = new NewsPeedItemPresenter();
+        newsPeedItemView = new NewsPeedItemView(context, position+1);
+        newsPeedItemPresenter.attachView(newsPeedItemView);
+        newsPeedItemView.setPresenter(newsPeedItemPresenter);
+
+        View view = (View)newsPeedItemView;
         container.addView(view);
         return view;
     }
@@ -51,21 +51,23 @@ public class NewsPeedViewPagerAdapter extends PagerAdapter{
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-        container.removeView((View)object);
+        container.removeView((View) object);
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
-        switch (position){
+        switch (position) {
             case 0:
                 return context.getResources().getString(R.string.asia);
             case 1:
                 return context.getResources().getString(R.string.europe);
             case 2:
-                return context.getResources().getString(R.string.americas);
+                return context.getResources().getString(R.string.north_americas);
             case 3:
-                return context.getResources().getString(R.string.oceania);
+                return context.getResources().getString(R.string.south_americas);
             case 4:
+                return context.getResources().getString(R.string.oceania);
+            case 5:
                 return context.getResources().getString(R.string.africa);
             default:
                 return "띠용";

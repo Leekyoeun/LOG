@@ -12,8 +12,8 @@ public class PostResult {
 
     @SerializedName("count")
     private int count;
-    @SerializedName("results")
-    private List<Post> PostList;
+    @SerializedName("posts")
+    private List<PostCover> PostList;
 
     public int getCount() {
         return count;
@@ -23,11 +23,11 @@ public class PostResult {
         this.count = count;
     }
 
-    public List<Post> getPostList() {
+    public List<PostCover> getPostList() {
         return PostList;
     }
 
-    public void setPostList(List<Post> postList) {
+    public void setPostList(List<PostCover> postList) {
         PostList = postList;
     }
 }

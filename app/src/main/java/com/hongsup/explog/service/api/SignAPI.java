@@ -25,5 +25,4 @@ public interface SignAPI {
 
     @POST("/member/login/")
     Observable<Response<User>> signIn(@Body SignIn signIn);
-
 }

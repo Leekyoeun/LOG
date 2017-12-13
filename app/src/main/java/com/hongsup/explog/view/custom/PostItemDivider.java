@@ -18,9 +18,13 @@ public class PostItemDivider extends RecyclerView.ItemDecoration {
 
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-        // 마지막 아이템이 아닌 경우, 공백 추가
-        if (parent.getChildAdapterPosition(view) != parent.getAdapter().getItemCount() - 1) {
-            outRect.bottom = verticalSpaceHeight;
+
+        outRect.right = verticalSpaceHeight;
+        outRect.left= verticalSpaceHeight;
+        outRect.bottom = verticalSpaceHeight;
+        if (parent.getChildAdapterPosition(view) == 0 ) {
+            // 첫번째 아이템만
+            outRect.top = verticalSpaceHeight;
         }
     }
 }
