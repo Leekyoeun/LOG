@@ -46,11 +46,11 @@ public class NewsPeedView extends FrameLayout {
     @BindView(R.id.toolbarTabLayout)
     TabLayout toolbarTabLayout;
 
-    // view_newspeed_top.xml 최상단 Layout
+    // view_newspeed_headerder.xml 최상단 Layout
     @BindView(R.id.newsPeedTopLayout)
     ConstraintLayout newsPeedTopLayout;
 
-    // view_newspeed_top.xml 에 들어가는 TabLayout
+    // view_newspeed_header.xmlxml 에 들어가는 TabLayout
     @BindView(R.id.topTabLayout)
     TabLayout topTabLayout;
 
