@@ -21,11 +21,12 @@
     <string name="africa">아프리카</string>
     <string name="asia">아시아</string>
     <string name="europe">유럽</string>
-    <string name="americas">아메리카</string>
+    <string name="north_americas">북아메리카</string>
+    <string name="south_americas">남아메리카</string>
     <string name="oceania">오세아니아</string>
 
     <string name="cover_change">표지 번경</string>
-    <string name="cover_hash">태그</string>
+    <string name="cover_area">지역</string>
 
     <string name="menu_cover_ok">확인</string>
 

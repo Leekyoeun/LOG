@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Toast;
 
 import com.hongsup.explog.R;
 import com.hongsup.explog.view.main.MainActivity;
@@ -52,8 +53,8 @@ public class SplashView implements SplashContract.iView {
     }
 
     @Override
-    public void showError() {
-
+    public void showError(String text) {
+        Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
     }
 
     @Override

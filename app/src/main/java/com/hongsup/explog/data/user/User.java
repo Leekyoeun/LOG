@@ -1,12 +1,17 @@
-package com.hongsup.explog.data.sign;
+package com.hongsup.explog.data.user;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
 
 /**
  * Created by 정인섭 on 2017-12-11.
+ *
+ * Modify by Android Hong on 2017-12-13
  */
 
-public class SignUpResponse {
+public class User implements Serializable{
     @SerializedName("pk")
     private int pk;
     @SerializedName("username")
@@ -17,6 +22,13 @@ public class SignUpResponse {
     private String img_profile;
     @SerializedName("token")
     private String token;
+
+    /**
+     * SignIn 오류 났을 경우
+     */
+    @SerializedName("message")
+    @Expose(serialize = false, deserialize = true)
+    private String message;
 
     public int getPk() {
         return pk;
@@ -56,5 +68,25 @@ public class SignUpResponse {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "pk=" + pk +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", img_profile='" + img_profile + '\'' +
+                ", token='" + token + '\'' +
+                ", message='" + message + '\'' +
+                '}';
     }
 }

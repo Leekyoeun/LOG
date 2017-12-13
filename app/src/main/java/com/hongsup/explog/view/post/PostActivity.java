@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.hongsup.explog.R;
 import com.hongsup.explog.data.Const;
 import com.hongsup.explog.data.post.Content;
-import com.hongsup.explog.data.post.Post;
+import com.hongsup.explog.data.post.PostCover;
 import com.hongsup.explog.data.post.PostContent;
 import com.hongsup.explog.view.post.adapter.PostAdapter;
 import com.hongsup.explog.view.post.listener.PostContentListener;
@@ -76,7 +76,7 @@ public class PostActivity extends AppCompatActivity implements PostContentListen
 
 
         Intent intent = getIntent();
-        Post post = (Post) intent.getSerializableExtra("POST");
+        PostCover post = (PostCover) intent.getSerializableExtra("POST");
 /*
         if(post != null){
             // Cover 에서 작성한 경우

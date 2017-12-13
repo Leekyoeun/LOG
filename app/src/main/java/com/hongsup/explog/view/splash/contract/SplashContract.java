@@ -17,7 +17,7 @@ public interface SplashContract {
         void showProgress();
         void hideProgress();
 
-        void showError();
+        void showError(String text);
 
         void goMain();
     }

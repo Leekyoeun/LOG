@@ -50,4 +50,14 @@ public class DateUtil {
         string_date = df2.format(date);
         return string_date;
     }
+
+
+    public static String getConvertDate(String start_date, String end_date){
+        String startData = start_date.substring(0,10).replace("-",".");
+        String endData ="";
+        if(end_date != null){
+            endData = "-"+end_date.substring(0,10).replace("-",".");
+        }
+        return startData+endData;
+    }
 }
