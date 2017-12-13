@@ -7,6 +7,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.FrameLayout;
 
 import com.hongsup.explog.R;
@@ -35,7 +37,6 @@ public class NewsPeedItemView extends FrameLayout implements NewsPeedItemContrac
     @BindView(R.id.recyclerView)
     public RecyclerView recyclerView;
 
-
     public NewsPeedItemView(@NonNull Context context, int index) {
         super(context);
         this.context = context;
@@ -59,13 +60,6 @@ public class NewsPeedItemView extends FrameLayout implements NewsPeedItemContrac
         RecyclerView 사이에 여백 주는 Code
          */
         recyclerView.addItemDecoration(new PostItemDivider(48));
-
-        // RecyclerView Animation
-        /*
-        int resId = R.anim.layout_animation_fall_down;
-        LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(context, resId);
-        recyclerView.setLayoutAnimation(animation);
-        */
     }
 
     @Override

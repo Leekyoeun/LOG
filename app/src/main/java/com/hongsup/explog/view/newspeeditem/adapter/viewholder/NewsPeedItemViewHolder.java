@@ -10,28 +10,33 @@ import com.hongsup.explog.data.post.PostCover;
 import com.hongsup.explog.util.DateUtil;
 import com.hongsup.explog.view.newspeeditem.listener.OnCoverClickListener;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Created by Android Hong on 2017-12-13.
  */
 
 public class NewsPeedItemViewHolder extends RecyclerView.ViewHolder {
 
+    @BindView(R.id.textTitle)
+    TextView textTitle;
+    @BindView(R.id.imgCover)
+    ImageView imgCover;
+    @BindView(R.id.textDate)
+    TextView textDate;
+    @BindView(R.id.textWriter)
+    TextView textWriter;
+    @BindView(R.id.textComment)
+    TextView textComment;
+    @BindView(R.id.textLike)
+    TextView textLike;
+
     private PostCover postCover;
-    private TextView textTitle;
-    private ImageView imgCover;
-    private TextView textDate;
-    private TextView textWriter;
-    private TextView textComment;
-    private TextView textLike;
 
     public NewsPeedItemViewHolder(View itemView, OnCoverClickListener listener) {
         super(itemView);
-        textTitle = itemView.findViewById(R.id.textTitle);
-        imgCover = itemView.findViewById(R.id.imgCover);
-        textDate = itemView.findViewById(R.id.textDate);
-        textWriter = itemView.findViewById(R.id.textWriter);
-        textComment = itemView.findViewById(R.id.textComment);
-        textLike = itemView.findViewById(R.id.textLike);
+        ButterKnife.bind(this, itemView);
 
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,10 +50,8 @@ public class NewsPeedItemViewHolder extends RecyclerView.ViewHolder {
         this.postCover = postCover;
 
         textTitle.setText(postCover.getTitle());
-
         // Glide 를 사용하여
         // 배경 사진 뿌려줘야 한다.
-
         textDate.setText(DateUtil.getConvertDate(postCover.getStartDate(), postCover.getEndDate()));
         textWriter.setText(postCover.getAuthor().getUsername());
         textLike.setText(postCover.getLikeCount() +"");

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- NewsPeed Item 보여주는 Layout -->
+<?xml version="1.0" encoding="utf-8"?><!-- NewsPeed Item 보여주는 Layout -->
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,9 +7,5 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
-
-    <!-- RecyclerView Animation -->
-    <!-- android:layoutAnimation="@anim/layout_animation_fall_down" -->
+        android:layout_height="match_parent" />
 </android.support.design.widget.CoordinatorLayout>
