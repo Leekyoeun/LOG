@@ -2,6 +2,7 @@ package com.hongsup.explog.view.signup.contract;
 
 import android.view.View;
 
+import com.hongsup.explog.data.photo.Photo;
 import com.hongsup.explog.data.sign.SignUp;
 
 /**
@@ -16,9 +17,11 @@ public interface SignUpContract {
 
         void showProgress();
         void hideProgress();
-        void showError();
+        void showError(String text);
 
         void goSignIn();
+
+        void setImageView(Photo photo);
     }
 
     interface iPresenter{

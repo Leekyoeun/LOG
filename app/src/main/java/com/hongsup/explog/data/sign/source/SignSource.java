@@ -2,6 +2,7 @@ package com.hongsup.explog.data.sign.source;
 
 import com.hongsup.explog.data.sign.SignIn;
 import com.hongsup.explog.data.sign.SignUp;
+import com.hongsup.explog.data.user.User;
 
 import io.reactivex.Observable;
 import retrofit2.Response;
@@ -18,7 +19,7 @@ public interface SignSource {
      * @param signUp
      * @return
      */
-    Observable<Response<SignUp>> singUp(SignUp signUp);
+    Observable<Response<User>> singUp(SignUp signUp);
 
     /**
      * SignIn 메소드
@@ -26,6 +27,8 @@ public interface SignSource {
      * @param signIn
      * @return
      */
-    Observable<Response<SignIn>> signIn(SignIn signIn);
+    Observable<Response<User>> signIn(SignIn signIn);
+
+
 
 }

@@ -1,6 +1,6 @@
 package com.hongsup.explog.data.sign;
 
-import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by Android Hong on 2017-11-29.
@@ -8,48 +8,17 @@ import com.google.gson.annotations.Expose;
 
 public class SignUp {
 
-    @Expose(serialize = false, deserialize = false)
-    private int code;
-
-    @Expose(serialize = false, deserialize = true)
-    private String pk;
-
-    @Expose(serialize = true, deserialize = true)
+    @SerializedName("username")
     private String username;
 
-    @Expose(serialize = true, deserialize = true)
+    @SerializedName("email")
     private String email;
 
-    @Expose(serialize = true, deserialize = true)
+    @SerializedName("img_profile")
     private String img_profile;
 
-    @Expose(serialize = false, deserialize = true)
-    private String token;
-
-    @Expose(serialize = true, deserialize = true)
-    private String password1;
-
-    @Expose(serialize = true, deserialize = true)
-    private String password2;
-
-    @Expose(serialize = false, deserialize = true)
-    private String non_field_errors;
-
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
-    }
-
-    public String getPk() {
-        return pk;
-    }
-
-    public void setPk(String pk) {
-        this.pk = pk;
-    }
+    @SerializedName("password")
+    private String password;
 
     public String getUsername() {
         return username;
@@ -75,50 +44,21 @@ public class SignUp {
         this.img_profile = img_profile;
     }
 
-    public String getToken() {
-        return token;
+    public String getPassword() {
+        return password;
     }
 
-    public void setToken(String token) {
-        this.token = token;
-    }
-
-    public String getPassword1() {
-        return password1;
-    }
-
-    public void setPassword1(String password1) {
-        this.password1 = password1;
-    }
-
-    public String getPassword2() {
-        return password2;
-    }
-
-    public void setPassword2(String password2) {
-        this.password2 = password2;
-    }
-
-    public String getNon_field_errors() {
-        return non_field_errors;
-    }
-
-    public void setNon_field_errors(String non_field_errors) {
-        this.non_field_errors = non_field_errors;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
     public String toString() {
         return "SignUp{" +
-                "code=" + code +
-                ", pk='" + pk + '\'' +
-                ", username='" + username + '\'' +
+                "username='" + username + '\'' +
                 ", email='" + email + '\'' +
                 ", img_profile='" + img_profile + '\'' +
-                ", token='" + token + '\'' +
-                ", password1='" + password1 + '\'' +
-                ", password2='" + password2 + '\'' +
-                ", non_field_errors='" + non_field_errors + '\'' +
+                ", password='" + password + '\'' +
                 '}';
     }
 }

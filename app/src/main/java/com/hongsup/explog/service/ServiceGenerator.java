@@ -4,6 +4,8 @@ package com.hongsup.explog.service;
  * Created by Android Hong on 2017-11-29.
  */
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -20,6 +22,22 @@ import static com.hongsup.explog.data.Const.SERVER_URL;
 public class ServiceGenerator {
 
     private static final String TAG = "ServiceGenerator";
+
+    /**
+     * Retrofit2 생성
+     *
+     * @param className
+     * @param <I>
+     * @return
+     */
+    public static <I> I create(Class<I> className) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(SERVER_URL)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        return retrofit.create(className);
+    }
 
     /**
      * Retrofit2 생성
@@ -55,7 +73,7 @@ public class ServiceGenerator {
                     /*
                      excludeFieldsWithoutExposeAnnotation() : Annotation 속성을 설정한 것을 적용하는 메소드
                      */
-                    .excludeFieldsWithoutExposeAnnotation()
+                    //.excludeFieldsWithoutExposeAnnotation()
                     /*
                      serializeNulls() : 속성이 null 일 경우 "속성명" : null 로 보내는 메소드
                      */
@@ -66,6 +84,7 @@ public class ServiceGenerator {
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .build();
+
         }else{
             gson = new GsonBuilder()
                     .excludeFieldsWithoutExposeAnnotation()
@@ -76,7 +95,6 @@ public class ServiceGenerator {
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .build();
         }
-
         return retrofit.create(className);
     }
 

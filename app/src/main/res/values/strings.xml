@@ -1,9 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Explog</string>
+
+    <string name="explog"><b>E X P L O G</b></string>
+
     <string name="sign_facebook">Start with Facebook</string>
     <string name="sign_email">Start with Email</string>
     <string name="sign_start">Start</string>
     <string name="txt_sing_up">Sign up for <b><u>email</u></b></string>
-    <string name="explog"><b>E x p l o g</b></string>
     <string name="sign_up">Sign Up</string>
+
+    <string name="title_home" translatable="false">Home</string>
+    <string name="title_dashboard" translatable="false">Dashboard</string>
+    <string name="title_newspeed">Newspeed</string>
+    <string name="title_search">Search</string>
+    <string name="title_notification">Notification</string>
+    <string name="title_profile">Profile</string>
+    <string name="title_post">Post</string>
+
+    <string name="txt_end_date">End Date</string>
+
+    <string name="africa">AFRICA</string>
+    <string name="asia">ASIA</string>
+    <string name="europe">EUROPE</string>
+    <string name="americas">AMERICA</string>
+    <string name="oceania">OCEANIA</string>
+
+    <string name="cover_change">COVER CHANGE</string>
+    <string name="cover_hash">TAG</string>
+    <string name="cover_hyphen">-</string>
+
+    <string name="menu_cover_ok">OK</string>
+
+    <string name="menu_post_cover_change">Cover/Tag Modify</string>
+    <string name="menu_post_delete">Post Delete</string>
 </resources>
