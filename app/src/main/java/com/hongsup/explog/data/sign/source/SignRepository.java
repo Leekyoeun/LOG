@@ -4,6 +4,7 @@ import android.net.Uri;
 
 import com.hongsup.explog.data.sign.SignIn;
 import com.hongsup.explog.data.sign.SignUp;
+import com.hongsup.explog.data.sign.SignUpResponse;
 
 import java.util.Map;
 
@@ -32,7 +33,7 @@ public class SignRepository implements SignSource {
     }
 
     @Override
-    public Observable<Response<SignUp>> singUp(SignUp signUp) {
+    public Observable<Response<SignUpResponse>> singUp(SignUp signUp) {
         return signRemoteDataSource.singUp(signUp);
     }
 

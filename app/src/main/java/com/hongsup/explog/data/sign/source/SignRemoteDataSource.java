@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.hongsup.explog.data.sign.SignIn;
 import com.hongsup.explog.data.sign.SignUp;
+import com.hongsup.explog.data.sign.SignUpResponse;
 import com.hongsup.explog.service.ServiceGenerator;
 import com.hongsup.explog.service.api.SignAPI;
 
@@ -45,7 +46,7 @@ public class SignRemoteDataSource implements SignSource {
     }
 
     @Override
-    public Observable<Response<SignUp>> singUp(SignUp signUp) {
+    public Observable<Response<SignUpResponse>> singUp(SignUp signUp) {
 
         signUpAPI = ServiceGenerator.create(SignAPI.class, true);
 
@@ -57,18 +58,23 @@ public class SignRemoteDataSource implements SignSource {
 
 
         Log.e(TAG, "singUp: " + signUp.getImg_profile() );
+        Log.e(TAG, "singUp: " + signUp.toString() );
 
         if(signUp.getImg_profile() != null){
             File file = new File(signUp.getImg_profile());
             // create RequestBody instance from file
+            Log.e(TAG, "singUp: " + file.getName() );
             RequestBody requestFile = RequestBody.create(MediaType.parse("image/*"), file);
-            requestBodyMap.put("img_profile\"; filename=\""+file.getName() +"\"", requestFile);
+            requestBodyMap.put("img_profile\"; filename=\""+file.getName(), requestFile);
         }else{
             RequestBody requestFile = RequestBody.create(MediaType.parse(""),"");
-            requestBodyMap.put("img_profile\"; filename=\"\"", requestFile);
+            requestBodyMap.put("img_profile\"; filename=\"", requestFile);
         }
 
         return signUpAPI.signUp(requestBodyMap);
+
+        //return signUpAPI.signUp(signUp);
+
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.hongsup.explog.view.signup.presenter;
 import android.util.Log;
 
 import com.hongsup.explog.data.sign.SignUp;
+import com.hongsup.explog.data.sign.SignUpResponse;
 import com.hongsup.explog.data.sign.source.SignRepository;
 import com.hongsup.explog.view.signup.contract.SignUpContract;
 
@@ -37,7 +38,7 @@ public class SignUpPresenter implements SignUpContract.iPresenter {
          */
         Log.e("SignUpActivity", "setSignUp: "+signUp.toString() );
 
-        Observable<Response<SignUp>> observable = repository.singUp(signUp);
+        Observable<Response<SignUpResponse>> observable = repository.singUp(signUp);
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(data -> {
@@ -57,7 +58,11 @@ public class SignUpPresenter implements SignUpContract.iPresenter {
                             user.setPk(data.body().getPk());
                             user.setToken(data.body().getToken());
                             */
-                            //Log.e("SignUpActivity", "onResponse: " + data.body().toString());
+                            Log.e("SignUpActivity", "onResponse: " + data.body().getImg_profile());
+                            Log.e("SignUpActivity", "onResponse: " + data.body().getEmail());
+                            Log.e("SignUpActivity", "onResponse: " + data.body().getToken());
+                            Log.e("SignUpActivity", "onResponse: " + data.body().getUsername());
+                            Log.e("SignUpActivity", "onResponse: " + data.body().getPk());
 
                             view.hideProgress();
                             view.goSignIn();
