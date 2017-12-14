@@ -112,6 +112,7 @@ public class CoverView implements CoverContract.iView {
     @Override
     public void setMenu(Menu menu) {
         this.menu = menu;
+        ((Activity)context).getMenuInflater().inflate(R.menu.menu_cover, menu);
     }
 
     @Override

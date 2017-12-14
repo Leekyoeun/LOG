@@ -4,6 +4,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.hongsup.explog.data.post.UploadPostText;
 import com.hongsup.explog.view.post.adapter.contract.PostAdapterContract;
 
 /**
@@ -29,5 +30,7 @@ public interface PostContract {
 
         void setPostAdapterModel(PostAdapterContract.iModel model);
         void setPostAdapterView(PostAdapterContract.iView view);
+
+        void uploadPostText(int postPk, UploadPostText postText);
     }
 }

@@ -1,9 +1,11 @@
 package com.hongsup.explog.data.post.source;
 
+import com.hongsup.explog.data.post.Content;
 import com.hongsup.explog.data.post.PostContentResult;
 import com.hongsup.explog.data.post.PostCover;
 import com.hongsup.explog.data.post.PostResult;
 import com.hongsup.explog.data.post.UploadCover;
+import com.hongsup.explog.data.post.UploadPostText;
 import com.hongsup.explog.service.ServiceGenerator;
 import com.hongsup.explog.service.api.PostAPI;
 
@@ -46,5 +48,10 @@ public class PostRemoteDataSource implements PostSource{
     @Override
     public Observable<Response<PostContentResult>> getPostContentList(int postPk) {
         return postAPI.getPostContentList(postPk);
+    }
+
+    @Override
+    public Observable<Response<Content>> uploadPostText(int postPk, UploadPostText postText) {
+        return postTokenAPI.uploadPostText(postPk, postText);
     }
 }

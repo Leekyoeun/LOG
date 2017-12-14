@@ -8,6 +8,8 @@ public class Const {
     public static final String SERVER_URL = "http://explog-shz.ap-northeast-2.elasticbeanstalk.com";
 
     public static final int REQ_GALLERY = 101;
+    public static final int REQ_TEXT = 102;
+    public static final int REQ_PATH = 103;
 
     public static final int VIEW_TYPE_INIT = 0;
     public static final int VIEW_TYPE_TEXT = 1;
@@ -20,5 +22,7 @@ public class Const {
     public static final String CONTENT_TYPE_PATH = "path";
 
 
+    public static final String INTENT_EXTRA_PK = "POST_PK";
     public static final String INTENT_EXTRA_COVER = "COVER";
+    public static final String INTENT_EXTRA_CONTENT_TEXT = "CONTENT_TEXT";
 }

@@ -62,15 +62,16 @@
             android:name=".view.post.PostActivity"
             android:theme="@style/AppTheme.NoStatusBar" />
 
-        <!-- POST 페이지 -->
+        <!-- Post Text 작성 페이지 -->
         <activity
             android:name=".view.posttext.PostTextActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.BaseNoActionbar"/>
 
-        <!-- POST 페이지 -->
+        <!-- Post Path 작성 페이지 -->
         <activity
             android:name=".view.postpath.PostPathActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.BaseNoActionbar" />
+
 
         <!-- Profile edit 페이지 -->
         <activity android:name=".view.setting.editprofile.EditProfileActivity" />

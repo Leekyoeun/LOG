@@ -1,9 +1,12 @@
 package com.hongsup.explog.service.api;
 
+import com.hongsup.explog.data.post.Content;
+import com.hongsup.explog.data.post.PostContent;
 import com.hongsup.explog.data.post.PostContentResult;
 import com.hongsup.explog.data.post.PostCover;
 import com.hongsup.explog.data.post.PostResult;
 import com.hongsup.explog.data.post.UploadCover;
+import com.hongsup.explog.data.post.UploadPostText;
 
 import io.reactivex.Observable;
 import retrofit2.Response;
@@ -41,4 +44,10 @@ public interface PostAPI {
      */
     @GET("/post/{post_pk}")
     Observable<Response<PostContentResult>> getPostContentList(@Path("post_pk") int postPk);
+
+    /**
+     *  Upload Post Text
+     */
+    @POST("/post/{post_pk}/text/")
+    Observable<Response<Content>> uploadPostText(@Path("post_pk") int postPk, @Body UploadPostText uploadPostText);
 }

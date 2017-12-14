@@ -33,7 +33,9 @@
 
     <string name="menu_cover_ok">OK</string>
 
-    <string name="menu_post_cover_change">Cover/Tag Modify</string>
+    <string name="menu_post_cover_change">Cover/Area Modify</string>
     <string name="menu_post_delete">Post Delete</string>
     <string name="choose_area">Choice Area</string>
+
+    <string name="post_content_text">TEXT</string>
 </resources>

@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,20 +32,13 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static com.bumptech.glide.gifdecoder.GifHeaderParser.TAG;
+
 /**
  * Created by Android Hong on 2017-12-14.
  */
 
 public class PostView implements PostContract.iView{
-
-    private Context context;
-    private PostContract.iPresenter presenter;
-    private View view;
-    private Intent coverIntent;
-    private Intent textIntent;
-    private PostCover cover;
-    private PostAdapter postAdapter;
-    private int menuId;
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -65,6 +59,16 @@ public class PostView implements PostContract.iView{
     @BindView(R.id.progressBarLayout)
     RelativeLayout progressBarLayout;
 
+    private Context context;
+    private PostContract.iPresenter presenter;
+    private View view;
+    private Intent coverIntent;
+    private Intent textIntent;
+    private PostCover cover;
+    private PostAdapter postAdapter;
+    private int menuId;
+
+
     public PostView(Context context){
         this.context = context;
         view = LayoutInflater.from(context).inflate(R.layout.activity_post, null);
@@ -76,7 +80,7 @@ public class PostView implements PostContract.iView{
         initToolbar();
         initAdapter();
         setCoverData();
-    }
+}
 
     @Override
     public void setPresenter(PostContract.iPresenter presenter) {
@@ -179,7 +183,8 @@ public class PostView implements PostContract.iView{
     @OnClick(R.id.fab)
     public void createText(){
         textIntent = new Intent(context, PostTextActivity.class);
-        context.startActivity(textIntent);
+        textIntent.putExtra(Const.INTENT_EXTRA_PK, cover.getPk());
+        ((Activity)context).startActivityForResult(textIntent, Const.REQ_TEXT);
     }
 
 }

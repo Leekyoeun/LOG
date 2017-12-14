@@ -39,7 +39,6 @@ public class CoverActivity extends AppCompatActivity{
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_cover, menu);
         coverView.setMenu(menu);
         coverView.setTextCount();
         return true;
