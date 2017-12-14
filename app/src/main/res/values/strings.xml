@@ -35,4 +35,5 @@
 
     <string name="menu_post_cover_change">Cover/Tag Modify</string>
     <string name="menu_post_delete">Post Delete</string>
+    <string name="choose_area">Choice Area</string>
 </resources>

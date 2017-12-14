@@ -5,7 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.hongsup.explog.data.post.Content;
-import com.hongsup.explog.view.post.listener.PostContentListener;
+import com.hongsup.explog.view.post.listener.OnPostContentClickListener;
 
 /**
  * Created by Android Hong on 2017-12-12.
@@ -19,9 +19,11 @@ public abstract class PostViewHolder extends RecyclerView.ViewHolder {
 
     public abstract void setContext(Context context);
 
-    public abstract void setListener(PostContentListener listener);
+    public abstract void setListener(OnPostContentClickListener listener);
 
     public abstract void setPosition(int position);
+
+    public abstract void setCheckMyPost(boolean checkMyPost);
 
     public abstract void bind(Content data);
 }

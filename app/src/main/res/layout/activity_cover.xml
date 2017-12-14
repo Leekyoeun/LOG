@@ -128,7 +128,7 @@
                 android:paddingRight="10dp">
 
                 <Button
-                    android:id="@+id/btnHashTag"
+                    android:id="@+id/btnArea"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
@@ -144,15 +144,17 @@
                     android:textColor="@color/colorGray" />
 
                 <TextView
+                    android:id="@+id/textArea"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_toEndOf="@+id/btnHashTag"
-                    android:layout_toRightOf="@+id/btnHashTag"
-                    android:background="@drawable/border_cover_tag"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toEndOf="@+id/btnArea"
+                    android:layout_toRightOf="@+id/btnArea"
+                    android:background="@drawable/border_cover_area"
                     android:gravity="center"
-                    android:text="1"
-                    android:textColor="@color/colorWhite" />
+                    android:textColor="@color/colorMain"
+                    android:visibility="gone" />
 
                 <Button
                     android:id="@+id/btnChangeCover"
@@ -171,4 +173,20 @@
             </RelativeLayout>
         </RelativeLayout>
     </ScrollView>
+
+
+    <!-- ProgressBar Layout -->
+    <RelativeLayout
+        android:id="@+id/progressBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true" />
+    </RelativeLayout>
 </RelativeLayout>

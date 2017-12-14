@@ -5,10 +5,9 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.hongsup.explog.R;
 import com.hongsup.explog.data.post.Content;
-import com.hongsup.explog.view.post.listener.PostContentListener;
+import com.hongsup.explog.view.post.listener.OnPostContentClickListener;
 
 /**
  * Created by Android Hong on 2017-12-11.
@@ -17,7 +16,7 @@ import com.hongsup.explog.view.post.listener.PostContentListener;
 public class PhotoViewHolder extends PostViewHolder {
 
     private int position;
-    private PostContentListener postContentListener;
+    private OnPostContentClickListener listener;
 
     private ImageView imgPhoto;
 
@@ -34,13 +33,18 @@ public class PhotoViewHolder extends PostViewHolder {
     }
 
     @Override
-    public void setListener(PostContentListener listener) {
-        this.postContentListener = listener;
+    public void setListener(OnPostContentClickListener listener) {
+        this.listener = listener;
     }
 
     @Override
     public void setPosition(int position) {
         this.position = position;
+    }
+
+    @Override
+    public void setCheckMyPost(boolean checkMyPost) {
+
     }
 
     @Override

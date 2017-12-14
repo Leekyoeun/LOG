@@ -6,7 +6,7 @@ import android.widget.ImageView;
 
 import com.hongsup.explog.R;
 import com.hongsup.explog.data.post.Content;
-import com.hongsup.explog.view.post.listener.PostContentListener;
+import com.hongsup.explog.view.post.listener.OnPostContentClickListener;
 
 /**
  * Created by Android Hong on 2017-12-11.
@@ -15,7 +15,7 @@ import com.hongsup.explog.view.post.listener.PostContentListener;
 public class PathViewHolder extends PostViewHolder {
 
     private int position;
-    private PostContentListener postContentListener;
+    private OnPostContentClickListener listener;
     private Context context;
 
     private ImageView imgPath;
@@ -31,13 +31,18 @@ public class PathViewHolder extends PostViewHolder {
     }
 
     @Override
-    public void setListener(PostContentListener listener) {
-        this.postContentListener = postContentListener;
+    public void setListener(OnPostContentClickListener listener) {
+        this.listener = listener;
     }
 
     @Override
     public void setPosition(int position) {
         this.position = position;
+    }
+
+    @Override
+    public void setCheckMyPost(boolean checkMyPost) {
+
     }
 
     @Override

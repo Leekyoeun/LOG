@@ -62,8 +62,19 @@
             android:name=".view.post.PostActivity"
             android:theme="@style/AppTheme.NoStatusBar" />
 
+        <!-- POST 페이지 -->
+        <activity
+            android:name=".view.posttext.PostTextActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <!-- POST 페이지 -->
+        <activity
+            android:name=".view.postpath.PostPathActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
         <!-- Profile edit 페이지 -->
         <activity android:name=".view.setting.editprofile.EditProfileActivity" />
+
         <activity android:name=".view.setting.alarmsetting.AlarmSettingActivity" />
     </application>
 

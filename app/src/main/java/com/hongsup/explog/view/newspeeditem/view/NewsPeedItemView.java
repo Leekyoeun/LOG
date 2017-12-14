@@ -7,11 +7,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.animation.AnimationUtils;
-import android.view.animation.LayoutAnimationController;
 import android.widget.FrameLayout;
 
 import com.hongsup.explog.R;
+import com.hongsup.explog.data.Const;
 import com.hongsup.explog.data.post.PostCover;
 import com.hongsup.explog.view.custom.PostItemDivider;
 import com.hongsup.explog.view.newspeeditem.adapter.NewsPeedItemAdapter;
@@ -77,7 +76,7 @@ public class NewsPeedItemView extends FrameLayout implements NewsPeedItemContrac
         /**
          * 값을 넘겨줘야 한다.
          */
-        intent.putExtra("COVER",postCover);
+        intent.putExtra(Const.INTENT_EXTRA_COVER,postCover);
         context.startActivity(intent);
     }
 
