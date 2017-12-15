@@ -55,9 +55,7 @@ public class PostPresenter implements PostContract.iPresenter, OnPostContentClic
                                         adapterModel.addItems(data.body().getPostContentList());
                                         adapterView.notifyAdapter();
                                     }
-
                                 } else {
-
                                     Log.e(TAG, "loadPostContent: 데이터 로드 실패");
                                     view.hideProgress();
                                 }

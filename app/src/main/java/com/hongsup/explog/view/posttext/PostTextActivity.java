@@ -3,12 +3,9 @@ package com.hongsup.explog.view.posttext;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
-import com.hongsup.explog.R;
 import com.hongsup.explog.view.posttext.contract.PostTextContract;
 import com.hongsup.explog.view.posttext.presenter.PostTextPresenter;
 import com.hongsup.explog.view.posttext.view.PostTextView;

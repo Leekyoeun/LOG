@@ -5,7 +5,6 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.hongsup.explog.data.post.PostCover;
-import com.hongsup.explog.data.post.UploadCover;
 
 /**
  * Created by Android Hong on 2017-12-14.
@@ -30,6 +29,6 @@ public interface CoverContract {
     }
     interface iPresenter{
         void attachView(iView view);
-        void uploadCover(UploadCover cover);
+        void uploadCover(PostCover cover);
     }
 }

@@ -3,7 +3,6 @@ package com.hongsup.explog.view.cover.presenter;
 import android.util.Log;
 
 import com.hongsup.explog.data.post.PostCover;
-import com.hongsup.explog.data.post.UploadCover;
 import com.hongsup.explog.data.post.source.PostRepository;
 import com.hongsup.explog.view.cover.contract.CoverContract;
 
@@ -33,7 +32,7 @@ public class CoverPresenter implements CoverContract.iPresenter {
     }
 
     @Override
-    public void uploadCover(UploadCover cover) {
+    public void uploadCover(PostCover cover) {
         view.showProgress();
         Observable<Response<PostCover>> observable = repository.uploadPostCover(cover);
         observable.subscribeOn(Schedulers.io())
@@ -50,6 +49,7 @@ public class CoverPresenter implements CoverContract.iPresenter {
                 }, throwable -> {
                     view.hideProgress();
                     view.showError("error 2" + throwable.getMessage());
+                    Log.e(TAG, "uploadCover: " + throwable.getMessage());
                 });
     }
 }

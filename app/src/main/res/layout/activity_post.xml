@@ -32,10 +32,7 @@
                 <ImageView
                     android:id="@+id/imgCover"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/main"
-                    android:tint="@color/colorPostTint" />
+                    android:layout_height="match_parent"/>
 
                 <RelativeLayout
                     android:id="@+id/contentLayout"

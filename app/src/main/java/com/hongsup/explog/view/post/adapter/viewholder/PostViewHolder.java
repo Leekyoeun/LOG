@@ -13,17 +13,30 @@ import com.hongsup.explog.view.post.listener.OnPostContentClickListener;
 
 public abstract class PostViewHolder extends RecyclerView.ViewHolder {
 
+    int position;
+    Context context;
+    boolean checkMyPost;
+    OnPostContentClickListener listener;
+
     public PostViewHolder(View itemView) {
         super(itemView);
     }
 
-    public abstract void setContext(Context context);
+    public void setCheckMyPost(boolean checkMyPost) {
+        this.checkMyPost = checkMyPost;
+    }
 
-    public abstract void setListener(OnPostContentClickListener listener);
+    public void setContext(Context context) {
+        this.context = context;
+    }
 
-    public abstract void setPosition(int position);
+    public void setListener(OnPostContentClickListener listener){
+        this.listener = listener;
+    }
 
-    public abstract void setCheckMyPost(boolean checkMyPost);
+    public void setPosition(int position) {
+        this.position = position;
+    }
 
     public abstract void bind(Content data);
 }

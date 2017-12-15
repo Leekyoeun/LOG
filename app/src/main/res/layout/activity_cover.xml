@@ -6,6 +6,12 @@
     android:fitsSystemWindows="true"
     tools:context="com.hongsup.explog.view.cover.CoverActivity">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textCoverPath"
+        android:visibility="gone"/>
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"

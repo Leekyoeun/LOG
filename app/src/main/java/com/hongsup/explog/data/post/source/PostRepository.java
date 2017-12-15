@@ -4,7 +4,6 @@ import com.hongsup.explog.data.post.Content;
 import com.hongsup.explog.data.post.PostContentResult;
 import com.hongsup.explog.data.post.PostCover;
 import com.hongsup.explog.data.post.PostResult;
-import com.hongsup.explog.data.post.UploadCover;
 import com.hongsup.explog.data.post.UploadPostText;
 
 import io.reactivex.Observable;
@@ -36,7 +35,7 @@ public class PostRepository implements PostSource{
     }
 
     @Override
-    public Observable<Response<PostCover>> uploadPostCover(UploadCover cover) {
+    public Observable<Response<PostCover>> uploadPostCover(PostCover cover) {
         return postRemoteDataSource.uploadPostCover(cover);
     }
 

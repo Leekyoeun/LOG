@@ -3,12 +3,13 @@ package com.hongsup.explog.view.post.view;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -32,13 +33,11 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-import static com.bumptech.glide.gifdecoder.GifHeaderParser.TAG;
-
 /**
  * Created by Android Hong on 2017-12-14.
  */
 
-public class PostView implements PostContract.iView{
+public class PostView implements PostContract.iView {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -69,18 +68,18 @@ public class PostView implements PostContract.iView{
     private int menuId;
 
 
-    public PostView(Context context){
+    public PostView(Context context) {
         this.context = context;
         view = LayoutInflater.from(context).inflate(R.layout.activity_post, null);
         ButterKnife.bind(this, view);
 
-        coverIntent = ((Activity)context).getIntent();
+        coverIntent = ((Activity) context).getIntent();
         cover = (PostCover) coverIntent.getSerializableExtra(Const.INTENT_EXTRA_COVER);
 
         initToolbar();
         initAdapter();
         setCoverData();
-}
+    }
 
     @Override
     public void setPresenter(PostContract.iPresenter presenter) {
@@ -112,47 +111,47 @@ public class PostView implements PostContract.iView{
 
     @Override
     public void setMenu(Menu menu) {
-        if(UserRepository.getInstance().getUser() != null && cover.getAuthor().getEmail().equals(UserRepository.getInstance().getUser().getEmail())){
+        if (UserRepository.getInstance().getUser() != null && cover.getAuthor().getEmail().equals(UserRepository.getInstance().getUser().getEmail())) {
             // 내 글인경우
             menuId = R.menu.menu_my_post;
-        }else{
+        } else {
             // 남의 글인경우
             menuId = R.menu.menu_your_post;
         }
-        ((AppCompatActivity)context).getMenuInflater().inflate(menuId, menu);
+        ((AppCompatActivity) context).getMenuInflater().inflate(menuId, menu);
     }
 
     @Override
     public void onMenuClick(MenuItem item) {
-        if(menuId == R.menu.menu_my_post){
+        if (menuId == R.menu.menu_my_post) {
             // 내 글이면
 
-        }else{
+        } else {
             // 남 글이면
 
         }
     }
 
     private void initToolbar() {
-        ((AppCompatActivity)context).setSupportActionBar(toolbar);
-        ((AppCompatActivity)context).getSupportActionBar().setTitle("");
-        ((AppCompatActivity)context).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity) context).setSupportActionBar(toolbar);
+        ((AppCompatActivity) context).getSupportActionBar().setTitle("");
+        ((AppCompatActivity) context).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((Activity)context).finish();
+                ((Activity) context).finish();
             }
         });
     }
 
     private void initAdapter() {
-        if(UserRepository.getInstance().getUser() != null){
+        if (UserRepository.getInstance().getUser() != null) {
             // 로그인한 상태이면
             postAdapter = new PostAdapter(context, cover.getAuthor().getEmail().equals(UserRepository.getInstance().getUser().getEmail()));
-        }else{
+        } else {
             // 로그인하지 않은 상태이면면
-           postAdapter = new PostAdapter(context, false);
+            postAdapter = new PostAdapter(context, false);
         }
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setAdapter(postAdapter);
@@ -167,13 +166,19 @@ public class PostView implements PostContract.iView{
             textWriter.setText(cover.getAuthor().getUsername());
 
             Glide.with(context)
+                    .load(cover.getCoverPath())
+                    .centerCrop()
+                    .into(imgCover);
+            imgCover.setColorFilter(ContextCompat.getColor(context, R.color.colorPostTint), PorterDuff.Mode.SRC_OVER);
+
+            Glide.with(context)
                     .load(cover.getAuthor().getImg_profile())
                     .into(imgProfile);
 
-            if(UserRepository.getInstance().getUser() != null && cover.getAuthor().getEmail().equals(UserRepository.getInstance().getUser().getEmail())){
+            if (UserRepository.getInstance().getUser() != null && cover.getAuthor().getEmail().equals(UserRepository.getInstance().getUser().getEmail())) {
                 // 내 글인경우
                 fab.setVisibility(View.VISIBLE);
-            }else{
+            } else {
                 // 남 글인경우
                 fab.setVisibility(View.GONE);
             }
@@ -181,10 +186,10 @@ public class PostView implements PostContract.iView{
     }
 
     @OnClick(R.id.fab)
-    public void createText(){
+    public void createText() {
         textIntent = new Intent(context, PostTextActivity.class);
         textIntent.putExtra(Const.INTENT_EXTRA_PK, cover.getPk());
-        ((Activity)context).startActivityForResult(textIntent, Const.REQ_TEXT);
+        ((Activity) context).startActivityForResult(textIntent, Const.REQ_TEXT);
     }
 
 }

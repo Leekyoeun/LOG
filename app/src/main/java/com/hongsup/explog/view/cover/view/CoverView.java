@@ -24,7 +24,6 @@ import com.bumptech.glide.Glide;
 import com.hongsup.explog.R;
 import com.hongsup.explog.data.Const;
 import com.hongsup.explog.data.post.PostCover;
-import com.hongsup.explog.data.post.UploadCover;
 import com.hongsup.explog.util.DateUtil;
 import com.hongsup.explog.util.DialogUtil;
 import com.hongsup.explog.view.cover.contract.CoverContract;
@@ -52,7 +51,7 @@ public class CoverView implements CoverContract.iView {
     private Intent postIntent;
     private DatePickerDialog dialog;
 
-    boolean endFlag;
+    private boolean endFlag;
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -70,6 +69,8 @@ public class CoverView implements CoverContract.iView {
     ImageView imgCover;
     @BindView(R.id.textArea)
     TextView textArea;
+    @BindView(R.id.textCoverPath)
+    TextView textCoverpath;
     @BindView(R.id.progressBarLayout)
     RelativeLayout progressBarLayout;
 
@@ -135,10 +136,12 @@ public class CoverView implements CoverContract.iView {
         int id = item.getItemId();
         switch (id) {
             case R.id.action_ok:
-                UploadCover cover = new UploadCover();
-
+                PostCover cover = new PostCover();
                 String area = textArea.getText().toString();
 
+                if(textCoverpath.getTag() != null){
+                    cover.setCoverPath((String)textCoverpath.getTag());
+                }
                 /*
                   지역 설정
                  */
@@ -169,12 +172,12 @@ public class CoverView implements CoverContract.iView {
                 cover.setTitle(editTitle.getText().toString());
 
                 /*
-                 시작 시간 설정
+                 시작 시간 설정 (yyyy-MM-ddT00:00:00)
                  */
                 cover.setStartDate(DateUtil.setConvertDate(textStartDate.getText().toString()));
 
                 /*
-                종료 시간 설정
+                종료 시간 설정 (yyyy-MM-ddT00:00:00)
                  */
                 if(!textEndDate.getText().toString().equals(context.getResources().getString(R.string.txt_end_date))){
                     cover.setEndDate(DateUtil.setConvertDate(textEndDate.getText().toString()));
@@ -341,6 +344,7 @@ public class CoverView implements CoverContract.iView {
                 .centerCrop()
                 .into(imgCover);
         imgCover.setColorFilter(ContextCompat.getColor(context, R.color.colorPostTint), PorterDuff.Mode.SRC_OVER);
+        textCoverpath.setTag(imagePath);
     }
 
     @Override

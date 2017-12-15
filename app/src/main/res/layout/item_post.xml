@@ -12,11 +12,7 @@
         android:layout_height="150dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:background="@drawable/sign"
-        android:scaleType="centerCrop"
-        android:src="@drawable/sign"
-        android:tint="@color/colorPostTint" />
+        android:layout_alignParentTop="true"/>
 
     <!--Title ( 타이틀 ) -->
     <TextView

@@ -1,10 +1,14 @@
 package com.hongsup.explog.view.newspeeditem.adapter.viewholder;
 
+import android.content.Context;
+import android.graphics.PorterDuff;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.hongsup.explog.R;
 import com.hongsup.explog.data.post.PostCover;
 import com.hongsup.explog.util.DateUtil;
@@ -33,9 +37,11 @@ public class NewsPeedItemViewHolder extends RecyclerView.ViewHolder {
     TextView textLike;
 
     private PostCover postCover;
+    private Context context;
 
     public NewsPeedItemViewHolder(View itemView, OnCoverClickListener listener) {
         super(itemView);
+        this.context = itemView.getContext();
         ButterKnife.bind(this, itemView);
 
         itemView.setOnClickListener(new View.OnClickListener() {
@@ -48,12 +54,17 @@ public class NewsPeedItemViewHolder extends RecyclerView.ViewHolder {
 
     public void setPostCover(PostCover postCover) {
         this.postCover = postCover;
-
         textTitle.setText(postCover.getTitle());
+
         // Glide 를 사용하여
-        // 배경 사진 뿌려줘야 한다.
+        Glide.with(context)
+                .load(postCover.getCoverPath())
+                .centerCrop()
+                .into(imgCover);
+        imgCover.setColorFilter(ContextCompat.getColor(context, R.color.colorMainTint), PorterDuff.Mode.SRC_OVER);
+
         textDate.setText(DateUtil.getConvertDate(postCover.getStartDate(), postCover.getEndDate()));
         textWriter.setText(postCover.getAuthor().getUsername());
-        textLike.setText(postCover.getLikeCount() +"");
+        textLike.setText(postCover.getLikeCount() + "");
     }
 }

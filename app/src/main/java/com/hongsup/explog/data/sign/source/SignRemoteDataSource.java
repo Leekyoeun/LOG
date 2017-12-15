@@ -25,18 +25,10 @@ public class SignRemoteDataSource implements SignSource {
 
     private static SignRemoteDataSource instance;
 
-    /*
-    private SignAPI signUpAPI;
-    private SignAPI signInAPI;
-    */
     private SignAPI signAPI;
 
     private SignRemoteDataSource() {
         // Service 생성
-        /*
-        signUpAPI = ServiceGenerator.create(SignAPI.class, createGson(true));
-        signInAPI = ServiceGenerator.create(SignAPI.class, createGson(false));
-        */
         signAPI = ServiceGenerator.create(SignAPI.class);
     }
 
@@ -98,8 +90,7 @@ public class SignRemoteDataSource implements SignSource {
         return gson;
     }
 
-
-    public static RequestBody toRequestBody(String json) {
+    private RequestBody toRequestBody(String json) {
         RequestBody body = RequestBody.create(MediaType.parse("text/plain"), json);
         return body;
     }

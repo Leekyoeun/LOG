@@ -1,18 +1,21 @@
 package com.hongsup.explog.service.api;
 
 import com.hongsup.explog.data.post.Content;
-import com.hongsup.explog.data.post.PostContent;
 import com.hongsup.explog.data.post.PostContentResult;
 import com.hongsup.explog.data.post.PostCover;
 import com.hongsup.explog.data.post.PostResult;
-import com.hongsup.explog.data.post.UploadCover;
 import com.hongsup.explog.data.post.UploadPostText;
 
+import java.util.Map;
+
 import io.reactivex.Observable;
+import okhttp3.RequestBody;
 import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.PartMap;
 import retrofit2.http.Path;
 
 /**
@@ -31,11 +34,13 @@ public interface PostAPI {
 
     /**
      * Upload Cover
-     * @param cover
+     *
+     * @param postCoverMap
      * @return
      */
+    @Multipart
     @POST("/post/create/")
-    Observable<Response<PostCover>> uploadPostCover(@Body UploadCover cover);
+    Observable<Response<PostCover>> uploadPostCover(@PartMap Map<String, RequestBody> postCoverMap);
 
     /**
      * Post 에 대한 내용 가져오는 메소드

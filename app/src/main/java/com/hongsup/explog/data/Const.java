@@ -15,6 +15,7 @@ public class Const {
     public static final int VIEW_TYPE_TEXT = 1;
     public static final int VIEW_TYPE_PHOTO = 2;
     public static final int VIEW_TYPE_PATH = 3;
+    public static final int VIEW_TYPE_FOOTER = 4;
 
     public static final String CONTENT_TYPE_INIT = "init";
     public static final String CONTENT_TYPE_TEXT = "txt";
@@ -25,4 +26,5 @@ public class Const {
     public static final String INTENT_EXTRA_PK = "POST_PK";
     public static final String INTENT_EXTRA_COVER = "COVER";
     public static final String INTENT_EXTRA_CONTENT_TEXT = "CONTENT_TEXT";
+
 }

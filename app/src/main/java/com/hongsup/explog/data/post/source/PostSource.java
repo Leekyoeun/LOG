@@ -4,7 +4,6 @@ import com.hongsup.explog.data.post.Content;
 import com.hongsup.explog.data.post.PostContentResult;
 import com.hongsup.explog.data.post.PostCover;
 import com.hongsup.explog.data.post.PostResult;
-import com.hongsup.explog.data.post.UploadCover;
 import com.hongsup.explog.data.post.UploadPostText;
 
 import io.reactivex.Observable;
@@ -28,7 +27,7 @@ public interface PostSource {
      * @param cover
      * @return
      */
-    Observable<Response<PostCover>> uploadPostCover(UploadCover cover);
+    Observable<Response<PostCover>> uploadPostCover(PostCover cover);
 
     /**
      * Post 에 대한 내용 가져오는 메소드

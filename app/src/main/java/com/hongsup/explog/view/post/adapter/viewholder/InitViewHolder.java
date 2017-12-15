@@ -1,13 +1,11 @@
 package com.hongsup.explog.view.post.adapter.viewholder;
 
-import android.content.Context;
 import android.view.View;
 import android.widget.TextView;
 
 import com.hongsup.explog.R;
 import com.hongsup.explog.data.post.Content;
 import com.hongsup.explog.data.user.source.UserRepository;
-import com.hongsup.explog.view.post.listener.OnPostContentClickListener;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -18,39 +16,15 @@ import butterknife.ButterKnife;
 
 public class InitViewHolder extends PostViewHolder {
 
-    private boolean checkMyPost;
-
     @BindView(R.id.textWriter)
     TextView textWriter;
     @BindView(R.id.textSummary)
     TextView textSummary;
 
-
     public InitViewHolder(View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
     }
-
-    @Override
-    public void setContext(Context context) {
-
-    }
-
-    @Override
-    public void setListener(OnPostContentClickListener listener) {
-
-    }
-
-    @Override
-    public void setPosition(int position) {
-
-    }
-
-    @Override
-    public void setCheckMyPost(boolean checkMyPost) {
-        this.checkMyPost = checkMyPost;
-    }
-
 
     @Override
     public void bind(Content data) {

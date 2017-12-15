@@ -1,14 +1,11 @@
 package com.hongsup.explog.view.cover;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.hongsup.explog.R;
 import com.hongsup.explog.data.photo.Photo;
 import com.hongsup.explog.view.cover.contract.CoverContract;
 import com.hongsup.explog.view.cover.presenter.CoverPresenter;
@@ -50,11 +47,8 @@ public class CoverActivity extends AppCompatActivity{
         return true;
     }
 
-
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             case REQ_GALLERY:
                 if (resultCode == RESULT_OK) {
