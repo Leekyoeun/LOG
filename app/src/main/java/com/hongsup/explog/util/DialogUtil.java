@@ -49,20 +49,4 @@ public class DialogUtil {
 
         return dialog;
     }
-
-    /**
-     * Alert 를 선택한는 다이얼로그
-     *
-     * @param context
-     * @param listener
-     * @return
-     */
-    public static AlertDialog showAlertDialog(Context context, DialogInterface.OnClickListener listener){
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        /*
-         setItems( 아이템의 목록, 클릭했을 경우에 대한 리스너 )
-         */
-        builder.setItems(new String[]{"item", "item2"}, listener);
-        return builder.create();
-    }
 }

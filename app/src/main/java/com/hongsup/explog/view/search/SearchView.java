@@ -21,7 +21,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.hongsup.explog.R;
+import com.hongsup.explog.data.post.PostCover;
 import com.hongsup.explog.data.search.dao.SearchHistoryDAO;
+import com.hongsup.explog.service.ServiceGenerator;
+import com.hongsup.explog.service.api.SearchAPI;
 import com.hongsup.explog.view.search.insuptest.SearchResponse;
 import com.hongsup.explog.view.search.insuptest.Word;
 import com.jakewharton.rxbinding2.widget.RxTextView;
@@ -167,12 +170,12 @@ public class SearchView extends FrameLayout implements SearchRecyclerAdapter.Lis
         readList();
     }
 
-    ArrayList<SearchResponse> list = new ArrayList<>();
+    ArrayList<PostCover> list = new ArrayList<>();
 
     public void getDataTwo(Word word) {
         progressBar.setVisibility(VISIBLE);
-        DataService dataService = getDataFromDB().create(DataService.class);
-        Observable<Response<ArrayList<SearchResponse>>> observable = dataService.observable(word);
+        SearchAPI searchAPI = ServiceGenerator.create(SearchAPI.class);
+        Observable<Response<ArrayList<PostCover>>> observable = searchAPI.observable(word);
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(data -> {
@@ -203,24 +206,4 @@ public class SearchView extends FrameLayout implements SearchRecyclerAdapter.Lis
                 });
         progressBar.setVisibility(INVISIBLE);
     }
-
-
-    public Retrofit getDataFromDB() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://explog-shz.ap-northeast-2.elasticbeanstalk.com")
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        return retrofit;
-    }
-
-    public interface DataService {
-
-        @POST("/post/search/")
-        Observable<Response<ArrayList<SearchResponse>>> observable(@Body Word word);
-
-    }
-
-
 }
