@@ -51,9 +51,9 @@ public class SearchRecyclerAdapter extends RecyclerView.Adapter<ViewHolder> {
                 View historyView = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_search_recycler_history, parent, false);
                 return new HistoryHolder(historyView);
 
-           // case RESULT :
-                //View resultView = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_search_recycler_result, parent, false);
-                //return new ResultHolder(resultView);
+            // case RESULT :
+            //View resultView = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_search_recycler_result, parent, false);
+            //return new ResultHolder(resultView);
         }
         return null;
     }
