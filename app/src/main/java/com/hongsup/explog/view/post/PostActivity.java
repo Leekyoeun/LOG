@@ -83,9 +83,6 @@ public class PostActivity extends AppCompatActivity implements OnPostContentClic
                     LatLng latLng = place.getLatLng();
 
                     postPresenter.uploadPostPath(latLng.latitude, latLng.longitude);
-
-                    Log.e(TAG, "onActivityResult: Lat = " + latLng.latitude );
-                    Log.e(TAG, "onActivityResult: Log = " + latLng.longitude );
                 }
                 break;
         }

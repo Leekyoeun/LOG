@@ -129,7 +129,7 @@ public class PostTextView implements PostTextContract.iView {
     }
 
     /**
-     * edtiText 변화에 대한 Menu 변환
+     * editText 변화에 대한 Menu 변환
      *
      * @param id    Menu Resource ID
      * @param check flag

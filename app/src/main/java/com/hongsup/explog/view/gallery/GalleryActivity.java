@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 
 import com.hongsup.explog.R;
+import com.hongsup.explog.data.Const;
 import com.hongsup.explog.data.photo.Photo;
 import com.hongsup.explog.view.base.BaseActivity;
 
@@ -121,7 +122,7 @@ public class GalleryActivity extends BaseActivity implements GalleryListener {
                 if (item.getIntent() != null) {
                     // 선택된 사진이 있으면 다음 Intent 로 이동한다.
                     ArrayList<Photo> selectPhotoList = galleryAdapter.getSelectPhotoList();
-                    setResult(RESULT_OK, item.getIntent().putExtra("PHOTO", selectPhotoList));
+                    setResult(RESULT_OK, item.getIntent().putExtra(Const.INTENT_EXTRA_PHOTO, selectPhotoList));
                     finish();
                 }
                 break;
