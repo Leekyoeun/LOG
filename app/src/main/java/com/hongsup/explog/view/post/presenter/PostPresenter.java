@@ -23,6 +23,7 @@ import static com.bumptech.glide.gifdecoder.GifHeaderParser.TAG;
 
 public class PostPresenter implements PostContract.iPresenter, OnPostContentClickListener {
 
+    private int postPk;
     private PostContract.iView view;
     private PostRepository repository;
     private PostAdapterContract.iView adapterView;
@@ -38,7 +39,20 @@ public class PostPresenter implements PostContract.iPresenter, OnPostContentClic
     }
 
     @Override
+    public void setPostAdapterModel(PostAdapterContract.iModel model) {
+        this.adapterModel = model;
+    }
+
+    @Override
+    public void setPostAdapterView(PostAdapterContract.iView view) {
+        this.adapterView = view;
+        this.adapterView.setOnPostContentClickListener(this);
+    }
+
+    @Override
     public void loadPostContent(int postPk) {
+        // PK 설정
+        this.postPk = postPk;
         view.showProgress();
         Observable<Response<PostContentResult>> observable = repository.getPostContentList(postPk);
         observable.subscribeOn(Schedulers.io())
@@ -48,10 +62,10 @@ public class PostPresenter implements PostContract.iPresenter, OnPostContentClic
                                 if (data.code() == 200) {
                                     Log.e(TAG, "loadPostContent: 데이터 로드 완료");
                                     view.hideProgress();
-                                    if(data.body().getPostContentList() == null || data.body().getPostContentList().size() == 0){
+                                    if (data.body().getPostContentList() == null || data.body().getPostContentList().size() == 0) {
                                         adapterModel.setInit();
                                         adapterView.notifyAdapter();
-                                    }else{
+                                    } else {
                                         adapterModel.addItems(data.body().getPostContentList());
                                         adapterView.notifyAdapter();
                                     }
@@ -71,18 +85,7 @@ public class PostPresenter implements PostContract.iPresenter, OnPostContentClic
     }
 
     @Override
-    public void setPostAdapterModel(PostAdapterContract.iModel model) {
-        this.adapterModel = model;
-    }
-
-    @Override
-    public void setPostAdapterView(PostAdapterContract.iView view) {
-        this.adapterView = view;
-        this.adapterView.setOnPostContentClickListener(this);
-    }
-
-    @Override
-    public void uploadPostText(int postPk, UploadPostText postText) {
+    public void uploadPostText(UploadPostText postText) {
         view.showProgress();
         Observable<Response<Content>> observable = repository.uploadPostText(postPk, postText);
         observable.subscribeOn(Schedulers.io())
@@ -92,6 +95,7 @@ public class PostPresenter implements PostContract.iPresenter, OnPostContentClic
                                 if (data.code() == 200) {
                                     Log.e(TAG, "loadPostContent: 데이터 업로드 완료");
                                     view.hideProgress();
+
                                 } else {
                                     Log.e(TAG, "loadPostContent: 데이터 업로드 실패");
                                     view.hideProgress();
@@ -105,6 +109,17 @@ public class PostPresenter implements PostContract.iPresenter, OnPostContentClic
                             Log.e(TAG, "loadPostContent: 데이터 업로드 실패");
                             view.hideProgress();
                         });
+    }
+
+    @Override
+    public void uploadPostPath(double lat, double lng) {
+        view.showProgress();
+    }
+
+    @Override
+    public void uploadPostPhoto(String photoPath) {
+        view.showProgress();
+
     }
 
 }

@@ -59,8 +59,10 @@ public class CoverView implements CoverContract.iView {
     LimitedEditText editTitle;
     @BindView(R.id.scrollView)
     ScrollView scrollView;
+    /*
     @BindView(R.id.textCount)
     TextView textCount;
+    */
     @BindView(R.id.textStartDate)
     TextView textStartDate;
     @BindView(R.id.textEndDate)
@@ -70,7 +72,7 @@ public class CoverView implements CoverContract.iView {
     @BindView(R.id.textArea)
     TextView textArea;
     @BindView(R.id.textCoverPath)
-    TextView textCoverpath;
+    TextView textCoverPath;
     @BindView(R.id.progressBarLayout)
     RelativeLayout progressBarLayout;
 
@@ -114,18 +116,15 @@ public class CoverView implements CoverContract.iView {
     public void setMenu(Menu menu) {
         this.menu = menu;
         ((Activity)context).getMenuInflater().inflate(R.menu.menu_cover, menu);
-    }
 
-    @Override
-    public void setTextCount() {
+        /**
+         *  EditTitle 변화
+         */
         RxTextView.textChangeEvents(editTitle)
                 .subscribe(ch -> {
                     if (ch.text().length() > 0) {
-                        textCount.setVisibility(View.VISIBLE);
-                        textCount.setText(ch.text().length() + "/50");
                         changeMenu(R.id.action_ok, true);
                     } else {
-                        textCount.setVisibility(View.GONE);
                         changeMenu(R.id.action_ok, false);
                     }
                 });
@@ -139,8 +138,8 @@ public class CoverView implements CoverContract.iView {
                 PostCover cover = new PostCover();
                 String area = textArea.getText().toString();
 
-                if(textCoverpath.getTag() != null){
-                    cover.setCoverPath((String)textCoverpath.getTag());
+                if(textCoverPath.getTag() != null){
+                    cover.setCoverPath((String) textCoverPath.getTag());
                 }
                 /*
                   지역 설정
@@ -344,7 +343,7 @@ public class CoverView implements CoverContract.iView {
                 .centerCrop()
                 .into(imgCover);
         imgCover.setColorFilter(ContextCompat.getColor(context, R.color.colorPostTint), PorterDuff.Mode.SRC_OVER);
-        textCoverpath.setTag(imagePath);
+        textCoverPath.setTag(imagePath);
     }
 
     @Override

@@ -37,7 +37,6 @@ public class CoverActivity extends AppCompatActivity{
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         coverView.setMenu(menu);
-        coverView.setTextCount();
         return true;
     }
 

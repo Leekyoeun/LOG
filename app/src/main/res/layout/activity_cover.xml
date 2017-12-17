@@ -22,6 +22,7 @@
         android:elevation="2dp"
         android:fitsSystemWindows="true">
 
+        <!--
         <TextView
             android:id="@+id/textCount"
             android:layout_width="wrap_content"
@@ -29,6 +30,7 @@
             android:layout_gravity="center"
             android:textColor="@color/colorWhite"
             android:textSize="12sp" />
+        -->
 
     </android.support.v7.widget.Toolbar>
 
@@ -159,6 +161,7 @@
                     android:layout_toRightOf="@+id/btnArea"
                     android:background="@drawable/border_cover_area"
                     android:gravity="center"
+                    android:textSize="12sp"
                     android:textColor="@color/colorMain"
                     android:visibility="gone" />
 

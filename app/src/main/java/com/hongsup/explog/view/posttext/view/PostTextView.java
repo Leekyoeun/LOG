@@ -27,6 +27,7 @@ import butterknife.ButterKnife;
  */
 
 public class PostTextView implements PostTextContract.iView {
+
     private Context context;
     private PostTextContract.iPresenter presenter;
     private View view;
@@ -50,7 +51,7 @@ public class PostTextView implements PostTextContract.iView {
          */
         uploadIntent = new Intent(context, PostActivity.class);
         postIntent = ((Activity) context).getIntent();
-        content = (Content) postIntent.getSerializableExtra(Const.INTENT_EXTRA_CONTENT_TEXT);
+        content = (Content) postIntent.getSerializableExtra(Const.INTENT_EXTRA_TEXT);
 
         initToolbar();
         setContentData();
@@ -67,7 +68,10 @@ public class PostTextView implements PostTextContract.iView {
     }
 
     @Override
-    public void setTextChange() {
+    public void setMenu(Menu menu) {
+        this.menu = menu;
+        ((Activity) context).getMenuInflater().inflate(R.menu.menu_cover, menu);
+
         RxTextView.textChangeEvents(editText)
                 .subscribe(ch -> {
                     if (ch.text().length() > 0) {
@@ -79,37 +83,29 @@ public class PostTextView implements PostTextContract.iView {
     }
 
     @Override
-    public void setMenu(Menu menu) {
-        this.menu = menu;
-        ((Activity) context).getMenuInflater().inflate(R.menu.menu_cover, menu);
-        }
+    public void onMenuClick(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.action_ok:
+                if (content != null) {
+                    // 글 수정인 경우
 
-        @Override
-        public void onMenuClick(MenuItem item) {
-            int id = item.getItemId();
-            switch (id) {
-                case R.id.action_ok:
-                    if (content != null) {
-                        // 글 수정인 경우
+                } else {
+                    // 글 작성인 경우
+                    UploadPostText postText = new UploadPostText();
+                    postText.setContent(editText.getText().toString());
+                    /**
+                     *  바꿔야 한다.
+                     *  날짜 선택
+                     */
+                    postText.setCreatedAt("2017-12-15T00:00:00");
 
-                    } else {
-                        // 글 작성인 경우
-                        UploadPostText postText = new UploadPostText();
-                        postText.setContent(editText.getText().toString());
+                    uploadIntent.putExtra(Const.INTENT_EXTRA_TEXT, postText);
 
-                        /**
-                         *  바꿔야 한다.
-                         *  날짜 선택
-                         */
-                        postText.setCreatedAt("2017-12-15T00:00:00");
-
-                        uploadIntent.putExtra(Const.INTENT_EXTRA_CONTENT_TEXT, postText);
-                        uploadIntent.putExtra(Const.INTENT_EXTRA_PK, postIntent.getIntExtra(Const.INTENT_EXTRA_PK, -1));
-
-                        ((Activity)context).setResult(Activity.RESULT_OK, uploadIntent);
-                        ((Activity)context).finish();
-                    }
-                    break;
+                    ((Activity) context).setResult(Activity.RESULT_OK, uploadIntent);
+                    ((Activity) context).finish();
+                }
+                break;
         }
     }
 

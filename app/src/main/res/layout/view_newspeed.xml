@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/main"
-    android:backgroundTintMode="src_over"
     android:backgroundTint="@color/colorMainTint"
+    android:backgroundTintMode="src_over"
     android:fitsSystemWindows="true">
 
     <!-- 상단 TabLayout-->
@@ -41,7 +41,7 @@
                 app:popupTheme="@style/AppTheme.PopupOverlay">
 
                 <!-- Toolbar 안에 들어가는 내용 -->
-                <include layout="@layout/view_newspeed_toolbar"/>
+                <include layout="@layout/view_newspeed_toolbar" />
 
             </android.support.v7.widget.Toolbar>
         </android.support.design.widget.CollapsingToolbarLayout>

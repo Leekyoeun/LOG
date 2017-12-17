@@ -21,7 +21,6 @@ public interface CoverContract {
         void showError(String text);
 
         void setMenu(Menu menu);
-        void setTextCount();
         void onMenuClick(MenuItem item);
         void setCover(String imagePath);
 

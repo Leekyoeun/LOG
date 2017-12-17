@@ -19,6 +19,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.location.places.ui.PlacePicker;
 import com.hongsup.explog.R;
 import com.hongsup.explog.data.Const;
 import com.hongsup.explog.data.post.PostCover;
@@ -26,7 +29,6 @@ import com.hongsup.explog.data.user.source.UserRepository;
 import com.hongsup.explog.util.DateUtil;
 import com.hongsup.explog.view.post.adapter.PostAdapter;
 import com.hongsup.explog.view.post.contract.PostContract;
-import com.hongsup.explog.view.posttext.PostTextActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -62,7 +64,7 @@ public class PostView implements PostContract.iView {
     private PostContract.iPresenter presenter;
     private View view;
     private Intent coverIntent;
-    private Intent textIntent;
+    private Intent contentIntent;
     private PostCover cover;
     private PostAdapter postAdapter;
     private int menuId;
@@ -187,9 +189,27 @@ public class PostView implements PostContract.iView {
 
     @OnClick(R.id.fab)
     public void createText() {
-        textIntent = new Intent(context, PostTextActivity.class);
-        textIntent.putExtra(Const.INTENT_EXTRA_PK, cover.getPk());
-        ((Activity) context).startActivityForResult(textIntent, Const.REQ_TEXT);
+
+        /*
+         PostText 를 작성하기 위해 PostTextActivity 사용
+         */
+        /*
+        contentIntent = new Intent(context, PostTextActivity.class);
+        ((Activity) context).startActivityForResult(contentIntent, Const.REQ_TEXT);
+        */
+
+        /*
+         PostPath 를 작성하기 위해 Google Place Intent 사용
+         */
+        PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
+
+        try {
+            ((Activity)context).startActivityForResult(builder.build((Activity)context), Const.REQ_PATH);
+        } catch (GooglePlayServicesRepairableException e) {
+            e.printStackTrace();
+        } catch (GooglePlayServicesNotAvailableException e) {
+            e.printStackTrace();
+        }
     }
 
 }

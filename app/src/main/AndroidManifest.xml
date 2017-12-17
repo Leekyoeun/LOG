@@ -13,6 +13,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAKk7KRv8_G4c5x3AK4qHwQkApIDoV7J6I"/>
+
         <activity
             android:name=".view.splash.SplashActivity"
             android:theme="@style/AppTheme.SplashTheme">
@@ -66,12 +70,6 @@
         <activity
             android:name=".view.posttext.PostTextActivity"
             android:theme="@style/AppTheme.BaseNoActionbar"/>
-
-        <!-- Post Path 작성 페이지 -->
-        <activity
-            android:name=".view.postpath.PostPathActivity"
-            android:theme="@style/AppTheme.BaseNoActionbar" />
-
 
         <!-- Profile edit 페이지 -->
         <activity android:name=".view.setting.editprofile.EditProfileActivity" />

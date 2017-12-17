@@ -84,6 +84,8 @@ public class SplashPresenter implements SplashContract.iPresenter {
 
                             PreferenceUtil.removeAllValue(context);
                             UserRepository.getInstance().clearUser();
+
+                            view.goSign();
                         }
                     }else{
                         /**
@@ -94,6 +96,8 @@ public class SplashPresenter implements SplashContract.iPresenter {
 
                         PreferenceUtil.removeAllValue(context);
                         UserRepository.getInstance().clearUser();
+
+                        view.goSign();
                     }
 
                 }, throwable -> {
@@ -102,6 +106,8 @@ public class SplashPresenter implements SplashContract.iPresenter {
 
                     PreferenceUtil.removeAllValue(context);
                     UserRepository.getInstance().clearUser();
+
+                    view.goSign();
                 });
     }
 }

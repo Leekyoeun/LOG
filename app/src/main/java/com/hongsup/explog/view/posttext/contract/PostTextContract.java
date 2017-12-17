@@ -14,14 +14,11 @@ public interface PostTextContract {
         void setPresenter(iPresenter presenter);
         View getView();
 
-        void setTextChange();
         void setMenu(Menu menu);
         void onMenuClick(MenuItem item);
-
     }
 
     interface iPresenter{
         void attachView(iView view);
-
     }
 }

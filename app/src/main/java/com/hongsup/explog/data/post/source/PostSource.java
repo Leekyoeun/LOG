@@ -44,4 +44,10 @@ public interface PostSource {
      * @return
      */
     Observable<Response<Content>> uploadPostText(int postPk, UploadPostText postText);
+
+    /*
+    Observable<Response<Content>> uploadPostPath(int postPk, double lat, double lng);
+
+    Observable<Response<Content>> uploadPostPhoto(int postPk, String photoPath);
+    */
 }

@@ -34,7 +34,6 @@ public class PostTextActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         postTextView.setMenu(menu);
-        postTextView.setTextChange();
         return true;
     }
 
