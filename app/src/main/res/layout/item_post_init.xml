@@ -23,9 +23,9 @@
         app:layout_constraintVertical_bias="0.100000024" />
 
     <TextView
+        android:id="@+id/textSummary"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="당신의 여행 이야기를 작성해보세요!"
         android:textAlignment="center"
         android:textSize="12sp"
         android:textStyle="bold"

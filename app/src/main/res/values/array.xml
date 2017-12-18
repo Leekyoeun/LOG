@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="area">
+        <item>@string/asia</item>
+        <item>@string/europe</item>
+        <item>@string/north_americas</item>
+        <item>@string/south_americas</item>
+        <item>@string/oceania</item>
+        <item>@string/africa</item>
+    </string-array>
+</resources>

@@ -32,8 +32,7 @@ public class NewsPeedItemAdapter extends RecyclerView.Adapter<NewsPeedItemViewHo
     @Override
     public void onBindViewHolder(NewsPeedItemViewHolder holder, int position) {
         PostCover postCover = postCoverList.get(position);
-
-        if (holder != null){
+        if(holder != null){
             holder.setPostCover(postCover);
         }
     }
@@ -45,7 +44,7 @@ public class NewsPeedItemAdapter extends RecyclerView.Adapter<NewsPeedItemViewHo
 
     @Override
     public void notifyAdapter() {
-        notifyDataSetChanged();
+        notifyItemRangeChanged(0, postCoverList.size());
     }
 
     @Override

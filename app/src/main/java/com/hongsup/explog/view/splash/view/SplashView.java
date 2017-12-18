@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.hongsup.explog.R;
 import com.hongsup.explog.view.main.MainActivity;
+import com.hongsup.explog.view.signin.SignInActivity;
 import com.hongsup.explog.view.splash.contract.SplashContract;
 
 /**
@@ -17,7 +18,7 @@ import com.hongsup.explog.view.splash.contract.SplashContract;
 
 public class SplashView implements SplashContract.iView {
 
-    private static final String TAG = "SignIn";
+    private static final String TAG = "SplashView";
 
     private View view;
     private Context context;
@@ -60,6 +61,13 @@ public class SplashView implements SplashContract.iView {
     @Override
     public void goMain() {
         Intent intent = new Intent(context, MainActivity.class);
+        context.startActivity(intent);
+        ((Activity) context).finish();
+    }
+
+    @Override
+    public void goSign() {
+        Intent intent = new Intent(context, SignInActivity.class);
         context.startActivity(intent);
         ((Activity) context).finish();
     }

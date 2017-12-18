@@ -11,6 +11,7 @@ import java.util.Date;
 public class DateUtil {
 
     private final static String DATE_PATTERN = "yyyy.MM.dd";
+    private final static String DATE_SERVER_UPLOAD = "yyyy-MM-dd";
 
     /**
      * 현재 날짜를 String Type(YYYY.MM.dd) 으로 변환하는 메소드
@@ -28,9 +29,9 @@ public class DateUtil {
      */
     public static long getConvertDate(String string_date) {
         long long_date = 0;
-        SimpleDateFormat f = new SimpleDateFormat(DATE_PATTERN);
+        SimpleDateFormat sdf = new SimpleDateFormat(DATE_PATTERN);
         try {
-            Date d = f.parse(string_date);
+            Date d = sdf.parse(string_date);
             long_date = d.getTime();
         } catch (ParseException e) {
             e.printStackTrace();
@@ -46,18 +47,36 @@ public class DateUtil {
     public static String getConvertDate(long long_date) {
         String string_date;
         Date date = new Date(long_date);
-        SimpleDateFormat df2 = new SimpleDateFormat(DATE_PATTERN);
-        string_date = df2.format(date);
+        SimpleDateFormat sdf = new SimpleDateFormat(DATE_PATTERN);
+        string_date = sdf.format(date);
         return string_date;
     }
 
 
+    /**
+     * startDate 와 endDate 를 yyyy.mm.dd - yyyy.mm.dd 로 변환
+     *
+     * @param start_date
+     * @param end_date
+     * @return
+     */
     public static String getConvertDate(String start_date, String end_date){
         String startData = start_date.substring(0,10).replace("-",".");
         String endData ="";
         if(end_date != null){
-            endData = "-"+end_date.substring(0,10).replace("-",".");
+            endData = " - "+end_date.substring(0,10).replace("-",".");
         }
         return startData+endData;
+    }
+
+    /**
+     * yyyy.MM.dd 를 yyyy-MM-ddT00:00:00 으로 변환하는 메소드
+     * @param date
+     * @return
+     */
+    public static String setConvertDate(String date){
+        String serverDate = date.replace(".","-") ;
+        serverDate += "T00:00:00";
+        return serverDate;
     }
 }

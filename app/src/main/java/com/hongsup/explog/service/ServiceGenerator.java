@@ -4,11 +4,10 @@ package com.hongsup.explog.service;
  * Created by Android Hong on 2017-11-29.
  */
 
-import android.util.Log;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -35,6 +34,19 @@ public class ServiceGenerator {
                 .baseUrl(SERVER_URL)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        return retrofit.create(className);
+    }
+
+    public static<I> I createInter(Class<I> className){
+        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+        httpClient.addNetworkInterceptor(new AddTokenInterceptor());
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(SERVER_URL)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(httpClient.build())
                 .build();
         return retrofit.create(className);
     }
