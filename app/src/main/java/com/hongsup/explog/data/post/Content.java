@@ -1,6 +1,7 @@
 package com.hongsup.explog.data.post;
 
 import com.google.gson.annotations.SerializedName;
+import com.hongsup.explog.data.user.User;
 
 import java.io.Serializable;
 
@@ -21,6 +22,9 @@ public class Content implements Serializable{
     private int lat;
     @SerializedName("lng")
     private int lng;
+
+    private int likeCount;
+    private User author;
 
     public int getPk() {
         return pk;
@@ -68,5 +72,21 @@ public class Content implements Serializable{
 
     public void setLng(int lng) {
         this.lng = lng;
+    }
+
+    public int getLikeCount() {
+        return likeCount;
+    }
+
+    public void setLikeCount(int likeCount) {
+        this.likeCount = likeCount;
+    }
+
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
     }
 }

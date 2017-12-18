@@ -7,7 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hongsup.explog.data.Const;
+import com.hongsup.explog.data.post.Content;
 import com.hongsup.explog.data.post.PostContent;
+import com.hongsup.explog.data.user.User;
 import com.hongsup.explog.view.post.adapter.contract.PostAdapterContract;
 import com.hongsup.explog.view.post.adapter.viewholder.PostViewHolder;
 import com.hongsup.explog.view.post.listener.OnPostContentClickListener;
@@ -67,13 +69,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostViewHolder> implements
             return Const.VIEW_TYPE_PATH;
         } else if (Const.CONTENT_TYPE_INIT.equals(postContent.getContentType())) {
             return Const.VIEW_TYPE_INIT;
+        } else if(Const.CONTENT_TYPE_FOOTER.equals(postContent.getContentType())){
+            return Const.VIEW_TYPE_FOOTER;
         }
         throw new RuntimeException("there is no type that matches the type " + postContent.getContentType() + " + make sure your using types correctly");
-    }
-
-    // True 가 반환되면 리스트의 끝임을 알수있다.
-    private boolean isPositionFooter(int position) {
-        return position == postContentList.size();
     }
 
     @Override
@@ -87,9 +86,28 @@ public class PostAdapter extends RecyclerView.Adapter<PostViewHolder> implements
     }
 
     @Override
-    public void setInit() {
+    public void setInit(int likeCount, User author) {
         PostContent postContent = new PostContent();
-        postContent.setContentType("init");
+
+        Content content = new Content();
+        content.setLikeCount(likeCount);
+        content.setAuthor(author);
+        postContent.setContent(content);
+
+        postContent.setContentType(Const.CONTENT_TYPE_INIT);
+        postContentList.add(postContent);
+    }
+
+    @Override
+    public void setLikeAndFollow(int likeCount, User author) {
+        PostContent postContent = new PostContent();
+
+        Content content = new Content();
+        content.setLikeCount(likeCount);
+        content.setAuthor(author);
+        postContent.setContent(content);
+        postContent.setContentType(Const.CONTENT_TYPE_FOOTER);
+
         postContentList.add(postContent);
     }
 

@@ -107,7 +107,7 @@ public class PostView implements PostContract.iView {
         this.presenter = presenter;
         this.presenter.setPostAdapterModel(postAdapter);
         this.presenter.setPostAdapterView(postAdapter);
-        this.presenter.loadPostContent(cover.getPk());
+        this.presenter.loadPostContent(cover);
     }
 
     @Override

@@ -4,6 +4,7 @@ import android.view.View;
 
 import com.hongsup.explog.R;
 import com.hongsup.explog.data.Const;
+import com.hongsup.explog.view.post.adapter.viewholder.FooterViewHolder;
 import com.hongsup.explog.view.post.adapter.viewholder.InitViewHolder;
 import com.hongsup.explog.view.post.adapter.viewholder.PathViewHolder;
 import com.hongsup.explog.view.post.adapter.viewholder.PhotoViewHolder;
@@ -37,6 +38,9 @@ public class PostViewHolderFactory {
             case Const.VIEW_TYPE_PATH:
                 layoutId = R.layout.item_post_path;
                 break;
+            case Const.VIEW_TYPE_FOOTER:
+                layoutId = R.layout.item_post_footer;
+                break;
             default:
                 throw new RuntimeException(type + "에 맞는 Layout 이 없습니다.");
         }
@@ -58,6 +62,9 @@ public class PostViewHolderFactory {
                 break;
             case Const.VIEW_TYPE_PATH:
                 viewHolder = new PathViewHolder(itemView);
+                break;
+            case Const.VIEW_TYPE_FOOTER:
+                viewHolder = new FooterViewHolder(itemView);
                 break;
             default:
                 throw new RuntimeException(type + "에 맞는 ViewHolder 가 없습니다.");

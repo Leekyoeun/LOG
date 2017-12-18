@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.hongsup.explog.data.post.Content;
 import com.hongsup.explog.data.post.PostContentResult;
+import com.hongsup.explog.data.post.PostCover;
 import com.hongsup.explog.data.post.UploadPostText;
 import com.hongsup.explog.data.post.source.PostRepository;
 import com.hongsup.explog.view.post.adapter.contract.PostAdapterContract;
@@ -50,9 +51,9 @@ public class PostPresenter implements PostContract.iPresenter, OnPostContentClic
     }
 
     @Override
-    public void loadPostContent(int postPk) {
+    public void loadPostContent(PostCover cover) {
         // PK 설정
-        this.postPk = postPk;
+        this.postPk = cover.getPk();
         view.showProgress();
         Observable<Response<PostContentResult>> observable = repository.getPostContentList(postPk);
         observable.subscribeOn(Schedulers.io())
@@ -62,15 +63,20 @@ public class PostPresenter implements PostContract.iPresenter, OnPostContentClic
                                 if (data.code() == 200) {
                                     Log.e(TAG, "loadPostContent: 데이터 로드 완료");
                                     view.hideProgress();
+
                                     if (data.body().getPostContentList() == null || data.body().getPostContentList().size() == 0) {
-                                        adapterModel.setInit();
+                                        adapterModel.setInit(cover.getLikeCount(),cover.getAuthor());
                                     } else {
                                         adapterModel.addItems(data.body().getPostContentList());
+                                        adapterModel.setLikeAndFollow(cover.getLikeCount(),cover.getAuthor());
                                     }
+
                                     /**
                                      * 마지막 Footer item 추가해야 한다.
                                      */
+
                                     adapterView.notifyAdapter();
+
                                 } else {
                                     Log.e(TAG, "loadPostContent: 데이터 로드 실패");
                                     view.hideProgress();
@@ -95,20 +101,19 @@ public class PostPresenter implements PostContract.iPresenter, OnPostContentClic
                 .subscribe(data -> {
                             if (data.isSuccessful()) {
                                 if (data.code() == 200) {
-                                    Log.e(TAG, "loadPostContent: 데이터 업로드 완료");
+                                    Log.e(TAG, "uploadPostText: 데이터 업로드 완료");
                                     view.hideProgress();
-
                                 } else {
-                                    Log.e(TAG, "loadPostContent: 데이터 업로드 실패");
+                                    Log.e(TAG, "uploadPostText: 데이터 업로드 실패");
                                     view.hideProgress();
                                 }
                             } else {
-                                Log.e(TAG, "loadPostContent: 데이터 업로드 실패");
+                                Log.e(TAG, "uploadPostText: 데이터 업로드 실패");
                                 view.hideProgress();
                             }
                         },
                         throwable -> {
-                            Log.e(TAG, "loadPostContent: 데이터 업로드 실패");
+                            Log.e(TAG, "uploadPostText: 데이터 업로드 실패");
                             view.hideProgress();
                         });
     }
