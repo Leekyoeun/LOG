@@ -8,7 +8,6 @@ import java.io.Serializable;
 /**
  * Created by Android Hong on 2017-12-11.
  */
-
 public class PostCover implements Serializable {
 
     @SerializedName("pk")
@@ -21,7 +20,7 @@ public class PostCover implements Serializable {
     private String startDate;
     @SerializedName("end_date")
     private String endDate;
-    @SerializedName("cover_path")
+    @SerializedName("img")
     private String coverPath;
     @SerializedName("created_at")
     private String createdAt;
@@ -100,5 +99,20 @@ public class PostCover implements Serializable {
 
     public void setLikeCount(int likeCount) {
         this.likeCount = likeCount;
+    }
+
+    @Override
+    public String toString() {
+        return "PostCover{" +
+                "pk=" + pk +
+                ", author=" + author +
+                ", title='" + title + '\'' +
+                ", startDate='" + startDate + '\'' +
+                ", endDate='" + endDate + '\'' +
+                ", coverPath='" + coverPath + '\'' +
+                ", createdAt='" + createdAt + '\'' +
+                ", continent='" + continent + '\'' +
+                ", likeCount=" + likeCount +
+                '}';
     }
 }

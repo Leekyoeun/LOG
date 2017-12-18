@@ -17,7 +17,6 @@ public class Content implements Serializable{
     private String createdAt;
     @SerializedName("photo")
     private String photoPath;
-
     @SerializedName("lat")
     private int lat;
     @SerializedName("lng")

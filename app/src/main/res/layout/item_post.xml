@@ -7,16 +7,12 @@
 
     <!-- 배경화면 View -->
     <ImageView
-        android:id="@+id/imgProfile"
+        android:id="@+id/imgCover"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:background="@drawable/sign"
-        android:scaleType="centerCrop"
-        android:src="@drawable/sign"
-        android:tint="@color/colorPostTint" />
+        android:layout_alignParentTop="true"/>
 
     <!--Title ( 타이틀 ) -->
     <TextView
@@ -28,7 +24,6 @@
         android:maxLines="2"
         android:paddingLeft="@dimen/item_post_image_margin"
         android:paddingRight="@dimen/item_post_image_margin"
-        android:text="이거슨 제목입니당. 뿌잉쀠ㅏ럼ㄴ아ㅣ러ㅏㅣㅁㄴ라ㅣㅓㅁ니ㅏㅇ러ㅏㅣㄴ멍라asdfasdfsadfㅣ"
         android:textColor="@color/colorWhite"
         android:textSize="@dimen/item_post_title"
         android:textStyle="bold"
@@ -46,7 +41,6 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:paddingLeft="@dimen/item_post_image_margin"
-        android:text="2017.11.12 - 2017.11.25"
         android:textColor="@color/colorWhite"
         android:textSize="@dimen/item_post_text"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -62,7 +56,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingLeft="@dimen/item_post_image_margin"
-        android:text="이흥기"
         android:textColor="@color/colorWhite"
         android:textSize="@dimen/item_post_text"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -105,7 +98,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:text="125K"
                 android:textColor="@color/colorWhite"
                 android:textSize="@dimen/item_post_text"
                 android:textStyle="bold" />
@@ -128,7 +120,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="123K"
                 android:textColor="@color/colorWhite"
                 android:textSize="@dimen/item_post_text"
                 android:textStyle="bold" />

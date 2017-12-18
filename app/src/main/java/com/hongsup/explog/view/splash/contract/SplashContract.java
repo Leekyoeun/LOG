@@ -20,6 +20,7 @@ public interface SplashContract {
         void showError(String text);
 
         void goMain();
+        void goSign();
     }
     interface iPresenter{
         void attachView(iView view);

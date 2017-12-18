@@ -1,6 +1,10 @@
 package com.hongsup.explog.data.post.source;
 
+import com.hongsup.explog.data.post.Content;
+import com.hongsup.explog.data.post.PostContentResult;
+import com.hongsup.explog.data.post.PostCover;
 import com.hongsup.explog.data.post.PostResult;
+import com.hongsup.explog.data.post.UploadPostText;
 
 import io.reactivex.Observable;
 import retrofit2.Response;
@@ -28,5 +32,20 @@ public class PostRepository implements PostSource{
     @Override
     public Observable<Response<PostResult>> getPostList(int category) {
         return postRemoteDataSource.getPostList(category);
+    }
+
+    @Override
+    public Observable<Response<PostCover>> uploadPostCover(PostCover cover) {
+        return postRemoteDataSource.uploadPostCover(cover);
+    }
+
+    @Override
+    public Observable<Response<PostContentResult>> getPostContentList(int postPk) {
+        return postRemoteDataSource.getPostContentList(postPk);
+    }
+
+    @Override
+    public Observable<Response<Content>> uploadPostText(int postPk, UploadPostText postText) {
+        return postRemoteDataSource.uploadPostText(postPk, postText);
     }
 }

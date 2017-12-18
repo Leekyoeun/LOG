@@ -1,7 +1,6 @@
 package com.hongsup.explog.view.main.view;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -14,12 +13,12 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import com.hongsup.explog.R;
-import com.hongsup.explog.view.main.MainActivity;
+import com.hongsup.explog.view.cover.CoverActivity;
 import com.hongsup.explog.view.main.contract.MainContract;
 import com.hongsup.explog.view.myinfo.MyInfoLayout;
 import com.hongsup.explog.view.newspeed.view.NewsPeedView;
-import com.hongsup.explog.view.cover.CoverActivity;
 import com.hongsup.explog.view.search.SearchView;
+
 import java.lang.reflect.Field;
 
 import butterknife.BindView;
@@ -66,23 +65,27 @@ public class MainView implements MainContract.iView, BottomNavigationView.OnNavi
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        frameLayout.removeAllViews();
+
         switch (id) {
             case R.id.navigation_newspeed:
                 // View 가 이미 있는지 체크
+                frameLayout.removeAllViews();
                 frameLayout.addView(new NewsPeedView(context));
                 return true;
             case R.id.navigation_search:
+                frameLayout.removeAllViews();
                 frameLayout.addView(new SearchView(context));
                 return true;
             case R.id.navigation_post:
                 // View 가 이미 있는지 체크
                 Intent intent = new Intent(context, CoverActivity.class);
                 context.startActivity(intent);
-                return true;
+                break;
             case R.id.navigation_notification:
+                frameLayout.removeAllViews();
                 return true;
             case R.id.navigation_profile:
+                frameLayout.removeAllViews();
                 frameLayout.addView(new MyInfoLayout(context));
                 return true;
         }
