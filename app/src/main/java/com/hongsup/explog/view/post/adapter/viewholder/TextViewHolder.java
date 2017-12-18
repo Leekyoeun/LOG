@@ -24,6 +24,7 @@ public class TextViewHolder extends PostViewHolder {
     public void bind(Content data) {
         Log.e("TextViewHolder", "bind:" + checkMyPost);
         Log.e("TextViewHolder", "bind: " + position );
+
         textContent.setText(data.getContent());
     }
 

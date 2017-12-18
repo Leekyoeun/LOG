@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -27,9 +28,12 @@ import com.hongsup.explog.data.Const;
 import com.hongsup.explog.data.post.PostCover;
 import com.hongsup.explog.data.user.source.UserRepository;
 import com.hongsup.explog.util.DateUtil;
+import com.hongsup.explog.view.gallery.GalleryActivity;
 import com.hongsup.explog.view.post.adapter.PostAdapter;
 import com.hongsup.explog.view.post.contract.PostContract;
+import com.hongsup.explog.view.posttext.PostTextActivity;
 
+import butterknife.BindAnim;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -40,6 +44,16 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 
 public class PostView implements PostContract.iView {
+
+    private Context context;
+    private PostContract.iPresenter presenter;
+    private View view;
+    private Intent coverIntent;
+    private Intent contentIntent;
+    private PostCover cover;
+    private PostAdapter postAdapter;
+    private int menuId;
+    private boolean isFabOpen;
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -57,17 +71,22 @@ public class PostView implements PostContract.iView {
     RecyclerView recyclerView;
     @BindView(R.id.fab)
     FloatingActionButton fab;
+    @BindView(R.id.fab_text)
+    FloatingActionButton fabText;
+    @BindView(R.id.fab_path)
+    FloatingActionButton fabPath;
+    @BindView(R.id.fab_photo)
+    FloatingActionButton fabPhoto;
     @BindView(R.id.progressBarLayout)
     RelativeLayout progressBarLayout;
-
-    private Context context;
-    private PostContract.iPresenter presenter;
-    private View view;
-    private Intent coverIntent;
-    private Intent contentIntent;
-    private PostCover cover;
-    private PostAdapter postAdapter;
-    private int menuId;
+    @BindAnim(R.anim.fab_open)
+    Animation fab_open;
+    @BindAnim(R.anim.fab_close)
+    Animation fab_close;
+    @BindAnim(R.anim.fab_rotate_forward)
+    Animation rotate_forward;
+    @BindAnim(R.anim.fab_rotate_backward)
+    Animation rotate_backward;
 
 
     public PostView(Context context) {
@@ -188,28 +207,57 @@ public class PostView implements PostContract.iView {
     }
 
     @OnClick(R.id.fab)
-    public void createText() {
+    public void animateFAB() {
+        if (isFabOpen) {
+            fab.startAnimation(rotate_backward);
+            fabText.startAnimation(fab_close);
+            fabPhoto.startAnimation(fab_close);
+            fabPath.startAnimation(fab_close);
+            fabText.setClickable(false);
+            fabPhoto.setClickable(false);
+            fabPath.setClickable(false);
+            isFabOpen = false;
+        } else {
+            fab.startAnimation(rotate_forward);
+            fabText.startAnimation(fab_open);
+            fabPhoto.startAnimation(fab_open);
+            fabPath.startAnimation(fab_open);
+            fabText.setClickable(true);
+            fabPhoto.setClickable(true);
+            fabPath.setClickable(true);
+            isFabOpen = true;
+        }
+    }
 
+    @OnClick(R.id.fab_text)
+    public void createText() {
         /*
          PostText 를 작성하기 위해 PostTextActivity 사용
          */
-        /*
         contentIntent = new Intent(context, PostTextActivity.class);
         ((Activity) context).startActivityForResult(contentIntent, Const.REQ_TEXT);
-        */
+    }
 
+    @OnClick(R.id.fab_path)
+    public void createPath() {
         /*
          PostPath 를 작성하기 위해 Google Place Intent 사용
          */
         PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
 
         try {
-            ((Activity)context).startActivityForResult(builder.build((Activity)context), Const.REQ_PATH);
+            ((Activity) context).startActivityForResult(builder.build((Activity) context), Const.REQ_PATH);
         } catch (GooglePlayServicesRepairableException e) {
             e.printStackTrace();
         } catch (GooglePlayServicesNotAvailableException e) {
             e.printStackTrace();
         }
+    }
+
+    @OnClick(R.id.fab_photo)
+    public void createPhoto() {
+        contentIntent = new Intent(context, GalleryActivity.class);
+        ((Activity) context).startActivityForResult(contentIntent, Const.REQ_GALLERY);
     }
 
 }

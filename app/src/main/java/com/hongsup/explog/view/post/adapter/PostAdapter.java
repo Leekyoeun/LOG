@@ -65,37 +65,20 @@ public class PostAdapter extends RecyclerView.Adapter<PostViewHolder> implements
             return Const.VIEW_TYPE_PHOTO;
         } else if (Const.CONTENT_TYPE_PATH.equals(postContent.getContentType())) {
             return Const.VIEW_TYPE_PATH;
-        }else if(Const.CONTENT_TYPE_INIT.equals(postContent.getContentType())){
+        } else if (Const.CONTENT_TYPE_INIT.equals(postContent.getContentType())) {
             return Const.VIEW_TYPE_INIT;
         }
         throw new RuntimeException("there is no type that matches the type " + postContent.getContentType() + " + make sure your using types correctly");
     }
 
-/*
-
-    public void addContent(PostContent postContent) {
-        if(Const.CONTENT_TYPE_INIT.equals(postContentList.get(0).getContentType())){
-            this.postContentList.clear();
-        }
-
-        this.postContentList.add(postContent);
-        notifyItemInserted(postContentList.size() - 1);
+    // True 가 반환되면 리스트의 끝임을 알수있다.
+    private boolean isPositionFooter(int position) {
+        return position == postContentList.size();
     }
-
-    public void deleteContent(int position) {
-        postContentList.remove(position);
-        notifyItemRemoved(position);
-
-        if(postContentList.size() == 0){
-            setInit();
-            notifyAdapter();
-        }
-    }
-*/
 
     @Override
     public void notifyAdapter() {
-        notifyItemRangeChanged(0,postContentList.size());
+        notifyItemRangeChanged(0, postContentList.size());
     }
 
     @Override

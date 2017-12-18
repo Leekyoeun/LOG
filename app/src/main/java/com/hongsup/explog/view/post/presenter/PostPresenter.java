@@ -64,11 +64,13 @@ public class PostPresenter implements PostContract.iPresenter, OnPostContentClic
                                     view.hideProgress();
                                     if (data.body().getPostContentList() == null || data.body().getPostContentList().size() == 0) {
                                         adapterModel.setInit();
-                                        adapterView.notifyAdapter();
                                     } else {
                                         adapterModel.addItems(data.body().getPostContentList());
-                                        adapterView.notifyAdapter();
                                     }
+                                    /**
+                                     * 마지막 Footer item 추가해야 한다.
+                                     */
+                                    adapterView.notifyAdapter();
                                 } else {
                                     Log.e(TAG, "loadPostContent: 데이터 로드 실패");
                                     view.hideProgress();
@@ -119,7 +121,6 @@ public class PostPresenter implements PostContract.iPresenter, OnPostContentClic
     @Override
     public void uploadPostPhoto(String photoPath) {
         view.showProgress();
-
     }
 
 }

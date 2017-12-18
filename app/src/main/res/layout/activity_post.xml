@@ -50,7 +50,6 @@
                         android:layout_marginRight="20dp"
                         android:maxLength="50"
                         android:maxLines="2"
-                        android:text="이것은 타이틀입니다. \n 뿌잉뿌잉"
                         android:textAlignment="center"
                         android:textColor="@color/colorWhite"
                         android:textSize="30sp" />
@@ -77,7 +76,6 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:gravity="center"
-                            android:text="2017.11.12 - 2017.12.14"
                             android:textColor="@color/colorWhite"
                             android:textSize="12sp" />
                     </LinearLayout>
@@ -106,7 +104,6 @@
                         android:layout_centerHorizontal="true"
                         android:gravity="center"
                         android:paddingTop="5dp"
-                        android:text="쏼라쏼라"
                         android:textSize="12sp" />
 
                 </RelativeLayout>
@@ -126,6 +123,48 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:src="@drawable/ic_fab_edit"
+        app:fabSize="mini"
+        android:visibility="invisible"
+        app:backgroundTint="@color/colorFab"
+        android:layout_marginBottom="80dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_photo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:src="@drawable/ic_fab_photo"
+        app:fabSize="mini"
+        android:visibility="invisible"
+        app:backgroundTint="@color/colorFab"
+        android:layout_marginBottom="64dp"
+        android:layout_marginRight="64dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_path"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:src="@drawable/ic_fab_path"
+        app:backgroundTint="@color/colorFab"
+        app:fabSize="mini"
+        android:visibility="invisible"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="80dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"

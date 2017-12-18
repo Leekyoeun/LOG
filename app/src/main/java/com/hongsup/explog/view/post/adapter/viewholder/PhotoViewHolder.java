@@ -25,6 +25,5 @@ public class PhotoViewHolder extends PostViewHolder {
         Glide.with(context)
                 .load(R.drawable.main)
                 .into(imgPhoto);
-
     }
 }
