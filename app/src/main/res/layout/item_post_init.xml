@@ -149,6 +149,7 @@
                 android:layout_centerVertical="true"
                 android:background="@drawable/border_post_follow"
                 android:gravity="center"
+                android:textColor="@color/colorBlack"
                 android:text="@string/txt_follow" />
         </RelativeLayout>
     </android.support.constraint.ConstraintLayout>
