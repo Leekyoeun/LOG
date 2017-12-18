@@ -37,5 +37,4 @@ public class ViewPagerAdapter extends PagerAdapter {
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         container.addView(view);
         return view;
-    }
-}
+    }}
