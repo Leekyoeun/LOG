@@ -1,10 +1,9 @@
 package com.hongsup.explog.data.post.source;
 
-import com.hongsup.explog.data.post.Content;
+import com.hongsup.explog.data.post.PostContent;
 import com.hongsup.explog.data.post.PostContentResult;
 import com.hongsup.explog.data.post.PostCover;
 import com.hongsup.explog.data.post.PostResult;
-import com.hongsup.explog.data.post.UploadPostText;
 import com.hongsup.explog.service.ServiceGenerator;
 import com.hongsup.explog.service.api.PostAPI;
 
@@ -21,7 +20,7 @@ import retrofit2.Response;
  * Created by Android Hong on 2017-12-13.
  */
 
-public class PostRemoteDataSource implements PostSource{
+public class PostRemoteDataSource implements PostSource {
 
     private static PostRemoteDataSource instance;
 
@@ -56,7 +55,7 @@ public class PostRemoteDataSource implements PostSource{
          End Date 가 있으면 그대로 보내주고,
          없으면 보내지 않는다.
          */
-        if(cover.getEndDate() != null){
+        if (cover.getEndDate() != null) {
             requestBodyMap.put("end_date", toRequestBody(cover.getEndDate()));
         }
 
@@ -66,13 +65,13 @@ public class PostRemoteDataSource implements PostSource{
          없으면 공백을 보내준다.
          */
 
-        if(cover.getCoverPath()!= null){
+        if (cover.getCoverPath() != null) {
             File file = new File(cover.getCoverPath());
             // create RequestBody instance from file
             RequestBody requestFile = RequestBody.create(MediaType.parse("image/*"), file);
-            requestBodyMap.put("img\"; filename=\""+file.getName(), requestFile);
-        }else{
-            RequestBody requestFile = RequestBody.create(MediaType.parse(""),"");
+            requestBodyMap.put("img\"; filename=\"" + file.getName(), requestFile);
+        } else {
+            RequestBody requestFile = RequestBody.create(MediaType.parse(""), "");
             requestBodyMap.put("img\"; filename=\"", requestFile);
         }
 
@@ -85,11 +84,27 @@ public class PostRemoteDataSource implements PostSource{
     }
 
     @Override
-    public Observable<Response<Content>> uploadPostText(int postPk, UploadPostText postText) {
-        return postTokenAPI.uploadPostText(postPk, postText);
+    public Observable<Response<PostContent>> uploadPostText(int postPk, String text, String date) {
+        return postTokenAPI.uploadPostText(postPk, text, date);
     }
 
-    public RequestBody toRequestBody(String json) {
+    @Override
+    public Observable<Response<PostContent>> uploadPostPath(int postPk, double lat, double lng) {
+        return postTokenAPI.uploadPostPath(postPk, String.valueOf(lat), String.valueOf(lng));
+    }
+
+    @Override
+    public Observable<Response<PostContent>> uploadPostPhoto(int postPk, String photoPath) {
+        Map<String, RequestBody> requestBodyMap = new HashMap<>();
+        File file = new File(photoPath);
+        RequestBody requestFile = RequestBody.create(MediaType.parse("image/*"), file);
+        requestBodyMap.put("photo\"; filename=\"" + file.getName(), requestFile);
+
+        return postTokenAPI.uploadPostPhoto(postPk, requestBodyMap);
+    }
+
+
+    private RequestBody toRequestBody(String json) {
         RequestBody body = RequestBody.create(MediaType.parse("text/plain"), json);
         return body;
     }

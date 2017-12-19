@@ -50,4 +50,14 @@ public class PostContent implements Serializable{
     public void setContent(Content content) {
         this.content = content;
     }
+
+    @Override
+    public String toString() {
+        return "PostContent{" +
+                "post=" + post +
+                ", order=" + order +
+                ", contentType='" + contentType + '\'' +
+                ", content=" + content +
+                '}';
+    }
 }

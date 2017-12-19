@@ -4,7 +4,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.hongsup.explog.data.post.UploadPostText;
+import com.hongsup.explog.data.post.PostCover;
 import com.hongsup.explog.view.post.adapter.contract.PostAdapterContract;
 
 /**
@@ -32,13 +32,13 @@ public interface PostContract {
     interface iPresenter {
         void attachView(iView view);
 
-        void loadPostContent(int postPk);
+        void loadPostContent(PostCover cover);
 
         void setPostAdapterModel(PostAdapterContract.iModel model);
 
         void setPostAdapterView(PostAdapterContract.iView view);
 
-        void uploadPostText(UploadPostText postText);
+        void uploadPostText(String text, String date);
 
         void uploadPostPath(double lat, double lng);
 

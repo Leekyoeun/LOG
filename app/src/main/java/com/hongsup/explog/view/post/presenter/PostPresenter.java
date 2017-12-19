@@ -2,9 +2,9 @@ package com.hongsup.explog.view.post.presenter;
 
 import android.util.Log;
 
-import com.hongsup.explog.data.post.Content;
+import com.hongsup.explog.data.post.PostContent;
 import com.hongsup.explog.data.post.PostContentResult;
-import com.hongsup.explog.data.post.UploadPostText;
+import com.hongsup.explog.data.post.PostCover;
 import com.hongsup.explog.data.post.source.PostRepository;
 import com.hongsup.explog.view.post.adapter.contract.PostAdapterContract;
 import com.hongsup.explog.view.post.contract.PostContract;
@@ -50,77 +50,108 @@ public class PostPresenter implements PostContract.iPresenter, OnPostContentClic
     }
 
     @Override
-    public void loadPostContent(int postPk) {
+    public void loadPostContent(PostCover cover) {
         // PK 설정
-        this.postPk = postPk;
+        this.postPk = cover.getPk();
         view.showProgress();
         Observable<Response<PostContentResult>> observable = repository.getPostContentList(postPk);
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(data -> {
                             if (data.isSuccessful()) {
-                                if (data.code() == 200) {
-                                    Log.e(TAG, "loadPostContent: 데이터 로드 완료");
-                                    view.hideProgress();
-                                    if (data.body().getPostContentList() == null || data.body().getPostContentList().size() == 0) {
-                                        adapterModel.setInit();
-                                    } else {
-                                        adapterModel.addItems(data.body().getPostContentList());
-                                    }
-                                    /**
-                                     * 마지막 Footer item 추가해야 한다.
-                                     */
-                                    adapterView.notifyAdapter();
+
+                                Log.e(TAG, "loadPostContent: 데이터 로드 완료");
+                                view.hideProgress();
+
+                                if (data.body().getPostContentList() == null || data.body().getPostContentList().size() == 0) {
+                                    adapterModel.setInit(cover.getLikeCount(), cover.getAuthor());
                                 } else {
-                                    Log.e(TAG, "loadPostContent: 데이터 로드 실패");
-                                    view.hideProgress();
+                                    adapterModel.setItems(data.body().getPostContentList());
+                                    adapterModel.setLikeAndFollow(cover.getLikeCount(), cover.getAuthor());
                                 }
+                                adapterView.notifyAdapter();
+
                             } else {
-                                Log.e(TAG, "loadPostContent: 데이터 로드 실패");
+                                Log.e(TAG, "loadPostContent: 데이터 로드 실패1");
                                 view.hideProgress();
                             }
                         },
                         throwable -> {
-                            Log.e(TAG, "loadPostContent: 데이터 로드 실패");
+                            Log.e(TAG, "loadPostContent: 데이터 로드 실패2");
                             view.hideProgress();
                         });
     }
 
     @Override
-    public void uploadPostText(UploadPostText postText) {
+    public void uploadPostText(String text, String date) {
         view.showProgress();
-        Observable<Response<Content>> observable = repository.uploadPostText(postPk, postText);
+        Observable<Response<PostContent>> observable = repository.uploadPostText(postPk, text, date);
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(data -> {
+                            Log.e(TAG, "uploadPostText: " + data.code() + ", " + data.message());
                             if (data.isSuccessful()) {
-                                if (data.code() == 200) {
-                                    Log.e(TAG, "loadPostContent: 데이터 업로드 완료");
-                                    view.hideProgress();
-
-                                } else {
-                                    Log.e(TAG, "loadPostContent: 데이터 업로드 실패");
-                                    view.hideProgress();
-                                }
+                                Log.e(TAG, "uploadPostText: 데이터 업로드 완료");
+                                view.hideProgress();
+                                adapterModel.addItems(data.body());
                             } else {
-                                Log.e(TAG, "loadPostContent: 데이터 업로드 실패");
+                                Log.e(TAG, "uploadPostText: 데이터 업로드 실패2");
                                 view.hideProgress();
                             }
                         },
                         throwable -> {
-                            Log.e(TAG, "loadPostContent: 데이터 업로드 실패");
+                            Log.e(TAG, "uploadPostText: 데이터 업로드 실패");
                             view.hideProgress();
+                            Log.e(TAG, "uploadPostText: " + throwable.getMessage());
                         });
     }
 
     @Override
     public void uploadPostPath(double lat, double lng) {
         view.showProgress();
+        Observable<Response<PostContent>> observable = repository.uploadPostPath(postPk, lat, lng);
+        observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(data -> {
+                            Log.e(TAG, "uploadPostPath: " + data.code() + ", " + data.message());
+                            if (data.isSuccessful()) {
+                                Log.e(TAG, "uploadPostPath: 데이터 업로드 완료");
+                                view.hideProgress();
+                                adapterModel.addItems(data.body());
+                            } else {
+                                Log.e(TAG, "uploadPostPath: 데이터 업로드 실패1");
+                                view.hideProgress();
+                            }
+                        },
+                        throwable -> {
+                            Log.e(TAG, "uploadPostPath: 데이터 업로드 실패2");
+                            view.hideProgress();
+                            Log.e(TAG, "uploadPostPath: " + throwable.getMessage());
+                        });
     }
 
     @Override
     public void uploadPostPhoto(String photoPath) {
         view.showProgress();
+        Observable<Response<PostContent>> observable = repository.uploadPostPhoto(postPk, photoPath);
+        observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(data -> {
+                            Log.e(TAG, "uploadPostPhoto: " + data.code() + ", " + data.message());
+                            if (data.isSuccessful()) {
+                                Log.e(TAG, "uploadPostPhoto: 데이터 업로드 완료");
+                                view.hideProgress();
+                                adapterModel.addItems(data.body());
+                            } else {
+                                Log.e(TAG, "uploadPostPhoto: 데이터 업로드 실패1");
+                                view.hideProgress();
+                            }
+                        },
+                        throwable -> {
+                            Log.e(TAG, "uploadPostPhoto: 데이터 업로드 실패2");
+                            view.hideProgress();
+                            Log.e(TAG, "uploadPostPhoto: " + throwable.getMessage());
+                        });
     }
 
 }

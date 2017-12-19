@@ -14,7 +14,6 @@ import android.widget.EditText;
 import com.hongsup.explog.R;
 import com.hongsup.explog.data.Const;
 import com.hongsup.explog.data.post.Content;
-import com.hongsup.explog.data.post.UploadPostText;
 import com.hongsup.explog.view.post.PostActivity;
 import com.hongsup.explog.view.posttext.contract.PostTextContract;
 import com.jakewharton.rxbinding2.widget.RxTextView;
@@ -92,15 +91,8 @@ public class PostTextView implements PostTextContract.iView {
 
                 } else {
                     // 글 작성인 경우
-                    UploadPostText postText = new UploadPostText();
-                    postText.setContent(editText.getText().toString());
-                    /**
-                     *  바꿔야 한다.
-                     *  날짜 선택
-                     */
-                    postText.setCreatedAt("2017-12-15T00:00:00");
-
-                    uploadIntent.putExtra(Const.INTENT_EXTRA_TEXT, postText);
+                    uploadIntent.putExtra(Const.INTENT_EXTRA_TEXT, editText.getText().toString());
+                    uploadIntent.putExtra(Const.INTENT_EXTRA_DATE, "2017-12-15");
 
                     ((Activity) context).setResult(Activity.RESULT_OK, uploadIntent);
                     ((Activity) context).finish();
