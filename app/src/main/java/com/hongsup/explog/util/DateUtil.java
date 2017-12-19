@@ -61,22 +61,21 @@ public class DateUtil {
      * @return
      */
     public static String getConvertDate(String start_date, String end_date){
-        String startData = start_date.substring(0,10).replace("-",".");
+        String startData = start_date.replace("-",".");
         String endData ="";
         if(end_date != null){
-            endData = " - "+end_date.substring(0,10).replace("-",".");
+            endData = " - "+end_date.replace("-",".");
         }
         return startData+endData;
     }
 
     /**
-     * yyyy.MM.dd 를 yyyy-MM-ddT00:00:00 으로 변환하는 메소드
+     * yyyy.MM.dd 를 yyyy-MM-dd 으로 변환하는 메소드
      * @param date
      * @return
      */
     public static String setConvertDate(String date){
         String serverDate = date.replace(".","-") ;
-        serverDate += "T00:00:00";
         return serverDate;
     }
 }

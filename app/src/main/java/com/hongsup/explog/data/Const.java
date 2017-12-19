@@ -21,9 +21,10 @@ public class Const {
     public static final String CONTENT_TYPE_TEXT = "txt";
     public static final String CONTENT_TYPE_PHOTO = "img";
     public static final String CONTENT_TYPE_PATH = "path";
-
+    public static final String CONTENT_TYPE_FOOTER = "footer";
 
     public static final String INTENT_EXTRA_COVER = "COVER";
     public static final String INTENT_EXTRA_TEXT = "TEXT";
     public static final String INTENT_EXTRA_PHOTO = "PHOTO";
+    public static final String INTENT_EXTRA_DATE ="DATE";
 }

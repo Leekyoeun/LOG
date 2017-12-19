@@ -17,6 +17,8 @@
     <string name="title_post">작성</string>
 
     <string name="txt_end_date">종료 날짜</string>
+    <string name="txt_follow">Follow</string>
+    <string name="txt_following">Following</string>
 
     <string name="africa">아프리카</string>
     <string name="asia">아시아</string>

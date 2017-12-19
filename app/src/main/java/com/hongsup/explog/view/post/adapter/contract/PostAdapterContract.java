@@ -1,6 +1,7 @@
 package com.hongsup.explog.view.post.adapter.contract;
 
 import com.hongsup.explog.data.post.PostContent;
+import com.hongsup.explog.data.user.User;
 import com.hongsup.explog.view.post.listener.OnPostContentClickListener;
 
 import java.util.List;
@@ -11,13 +12,18 @@ import java.util.List;
 
 public interface PostAdapterContract {
 
-    interface iView{
+    interface iView {
         void notifyAdapter();
         void setOnPostContentClickListener(OnPostContentClickListener listener);
     }
 
-    interface iModel{
-        void setInit();
-        void addItems(List<PostContent> postContentList);
+    interface iModel {
+        void setInit(int likeCount, User author);
+
+        void setLikeAndFollow(int likeCount, User author);
+
+        void setItems(List<PostContent> postContentList);
+
+        void addItems(PostContent postContent);
     }
 }

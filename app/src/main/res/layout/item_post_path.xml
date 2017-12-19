@@ -16,24 +16,26 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/imgPhoto"
+            android:id="@+id/imgPath"
             android:layout_width="match_parent"
             android:layout_height="140dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp" />
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:scaleType="centerCrop" />
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/imgPhoto"
+            android:layout_below="@+id/imgPath"
             android:paddingBottom="5dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:paddingTop="5dp">
+            android:paddingTop="5dp"
+            android:id="@+id/relativeLayout2">
 
             <View
                 android:layout_width="match_parent"

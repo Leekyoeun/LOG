@@ -19,6 +19,8 @@
     <string name="title_post">Post</string>
 
     <string name="txt_end_date">End Date</string>
+    <string name="txt_follow">Follow</string>
+    <string name="txt_following">Following</string>
 
     <string name="africa">AFRICA</string>
     <string name="asia">ASIA</string>

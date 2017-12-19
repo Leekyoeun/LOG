@@ -7,23 +7,27 @@ import com.bumptech.glide.Glide;
 import com.hongsup.explog.R;
 import com.hongsup.explog.data.post.Content;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Created by Android Hong on 2017-12-11.
  */
 
 public class PhotoViewHolder extends PostViewHolder {
 
-    private ImageView imgPhoto;
+    @BindView(R.id.imgPhoto)
+    ImageView imgPhoto;
 
     public PhotoViewHolder(View itemView) {
         super(itemView);
-        imgPhoto = itemView.findViewById(R.id.imgPhoto);
+        ButterKnife.bind(this, itemView);
     }
 
     @Override
     public void bind(Content data) {
         Glide.with(context)
-                .load(R.drawable.main)
+                .load(data.getPhotoPath())
                 .into(imgPhoto);
     }
 }

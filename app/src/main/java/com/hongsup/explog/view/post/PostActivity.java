@@ -3,6 +3,7 @@ package com.hongsup.explog.view.post;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -11,7 +12,6 @@ import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.maps.model.LatLng;
 import com.hongsup.explog.data.Const;
 import com.hongsup.explog.data.photo.Photo;
-import com.hongsup.explog.data.post.UploadPostText;
 import com.hongsup.explog.view.post.contract.PostContract;
 import com.hongsup.explog.view.post.listener.OnPostContentClickListener;
 import com.hongsup.explog.view.post.presenter.PostPresenter;
@@ -56,30 +56,38 @@ public class PostActivity extends AppCompatActivity implements OnPostContentClic
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
             case Const.REQ_TEXT:
-                if(resultCode == RESULT_OK){
+                if (resultCode == RESULT_OK) {
                     /*
                      Post 의 글 작성이 완료된 경우
                      */
-                    UploadPostText postText = (UploadPostText)data.getSerializableExtra(Const.INTENT_EXTRA_TEXT);
-                    postPresenter.uploadPostText(postText);
+                    String text = data.getStringExtra(Const.INTENT_EXTRA_TEXT);
+                    String date = data.getStringExtra(Const.INTENT_EXTRA_DATE);
+                    postPresenter.uploadPostText(text, date);
                 }
                 break;
             case Const.REQ_GALLERY:
-                if(resultCode == RESULT_OK){
+                if (resultCode == RESULT_OK) {
                     /*
                      Post 의 사진 작성이 완료된 경우
                      */
                     ArrayList<Photo> photoList = (ArrayList<Photo>) data.getSerializableExtra(Const.INTENT_EXTRA_PHOTO);
                     postPresenter.uploadPostPhoto(photoList.get(0).getImagePath());
+
+
+                    Log.e(TAG, "onActivityResult: imagePath" + photoList.get(0).getImagePath());
+
                 }
                 break;
             case Const.REQ_PATH:
-                if(resultCode == RESULT_OK){
+                if (resultCode == RESULT_OK) {
                     /*
                      Post 의 장소 작성이 완료된 경우
                      */
                     Place place = PlacePicker.getPlace(this, data);
                     LatLng latLng = place.getLatLng();
+
+                    Log.e(TAG, "onActivityResult: latLng.latitude" + latLng.latitude);
+                    Log.e(TAG, "onActivityResult: latLng.longitude" + latLng.longitude);
 
                     postPresenter.uploadPostPath(latLng.latitude, latLng.longitude);
                 }

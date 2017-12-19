@@ -107,7 +107,7 @@ public class PostView implements PostContract.iView {
         this.presenter = presenter;
         this.presenter.setPostAdapterModel(postAdapter);
         this.presenter.setPostAdapterView(postAdapter);
-        this.presenter.loadPostContent(cover.getPk());
+        this.presenter.loadPostContent(cover);
     }
 
     @Override
@@ -209,6 +209,7 @@ public class PostView implements PostContract.iView {
     @OnClick(R.id.fab)
     public void animateFAB() {
         if (isFabOpen) {
+
             fab.startAnimation(rotate_backward);
             fabText.startAnimation(fab_close);
             fabPhoto.startAnimation(fab_close);
@@ -218,6 +219,7 @@ public class PostView implements PostContract.iView {
             fabPath.setClickable(false);
             isFabOpen = false;
         } else {
+
             fab.startAnimation(rotate_forward);
             fabText.startAnimation(fab_open);
             fabPhoto.startAnimation(fab_open);

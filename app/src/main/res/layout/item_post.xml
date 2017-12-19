@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:ellipsize="end"
-        android:maxLines="2"
+        android:maxLines="1"
         android:paddingLeft="@dimen/item_post_image_margin"
         android:paddingRight="@dimen/item_post_image_margin"
         android:textColor="@color/colorWhite"

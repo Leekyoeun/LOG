@@ -7,7 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hongsup.explog.data.Const;
+import com.hongsup.explog.data.post.Content;
 import com.hongsup.explog.data.post.PostContent;
+import com.hongsup.explog.data.user.User;
 import com.hongsup.explog.view.post.adapter.contract.PostAdapterContract;
 import com.hongsup.explog.view.post.adapter.viewholder.PostViewHolder;
 import com.hongsup.explog.view.post.listener.OnPostContentClickListener;
@@ -67,13 +69,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostViewHolder> implements
             return Const.VIEW_TYPE_PATH;
         } else if (Const.CONTENT_TYPE_INIT.equals(postContent.getContentType())) {
             return Const.VIEW_TYPE_INIT;
+        } else if(Const.CONTENT_TYPE_FOOTER.equals(postContent.getContentType())){
+            return Const.VIEW_TYPE_FOOTER;
         }
         throw new RuntimeException("there is no type that matches the type " + postContent.getContentType() + " + make sure your using types correctly");
-    }
-
-    // True 가 반환되면 리스트의 끝임을 알수있다.
-    private boolean isPositionFooter(int position) {
-        return position == postContentList.size();
     }
 
     @Override
@@ -81,21 +80,67 @@ public class PostAdapter extends RecyclerView.Adapter<PostViewHolder> implements
         notifyItemRangeChanged(0, postContentList.size());
     }
 
+
     @Override
     public void setOnPostContentClickListener(OnPostContentClickListener listener) {
         this.listener = listener;
     }
 
     @Override
-    public void setInit() {
-        PostContent postContent = new PostContent();
-        postContent.setContentType("init");
-        postContentList.add(postContent);
+    public void setInit(int likeCount, User author) {
+        postContentList.add(createContent(likeCount, author, Const.CONTENT_TYPE_INIT));
     }
 
     @Override
-    public void addItems(List<PostContent> postContentList) {
+    public void setLikeAndFollow(int likeCount, User author) {
+        postContentList.add(createContent(likeCount, author, Const.CONTENT_TYPE_FOOTER));
+    }
+
+    @Override
+    public void setItems(List<PostContent> postContentList) {
         this.postContentList.clear();
         this.postContentList = postContentList;
+
     }
+
+    @Override
+    public void addItems(PostContent postContent) {
+        if(postContentList.get(0).getContentType().equals(Const.CONTENT_TYPE_INIT)){
+            // 첫번째 아이템이 init 인 경우
+            PostContent footerContent = createContent( postContentList.get(0).getContent().getLikeCount(),  postContentList.get(0).getContent().getAuthor(), Const.CONTENT_TYPE_FOOTER);
+            this.postContentList.clear();
+            this.postContentList.add(postContent);
+            this.postContentList.add(footerContent);
+            notifyItemRangeChanged(0, postContentList.size());
+        }else{
+            // 아닌 경우
+            this.postContentList.add(postContentList.size()-1, postContent);
+            notifyItemInserted(postContentList.size()-1);
+        }
+    }
+
+    /**
+     * Init OR Footer 생성기
+     *
+     * @param likeCount
+     * @param author
+     * @param type
+     * @return
+     */
+    private PostContent createContent(int likeCount, User author, String type){
+        PostContent postContent = new PostContent();
+
+        /**
+         * Like 와 Author 설정
+         */
+        Content content = new Content();
+        content.setLikeCount(likeCount);
+        content.setAuthor(author);
+        postContent.setContent(content);
+
+        postContent.setContentType(type);
+
+        return postContent;
+    }
+
 }

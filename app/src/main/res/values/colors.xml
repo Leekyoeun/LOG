@@ -11,7 +11,7 @@
     <color name="colorPostTint">#99505050</color>
 
     <color name="colorLightGray">#dcdcdc</color>
-
     <color name="colorGray">#A0A0A0</color>
+    <color name="colorBlack">#000000</color>
 
 </resources>
