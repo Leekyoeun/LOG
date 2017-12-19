@@ -19,9 +19,9 @@ public class Content implements Serializable{
     @SerializedName("photo")
     private String photoPath;
     @SerializedName("lat")
-    private int lat;
+    private double lat;
     @SerializedName("lng")
-    private int lng;
+    private double lng;
 
     private int likeCount;
     private User author;
@@ -58,19 +58,19 @@ public class Content implements Serializable{
         this.photoPath = photoPath;
     }
 
-    public int getLat() {
+    public double getLat() {
         return lat;
     }
 
-    public void setLat(int lat) {
+    public void setLat(double lat) {
         this.lat = lat;
     }
 
-    public int getLng() {
+    public double getLng() {
         return lng;
     }
 
-    public void setLng(int lng) {
+    public void setLng(double lng) {
         this.lng = lng;
     }
 

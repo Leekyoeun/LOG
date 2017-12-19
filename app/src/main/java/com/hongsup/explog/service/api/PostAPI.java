@@ -56,4 +56,18 @@ public interface PostAPI {
     @FormUrlEncoded
     @POST("/post/{post_pk}/text/")
     Observable<Response<PostContent>> uploadPostText(@Path("post_pk") int postPk, @Field("content")String text, @Field("created_at")String date);
+
+    /**
+     *  Upload Post Path
+     */
+    @FormUrlEncoded
+    @POST("/post/{post_pk}/path/")
+    Observable<Response<PostContent>> uploadPostPath(@Path("post_pk") int postPk, @Field("lat")String lat, @Field("lng")String lng);
+
+    /**
+     *  Upload Post Photo
+     */
+    @Multipart
+    @POST("/post/{post_pk}/photo/")
+    Observable<Response<PostContent>> uploadPostPhoto(@Path("post_pk") int postPk, @PartMap Map<String, RequestBody> postPhotoMap);
 }

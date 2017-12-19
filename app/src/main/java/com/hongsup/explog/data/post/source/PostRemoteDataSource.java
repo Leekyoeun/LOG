@@ -20,7 +20,7 @@ import retrofit2.Response;
  * Created by Android Hong on 2017-12-13.
  */
 
-public class PostRemoteDataSource implements PostSource{
+public class PostRemoteDataSource implements PostSource {
 
     private static PostRemoteDataSource instance;
 
@@ -55,7 +55,7 @@ public class PostRemoteDataSource implements PostSource{
          End Date 가 있으면 그대로 보내주고,
          없으면 보내지 않는다.
          */
-        if(cover.getEndDate() != null){
+        if (cover.getEndDate() != null) {
             requestBodyMap.put("end_date", toRequestBody(cover.getEndDate()));
         }
 
@@ -65,13 +65,13 @@ public class PostRemoteDataSource implements PostSource{
          없으면 공백을 보내준다.
          */
 
-        if(cover.getCoverPath()!= null){
+        if (cover.getCoverPath() != null) {
             File file = new File(cover.getCoverPath());
             // create RequestBody instance from file
             RequestBody requestFile = RequestBody.create(MediaType.parse("image/*"), file);
-            requestBodyMap.put("img\"; filename=\""+file.getName(), requestFile);
-        }else{
-            RequestBody requestFile = RequestBody.create(MediaType.parse(""),"");
+            requestBodyMap.put("img\"; filename=\"" + file.getName(), requestFile);
+        } else {
+            RequestBody requestFile = RequestBody.create(MediaType.parse(""), "");
             requestBodyMap.put("img\"; filename=\"", requestFile);
         }
 
@@ -85,17 +85,22 @@ public class PostRemoteDataSource implements PostSource{
 
     @Override
     public Observable<Response<PostContent>> uploadPostText(int postPk, String text, String date) {
-        return postTokenAPI.uploadPostText(postPk, text ,date);
+        return postTokenAPI.uploadPostText(postPk, text, date);
     }
 
     @Override
     public Observable<Response<PostContent>> uploadPostPath(int postPk, double lat, double lng) {
-        return null;
+        return postTokenAPI.uploadPostPath(postPk, String.valueOf(lat), String.valueOf(lng));
     }
 
     @Override
     public Observable<Response<PostContent>> uploadPostPhoto(int postPk, String photoPath) {
-        return null;
+        Map<String, RequestBody> requestBodyMap = new HashMap<>();
+        File file = new File(photoPath);
+        RequestBody requestFile = RequestBody.create(MediaType.parse("image/*"), file);
+        requestBodyMap.put("photo\"; filename=\"" + file.getName(), requestFile);
+
+        return postTokenAPI.uploadPostPhoto(postPk, requestBodyMap);
     }
 
 

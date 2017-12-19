@@ -14,7 +14,6 @@ public interface PostAdapterContract {
 
     interface iView {
         void notifyAdapter();
-
         void setOnPostContentClickListener(OnPostContentClickListener listener);
     }
 
@@ -23,6 +22,8 @@ public interface PostAdapterContract {
 
         void setLikeAndFollow(int likeCount, User author);
 
-        void addItems(List<PostContent> postContentList);
+        void setItems(List<PostContent> postContentList);
+
+        void addItems(PostContent postContent);
     }
 }

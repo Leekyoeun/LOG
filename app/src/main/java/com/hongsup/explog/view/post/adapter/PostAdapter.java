@@ -80,6 +80,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostViewHolder> implements
         notifyItemRangeChanged(0, postContentList.size());
     }
 
+
     @Override
     public void setOnPostContentClickListener(OnPostContentClickListener listener) {
         this.listener = listener;
@@ -87,33 +88,59 @@ public class PostAdapter extends RecyclerView.Adapter<PostViewHolder> implements
 
     @Override
     public void setInit(int likeCount, User author) {
-        PostContent postContent = new PostContent();
-
-        Content content = new Content();
-        content.setLikeCount(likeCount);
-        content.setAuthor(author);
-        postContent.setContent(content);
-
-        postContent.setContentType(Const.CONTENT_TYPE_INIT);
-        postContentList.add(postContent);
+        postContentList.add(createContent(likeCount, author, Const.CONTENT_TYPE_INIT));
     }
 
     @Override
     public void setLikeAndFollow(int likeCount, User author) {
+        postContentList.add(createContent(likeCount, author, Const.CONTENT_TYPE_FOOTER));
+    }
+
+    @Override
+    public void setItems(List<PostContent> postContentList) {
+        this.postContentList.clear();
+        this.postContentList = postContentList;
+
+    }
+
+    @Override
+    public void addItems(PostContent postContent) {
+        if(postContentList.get(0).getContentType().equals(Const.CONTENT_TYPE_INIT)){
+            // 첫번째 아이템이 init 인 경우
+            PostContent footerContent = createContent( postContentList.get(0).getContent().getLikeCount(),  postContentList.get(0).getContent().getAuthor(), Const.CONTENT_TYPE_FOOTER);
+            this.postContentList.clear();
+            this.postContentList.add(postContent);
+            this.postContentList.add(footerContent);
+            notifyItemRangeChanged(0, postContentList.size());
+        }else{
+            // 아닌 경우
+            this.postContentList.add(postContentList.size()-1, postContent);
+            notifyItemInserted(postContentList.size()-1);
+        }
+    }
+
+    /**
+     * Init OR Footer 생성기
+     *
+     * @param likeCount
+     * @param author
+     * @param type
+     * @return
+     */
+    private PostContent createContent(int likeCount, User author, String type){
         PostContent postContent = new PostContent();
 
+        /**
+         * Like 와 Author 설정
+         */
         Content content = new Content();
         content.setLikeCount(likeCount);
         content.setAuthor(author);
         postContent.setContent(content);
-        postContent.setContentType(Const.CONTENT_TYPE_FOOTER);
 
-        postContentList.add(postContent);
+        postContent.setContentType(type);
+
+        return postContent;
     }
 
-    @Override
-    public void addItems(List<PostContent> postContentList) {
-        this.postContentList.clear();
-        this.postContentList = postContentList;
-    }
 }

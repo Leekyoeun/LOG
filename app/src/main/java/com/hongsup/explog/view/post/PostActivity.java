@@ -3,6 +3,7 @@ package com.hongsup.explog.view.post;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -55,7 +56,7 @@ public class PostActivity extends AppCompatActivity implements OnPostContentClic
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
             case Const.REQ_TEXT:
-                if(resultCode == RESULT_OK){
+                if (resultCode == RESULT_OK) {
                     /*
                      Post 의 글 작성이 완료된 경우
                      */
@@ -65,21 +66,28 @@ public class PostActivity extends AppCompatActivity implements OnPostContentClic
                 }
                 break;
             case Const.REQ_GALLERY:
-                if(resultCode == RESULT_OK){
+                if (resultCode == RESULT_OK) {
                     /*
                      Post 의 사진 작성이 완료된 경우
                      */
                     ArrayList<Photo> photoList = (ArrayList<Photo>) data.getSerializableExtra(Const.INTENT_EXTRA_PHOTO);
                     postPresenter.uploadPostPhoto(photoList.get(0).getImagePath());
+
+
+                    Log.e(TAG, "onActivityResult: imagePath" + photoList.get(0).getImagePath());
+
                 }
                 break;
             case Const.REQ_PATH:
-                if(resultCode == RESULT_OK){
+                if (resultCode == RESULT_OK) {
                     /*
                      Post 의 장소 작성이 완료된 경우
                      */
                     Place place = PlacePicker.getPlace(this, data);
                     LatLng latLng = place.getLatLng();
+
+                    Log.e(TAG, "onActivityResult: latLng.latitude" + latLng.latitude);
+                    Log.e(TAG, "onActivityResult: latLng.longitude" + latLng.longitude);
 
                     postPresenter.uploadPostPath(latLng.latitude, latLng.longitude);
                 }
