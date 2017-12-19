@@ -19,9 +19,9 @@ import retrofit2.http.Part;
 
 public interface EditProfileAPI {
     @GET("/member/userprofile/")
-    Observable<Response<UserInformation>> getUserInfo(@Header("Authorization") String token);
+    Observable<Response<UserInformation>> getUserInfo();
 
     @Multipart
     @PATCH("/member/userprofile/update/")
-    Observable<Response<UserEditProfile>> userEditProfile(@Header("Authorization") String token, @Part MultipartBody.Part filePart, @Part("username") RequestBody username);
+    Observable<Response<UserEditProfile>> userEditProfile(@Part MultipartBody.Part filePart, @Part("username") RequestBody username);
 }

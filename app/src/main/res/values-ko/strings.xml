@@ -37,4 +37,5 @@
     <string name="menu_post_delete">여행기 삭제</string>
 
     <string name="post_content_text">글</string>
+    <string name="not_signed_in">로그인 하러 가기</string>
 </resources>

@@ -38,7 +38,7 @@ public class ServiceGenerator {
         return retrofit.create(className);
     }
 
-    public static<I> I createInter(Class<I> className){
+    public static<I> I createInterceptor(Class<I> className){
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
         httpClient.addNetworkInterceptor(new AddTokenInterceptor());
 

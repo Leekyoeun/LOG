@@ -30,7 +30,7 @@ public class PostRemoteDataSource implements PostSource {
     private PostRemoteDataSource() {
         // Service 생성
         postAPI = ServiceGenerator.create(PostAPI.class);
-        postTokenAPI = ServiceGenerator.createInter(PostAPI.class);
+        postTokenAPI = ServiceGenerator.createInterceptor(PostAPI.class);
     }
 
     public static PostRemoteDataSource getInstance() {
