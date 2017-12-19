@@ -2,10 +2,9 @@ package com.hongsup.explog.view.post.presenter;
 
 import android.util.Log;
 
-import com.hongsup.explog.data.post.Content;
+import com.hongsup.explog.data.post.PostContent;
 import com.hongsup.explog.data.post.PostContentResult;
 import com.hongsup.explog.data.post.PostCover;
-import com.hongsup.explog.data.post.UploadPostText;
 import com.hongsup.explog.data.post.source.PostRepository;
 import com.hongsup.explog.view.post.adapter.contract.PostAdapterContract;
 import com.hongsup.explog.view.post.contract.PostContract;
@@ -65,10 +64,10 @@ public class PostPresenter implements PostContract.iPresenter, OnPostContentClic
                                     view.hideProgress();
 
                                     if (data.body().getPostContentList() == null || data.body().getPostContentList().size() == 0) {
-                                        adapterModel.setInit(cover.getLikeCount(),cover.getAuthor());
+                                        adapterModel.setInit(cover.getLikeCount(), cover.getAuthor());
                                     } else {
                                         adapterModel.addItems(data.body().getPostContentList());
-                                        adapterModel.setLikeAndFollow(cover.getLikeCount(),cover.getAuthor());
+                                        adapterModel.setLikeAndFollow(cover.getLikeCount(), cover.getAuthor());
                                     }
 
                                     /**
@@ -93,28 +92,32 @@ public class PostPresenter implements PostContract.iPresenter, OnPostContentClic
     }
 
     @Override
-    public void uploadPostText(UploadPostText postText) {
+    public void uploadPostText(String text, String date) {
         view.showProgress();
-        Observable<Response<Content>> observable = repository.uploadPostText(postPk, postText);
+        Observable<Response<PostContent>> observable = repository.uploadPostText(postPk, text, date);
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(data -> {
+                            Log.e(TAG, "uploadPostText: " + data.code() + ", " + data.message() );
                             if (data.isSuccessful()) {
                                 if (data.code() == 200) {
                                     Log.e(TAG, "uploadPostText: 데이터 업로드 완료");
                                     view.hideProgress();
+                                    Log.e(TAG, "uploadPostText: " + data.body().toString());
                                 } else {
-                                    Log.e(TAG, "uploadPostText: 데이터 업로드 실패");
+                                    Log.e(TAG, "uploadPostText: 데이터 업로드 실패1");
                                     view.hideProgress();
                                 }
                             } else {
-                                Log.e(TAG, "uploadPostText: 데이터 업로드 실패");
+                                Log.e(TAG, "uploadPostText: 데이터 업로드 실패2");
                                 view.hideProgress();
+
                             }
                         },
                         throwable -> {
                             Log.e(TAG, "uploadPostText: 데이터 업로드 실패");
                             view.hideProgress();
+                            Log.e(TAG, "uploadPostText: " +throwable.getMessage() );
                         });
     }
 

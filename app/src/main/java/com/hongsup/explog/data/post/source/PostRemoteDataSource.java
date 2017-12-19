@@ -1,10 +1,9 @@
 package com.hongsup.explog.data.post.source;
 
-import com.hongsup.explog.data.post.Content;
+import com.hongsup.explog.data.post.PostContent;
 import com.hongsup.explog.data.post.PostContentResult;
 import com.hongsup.explog.data.post.PostCover;
 import com.hongsup.explog.data.post.PostResult;
-import com.hongsup.explog.data.post.UploadPostText;
 import com.hongsup.explog.service.ServiceGenerator;
 import com.hongsup.explog.service.api.PostAPI;
 
@@ -85,11 +84,22 @@ public class PostRemoteDataSource implements PostSource{
     }
 
     @Override
-    public Observable<Response<Content>> uploadPostText(int postPk, UploadPostText postText) {
-        return postTokenAPI.uploadPostText(postPk, postText);
+    public Observable<Response<PostContent>> uploadPostText(int postPk, String text, String date) {
+        return postTokenAPI.uploadPostText(postPk, text ,date);
     }
 
-    public RequestBody toRequestBody(String json) {
+    @Override
+    public Observable<Response<PostContent>> uploadPostPath(int postPk, double lat, double lng) {
+        return null;
+    }
+
+    @Override
+    public Observable<Response<PostContent>> uploadPostPhoto(int postPk, String photoPath) {
+        return null;
+    }
+
+
+    private RequestBody toRequestBody(String json) {
         RequestBody body = RequestBody.create(MediaType.parse("text/plain"), json);
         return body;
     }

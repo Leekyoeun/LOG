@@ -1,6 +1,5 @@
 package com.hongsup.explog.view.post.adapter.viewholder;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -22,9 +21,6 @@ public class TextViewHolder extends PostViewHolder {
 
     @Override
     public void bind(Content data) {
-        Log.e("TextViewHolder", "bind:" + checkMyPost);
-        Log.e("TextViewHolder", "bind: " + position );
-
         textContent.setText(data.getContent());
     }
 

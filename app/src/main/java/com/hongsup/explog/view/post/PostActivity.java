@@ -11,7 +11,6 @@ import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.maps.model.LatLng;
 import com.hongsup.explog.data.Const;
 import com.hongsup.explog.data.photo.Photo;
-import com.hongsup.explog.data.post.UploadPostText;
 import com.hongsup.explog.view.post.contract.PostContract;
 import com.hongsup.explog.view.post.listener.OnPostContentClickListener;
 import com.hongsup.explog.view.post.presenter.PostPresenter;
@@ -60,8 +59,9 @@ public class PostActivity extends AppCompatActivity implements OnPostContentClic
                     /*
                      Post 의 글 작성이 완료된 경우
                      */
-                    UploadPostText postText = (UploadPostText)data.getSerializableExtra(Const.INTENT_EXTRA_TEXT);
-                    postPresenter.uploadPostText(postText);
+                    String text = data.getStringExtra(Const.INTENT_EXTRA_TEXT);
+                    String date = data.getStringExtra(Const.INTENT_EXTRA_DATE);
+                    postPresenter.uploadPostText(text, date);
                 }
                 break;
             case Const.REQ_GALLERY:

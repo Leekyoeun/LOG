@@ -1,7 +1,6 @@
 package com.hongsup.explog.data.post;
 
 import com.google.gson.annotations.SerializedName;
-import com.hongsup.explog.data.user.User;
 
 import java.io.Serializable;
 
@@ -52,5 +51,13 @@ public class PostContent implements Serializable{
         this.content = content;
     }
 
-
+    @Override
+    public String toString() {
+        return "PostContent{" +
+                "post=" + post +
+                ", order=" + order +
+                ", contentType='" + contentType + '\'' +
+                ", content=" + content +
+                '}';
+    }
 }

@@ -1,17 +1,17 @@
 package com.hongsup.explog.service.api;
 
-import com.hongsup.explog.data.post.Content;
+import com.hongsup.explog.data.post.PostContent;
 import com.hongsup.explog.data.post.PostContentResult;
 import com.hongsup.explog.data.post.PostCover;
 import com.hongsup.explog.data.post.PostResult;
-import com.hongsup.explog.data.post.UploadPostText;
 
 import java.util.Map;
 
 import io.reactivex.Observable;
 import okhttp3.RequestBody;
 import retrofit2.Response;
-import retrofit2.http.Body;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -53,6 +53,7 @@ public interface PostAPI {
     /**
      *  Upload Post Text
      */
+    @FormUrlEncoded
     @POST("/post/{post_pk}/text/")
-    Observable<Response<Content>> uploadPostText(@Path("post_pk") int postPk, @Body UploadPostText uploadPostText);
+    Observable<Response<PostContent>> uploadPostText(@Path("post_pk") int postPk, @Field("content")String text, @Field("created_at")String date);
 }
