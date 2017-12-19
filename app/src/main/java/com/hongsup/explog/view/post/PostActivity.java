@@ -72,10 +72,6 @@ public class PostActivity extends AppCompatActivity implements OnPostContentClic
                      */
                     ArrayList<Photo> photoList = (ArrayList<Photo>) data.getSerializableExtra(Const.INTENT_EXTRA_PHOTO);
                     postPresenter.uploadPostPhoto(photoList.get(0).getImagePath());
-
-
-                    Log.e(TAG, "onActivityResult: imagePath" + photoList.get(0).getImagePath());
-
                 }
                 break;
             case Const.REQ_PATH:
@@ -85,10 +81,6 @@ public class PostActivity extends AppCompatActivity implements OnPostContentClic
                      */
                     Place place = PlacePicker.getPlace(this, data);
                     LatLng latLng = place.getLatLng();
-
-                    Log.e(TAG, "onActivityResult: latLng.latitude" + latLng.latitude);
-                    Log.e(TAG, "onActivityResult: latLng.longitude" + latLng.longitude);
-
                     postPresenter.uploadPostPath(latLng.latitude, latLng.longitude);
                 }
                 break;

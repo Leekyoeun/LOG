@@ -33,24 +33,20 @@ import butterknife.ButterKnife;
 
 public class MainView implements MainContract.iView, BottomNavigationView.OnNavigationItemSelectedListener {
 
+    private View view;
+    private Context context;
+    private MainContract.iPresenter presenter;
+    private int id = -10;
+
     @BindView(R.id.navigation)
     BottomNavigationView navigation;
     @BindView(R.id.frameLayout)
     FrameLayout frameLayout;
 
-    private View view;
-    private Context context;
-    private MainContract.iPresenter presenter;
-
-    int id = -10;
-
-    UserRepository userRepository;
-
     public MainView(Context context) {
         this.context = context;
         view = LayoutInflater.from(context).inflate(R.layout.activity_main, null);
         ButterKnife.bind(this, view);
-        userRepository = UserRepository.getInstance();
         initView();
     }
 
@@ -72,7 +68,7 @@ public class MainView implements MainContract.iView, BottomNavigationView.OnNavi
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        if(id!=item.getItemId()) {
+        if (id != item.getItemId()) {
             id = item.getItemId();
 
             switch (id) {
@@ -95,7 +91,7 @@ public class MainView implements MainContract.iView, BottomNavigationView.OnNavi
                     return true;
                 case R.id.navigation_profile:
                     frameLayout.removeAllViews();
-                    if (userRepository.getUser() != null) {
+                    if (UserRepository.getInstance().getUser() != null) {
                         frameLayout.addView(new MyInfoLayout(context));
                     } else {
                         frameLayout.addView(new MyInfoNotLogInLayout(context));

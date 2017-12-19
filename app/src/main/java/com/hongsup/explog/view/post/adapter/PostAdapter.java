@@ -13,6 +13,7 @@ import com.hongsup.explog.data.user.User;
 import com.hongsup.explog.view.post.adapter.contract.PostAdapterContract;
 import com.hongsup.explog.view.post.adapter.viewholder.PostViewHolder;
 import com.hongsup.explog.view.post.listener.OnPostContentClickListener;
+import com.hongsup.explog.view.post.listener.OnPostLikeClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +28,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostViewHolder> implements
 
     private Context context;
     private List<PostContent> postContentList;
-    private OnPostContentClickListener listener;
+    private OnPostContentClickListener postContentClickListener;
+    private OnPostLikeClickListener postLikeClickListener;
     private boolean checkMyPost;
 
     public PostAdapter(Context context, boolean checkMyPost) {
@@ -48,7 +50,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostViewHolder> implements
         PostContent postContent = postContentList.get(position);
         holder.setContext(context);
         holder.setPosition(position);
-        holder.setListener(listener);
+        holder.setContentClickListener(postContentClickListener);
+        holder.setLikeClickListener(postLikeClickListener);
         holder.setCheckMyPost(checkMyPost);
         holder.bind(postContent.getContent());
     }
@@ -82,32 +85,36 @@ public class PostAdapter extends RecyclerView.Adapter<PostViewHolder> implements
 
 
     @Override
-    public void setOnPostContentClickListener(OnPostContentClickListener listener) {
-        this.listener = listener;
+    public void setOnPostContentClickListener(OnPostContentClickListener postContentClickListener) {
+        this.postContentClickListener = postContentClickListener;
     }
 
     @Override
-    public void setInit(int likeCount, User author) {
-        postContentList.add(createContent(likeCount, author, Const.CONTENT_TYPE_INIT));
+    public void setOnPostLikeClickListener(OnPostLikeClickListener postLikeClickListener) {
+        this.postLikeClickListener = postLikeClickListener;
     }
 
     @Override
-    public void setLikeAndFollow(int likeCount, User author) {
-        postContentList.add(createContent(likeCount, author, Const.CONTENT_TYPE_FOOTER));
+    public void setInit(int[] liked, int likeCount, User author) {
+        postContentList.add(createContent(liked, likeCount, author, Const.CONTENT_TYPE_INIT));
+    }
+
+    @Override
+    public void setLikeAndFollow(int[] liked, int likeCount, User author) {
+        postContentList.add(createContent(liked ,likeCount, author, Const.CONTENT_TYPE_FOOTER));
     }
 
     @Override
     public void setItems(List<PostContent> postContentList) {
         this.postContentList.clear();
         this.postContentList = postContentList;
-
     }
 
     @Override
     public void addItems(PostContent postContent) {
         if(postContentList.get(0).getContentType().equals(Const.CONTENT_TYPE_INIT)){
             // 첫번째 아이템이 init 인 경우
-            PostContent footerContent = createContent( postContentList.get(0).getContent().getLikeCount(),  postContentList.get(0).getContent().getAuthor(), Const.CONTENT_TYPE_FOOTER);
+            PostContent footerContent = createContent(postContentList.get(0).getContent().getLiked(), postContentList.get(0).getContent().getLikeCount(),  postContentList.get(0).getContent().getAuthor(), Const.CONTENT_TYPE_FOOTER);
             this.postContentList.clear();
             this.postContentList.add(postContent);
             this.postContentList.add(footerContent);
@@ -120,14 +127,14 @@ public class PostAdapter extends RecyclerView.Adapter<PostViewHolder> implements
     }
 
     /**
-     * Init OR Footer 생성기
+     * initViewHolder Item OR FooterViewHolder Item 생성기
      *
      * @param likeCount
      * @param author
      * @param type
      * @return
      */
-    private PostContent createContent(int likeCount, User author, String type){
+    private PostContent createContent(int[] liked, int likeCount, User author, String type){
         PostContent postContent = new PostContent();
 
         /**
@@ -135,6 +142,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostViewHolder> implements
          */
         Content content = new Content();
         content.setLikeCount(likeCount);
+        content.setLiked(liked);
         content.setAuthor(author);
         postContent.setContent(content);
 

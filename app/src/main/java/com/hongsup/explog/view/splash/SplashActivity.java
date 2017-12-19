@@ -8,6 +8,7 @@ import android.text.TextUtils;
 
 import com.hongsup.explog.data.sign.SignIn;
 import com.hongsup.explog.util.PreferenceUtil;
+import com.hongsup.explog.view.main.MainActivity;
 import com.hongsup.explog.view.signin.SignInActivity;
 import com.hongsup.explog.view.splash.contract.SplashContract;
 import com.hongsup.explog.view.splash.presenter.SplashPresenter;
@@ -46,7 +47,7 @@ public class SplashActivity extends AppCompatActivity {
 
                     splashPresenter.getSignIn(sign);
                 }else{
-                    Intent intent = new Intent(SplashActivity.this, SignInActivity.class);
+                    Intent intent = new Intent(SplashActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
                 }

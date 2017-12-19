@@ -52,14 +52,17 @@ import retrofit2.http.POST;
  */
 
 public class SearchView extends FrameLayout implements SearchRecyclerAdapter.ListAction {
+
     @BindView(R.id.editSearch)
     EditText editSearch;
     @BindView(R.id.recyclerSearchHistory)
     RecyclerView recyclerSearchHistory;
     @BindView(R.id.imgDeleteTextSearch)
     ImageView imgDeleteTextSearch;
+
     SearchRecyclerAdapter searchRecyclerAdapter;
     SearchRecyclerResultAdapter searchRecyclerResultAdapter;
+
     SearchHistoryDAO dao;
     Word word;
     @BindView(R.id.progressBar3)

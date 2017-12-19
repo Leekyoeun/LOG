@@ -6,6 +6,7 @@ import android.view.View;
 
 import com.hongsup.explog.data.post.Content;
 import com.hongsup.explog.view.post.listener.OnPostContentClickListener;
+import com.hongsup.explog.view.post.listener.OnPostLikeClickListener;
 
 /**
  * Created by Android Hong on 2017-12-12.
@@ -16,7 +17,8 @@ public abstract class PostViewHolder extends RecyclerView.ViewHolder {
     int position;
     Context context;
     boolean checkMyPost;
-    OnPostContentClickListener listener;
+    OnPostContentClickListener postContentClickListener;
+    OnPostLikeClickListener postLikeClickListener;
 
     public PostViewHolder(View itemView) {
         super(itemView);
@@ -30,8 +32,12 @@ public abstract class PostViewHolder extends RecyclerView.ViewHolder {
         this.context = context;
     }
 
-    public void setListener(OnPostContentClickListener listener){
-        this.listener = listener;
+    public void setContentClickListener(OnPostContentClickListener postContentClickListener) {
+        this.postContentClickListener = postContentClickListener;
+    }
+
+    public void setLikeClickListener(OnPostLikeClickListener postLikeClickListener) {
+        this.postLikeClickListener = postLikeClickListener;
     }
 
     public void setPosition(int position) {

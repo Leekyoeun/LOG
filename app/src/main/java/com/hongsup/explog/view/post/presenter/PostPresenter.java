@@ -1,6 +1,7 @@
 package com.hongsup.explog.view.post.presenter;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import com.hongsup.explog.data.post.PostContent;
 import com.hongsup.explog.data.post.PostContentResult;
@@ -9,6 +10,7 @@ import com.hongsup.explog.data.post.source.PostRepository;
 import com.hongsup.explog.view.post.adapter.contract.PostAdapterContract;
 import com.hongsup.explog.view.post.contract.PostContract;
 import com.hongsup.explog.view.post.listener.OnPostContentClickListener;
+import com.hongsup.explog.view.post.listener.OnPostLikeClickListener;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -21,7 +23,7 @@ import static com.bumptech.glide.gifdecoder.GifHeaderParser.TAG;
  * Created by Android Hong on 2017-12-14.
  */
 
-public class PostPresenter implements PostContract.iPresenter, OnPostContentClickListener {
+public class PostPresenter implements PostContract.iPresenter, OnPostContentClickListener, OnPostLikeClickListener {
 
     private int postPk;
     private PostContract.iView view;
@@ -47,6 +49,7 @@ public class PostPresenter implements PostContract.iPresenter, OnPostContentClic
     public void setPostAdapterView(PostAdapterContract.iView view) {
         this.adapterView = view;
         this.adapterView.setOnPostContentClickListener(this);
+        this.adapterView.setOnPostLikeClickListener(this);
     }
 
     @Override
@@ -59,18 +62,18 @@ public class PostPresenter implements PostContract.iPresenter, OnPostContentClic
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(data -> {
                             if (data.isSuccessful()) {
-
                                 Log.e(TAG, "loadPostContent: 데이터 로드 완료");
                                 view.hideProgress();
 
                                 if (data.body().getPostContentList() == null || data.body().getPostContentList().size() == 0) {
-                                    adapterModel.setInit(cover.getLikeCount(), cover.getAuthor());
+                                    adapterModel.setInit(cover.getLiked(), cover.getLikeCount(), cover.getAuthor());
                                 } else {
                                     adapterModel.setItems(data.body().getPostContentList());
-                                    adapterModel.setLikeAndFollow(cover.getLikeCount(), cover.getAuthor());
+                                    adapterModel.setLikeAndFollow(cover.getLiked(), cover.getLikeCount(), cover.getAuthor());
                                 }
-                                adapterView.notifyAdapter();
 
+                                Log.e(TAG, "loadPostContent: " + cover.getLiked().length);
+                                adapterView.notifyAdapter();
                             } else {
                                 Log.e(TAG, "loadPostContent: 데이터 로드 실패1");
                                 view.hideProgress();
@@ -154,4 +157,9 @@ public class PostPresenter implements PostContract.iPresenter, OnPostContentClic
                         });
     }
 
+    @Override
+    public void setOnLikeClick(int position) {
+        Log.e(TAG, "setOnLikeClick: " + position );
+        // Toast.makeText(context, "Liked 누름", Toast.LENGTH_SHORT).show();
+    }
 }

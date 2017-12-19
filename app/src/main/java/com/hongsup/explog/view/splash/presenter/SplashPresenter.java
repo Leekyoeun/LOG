@@ -50,64 +50,52 @@ public class SplashPresenter implements SplashContract.iPresenter {
                 .subscribe(data -> {
                     // next
                     Log.e("SignInActivity", data.code() + ", " + data.message());
-
                     /**
                      * 데이터가 정상적으로 연결된 경우
                      */
-                    if(data.isSuccessful()){
-                        if (data.code() == 200) {
-                            /**
-                             * 로그인이 성공하였을 경우
-                             */
-                            view.hideProgress();
-
-                            /**
-                             * 1. 자동 로그인에 필요한 SharedPreference 에 저장한다.
-                             */
-                            PreferenceUtil.setValue(context, "Email", signIn.getEmail());
-                            PreferenceUtil.setValue(context, "password", signIn.getPassword());
-                            PreferenceUtil.setValue(context, "token", data.body().getToken());
-
-                            /**
-                             * 2. 회원 정보를 저장한다.
-                             */
-                            UserRepository.getInstance().setUser(data.body());
-                            Log.e(TAG, "getSignIn: " + data.body().toString() );
-                            view.goMain();
-
-                        }else{
-                            /**
-                             * 로그인이 실패하였을 경우
-                             */
-                            view.hideProgress();
-                            view.showError("SplashActivity 로그인 실패 1");
-
-                            PreferenceUtil.removeAllValue(context);
-                            UserRepository.getInstance().clearUser();
-
-                            view.goSign();
-                        }
-                    }else{
+                    if (data.isSuccessful()) {
                         /**
-                         * 로그인이 실패하였을 경우
+                         * 로그인이 성공하였을 경우
                          */
                         view.hideProgress();
-                        view.showError("SplashActivity 로그인 실패 2");
+
+                        /**
+                         * 1. 자동 로그인에 필요한 SharedPreference 에 저장한다.
+                         */
+                        PreferenceUtil.setValue(context, "Email", signIn.getEmail());
+                        PreferenceUtil.setValue(context, "password", signIn.getPassword());
+                        PreferenceUtil.setValue(context, "token", data.body().getToken());
+
+                        /**
+                         * 2. 회원 정보를 저장한다.
+                         */
+                        UserRepository.getInstance().setUser(data.body());
+                        view.goMain();
+
+                    } else {
+
+                        /**
+                         * 로그인이 실패하였을 경우
+                         * Main 으로 간다.
+                         */
+                        view.hideProgress();
+
+                        // view.showError("SplashActivity 로그인 실패 2");
 
                         PreferenceUtil.removeAllValue(context);
                         UserRepository.getInstance().clearUser();
-
-                        view.goSign();
+                        view.goMain();
                     }
 
                 }, throwable -> {
                     view.hideProgress();
-                    view.showError("SplashActivity 로그인 실패 3" + throwable.getMessage() );
+
+                    // view.showError("SplashActivity 로그인 실패 3" + throwable.getMessage());
 
                     PreferenceUtil.removeAllValue(context);
                     UserRepository.getInstance().clearUser();
 
-                    view.goSign();
+                    view.goMain();
                 });
     }
 }

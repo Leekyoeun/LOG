@@ -30,6 +30,7 @@ public interface PostContract {
     }
 
     interface iPresenter {
+
         void attachView(iView view);
 
         void loadPostContent(PostCover cover);
