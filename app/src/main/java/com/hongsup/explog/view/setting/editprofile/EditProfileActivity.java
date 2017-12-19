@@ -1,6 +1,5 @@
 package com.hongsup.explog.view.setting.editprofile;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +13,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.hongsup.explog.R;
 import com.hongsup.explog.data.photo.Photo;
+import com.hongsup.explog.data.user.User;
+import com.hongsup.explog.data.user.source.UserRepository;
 import com.hongsup.explog.service.ServiceGenerator;
 import com.hongsup.explog.service.api.EditProfileAPI;
 import com.hongsup.explog.view.gallery.GalleryActivity;
@@ -53,6 +54,7 @@ public class EditProfileActivity extends AppCompatActivity {
     boolean isPhotoSelected = false;
     MultipartBody.Part filePart;
     RequestBody username;
+    UserRepository userRepository;
 
     // 사진 바꿨을 때 또는 username 바꿨을 때만 OK 버튼이 활성화되도록 코드 짜야 함
 
@@ -63,12 +65,12 @@ public class EditProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_profile);
         ButterKnife.bind(this);
 
-
-
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+        userRepository = UserRepository.getInstance();
+
+        setProfileFromUserRepository();
         getDataFromDB();
         textWatcher();
     }
@@ -111,7 +113,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
                         //이미지를 선택했을 경우 filepart에 이미지를 넣어준다.
                         File file = new File(photoList.get(0).getImagePath());
-                        filePart = MultipartBody.Part.createFormData("img_profile", file.getName(), RequestBody.create(MediaType.parse("image/*"), file));
+                        filePart = MultipartBody.Part.createFormData("img_profile"/*UserInformation 클래스의 필드 이름인듯*/, file.getName(), RequestBody.create(MediaType.parse("image/*"), file));
 
                         menu.getItem(0).setEnabled(true);
                         isPhotoSelected = true;
@@ -136,6 +138,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
                 //userEditProfile.setUsername(editNameEditProfile.getText().toString());
                 changeUserProfile();
+
                 finish();
         }
 
@@ -159,11 +162,21 @@ public class EditProfileActivity extends AppCompatActivity {
                 });
     }
 
+    private void setProfileFromUserRepository(){
+        if(userRepository.getUser()!=null) {
+            Glide.with(this).load(userRepository.getUser().getImg_profile()).centerCrop().into(imgEditProfile);
+            editNameEditProfile.setText(userRepository.getUser().getUsername());
+            originalUserName = editNameEditProfile.getText().toString();
+        }else{
+            editNameEditProfile.setText("로그인 하시오");
+
+        }
+    }
+
     // 서버로부터 데이터 받아오는 코드 - 토큰값은 Intercepter 써야하고 앞에 Activity에 있는 코드와 겹치는 것 고려 필요
     public void getDataFromDB() {
-        String token = "Token 6e88efd22b8a6afbc46782c5ba6cb576e163ff8d";
-        EditProfileAPI profileEditAPI = ServiceGenerator.create(EditProfileAPI.class);
-        Observable<Response<UserInformation>> getUserInfo = profileEditAPI.getUserInfo(token);
+        EditProfileAPI profileEditAPI = ServiceGenerator.createInterceptor(EditProfileAPI.class);
+        Observable<Response<UserInformation>> getUserInfo = profileEditAPI.getUserInfo();
         getUserInfo.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(data -> {
@@ -171,11 +184,13 @@ public class EditProfileActivity extends AppCompatActivity {
                         if(data.code()==200){
                             Log.d("EditProfileActivity", "확인됨");
 
-                            Glide.with(EditProfileActivity.this)
-                                    .load(data.body().getImg_profile()).centerCrop().into(imgEditProfile);
+//                            Glide.with(EditProfileActivity.this)
+//                                    .load(data.body().getImg_profile()).centerCrop().into(imgEditProfile);
+//
+//                            editNameEditProfile.setText(data.body().getUsername());
+//                            originalUserName = editNameEditProfile.getText().toString();
 
-                            editNameEditProfile.setText(data.body().getUsername());
-                            originalUserName = editNameEditProfile.getText().toString();
+
 
                         }else{
                             Log.d("EditProfileActivity", "확인안됨");
@@ -190,16 +205,17 @@ public class EditProfileActivity extends AppCompatActivity {
 
     //바뀐 데이터를 서버로 보내는 과정, 역시 토큰값 Intercepter로 해야 함, 확인은 OK버튼을 눌러야 함
     public void changeUserProfile(){
-        String token = "Token 6e88efd22b8a6afbc46782c5ba6cb576e163ff8d";
 
-        EditProfileAPI profileEditAPI = ServiceGenerator.create(EditProfileAPI.class);
-        Observable<Response<UserEditProfile>> observable = profileEditAPI.userEditProfile(token, filePart, username);
+        EditProfileAPI profileEditAPI = ServiceGenerator.createInterceptor(EditProfileAPI.class);
+        Observable<Response<UserEditProfile>> observable = profileEditAPI.userEditProfile(filePart, username);
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(data ->{
                     if(data.isSuccessful()){
                         if(data.code()==200){
                             Log.d("EditProfileActivity", "업로드 확인됨");
+                            userRepository.getUser().setImg_profile(data.body().getImg_profile());
+                            userRepository.getUser().setUsername(editNameEditProfile.getText().toString());
 
                         }else{
                             Log.d("EditProfileActivity", "확인안됨");
@@ -208,7 +224,7 @@ public class EditProfileActivity extends AppCompatActivity {
                         Log.d("EditProfileActivity", data.errorBody().string() +"data unsuccessful");
                     }
                 }, throwable -> {
-                    Log.e("SearchView", throwable.getMessage());
+                    Log.e("EditProfileActivity", throwable.getMessage());
                 });
 
     }

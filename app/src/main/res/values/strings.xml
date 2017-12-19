@@ -38,4 +38,6 @@
     <string name="choose_area">Choice Area</string>
 
     <string name="post_content_text">TEXT</string>
+
+    <string name="not_signed_in">Go to Sign-in</string>
 </resources>

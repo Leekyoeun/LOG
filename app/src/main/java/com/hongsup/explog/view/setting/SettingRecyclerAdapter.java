@@ -1,6 +1,8 @@
 package com.hongsup.explog.view.setting;
 
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -15,6 +17,7 @@ import android.widget.TextView;
 import com.hongsup.explog.R;
 import com.hongsup.explog.data.user.source.UserRepository;
 import com.hongsup.explog.util.PreferenceUtil;
+import com.hongsup.explog.view.main.MainActivity;
 import com.hongsup.explog.view.setting.alarmsetting.AlarmSettingActivity;
 import com.hongsup.explog.view.setting.editprofile.EditProfileActivity;
 
@@ -105,9 +108,9 @@ public class SettingRecyclerAdapter extends RecyclerView.Adapter<SettingRecycler
 
                                                 PreferenceUtil.removeAllValue(itemView.getContext());
                                                 UserRepository.getInstance().clearUser();
-                                                mList[mList.length-1] = "";
-                                                mType[mType.length-1] = 0;
-
+                                                ((Activity)iSettingView).finish();
+                                                Intent intent = new Intent((Context)iSettingView, MainActivity.class);
+                                                ((Context)iSettingView).startActivity(intent);
                                             }
                                         })
                                         .setNegativeButton("취소", new DialogInterface.OnClickListener() {
