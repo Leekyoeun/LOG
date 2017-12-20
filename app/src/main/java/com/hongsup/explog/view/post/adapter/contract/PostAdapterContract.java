@@ -14,20 +14,24 @@ import java.util.List;
 public interface PostAdapterContract {
 
     interface iView {
-        void notifyAdapter();
-
         void setOnPostContentClickListener(OnPostContentClickListener postContentClickListener);
 
         void setOnPostLikeClickListener(OnPostLikeClickListener postLikeClickListener);
+
+        void notifyAllAdapter();
+
+        void notifyLike(int position);
     }
 
     interface iModel {
         void setInit(int[] liked, int likeCount, User author);
 
-        void setLikeAndFollow(int[] liked, int likeCount, User author);
-
         void setItems(List<PostContent> postContentList);
 
+        void setLikeAndFollow(int[] liked, int likeCount, User author);
+
         void addItems(PostContent postContent);
+
+        void modifyLike(int position, int[] liked, int likeCount);
     }
 }

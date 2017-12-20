@@ -1,11 +1,11 @@
 package com.hongsup.explog.view.post.adapter.viewholder;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.hongsup.explog.R;
@@ -59,6 +59,7 @@ public class FooterViewHolder extends PostViewHolder {
          *  좋아요 설정
          */
         setLiked(data.getLiked(), data.getLikeCount());
+
         if (checkMyPost) {
             // 내 글이면
             lineView.setVisibility(View.GONE);
@@ -79,7 +80,6 @@ public class FooterViewHolder extends PostViewHolder {
 
     @OnClick(R.id.imgLike)
     public void onLikeClick() {
-        Toast.makeText(context, "Liked 누름", Toast.LENGTH_SHORT).show();
         postLikeClickListener.setOnLikeClick(position);
     }
 
@@ -92,19 +92,28 @@ public class FooterViewHolder extends PostViewHolder {
         }
     }
 
-
     private void setLiked(int[] liked, int likeCount){
         /**
          *  좋아요 설정
          */
-        if (UserRepository.getInstance().getUser() != null && Arrays.binarySearch(liked, UserRepository.getInstance().getUser().getPk()) > 0) {
+        if (UserRepository.getInstance().getUser() != null && isLiked(liked)) {
             // '좋아요'를 눌렀을 경우
             imgLike.setImageResource(R.drawable.ic_like_red_16dp);
             textLikeCount.setTextColor(context.getResources().getColor(R.color.colorRed));
             textLikeCount.setText(likeCount + "");
         } else {
             // '좋아요'를 누르지 않았을 경우
+            imgLike.setImageResource(R.drawable.ic_like_gray_16dp);
+            textLikeCount.setTextColor(context.getResources().getColor(R.color.colorGray));
             textLikeCount.setText(likeCount + "");
+        }
+    }
+
+    private boolean isLiked(int[] liked){
+        if(liked != null && Arrays.binarySearch(liked, UserRepository.getInstance().getUser().getPk()) >= 0){
+            return true;
+        }else{
+            return false;
         }
     }
 }

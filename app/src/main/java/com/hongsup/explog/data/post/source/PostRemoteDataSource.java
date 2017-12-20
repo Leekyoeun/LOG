@@ -103,6 +103,11 @@ public class PostRemoteDataSource implements PostSource {
         return postTokenAPI.uploadPostPhoto(postPk, requestBodyMap);
     }
 
+    @Override
+    public Observable<Response<PostCover>> setPostLike(int postPk) {
+        return postTokenAPI.setPostLike(postPk);
+    }
+
 
     private RequestBody toRequestBody(String json) {
         RequestBody body = RequestBody.create(MediaType.parse("text/plain"), json);

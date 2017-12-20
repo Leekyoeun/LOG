@@ -5,7 +5,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.hongsup.explog.R;
@@ -13,7 +12,6 @@ import com.hongsup.explog.data.post.Content;
 import com.hongsup.explog.data.user.source.UserRepository;
 
 import java.util.Arrays;
-import java.util.stream.IntStream;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -105,18 +103,28 @@ public class InitViewHolder extends PostViewHolder {
         }
     }
 
-    private void setLiked(int[] liked, int likeCount){
+    private void setLiked(int[] liked, int likeCount) {
         /**
          *  좋아요 설정
          */
-        if (UserRepository.getInstance().getUser() != null && Arrays.binarySearch(liked, UserRepository.getInstance().getUser().getPk()) > 0) {
+        if (UserRepository.getInstance().getUser() != null && isLiked(liked)) {
             // '좋아요'를 눌렀을 경우
             imgLike.setImageResource(R.drawable.ic_like_red_16dp);
             textLikeCount.setTextColor(context.getResources().getColor(R.color.colorRed));
             textLikeCount.setText(likeCount + "");
         } else {
             // '좋아요'를 누르지 않았을 경우
+            imgLike.setImageResource(R.drawable.ic_like_gray_16dp);
+            textLikeCount.setTextColor(context.getResources().getColor(R.color.colorGray));
             textLikeCount.setText(likeCount + "");
+        }
+    }
+
+    private boolean isLiked(int[] liked) {
+        if (liked != null && Arrays.binarySearch(liked, UserRepository.getInstance().getUser().getPk()) >= 0) {
+            return true;
+        } else {
+            return false;
         }
     }
 }

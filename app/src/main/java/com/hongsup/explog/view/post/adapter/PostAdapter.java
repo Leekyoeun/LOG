@@ -2,6 +2,7 @@ package com.hongsup.explog.view.post.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,17 +73,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostViewHolder> implements
             return Const.VIEW_TYPE_PATH;
         } else if (Const.CONTENT_TYPE_INIT.equals(postContent.getContentType())) {
             return Const.VIEW_TYPE_INIT;
-        } else if(Const.CONTENT_TYPE_FOOTER.equals(postContent.getContentType())){
+        } else if (Const.CONTENT_TYPE_FOOTER.equals(postContent.getContentType())) {
             return Const.VIEW_TYPE_FOOTER;
         }
         throw new RuntimeException("there is no type that matches the type " + postContent.getContentType() + " + make sure your using types correctly");
     }
-
-    @Override
-    public void notifyAdapter() {
-        notifyItemRangeChanged(0, postContentList.size());
-    }
-
 
     @Override
     public void setOnPostContentClickListener(OnPostContentClickListener postContentClickListener) {
@@ -95,13 +90,23 @@ public class PostAdapter extends RecyclerView.Adapter<PostViewHolder> implements
     }
 
     @Override
+    public void notifyAllAdapter() {
+        notifyItemRangeChanged(0, postContentList.size());
+    }
+
+    @Override
+    public void notifyLike(int position) {
+        notifyItemChanged(position);
+    }
+
+    @Override
     public void setInit(int[] liked, int likeCount, User author) {
         postContentList.add(createContent(liked, likeCount, author, Const.CONTENT_TYPE_INIT));
     }
 
     @Override
     public void setLikeAndFollow(int[] liked, int likeCount, User author) {
-        postContentList.add(createContent(liked ,likeCount, author, Const.CONTENT_TYPE_FOOTER));
+        postContentList.add(createContent(liked, likeCount, author, Const.CONTENT_TYPE_FOOTER));
     }
 
     @Override
@@ -112,18 +117,24 @@ public class PostAdapter extends RecyclerView.Adapter<PostViewHolder> implements
 
     @Override
     public void addItems(PostContent postContent) {
-        if(postContentList.get(0).getContentType().equals(Const.CONTENT_TYPE_INIT)){
+        if (postContentList.get(0).getContentType().equals(Const.CONTENT_TYPE_INIT)) {
             // 첫번째 아이템이 init 인 경우
-            PostContent footerContent = createContent(postContentList.get(0).getContent().getLiked(), postContentList.get(0).getContent().getLikeCount(),  postContentList.get(0).getContent().getAuthor(), Const.CONTENT_TYPE_FOOTER);
+            PostContent footerContent = createContent(postContentList.get(0).getContent().getLiked(), postContentList.get(0).getContent().getLikeCount(), postContentList.get(0).getContent().getAuthor(), Const.CONTENT_TYPE_FOOTER);
             this.postContentList.clear();
             this.postContentList.add(postContent);
             this.postContentList.add(footerContent);
             notifyItemRangeChanged(0, postContentList.size());
-        }else{
+        } else {
             // 아닌 경우
-            this.postContentList.add(postContentList.size()-1, postContent);
-            notifyItemInserted(postContentList.size()-1);
+            this.postContentList.add(postContentList.size() - 1, postContent);
+            notifyItemInserted(postContentList.size() - 1);
         }
+    }
+
+    @Override
+    public void modifyLike(int position, int[] liked, int likeCount) {
+        postContentList.get(position).getContent().setLikeCount(likeCount);
+        postContentList.get(position).getContent().setLiked(liked);
     }
 
     /**
@@ -134,7 +145,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostViewHolder> implements
      * @param type
      * @return
      */
-    private PostContent createContent(int[] liked, int likeCount, User author, String type){
+    private PostContent createContent(int[] liked, int likeCount, User author, String type) {
         PostContent postContent = new PostContent();
 
         /**

@@ -1,7 +1,6 @@
 package com.hongsup.explog.view.post.presenter;
 
 import android.util.Log;
-import android.widget.Toast;
 
 import com.hongsup.explog.data.post.PostContent;
 import com.hongsup.explog.data.post.PostContentResult;
@@ -71,9 +70,7 @@ public class PostPresenter implements PostContract.iPresenter, OnPostContentClic
                                     adapterModel.setItems(data.body().getPostContentList());
                                     adapterModel.setLikeAndFollow(cover.getLiked(), cover.getLikeCount(), cover.getAuthor());
                                 }
-
-                                Log.e(TAG, "loadPostContent: " + cover.getLiked().length);
-                                adapterView.notifyAdapter();
+                                adapterView.notifyAllAdapter();
                             } else {
                                 Log.e(TAG, "loadPostContent: 데이터 로드 실패1");
                                 view.hideProgress();
@@ -98,12 +95,12 @@ public class PostPresenter implements PostContract.iPresenter, OnPostContentClic
                                 view.hideProgress();
                                 adapterModel.addItems(data.body());
                             } else {
-                                Log.e(TAG, "uploadPostText: 데이터 업로드 실패2");
+                                Log.e(TAG, "uploadPostText: 데이터 업로드 실패1");
                                 view.hideProgress();
                             }
                         },
                         throwable -> {
-                            Log.e(TAG, "uploadPostText: 데이터 업로드 실패");
+                            Log.e(TAG, "uploadPostText: 데이터 업로드 실패2");
                             view.hideProgress();
                             Log.e(TAG, "uploadPostText: " + throwable.getMessage());
                         });
@@ -159,7 +156,26 @@ public class PostPresenter implements PostContract.iPresenter, OnPostContentClic
 
     @Override
     public void setOnLikeClick(int position) {
-        Log.e(TAG, "setOnLikeClick: " + position );
-        // Toast.makeText(context, "Liked 누름", Toast.LENGTH_SHORT).show();
+        view.showProgress();
+        Observable<Response<PostCover>> observable = repository.setPostLike(postPk);
+        observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(data -> {
+                            Log.e(TAG, "setOnLikeClick: " + data.code() + ", " + data.message());
+                            if (data.isSuccessful()) {
+                                Log.e(TAG, "setOnLikeClick: '좋아요' 완료");
+                                view.hideProgress();
+                                adapterModel.modifyLike(position, data.body().getLiked(), data.body().getLikeCount());
+                                adapterView.notifyLike(position);
+                            } else {
+                                Log.e(TAG, "setOnLikeClick: '좋아요' 실패1");
+                                view.hideProgress();
+                            }
+                        },
+                        throwable -> {
+                            Log.e(TAG, "setOnLikeClick: '좋아요' 실패2");
+                            view.hideProgress();
+                            Log.e(TAG, "setOnLikeClick: " + throwable.getMessage());
+                        });
     }
 }

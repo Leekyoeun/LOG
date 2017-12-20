@@ -59,6 +59,8 @@ public class SplashPresenter implements SplashContract.iPresenter {
                          */
                         view.hideProgress();
 
+                        Log.e(TAG, "getSignIn: " + data.body().toString() );
+
                         /**
                          * 1. 자동 로그인에 필요한 SharedPreference 에 저장한다.
                          */

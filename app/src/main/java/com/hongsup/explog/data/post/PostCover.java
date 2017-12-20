@@ -32,6 +32,10 @@ public class PostCover implements Serializable {
     @SerializedName("liked")
     private int[] liked;
 
+    // 오류 관련 필드
+    @SerializedName("detail")
+    private String detail;
+
     public int getPk() {
         return pk;
     }
@@ -112,6 +116,14 @@ public class PostCover implements Serializable {
         this.liked = liked;
     }
 
+    public String getDetail() {
+        return detail;
+    }
+
+    public void setDetail(String detail) {
+        this.detail = detail;
+    }
+
     @Override
     public String toString() {
         return "PostCover{" +
@@ -125,6 +137,7 @@ public class PostCover implements Serializable {
                 ", continent='" + continent + '\'' +
                 ", likeCount=" + likeCount +
                 ", liked=" + Arrays.toString(liked) +
+                ", detail='" + detail + '\'' +
                 '}';
     }
 }
