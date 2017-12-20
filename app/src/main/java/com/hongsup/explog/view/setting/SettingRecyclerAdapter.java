@@ -98,8 +98,8 @@ public class SettingRecyclerAdapter extends RecyclerView.Adapter<SettingRecycler
                                 break;
 
                             case "로그아웃" :
-                                new AlertDialog.Builder(itemView.getContext()).setTitle("알림")
-                                        .setMessage("뭐라카노")
+                                new AlertDialog.Builder(itemView.getContext()).setTitle("로그아웃")
+                                        .setMessage("로그아웃 하시겠습니까?")
                                         .setCancelable(true)
                                         .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                                             @Override
@@ -109,7 +109,9 @@ public class SettingRecyclerAdapter extends RecyclerView.Adapter<SettingRecycler
                                                 PreferenceUtil.removeAllValue(itemView.getContext());
                                                 UserRepository.getInstance().clearUser();
                                                 ((Activity)iSettingView).finish();
+                                                //로그아웃이 되면 mainactivity로 빠져나감, flag값을 통해 이전의 mainactivity는 tast에서 사라짐 12/20
                                                 Intent intent = new Intent((Context)iSettingView, MainActivity.class);
+                                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                                 ((Context)iSettingView).startActivity(intent);
                                             }
                                         })
@@ -152,7 +154,6 @@ public class SettingRecyclerAdapter extends RecyclerView.Adapter<SettingRecycler
     }
 
     interface ISettingView{
-        void editProfile();
         void logOut(boolean isChecked);
     }
 }

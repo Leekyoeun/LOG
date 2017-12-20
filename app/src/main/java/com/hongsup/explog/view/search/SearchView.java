@@ -2,6 +2,7 @@ package com.hongsup.explog.view.search;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,8 +11,10 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -35,6 +38,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnTextChanged;
+import butterknife.OnTouch;
 import io.reactivex.Observable;
 import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -65,12 +69,14 @@ public class SearchView extends FrameLayout implements SearchRecyclerAdapter.Lis
 
     SearchHistoryDAO dao;
     Word word;
-    @BindView(R.id.progressBar3)
-    ProgressBar progressBar;
     @BindView(R.id.textSearching)
     TextView textSearching;
     @BindView(R.id.relativeSearching)
     RelativeLayout relativeSearching;
+    @BindView(R.id.progressBar3)
+    ProgressBar progressBar;
+
+    InputMethodManager inputMethodManager;
 
     public SearchView(@NonNull Context context) {
         super(context);
@@ -86,6 +92,8 @@ public class SearchView extends FrameLayout implements SearchRecyclerAdapter.Lis
         setListener();
         addView(view);
         word = new Word();
+        inputMethodManager = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
+
     }
 
     private void insert() {
@@ -105,16 +113,10 @@ public class SearchView extends FrameLayout implements SearchRecyclerAdapter.Lis
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (!"".equals(editSearch.getText().toString()) && keyCode == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_UP) {
                     insert();
-                    editSearch.setText("");
+                    inputMethodManager.hideSoftInputFromWindow(editSearch.getWindowToken(), 0);
+                    //editSearch.setText("");
                 }
                 return false;
-            }
-        });
-
-        editSearch.setOnFocusChangeListener(new OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-
             }
         });
 
@@ -127,21 +129,28 @@ public class SearchView extends FrameLayout implements SearchRecyclerAdapter.Lis
             }
         });
 
-
         RxTextView.textChanges(editSearch)
                 .subscribe(ch -> {
                     if (ch.length() > 0) {
-                        String com = "'" + ch.toString() + "' 검색중입니다";
-                        textSearching.setText(com);
-                        relativeSearching.setVisibility(VISIBLE);
+                        relativeSearching.setVisibility(INVISIBLE);
                         recyclerSearchHistory.setAdapter(searchRecyclerResultAdapter);
                         word.setWord(ch.toString());
                         getDataTwo(word);
-                        relativeSearching.setVisibility(INVISIBLE);
+                        //결과가 검색이 되면 스크롤 움직였을 때 소프트 키보드 사라짐 12/20
+                        recyclerSearchHistory.setOnTouchListener(new OnTouchListener() {
+                            @Override
+                            public boolean onTouch(View v, MotionEvent event) {
+                                if(event.getAction()==MotionEvent.ACTION_MOVE){
+                                    inputMethodManager.hideSoftInputFromWindow(recyclerSearchHistory.getWindowToken(), 0);
+                                }
+                                return false;
+                            }
+                        });
+
                         //searchRecyclerResultAdapter.resultNotifier(list);
 
                     } else {
-
+                        relativeSearching.setVisibility(INVISIBLE);
                         recyclerSearchHistory.setAdapter(searchRecyclerAdapter);
 
                     }
@@ -151,7 +160,7 @@ public class SearchView extends FrameLayout implements SearchRecyclerAdapter.Lis
 
     private void setRecyclerView() {
         searchRecyclerAdapter = new SearchRecyclerAdapter(this);
-        searchRecyclerResultAdapter = new SearchRecyclerResultAdapter();
+        searchRecyclerResultAdapter = new SearchRecyclerResultAdapter(getContext());
         recyclerSearchHistory.setAdapter(searchRecyclerAdapter);
         recyclerSearchHistory.setLayoutManager(new LinearLayoutManager(getContext()));
     }
@@ -188,6 +197,9 @@ public class SearchView extends FrameLayout implements SearchRecyclerAdapter.Lis
                             Log.d("SearchView", "확인됨");
                             list = data.body();
                             searchRecyclerResultAdapter.resultNotifier(list);
+                            if (list.size() == 0) {
+                                relativeSearching.setVisibility(VISIBLE);
+                            }
                             Log.d("SearchView", "데이터 없음" + data.body().size());
 //                            Log.d("SearchView", "데이터 없음" + data.errorBody());
 //                            Log.d("SearchView", "데이터 없음" + data.message());
@@ -197,7 +209,7 @@ public class SearchView extends FrameLayout implements SearchRecyclerAdapter.Lis
 //                            if(data.body().size()==0){
 //                                Log.d("SearchView", "뜬다 떠");
 //                            }
-
+                            progressBar.setVisibility(INVISIBLE);
                         } else {
                             Log.d("SearchView", "data is not Successful");
                         }
@@ -207,6 +219,6 @@ public class SearchView extends FrameLayout implements SearchRecyclerAdapter.Lis
                 }, throwable -> {
                     Log.e("SearchView", throwable.getMessage());
                 });
-        progressBar.setVisibility(INVISIBLE);
+
     }
 }
