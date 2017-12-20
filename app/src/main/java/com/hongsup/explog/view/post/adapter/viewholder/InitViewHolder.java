@@ -90,7 +90,6 @@ public class InitViewHolder extends PostViewHolder {
 
     @OnClick(R.id.imgLike)
     public void onLikeClick() {
-
         postLikeClickListener.setOnLikeClick(position);
     }
 
