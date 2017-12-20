@@ -58,4 +58,9 @@ public class PostRepository implements PostSource{
         return postRemoteDataSource.uploadPostPhoto(postPk, photoPath);
     }
 
+    @Override
+    public Observable<Response<PostCover>> setPostLike(int postPk) {
+        return postRemoteDataSource.setPostLike(postPk);
+    }
+
 }

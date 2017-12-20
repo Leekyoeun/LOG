@@ -127,7 +127,6 @@ public class PostView implements PostContract.iView {
 
     @Override
     public void showError() {
-
     }
 
     @Override

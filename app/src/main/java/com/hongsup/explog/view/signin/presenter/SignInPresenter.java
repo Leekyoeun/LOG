@@ -25,7 +25,7 @@ public class SignInPresenter implements SignInContract.iPresenter {
 
     private SignInContract.iView view;
     private SignRepository repository;
-    Context context;
+    private Context context;
 
     public SignInPresenter(Context context) {
         repository = SignRepository.getInstance();

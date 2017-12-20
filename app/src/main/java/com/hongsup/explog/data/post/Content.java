@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 import com.hongsup.explog.data.user.User;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 /**
  * Created by Android Hong on 2017-12-12.
@@ -24,6 +25,7 @@ public class Content implements Serializable{
     private double lng;
 
     private int likeCount;
+    private int[] liked;
     private User author;
 
     public int getPk() {
@@ -88,5 +90,28 @@ public class Content implements Serializable{
 
     public void setAuthor(User author) {
         this.author = author;
+    }
+
+    public int[] getLiked() {
+        return liked;
+    }
+
+    public void setLiked(int[] liked) {
+        this.liked = liked;
+    }
+
+    @Override
+    public String toString() {
+        return "Content{" +
+                "pk=" + pk +
+                ", content='" + content + '\'' +
+                ", createdAt='" + createdAt + '\'' +
+                ", photoPath='" + photoPath + '\'' +
+                ", lat=" + lat +
+                ", lng=" + lng +
+                ", likeCount=" + likeCount +
+                ", liked=" + Arrays.toString(liked) +
+                ", author=" + author +
+                '}';
     }
 }

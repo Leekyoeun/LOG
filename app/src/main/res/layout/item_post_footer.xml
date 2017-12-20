@@ -16,7 +16,7 @@
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.437">
+        app:layout_constraintVertical_bias="0.45">
 
         <ImageButton
             android:id="@+id/imgLike"
@@ -33,6 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="10dp"
+            android:textColor="@color/colorGray"
             android:gravity="center"
             android:textSize="16sp"
             android:textStyle="bold"

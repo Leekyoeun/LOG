@@ -1,5 +1,6 @@
 package com.hongsup.explog.view.post.adapter.viewholder;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -9,6 +10,9 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.hongsup.explog.R;
 import com.hongsup.explog.data.post.Content;
+import com.hongsup.explog.data.user.source.UserRepository;
+
+import java.util.Arrays;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -21,7 +25,6 @@ import butterknife.OnClick;
 public class FooterViewHolder extends PostViewHolder {
 
     private boolean onFollowing;
-
 
     @BindView(R.id.lineView)
     View lineView;
@@ -46,13 +49,16 @@ public class FooterViewHolder extends PostViewHolder {
 
     @Override
     public void bind(Content data) {
-        if(onFollowing){
+        if (onFollowing) {
 
-        }else{
+        } else {
 
         }
 
-        textLikeCount.setText(data.getLikeCount() + "");
+        /**
+         *  좋아요 설정
+         */
+        setLiked(data.getLiked(), data.getLikeCount());
 
         if (checkMyPost) {
             // 내 글이면
@@ -73,16 +79,41 @@ public class FooterViewHolder extends PostViewHolder {
     }
 
     @OnClick(R.id.imgLike)
-    public void onLikeClick(){
-
+    public void onLikeClick() {
+        postLikeClickListener.setOnLikeClick(position);
     }
 
     @OnClick(R.id.textFollow)
-    public void onFollowClick(){
-        if(onFollowing){
+    public void onFollowClick() {
+        if (onFollowing) {
 
+        } else {
+
+        }
+    }
+
+    private void setLiked(int[] liked, int likeCount){
+        /**
+         *  좋아요 설정
+         */
+        if (UserRepository.getInstance().getUser() != null && isLiked(liked)) {
+            // '좋아요'를 눌렀을 경우
+            imgLike.setImageResource(R.drawable.ic_like_red_16dp);
+            textLikeCount.setTextColor(context.getResources().getColor(R.color.colorRed));
+            textLikeCount.setText(likeCount + "");
+        } else {
+            // '좋아요'를 누르지 않았을 경우
+            imgLike.setImageResource(R.drawable.ic_like_gray_16dp);
+            textLikeCount.setTextColor(context.getResources().getColor(R.color.colorGray));
+            textLikeCount.setText(likeCount + "");
+        }
+    }
+
+    private boolean isLiked(int[] liked){
+        if(liked != null && Arrays.binarySearch(liked, UserRepository.getInstance().getUser().getPk()) >= 0){
+            return true;
         }else{
-
+            return false;
         }
     }
 }

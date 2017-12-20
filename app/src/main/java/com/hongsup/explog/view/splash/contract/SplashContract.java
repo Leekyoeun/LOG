@@ -20,6 +20,11 @@ public interface SplashContract {
         void showError(String text);
 
         void goMain();
+
+        /**
+         * 2017-12-19
+         * 사용하지 않음
+         */
         void goSign();
     }
     interface iPresenter{

@@ -65,4 +65,11 @@ public interface PostSource {
      */
     Observable<Response<PostContent>> uploadPostPhoto(int postPk, String photoPath);
 
+    /**
+     * Post 에 대한 like 설정
+     *
+     * @param postPk
+     * @return
+     */
+    Observable<Response<PostCover>> setPostLike(int postPk);
 }

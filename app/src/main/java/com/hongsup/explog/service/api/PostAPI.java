@@ -70,4 +70,13 @@ public interface PostAPI {
     @Multipart
     @POST("/post/{post_pk}/photo/")
     Observable<Response<PostContent>> uploadPostPhoto(@Path("post_pk") int postPk, @PartMap Map<String, RequestBody> postPhotoMap);
+
+    /**
+     * Post set Like
+     * @param postPk
+     * @return
+     */
+    @POST("/post/{post_pk}/like/")
+    Observable<Response<PostCover>> setPostLike(@Path("post_pk") int postPk);
+
 }

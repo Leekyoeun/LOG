@@ -9,6 +9,7 @@ import com.hongsup.explog.data.post.source.PostRepository;
 import com.hongsup.explog.view.post.adapter.contract.PostAdapterContract;
 import com.hongsup.explog.view.post.contract.PostContract;
 import com.hongsup.explog.view.post.listener.OnPostContentClickListener;
+import com.hongsup.explog.view.post.listener.OnPostLikeClickListener;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -21,7 +22,7 @@ import static com.bumptech.glide.gifdecoder.GifHeaderParser.TAG;
  * Created by Android Hong on 2017-12-14.
  */
 
-public class PostPresenter implements PostContract.iPresenter, OnPostContentClickListener {
+public class PostPresenter implements PostContract.iPresenter, OnPostContentClickListener, OnPostLikeClickListener {
 
     private int postPk;
     private PostContract.iView view;
@@ -47,6 +48,7 @@ public class PostPresenter implements PostContract.iPresenter, OnPostContentClic
     public void setPostAdapterView(PostAdapterContract.iView view) {
         this.adapterView = view;
         this.adapterView.setOnPostContentClickListener(this);
+        this.adapterView.setOnPostLikeClickListener(this);
     }
 
     @Override
@@ -59,18 +61,16 @@ public class PostPresenter implements PostContract.iPresenter, OnPostContentClic
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(data -> {
                             if (data.isSuccessful()) {
-
                                 Log.e(TAG, "loadPostContent: 데이터 로드 완료");
                                 view.hideProgress();
 
                                 if (data.body().getPostContentList() == null || data.body().getPostContentList().size() == 0) {
-                                    adapterModel.setInit(cover.getLikeCount(), cover.getAuthor());
+                                    adapterModel.setInit(cover.getLiked(), cover.getLikeCount(), cover.getAuthor());
                                 } else {
                                     adapterModel.setItems(data.body().getPostContentList());
-                                    adapterModel.setLikeAndFollow(cover.getLikeCount(), cover.getAuthor());
+                                    adapterModel.setLikeAndFollow(cover.getLiked(), cover.getLikeCount(), cover.getAuthor());
                                 }
-                                adapterView.notifyAdapter();
-
+                                adapterView.notifyAllAdapter();
                             } else {
                                 Log.e(TAG, "loadPostContent: 데이터 로드 실패1");
                                 view.hideProgress();
@@ -95,12 +95,12 @@ public class PostPresenter implements PostContract.iPresenter, OnPostContentClic
                                 view.hideProgress();
                                 adapterModel.addItems(data.body());
                             } else {
-                                Log.e(TAG, "uploadPostText: 데이터 업로드 실패2");
+                                Log.e(TAG, "uploadPostText: 데이터 업로드 실패1");
                                 view.hideProgress();
                             }
                         },
                         throwable -> {
-                            Log.e(TAG, "uploadPostText: 데이터 업로드 실패");
+                            Log.e(TAG, "uploadPostText: 데이터 업로드 실패2");
                             view.hideProgress();
                             Log.e(TAG, "uploadPostText: " + throwable.getMessage());
                         });
@@ -154,4 +154,28 @@ public class PostPresenter implements PostContract.iPresenter, OnPostContentClic
                         });
     }
 
+    @Override
+    public void setOnLikeClick(int position) {
+        view.showProgress();
+        Observable<Response<PostCover>> observable = repository.setPostLike(postPk);
+        observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(data -> {
+                            Log.e(TAG, "setOnLikeClick: " + data.code() + ", " + data.message());
+                            if (data.isSuccessful()) {
+                                Log.e(TAG, "setOnLikeClick: '좋아요' 완료");
+                                view.hideProgress();
+                                adapterModel.modifyLike(position, data.body().getLiked(), data.body().getLikeCount());
+                                adapterView.notifyLike(position);
+                            } else {
+                                Log.e(TAG, "setOnLikeClick: '좋아요' 실패1");
+                                view.hideProgress();
+                            }
+                        },
+                        throwable -> {
+                            Log.e(TAG, "setOnLikeClick: '좋아요' 실패2");
+                            view.hideProgress();
+                            Log.e(TAG, "setOnLikeClick: " + throwable.getMessage());
+                        });
+    }
 }
