@@ -73,6 +73,8 @@ public class EditProfileActivity extends AppCompatActivity {
         setProfileFromUserRepository();
         getDataFromDB();
         textWatcher();
+
+        editNameEditProfile.setSelection(editNameEditProfile.length());
     }
 
     @Override

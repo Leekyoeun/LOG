@@ -20,6 +20,11 @@
         <activity
             android:name=".view.splash.SplashActivity"
             android:theme="@style/AppTheme.SplashTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
 
@@ -38,11 +43,7 @@
         <activity
             android:name=".view.main.MainActivity"
             android:theme="@style/AppTheme.NoStatusBar">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
         </activity>
 
         <!-- 갤러리 페이지 -->

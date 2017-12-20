@@ -71,10 +71,6 @@ public class SettingActivity extends AppCompatActivity implements SettingRecycle
         }
     }
 
-    @Override
-    public void editProfile() {
-        settingRelativeLayout.addView(new EditProfileView(this));
-    }
 
     @Override
     public void logOut(boolean isChecked) {

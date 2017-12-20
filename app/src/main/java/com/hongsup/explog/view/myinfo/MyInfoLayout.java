@@ -108,7 +108,7 @@ public class MyInfoLayout extends FrameLayout {
                 .subscribe(data -> {
                     if (data.isSuccessful()) {
                         if (data.code() == 200) {
-                            Log.d("MainActivity", "확인됨");
+                            Log.d("MyInfoLayout", "확인됨");
 
 //                            Glide.with(getContext())
 //                                    .load(data.body().getImg_profile()).centerCrop().into(imgProfile);
@@ -121,13 +121,13 @@ public class MyInfoLayout extends FrameLayout {
                             myinfo_viewPager.setAdapter(viewPagerAdapter);
 
                         } else {
-                            Log.d("EditProfileActivity", "확인안됨");
+                            Log.d("MyInfoLayout", "확인안됨");
                         }
                     } else {
-                        Log.d("EditProfileActivity", data.errorBody().string() + "data unsuccessful");
+                        Log.d("MyInfoLayout", data.errorBody().string() + "data unsuccessful");
                     }
                 }, throwable -> {
-                    Log.e("SearchView", throwable.getMessage());
+                    Log.e("MyInfoLayout", throwable.getMessage());
                 });
 
     }
