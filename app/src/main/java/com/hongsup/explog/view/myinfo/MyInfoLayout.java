@@ -1,5 +1,6 @@
 package com.hongsup.explog.view.myinfo;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.CoordinatorLayout;
@@ -12,6 +13,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.hongsup.explog.R;
@@ -87,19 +89,29 @@ public class MyInfoLayout extends FrameLayout {
         });
     }
 
-    private void setProfileFromUserRepository(){
+    public void setProfileFromUserRepository(){
+        Toast.makeText(getContext(), "아직 내맘에 서로 마주앉던 그 눈빛을", Toast.LENGTH_SHORT).show();
         UserRepository userRepository = UserRepository.getInstance();
         if(userRepository.getUser()!=null) {
-            Glide.with(getContext()).load(userRepository.getUser().getImg_profile()).centerCrop().into(imgProfile);
-            textUserNameMyInfo.setText(userRepository.getUser().getUsername());
-            textEmailMyInfo.setText(userRepository.getUser().getEmail());
+            ((Activity)getContext()).runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Log.d("setProfileFromUserRepo", userRepository.getUser().getUsername());
+                    Log.d("setProfileFromUserRepo", userRepository.getUser().getImg_profile());
+//                    Glide.with(getContext()).load(userRepository.getUser().getImg_profile()).centerCrop().into(imgProfile);
+//                    textUserNameMyInfo.setText(userRepository.getUser().getUsername());
+//                    textEmailMyInfo.setText(userRepository.getUser().getEmail());
+                    Toast.makeText(getContext(), "차가운 바람이 이자릴 지나면", Toast.LENGTH_SHORT).show();
+                }
+            });
+
         }else{
             textUserNameMyInfo.setText("로그인 하쇼");
             textEmailMyInfo.setText("로그인 하쇼");
         }
     }
 
-    private void getDataFromDB() {
+    public void getDataFromDB() {
 
         EditProfileAPI profileEditAPI = ServiceGenerator.createInterceptor(EditProfileAPI.class);
         Observable<Response<UserInformation>> getUserInfo = profileEditAPI.getUserInfo();
@@ -108,26 +120,26 @@ public class MyInfoLayout extends FrameLayout {
                 .subscribe(data -> {
                     if (data.isSuccessful()) {
                         if (data.code() == 200) {
-                            Log.d("MyInfoLayout", "확인됨");
+                            Log.d("MainActivity", "확인됨");
 
-//                            Glide.with(getContext())
-//                                    .load(data.body().getImg_profile()).centerCrop().into(imgProfile);
-//
-//                            textUserNameMyInfo.setText(data.body().getUsername());
-//                            textEmailMyInfo.setText(data.body().getEmail());
+                            Glide.with(getContext())
+                                    .load(data.body().getImg_profile()).centerCrop().into(imgProfile);
+
+                            textUserNameMyInfo.setText(data.body().getUsername());
+                            textEmailMyInfo.setText(data.body().getEmail());
                             list.add(data.body().getPosts());
                             list.add(data.body().getLiked_posts());
                             viewPagerAdapter = new ViewPagerAdapter(list);
                             myinfo_viewPager.setAdapter(viewPagerAdapter);
 
                         } else {
-                            Log.d("MyInfoLayout", "확인안됨");
+                            Log.d("EditProfileActivity", "확인안됨");
                         }
                     } else {
-                        Log.d("MyInfoLayout", data.errorBody().string() + "data unsuccessful");
+                        Log.d("EditProfileActivity", data.errorBody().string() + "data unsuccessful");
                     }
                 }, throwable -> {
-                    Log.e("MyInfoLayout", throwable.getMessage());
+                    Log.e("SearchView", throwable.getMessage());
                 });
 
     }
