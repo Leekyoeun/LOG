@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import com.bumptech.glide.Glide;
 import com.hongsup.explog.R;
 import com.hongsup.explog.data.user.source.UserRepository;
 import com.hongsup.explog.view.cover.CoverActivity;

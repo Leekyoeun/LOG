@@ -1,7 +1,10 @@
 package com.hongsup.explog.view.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.hongsup.explog.view.main.contract.MainContract;
 import com.hongsup.explog.view.main.presenter.MainPresenter;
@@ -22,5 +25,12 @@ public class MainActivity extends AppCompatActivity {
         /* Animation 삭제 */
         overridePendingTransition(0,0);
         setContentView(mainView.getView());
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+
     }
 }
