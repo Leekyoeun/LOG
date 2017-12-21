@@ -44,13 +44,11 @@ public class SignUpPresenter implements SignUpContract.iPresenter {
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(data -> {
-                    Log.e(TAG, "setSignUp: " + data.code() + " , " + data.message() );
+                    Log.e(TAG, "setSignUp: " + data.code() + " , " + data.message());
                     if (data.isSuccessful()) {
-                        if (data.code() == 200) {
-                            // next
-                            view.hideProgress();
-                            view.goSignIn();
-                        }
+                        // next
+                        view.hideProgress();
+                        view.goSignIn();
                     } else {
                         Log.e("SignUpActivity", "setSignUp: Error");
                         view.hideProgress();

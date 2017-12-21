@@ -21,21 +21,48 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/editText"
+    <LinearLayout
+        android:id="@+id/linearLayoutEditProfile"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:ems="10"
-        android:gravity="center"
-        android:inputType="textPersonName"
-        android:paddingBottom="15dp"
-        android:text="Name"
+        android:layout_marginTop="40dp"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintHorizontal_bias="0.533"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgEditProfile" />
+        app:layout_constraintTop_toBottomOf="@+id/imgEditProfile">
+
+        <EditText
+            android:id="@+id/editNameEditProfile"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:maxLength="12"
+            android:text="Name" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="right|center_vertical"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            app:srcCompat="@android:drawable/ic_menu_edit" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textTextNumEditProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayoutEditProfile"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutEditProfile" />
 
 </android.support.constraint.ConstraintLayout>
+

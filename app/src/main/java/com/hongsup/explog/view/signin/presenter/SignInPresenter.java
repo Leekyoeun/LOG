@@ -25,7 +25,7 @@ public class SignInPresenter implements SignInContract.iPresenter {
 
     private SignInContract.iView view;
     private SignRepository repository;
-    Context context;
+    private Context context;
 
     public SignInPresenter(Context context) {
         repository = SignRepository.getInstance();
@@ -49,42 +49,32 @@ public class SignInPresenter implements SignInContract.iPresenter {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(data -> {
                     // next
-                    Log.e(TAG, "getSignIn: " + data.code() );
+                    Log.e(TAG, "getSignIn: " + data.code());
                     if (data.isSuccessful()) {
-                        if (data.code() == 200) {
-                            /**
-                             * 로그인이 성공했을 경우
-                             */
 
-                            view.hideProgress();
+                        /**
+                         * 로그인이 성공했을 경우
+                         */
 
-                            /**
-                             * 1. 자동 로그인에 필요한 SharedPreference 에 저장한다.
-                             */
-                            PreferenceUtil.setValue(context, "Email", signIn.getEmail());
-                            PreferenceUtil.setValue(context, "password", signIn.getPassword());
-                            PreferenceUtil.setValue(context, "token", data.body().getToken());
+                        view.hideProgress();
 
-                            /**
-                             * 2. 회원 정보를 저장한다.
-                             */
-                            UserRepository.getInstance().setUser(data.body());
-                            Log.e(TAG, "getSignIn: " + data.body().toString());
-                            view.goMain();
-                        } else {
+                        /**
+                         * 1. 자동 로그인에 필요한 SharedPreference 에 저장한다.
+                         */
+                        PreferenceUtil.setValue(context, "Email", signIn.getEmail());
+                        PreferenceUtil.setValue(context, "password", signIn.getPassword());
+                        PreferenceUtil.setValue(context, "token", data.body().getToken());
 
-                            /**
-                             * 로그인이 실패하였을 경우
-                             */
-                            view.hideProgress();
-                            view.showError("로그인 실패 1");
+                        /**
+                         * 2. 회원 정보를 저장한다.
+                         */
+                        UserRepository.getInstance().setUser(data.body());
+                        Log.e(TAG, "getSignIn: " + data.body().toString());
+                        view.goMain();
 
-                            PreferenceUtil.removeAllValue(context);
-                            UserRepository.getInstance().clearUser();
-                        }
                     } else {
                         view.hideProgress();
-                        view.showError("로그인 실패 2");
+                        view.showError("로그인 실패 1");
 
                         PreferenceUtil.removeAllValue(context);
                         UserRepository.getInstance().clearUser();

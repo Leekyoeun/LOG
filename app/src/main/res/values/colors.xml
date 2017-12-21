@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#4A99D5</color>
-    <color name="colorPrimaryDark">#337CBA</color>
+    <color name="colorPrimaryDark">#337cba</color>
     <color name="colorAccent">#673AB7</color>
+    <color name="colorFab">#B39DDB</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorMain">#4A99D5</color>
     <color name="colorAlter">#FFAAAAFF</color>
@@ -10,7 +11,9 @@
     <color name="colorPostTint">#99505050</color>
 
     <color name="colorLightGray">#dcdcdc</color>
-
     <color name="colorGray">#A0A0A0</color>
+    <color name="colorBlack">#000000</color>
+
+    <color name="colorRed">#FF0000</color>
 
 </resources>

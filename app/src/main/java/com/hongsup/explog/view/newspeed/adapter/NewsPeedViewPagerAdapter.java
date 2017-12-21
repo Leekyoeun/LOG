@@ -3,6 +3,8 @@ package com.hongsup.explog.view.newspeed.adapter;
 import android.content.Context;
 import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
+import android.util.Log;
+import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -10,6 +12,10 @@ import com.hongsup.explog.R;
 import com.hongsup.explog.view.newspeeditem.contract.NewsPeedItemContract;
 import com.hongsup.explog.view.newspeeditem.presenter.NewsPeedItemPresenter;
 import com.hongsup.explog.view.newspeeditem.view.NewsPeedItemView;
+
+import javax.security.auth.login.LoginException;
+
+import static com.bumptech.glide.gifdecoder.GifHeaderParser.TAG;
 
 /**
  * Created by Android Hong on 2017-11-30.
@@ -22,6 +28,8 @@ public class NewsPeedViewPagerAdapter extends PagerAdapter {
 
     private NewsPeedItemContract.iPresenter newsPeedItemPresenter;
     private NewsPeedItemContract.iView newsPeedItemView;
+
+    private SparseArray<View> views = new SparseArray<>(COUNT);
 
     public NewsPeedViewPagerAdapter(Context context) {
         this.context = context;
@@ -36,11 +44,13 @@ public class NewsPeedViewPagerAdapter extends PagerAdapter {
     public Object instantiateItem(ViewGroup container, int position) {
         newsPeedItemPresenter = new NewsPeedItemPresenter();
         newsPeedItemView = new NewsPeedItemView(context, position+1);
+
         newsPeedItemPresenter.attachView(newsPeedItemView);
         newsPeedItemView.setPresenter(newsPeedItemPresenter);
 
         View view = (View)newsPeedItemView;
         container.addView(view);
+        views.put(position, view);
         return view;
     }
 
@@ -51,7 +61,9 @@ public class NewsPeedViewPagerAdapter extends PagerAdapter {
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-        container.removeView((View) object);
+        View view = (View)object;
+        container.removeView(view);
+        views.remove(position);
     }
 
     @Override
@@ -73,10 +85,4 @@ public class NewsPeedViewPagerAdapter extends PagerAdapter {
                 return "띠용";
         }
     }
-
-    @Override
-    public Parcelable saveState() {
-        return super.saveState();
-    }
-
 }

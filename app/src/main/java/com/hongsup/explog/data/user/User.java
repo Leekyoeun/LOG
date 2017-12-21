@@ -2,8 +2,13 @@ package com.hongsup.explog.data.user;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.hongsup.explog.view.setting.editprofile.insuptest.Followers;
+import com.hongsup.explog.view.setting.editprofile.insuptest.Following_users;
+import com.hongsup.explog.view.setting.editprofile.insuptest.Liked_posts;
+import com.hongsup.explog.view.setting.editprofile.insuptest.Posts;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * Created by 정인섭 on 2017-12-11.
@@ -77,6 +82,8 @@ public class User implements Serializable{
     public void setMessage(String message) {
         this.message = message;
     }
+
+
 
     @Override
     public String toString() {

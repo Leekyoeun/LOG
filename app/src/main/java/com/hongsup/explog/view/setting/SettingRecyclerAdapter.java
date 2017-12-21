@@ -1,6 +1,8 @@
 package com.hongsup.explog.view.setting;
 
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -15,6 +17,7 @@ import android.widget.TextView;
 import com.hongsup.explog.R;
 import com.hongsup.explog.data.user.source.UserRepository;
 import com.hongsup.explog.util.PreferenceUtil;
+import com.hongsup.explog.view.main.MainActivity;
 import com.hongsup.explog.view.setting.alarmsetting.AlarmSettingActivity;
 import com.hongsup.explog.view.setting.editprofile.EditProfileActivity;
 
@@ -95,8 +98,8 @@ public class SettingRecyclerAdapter extends RecyclerView.Adapter<SettingRecycler
                                 break;
 
                             case "로그아웃" :
-                                new AlertDialog.Builder(itemView.getContext()).setTitle("알림")
-                                        .setMessage("뭐라카노")
+                                new AlertDialog.Builder(itemView.getContext()).setTitle("로그아웃")
+                                        .setMessage("로그아웃 하시겠습니까?")
                                         .setCancelable(true)
                                         .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                                             @Override
@@ -105,9 +108,11 @@ public class SettingRecyclerAdapter extends RecyclerView.Adapter<SettingRecycler
 
                                                 PreferenceUtil.removeAllValue(itemView.getContext());
                                                 UserRepository.getInstance().clearUser();
-                                                mList[mList.length-1] = "";
-                                                mType[mType.length-1] = 0;
-
+                                                ((Activity)iSettingView).finish();
+                                                //로그아웃이 되면 mainactivity로 빠져나감, flag값을 통해 이전의 mainactivity는 tast에서 사라짐 12/20
+                                                Intent intent = new Intent((Context)iSettingView, MainActivity.class);
+                                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                                ((Context)iSettingView).startActivity(intent);
                                             }
                                         })
                                         .setNegativeButton("취소", new DialogInterface.OnClickListener() {
@@ -149,7 +154,6 @@ public class SettingRecyclerAdapter extends RecyclerView.Adapter<SettingRecycler
     }
 
     interface ISettingView{
-        void editProfile();
         void logOut(boolean isChecked);
     }
 }

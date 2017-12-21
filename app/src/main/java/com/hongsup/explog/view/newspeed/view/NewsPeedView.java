@@ -80,6 +80,7 @@ public class NewsPeedView extends FrameLayout {
          */
         NewsPeedViewPagerAdapter newsPeedViewPagerAdapter = new NewsPeedViewPagerAdapter(context);
         viewPager.setAdapter(newsPeedViewPagerAdapter);
+        viewPager.setOffscreenPageLimit(5);
         addView(view);
     }
 

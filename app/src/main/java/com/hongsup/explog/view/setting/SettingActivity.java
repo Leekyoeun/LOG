@@ -1,5 +1,6 @@
 package com.hongsup.explog.view.setting;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +15,9 @@ import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
 import com.hongsup.explog.R;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,11 +45,32 @@ public class SettingActivity extends AppCompatActivity implements SettingRecycle
 
     }
 
+    public void reflection(){
+
+        try {
+            Class<?> cls = Class.forName("com.hongsup.explog.view.myinfo.MyInfoLayout");
+            Class[] constructorParamClass = new Class[] {Context.class};
+            Object[] constructorParamObject = new Object[] {this};
+            Constructor constructor = cls.getConstructor(constructorParamClass);
+            Object objectClass = constructor.newInstance(constructorParamObject);
+
+            Method method = cls.getDeclaredMethod("getDataFromDB");
+            method.invoke(objectClass);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()){
             case android.R.id.home:
                 onBackPressed();
+                reflection();
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -71,10 +96,6 @@ public class SettingActivity extends AppCompatActivity implements SettingRecycle
         }
     }
 
-    @Override
-    public void editProfile() {
-        settingRelativeLayout.addView(new EditProfileView(this));
-    }
 
     @Override
     public void logOut(boolean isChecked) {

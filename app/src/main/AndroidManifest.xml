@@ -13,6 +13,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAKk7KRv8_G4c5x3AK4qHwQkApIDoV7J6I" />
+
         <activity
             android:name=".view.splash.SplashActivity"
             android:theme="@style/AppTheme.SplashTheme">
@@ -27,7 +31,7 @@
         <activity
             android:name=".view.signin.SignInActivity"
             android:theme="@style/AppTheme.NoStatusBar"
-            android:windowSoftInputMode="adjustResize"></activity>
+            android:windowSoftInputMode="adjustResize" />
 
         <!-- 회원가입 페이지 -->
         <activity
@@ -37,11 +41,14 @@
         <!-- 메인 페이지 -->
         <activity
             android:name=".view.main.MainActivity"
-            android:theme="@style/AppTheme.NoStatusBar" />
+            android:theme="@style/AppTheme.NoStatusBar">
+
+        </activity>
 
         <!-- 갤러리 페이지 -->
-        <activity android:name=".view.gallery.GalleryActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".view.gallery.GalleryActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <!-- 세팅 페이지 -->
         <activity
@@ -52,16 +59,21 @@
         <activity
             android:name=".view.cover.CoverActivity"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustResize"/>
+            android:windowSoftInputMode="adjustResize" />
 
         <!-- POST 페이지 -->
         <activity
             android:name=".view.post.PostActivity"
             android:theme="@style/AppTheme.NoStatusBar" />
 
+        <!-- Post Text 작성 페이지 -->
+        <activity
+            android:name=".view.posttext.PostTextActivity"
+            android:theme="@style/AppTheme.BaseNoActionbar" />
+
         <!-- Profile edit 페이지 -->
         <activity android:name=".view.setting.editprofile.EditProfileActivity" />
-        <activity android:name=".view.setting.alarmsetting.AlarmSettingActivity"></activity>
+        <activity android:name=".view.setting.alarmsetting.AlarmSettingActivity" />
     </application>
 
 </manifest>

@@ -6,6 +6,12 @@
     android:fitsSystemWindows="true"
     tools:context="com.hongsup.explog.view.cover.CoverActivity">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textCoverPath"
+        android:visibility="gone"/>
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -16,6 +22,7 @@
         android:elevation="2dp"
         android:fitsSystemWindows="true">
 
+        <!--
         <TextView
             android:id="@+id/textCount"
             android:layout_width="wrap_content"
@@ -23,6 +30,7 @@
             android:layout_gravity="center"
             android:textColor="@color/colorWhite"
             android:textSize="12sp" />
+        -->
 
     </android.support.v7.widget.Toolbar>
 
@@ -128,7 +136,7 @@
                 android:paddingRight="10dp">
 
                 <Button
-                    android:id="@+id/btnHashTag"
+                    android:id="@+id/btnArea"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
@@ -144,15 +152,18 @@
                     android:textColor="@color/colorGray" />
 
                 <TextView
+                    android:id="@+id/textArea"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_toEndOf="@+id/btnHashTag"
-                    android:layout_toRightOf="@+id/btnHashTag"
-                    android:background="@drawable/border_cover_tag"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toEndOf="@+id/btnArea"
+                    android:layout_toRightOf="@+id/btnArea"
+                    android:background="@drawable/border_cover_area"
                     android:gravity="center"
-                    android:text="1"
-                    android:textColor="@color/colorWhite" />
+                    android:textSize="12sp"
+                    android:textColor="@color/colorMain"
+                    android:visibility="gone" />
 
                 <Button
                     android:id="@+id/btnChangeCover"
@@ -171,4 +182,20 @@
             </RelativeLayout>
         </RelativeLayout>
     </ScrollView>
+
+
+    <!-- ProgressBar Layout -->
+    <RelativeLayout
+        android:id="@+id/progressBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true" />
+    </RelativeLayout>
 </RelativeLayout>

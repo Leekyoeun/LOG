@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import com.hongsup.explog.R;
+import com.hongsup.explog.data.Const;
 import com.hongsup.explog.data.post.PostCover;
 import com.hongsup.explog.view.custom.PostItemDivider;
 import com.hongsup.explog.view.newspeeditem.adapter.NewsPeedItemAdapter;
@@ -35,7 +36,6 @@ public class NewsPeedItemView extends FrameLayout implements NewsPeedItemContrac
     @BindView(R.id.recyclerView)
     public RecyclerView recyclerView;
 
-
     public NewsPeedItemView(@NonNull Context context, int index) {
         super(context);
         this.context = context;
@@ -59,13 +59,6 @@ public class NewsPeedItemView extends FrameLayout implements NewsPeedItemContrac
         RecyclerView 사이에 여백 주는 Code
          */
         recyclerView.addItemDecoration(new PostItemDivider(48));
-
-        // RecyclerView Animation
-        /*
-        int resId = R.anim.layout_animation_fall_down;
-        LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(context, resId);
-        recyclerView.setLayoutAnimation(animation);
-        */
     }
 
     @Override
@@ -83,7 +76,7 @@ public class NewsPeedItemView extends FrameLayout implements NewsPeedItemContrac
         /**
          * 값을 넘겨줘야 한다.
          */
-        intent.putExtra("COVER",postCover);
+        intent.putExtra(Const.INTENT_EXTRA_COVER,postCover);
         context.startActivity(intent);
     }
 

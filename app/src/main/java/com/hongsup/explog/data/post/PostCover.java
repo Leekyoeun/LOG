@@ -4,11 +4,11 @@ import com.google.gson.annotations.SerializedName;
 import com.hongsup.explog.data.user.User;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 /**
  * Created by Android Hong on 2017-12-11.
  */
-
 public class PostCover implements Serializable {
 
     @SerializedName("pk")
@@ -21,7 +21,7 @@ public class PostCover implements Serializable {
     private String startDate;
     @SerializedName("end_date")
     private String endDate;
-    @SerializedName("cover_path")
+    @SerializedName("img")
     private String coverPath;
     @SerializedName("created_at")
     private String createdAt;
@@ -29,6 +29,12 @@ public class PostCover implements Serializable {
     private String continent;
     @SerializedName("num_liked")
     private int likeCount;
+    @SerializedName("liked")
+    private int[] liked;
+
+    // 오류 관련 필드
+    @SerializedName("detail")
+    private String detail;
 
     public int getPk() {
         return pk;
@@ -100,5 +106,38 @@ public class PostCover implements Serializable {
 
     public void setLikeCount(int likeCount) {
         this.likeCount = likeCount;
+    }
+
+    public int[] getLiked() {
+        return liked;
+    }
+
+    public void setLiked(int[] liked) {
+        this.liked = liked;
+    }
+
+    public String getDetail() {
+        return detail;
+    }
+
+    public void setDetail(String detail) {
+        this.detail = detail;
+    }
+
+    @Override
+    public String toString() {
+        return "PostCover{" +
+                "pk=" + pk +
+                ", author=" + author +
+                ", title='" + title + '\'' +
+                ", startDate='" + startDate + '\'' +
+                ", endDate='" + endDate + '\'' +
+                ", coverPath='" + coverPath + '\'' +
+                ", createdAt='" + createdAt + '\'' +
+                ", continent='" + continent + '\'' +
+                ", likeCount=" + likeCount +
+                ", liked=" + Arrays.toString(liked) +
+                ", detail='" + detail + '\'' +
+                '}';
     }
 }

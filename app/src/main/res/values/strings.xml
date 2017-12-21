@@ -19,6 +19,8 @@
     <string name="title_post">Post</string>
 
     <string name="txt_end_date">End Date</string>
+    <string name="txt_follow">Follow</string>
+    <string name="txt_following">Following</string>
 
     <string name="africa">AFRICA</string>
     <string name="asia">ASIA</string>
@@ -33,6 +35,11 @@
 
     <string name="menu_cover_ok">OK</string>
 
-    <string name="menu_post_cover_change">Cover/Tag Modify</string>
+    <string name="menu_post_cover_change">Cover/Area Modify</string>
     <string name="menu_post_delete">Post Delete</string>
+    <string name="choose_area">Choice Area</string>
+
+    <string name="post_content_text">TEXT</string>
+
+    <string name="not_signed_in">Go to Sign-in</string>
 </resources>

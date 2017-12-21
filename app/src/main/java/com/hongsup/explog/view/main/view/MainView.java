@@ -1,7 +1,6 @@
 package com.hongsup.explog.view.main.view;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -13,13 +12,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import com.bumptech.glide.Glide;
 import com.hongsup.explog.R;
-import com.hongsup.explog.view.main.MainActivity;
+import com.hongsup.explog.data.user.source.UserRepository;
+import com.hongsup.explog.view.cover.CoverActivity;
 import com.hongsup.explog.view.main.contract.MainContract;
 import com.hongsup.explog.view.myinfo.MyInfoLayout;
+import com.hongsup.explog.view.myinfo.MyInfoNotLogInLayout;
 import com.hongsup.explog.view.newspeed.view.NewsPeedView;
-import com.hongsup.explog.view.cover.CoverActivity;
-import com.hongsup.explog.view.search.SearchView;
+import com.hongsup.explog.view.search.view.SearchView;
+
 import java.lang.reflect.Field;
 
 import butterknife.BindView;
@@ -31,14 +33,15 @@ import butterknife.ButterKnife;
 
 public class MainView implements MainContract.iView, BottomNavigationView.OnNavigationItemSelectedListener {
 
+    private View view;
+    private Context context;
+    private MainContract.iPresenter presenter;
+    private int id = -10;
+
     @BindView(R.id.navigation)
     BottomNavigationView navigation;
     @BindView(R.id.frameLayout)
     FrameLayout frameLayout;
-
-    private View view;
-    private Context context;
-    private MainContract.iPresenter presenter;
 
     public MainView(Context context) {
         this.context = context;
@@ -65,27 +68,38 @@ public class MainView implements MainContract.iView, BottomNavigationView.OnNavi
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-        frameLayout.removeAllViews();
-        switch (id) {
-            case R.id.navigation_newspeed:
-                // View 가 이미 있는지 체크
-                frameLayout.addView(new NewsPeedView(context));
-                return true;
-            case R.id.navigation_search:
-                frameLayout.addView(new SearchView(context));
-                return true;
-            case R.id.navigation_post:
-                // View 가 이미 있는지 체크
-                Intent intent = new Intent(context, CoverActivity.class);
-                context.startActivity(intent);
-                return true;
-            case R.id.navigation_notification:
-                return true;
-            case R.id.navigation_profile:
-                frameLayout.addView(new MyInfoLayout(context));
-                return true;
+        if (id != item.getItemId()) {
+            id = item.getItemId();
+
+            switch (id) {
+                case R.id.navigation_newspeed:
+                    // View 가 이미 있는지 체크
+                    frameLayout.removeAllViews();
+                    frameLayout.addView(new NewsPeedView(context));
+                    return true;
+                case R.id.navigation_search:
+                    frameLayout.removeAllViews();
+                    frameLayout.addView(new SearchView(context));
+                    return true;
+                case R.id.navigation_post:
+                    // View 가 이미 있는지 체크
+                    Intent intent = new Intent(context, CoverActivity.class);
+                    context.startActivity(intent);
+                    break;
+                case R.id.navigation_notification:
+                    frameLayout.removeAllViews();
+                    return true;
+                case R.id.navigation_profile:
+                    frameLayout.removeAllViews();
+                    if (UserRepository.getInstance().getUser() != null) {
+                        frameLayout.addView(new MyInfoLayout(context));
+                    } else {
+                        frameLayout.addView(new MyInfoNotLogInLayout(context));
+                    }
+                    return true;
+            }
         }
+        id = -10;
         return false;
     }
 
