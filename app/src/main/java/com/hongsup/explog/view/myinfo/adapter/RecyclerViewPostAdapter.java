@@ -1,19 +1,19 @@
 package com.hongsup.explog.view.myinfo.adapter;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.support.design.widget.TabLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.hongsup.explog.R;
 import com.hongsup.explog.data.Const;
 import com.hongsup.explog.data.post.PostCover;
-import com.hongsup.explog.data.user.User;
 import com.hongsup.explog.data.user.source.UserRepository;
 import com.hongsup.explog.view.post.PostActivity;
 import com.hongsup.explog.view.setting.editprofile.insuptest.Posts;
@@ -28,12 +28,14 @@ import butterknife.ButterKnife;
  */
 
 public class RecyclerViewPostAdapter extends RecyclerView.Adapter<RecyclerViewPostAdapter.MyHolder> {
-    ArrayList<PostCover> list = new ArrayList<>();
+    ArrayList<Posts> list = new ArrayList<>();
     UserRepository userRepository = UserRepository.getInstance();
+    Context context;
 
-    public void setList(ArrayList<PostCover> list){
+    public void setList(ArrayList<Posts> list, Context context){
         this.list = list;
         notifyDataSetChanged();
+        this.context = context;
     }
 
     @Override
@@ -47,10 +49,12 @@ public class RecyclerViewPostAdapter extends RecyclerView.Adapter<RecyclerViewPo
     @Override
     public void onBindViewHolder(MyHolder holder, int position) {
         holder.textTitle.setText(list.get(position).getTitle());
-        String date = list.get(position).getStartDate() + " - " + list.get(position).getEndDate();
+        String date = list.get(position).getStart_date() + " - " + list.get(position).getEnd_date();
         holder.textDate.setText(date);
-        holder.postCover = list.get(position);
-        holder.postCover.setAuthor(userRepository.getUser());
+        holder.posts = list.get(position);
+        //holder.posts.setAuthor(userRepository.getUser());
+
+        Glide.with(context).load(list.get(position).getImg()).centerCrop().into(holder.imgCover);
     }
 
     @Override
@@ -65,8 +69,10 @@ public class RecyclerViewPostAdapter extends RecyclerView.Adapter<RecyclerViewPo
         TextView textDate;
         @BindView(R.id.textWriter)
         TextView textWriter;
+        @BindView(R.id.imgCover)
+        ImageView imgCover;
 
-        PostCover postCover;
+        Posts posts;
 
         public MyHolder(final View itemView) {
             super(itemView);
@@ -77,6 +83,11 @@ public class RecyclerViewPostAdapter extends RecyclerView.Adapter<RecyclerViewPo
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(itemView.getContext(), PostActivity.class);
+                    PostCover postCover = new PostCover();
+                    postCover.makePostCover(posts);
+                    postCover.setAuthor(userRepository.getUser());
+
+
                     intent.putExtra(Const.INTENT_EXTRA_COVER, postCover);
                     itemView.getContext().startActivity(intent);
                 }

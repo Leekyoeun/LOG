@@ -25,6 +25,7 @@ import android.widget.TextView;
 
 import com.hongsup.explog.R;
 import com.hongsup.explog.data.post.PostCover;
+import com.hongsup.explog.data.post.source.PostCoverList;
 import com.hongsup.explog.data.search.dao.SearchHistoryDAO;
 import com.hongsup.explog.service.ServiceGenerator;
 import com.hongsup.explog.service.api.SearchAPI;
@@ -93,9 +94,9 @@ public class SearchView extends FrameLayout implements SearchRecyclerAdapter.Lis
         addView(view);
         word = new Word();
         inputMethodManager = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
-
     }
 
+    // mysql에 검색어 넣는 과정
     private void insert() {
         String word = editSearch.getText().toString();
         SearchHistoryDAO dao = new SearchHistoryDAO(getContext());
@@ -113,6 +114,7 @@ public class SearchView extends FrameLayout implements SearchRecyclerAdapter.Lis
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (!"".equals(editSearch.getText().toString()) && keyCode == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_UP) {
                     insert();
+                    // 키보드 사라짐
                     inputMethodManager.hideSoftInputFromWindow(editSearch.getWindowToken(), 0);
                     //editSearch.setText("");
                 }
@@ -184,10 +186,11 @@ public class SearchView extends FrameLayout implements SearchRecyclerAdapter.Lis
 
     ArrayList<PostCover> list = new ArrayList<>();
 
+
     public void getDataTwo(Word word) {
         progressBar.setVisibility(VISIBLE);
         SearchAPI searchAPI = ServiceGenerator.create(SearchAPI.class);
-        Observable<Response<ArrayList<PostCover>>> observable = searchAPI.observable(word);
+        Observable<Response<PostCoverList>> observable = searchAPI.observable(word);
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(data -> {
@@ -195,12 +198,13 @@ public class SearchView extends FrameLayout implements SearchRecyclerAdapter.Lis
                     if (data.isSuccessful()) {
                         if (data.code() == 200) {
                             Log.d("SearchView", "확인됨");
-                            list = data.body();
+
+                            list = data.body().getPostCover();
                             searchRecyclerResultAdapter.resultNotifier(list);
                             if (list.size() == 0) {
                                 relativeSearching.setVisibility(VISIBLE);
                             }
-                            Log.d("SearchView", "데이터 없음" + data.body().size());
+                            //Log.d("SearchView", "데이터 없음" + data.body().size());
 //                            Log.d("SearchView", "데이터 없음" + data.errorBody());
 //                            Log.d("SearchView", "데이터 없음" + data.message());
 //                            Log.d("SearchView", "데이터 없음" + data.raw());

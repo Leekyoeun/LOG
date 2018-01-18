@@ -43,10 +43,12 @@ public class MainView implements MainContract.iView, BottomNavigationView.OnNavi
     BottomNavigationView navigation;
     @BindView(R.id.frameLayout)
     FrameLayout frameLayout;
+    MyInfoLayout myInfoLayout;
 
     public MainView(Context context) {
         this.context = context;
         view = LayoutInflater.from(context).inflate(R.layout.activity_main, null);
+        myInfoLayout = new MyInfoLayout(context);
         ButterKnife.bind(this, view);
         initView();
     }
@@ -57,6 +59,11 @@ public class MainView implements MainContract.iView, BottomNavigationView.OnNavi
         frameLayout.addView(new NewsPeedView(context));
     }
 
+    @Override
+    public MyInfoLayout getMyInfoLayout() {
+        return myInfoLayout;
+    }
+    
     @Override
     public View getView() {
         return view;
@@ -93,7 +100,7 @@ public class MainView implements MainContract.iView, BottomNavigationView.OnNavi
                 case R.id.navigation_profile:
                     frameLayout.removeAllViews();
                     if (UserRepository.getInstance().getUser() != null) {
-                        frameLayout.addView(new MyInfoLayout(context));
+                        frameLayout.addView(myInfoLayout);
                     } else {
                         frameLayout.addView(new MyInfoNotLogInLayout(context));
                     }

@@ -11,13 +11,14 @@ import com.hongsup.explog.view.main.presenter.MainPresenter;
 import com.hongsup.explog.view.main.view.MainView;
 
 public class MainActivity extends AppCompatActivity {
-
+    MainContract.iPresenter mainPresenter;
+    MainContract.iView mainView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        MainContract.iView mainView = new MainView(this);
-        MainContract.iPresenter mainPresenter = new MainPresenter();
+        mainView = new MainView(this);
+        mainPresenter = new MainPresenter();
 
         mainPresenter.attachView(mainView);
         mainView.setPresenter(mainPresenter);
@@ -26,11 +27,16 @@ public class MainActivity extends AppCompatActivity {
         overridePendingTransition(0,0);
         setContentView(mainView.getView());
     }
+/*
+    @Override
+    protected void onRestart() {
+        super.onResume();
+        mainPresenter.refreshData(mainView);
+    }*/
 
     @Override
-    protected void onResume() {
-        super.onResume();
-
-
+    protected void onRestart() {
+        super.onRestart();
+        mainPresenter.refreshData(mainView);
     }
 }

@@ -69,7 +69,6 @@ public class MyInfoLayout extends FrameLayout {
         setProfileFromUserRepository();
         getDataFromDB();
 
-
         setListener();
 
         addView(view);
@@ -89,8 +88,8 @@ public class MyInfoLayout extends FrameLayout {
         });
     }
 
+    //UserRepository로 부터 정보를 불러와 profile 완성
     public void setProfileFromUserRepository(){
-        Toast.makeText(getContext(), "아직 내맘에 서로 마주앉던 그 눈빛을", Toast.LENGTH_SHORT).show();
         UserRepository userRepository = UserRepository.getInstance();
         if(userRepository.getUser()!=null) {
             ((Activity)getContext()).runOnUiThread(new Runnable() {
@@ -98,10 +97,9 @@ public class MyInfoLayout extends FrameLayout {
                 public void run() {
                     Log.d("setProfileFromUserRepo", userRepository.getUser().getUsername());
                     Log.d("setProfileFromUserRepo", userRepository.getUser().getImg_profile());
-//                    Glide.with(getContext()).load(userRepository.getUser().getImg_profile()).centerCrop().into(imgProfile);
-//                    textUserNameMyInfo.setText(userRepository.getUser().getUsername());
-//                    textEmailMyInfo.setText(userRepository.getUser().getEmail());
-                    Toast.makeText(getContext(), "차가운 바람이 이자릴 지나면", Toast.LENGTH_SHORT).show();
+                    Glide.with(getContext()).load(userRepository.getUser().getImg_profile()).centerCrop().into(imgProfile);
+                    textUserNameMyInfo.setText(userRepository.getUser().getUsername());
+                    textEmailMyInfo.setText(userRepository.getUser().getEmail());
                 }
             });
 
@@ -122,11 +120,11 @@ public class MyInfoLayout extends FrameLayout {
                         if (data.code() == 200) {
                             Log.d("MainActivity", "확인됨");
 
-                            Glide.with(getContext())
-                                    .load(data.body().getImg_profile()).centerCrop().into(imgProfile);
-
-                            textUserNameMyInfo.setText(data.body().getUsername());
-                            textEmailMyInfo.setText(data.body().getEmail());
+//                            Glide.with(getContext())
+//                                    .load(data.body().getImg_profile()).centerCrop().into(imgProfile);
+//
+//                            textUserNameMyInfo.setText(data.body().getUsername());
+//                            textEmailMyInfo.setText(data.body().getEmail());
                             list.add(data.body().getPosts());
                             list.add(data.body().getLiked_posts());
                             viewPagerAdapter = new ViewPagerAdapter(list);

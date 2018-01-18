@@ -1,6 +1,7 @@
 package com.hongsup.explog.service.api;
 
 import com.hongsup.explog.data.post.PostCover;
+import com.hongsup.explog.data.post.source.PostCoverList;
 import com.hongsup.explog.view.search.insuptest.Word;
 
 import java.util.ArrayList;
@@ -17,5 +18,5 @@ import retrofit2.http.POST;
 public interface SearchAPI {
 
     @POST("/post/search/")
-    Observable<Response<ArrayList<PostCover>>> observable(@Body Word word);
+    Observable<Response<PostCoverList>> observable(@Body Word word);
 }

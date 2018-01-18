@@ -23,11 +23,12 @@ public class UserInformation {
 
     private ArrayList<Liked_posts> liked_posts;
 
-    private ArrayList<PostCover> posts;
+    private ArrayList<Posts> posts;
 
     private Following_users[] following_users;
 
     private String pk;
+
 
     public Followers[] getFollowers ()
     {
@@ -99,12 +100,12 @@ public class UserInformation {
         this.liked_posts = liked_posts;
     }
 
-    public ArrayList<PostCover> getPosts ()
+    public ArrayList<Posts> getPosts ()
     {
         return posts;
     }
 
-    public void setPosts (ArrayList<PostCover> posts)
+    public void setPosts (ArrayList<Posts> posts)
     {
         this.posts = posts;
     }

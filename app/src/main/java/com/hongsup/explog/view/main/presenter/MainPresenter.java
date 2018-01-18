@@ -11,4 +11,9 @@ public class MainPresenter implements MainContract.iPresenter {
     public void attachView(MainContract.iView view) {
 
     }
+
+    @Override
+    public void refreshData(MainContract.iView view){
+        view.getMyInfoLayout().setProfileFromUserRepository();
+    }
 }

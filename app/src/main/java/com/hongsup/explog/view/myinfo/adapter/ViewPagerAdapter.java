@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import com.hongsup.explog.R;
 import com.hongsup.explog.data.post.PostCover;
 import com.hongsup.explog.view.setting.editprofile.insuptest.Liked_posts;
+import com.hongsup.explog.view.setting.editprofile.insuptest.Posts;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,12 +26,12 @@ public class ViewPagerAdapter extends PagerAdapter {
     RecyclerViewLikeAdapter recyclerViewLikeAdapter;
     RecyclerViewPostAdapter recyclerViewPostAdapter;
     ArrayList<List> list = new ArrayList<>();
-    ArrayList<PostCover> postList;
+    ArrayList<Posts> postList;
     ArrayList<Liked_posts> liked_postsList;
 
     public ViewPagerAdapter(ArrayList<List> list) {
         this.list = list;
-        postList = (ArrayList<PostCover>)list.get(0);
+        postList = (ArrayList<Posts>)list.get(0);
         liked_postsList = (ArrayList<Liked_posts>)list.get(1);
         Log.d("PostList Size", postList.size()+"");
     }
@@ -57,7 +58,7 @@ public class ViewPagerAdapter extends PagerAdapter {
 
         recyclerViewLikeAdapter = new RecyclerViewLikeAdapter();
         recyclerViewPostAdapter = new RecyclerViewPostAdapter();
-        recyclerViewPostAdapter.setList(postList);
+        recyclerViewPostAdapter.setList(postList, container.getContext());
         recyclerViewLikeAdapter.setList(liked_postsList);
         if(position==0){
             recyclerView.setAdapter(recyclerViewPostAdapter);
