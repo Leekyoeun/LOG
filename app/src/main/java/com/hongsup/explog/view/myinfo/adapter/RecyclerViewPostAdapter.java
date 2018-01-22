@@ -42,7 +42,6 @@ public class RecyclerViewPostAdapter extends RecyclerView.Adapter<RecyclerViewPo
     public MyHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_post, parent, false);
-        view.setBackgroundColor(Color.YELLOW);
         return new MyHolder(view);
     }
 

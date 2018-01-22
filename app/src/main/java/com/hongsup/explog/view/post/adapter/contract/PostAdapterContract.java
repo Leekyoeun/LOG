@@ -3,6 +3,7 @@ package com.hongsup.explog.view.post.adapter.contract;
 import com.hongsup.explog.data.post.PostContent;
 import com.hongsup.explog.data.user.User;
 import com.hongsup.explog.view.post.listener.OnPostContentClickListener;
+import com.hongsup.explog.view.post.listener.OnPostFollowClickListener;
 import com.hongsup.explog.view.post.listener.OnPostLikeClickListener;
 
 import java.util.List;
@@ -18,9 +19,11 @@ public interface PostAdapterContract {
 
         void setOnPostLikeClickListener(OnPostLikeClickListener postLikeClickListener);
 
+        void setOnPostFollowClickListener(OnPostFollowClickListener postFollowClickListener);
+
         void notifyAllAdapter();
 
-        void notifyLike(int position);
+        void notifyLike(int position); // RecyclerView에서 특정 위치의 데이터가 바뀌었을 때 호출된다.
     }
 
     interface iModel {
@@ -33,5 +36,7 @@ public interface PostAdapterContract {
         void addItems(PostContent postContent);
 
         void modifyLike(int position, int[] liked, int likeCount);
+
+        void setCheckIfFollowing(boolean check);
     }
 }

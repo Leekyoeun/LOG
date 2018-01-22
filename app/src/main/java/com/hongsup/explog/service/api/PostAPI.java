@@ -1,15 +1,18 @@
 package com.hongsup.explog.service.api;
 
+import com.hongsup.explog.data.post.Following;
 import com.hongsup.explog.data.post.PostContent;
 import com.hongsup.explog.data.post.PostContentResult;
 import com.hongsup.explog.data.post.PostCover;
 import com.hongsup.explog.data.post.PostResult;
+import com.hongsup.explog.view.setting.editprofile.insuptest.Following_users;
 
 import java.util.Map;
 
 import io.reactivex.Observable;
 import okhttp3.RequestBody;
 import retrofit2.Response;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -78,5 +81,8 @@ public interface PostAPI {
      */
     @POST("/post/{post_pk}/like/")
     Observable<Response<PostCover>> setPostLike(@Path("post_pk") int postPk);
+
+    @POST("/member/following/")
+    Observable<Response<Following>> following(@Body Following following);
 
 }

@@ -26,12 +26,15 @@ import com.google.android.gms.location.places.ui.PlacePicker;
 import com.hongsup.explog.R;
 import com.hongsup.explog.data.Const;
 import com.hongsup.explog.data.post.PostCover;
+import com.hongsup.explog.data.user.User;
 import com.hongsup.explog.data.user.source.UserRepository;
 import com.hongsup.explog.util.DateUtil;
 import com.hongsup.explog.view.gallery.GalleryActivity;
 import com.hongsup.explog.view.post.adapter.PostAdapter;
 import com.hongsup.explog.view.post.contract.PostContract;
 import com.hongsup.explog.view.posttext.PostTextActivity;
+
+import java.util.ArrayList;
 
 import butterknife.BindAnim;
 import butterknife.BindView;
@@ -54,6 +57,7 @@ public class PostView implements PostContract.iView {
     private PostAdapter postAdapter;
     private int menuId;
     private boolean isFabOpen;
+    private ArrayList<User> followList;
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -96,6 +100,7 @@ public class PostView implements PostContract.iView {
 
         coverIntent = ((Activity) context).getIntent();
         cover = (PostCover) coverIntent.getSerializableExtra(Const.INTENT_EXTRA_COVER);
+        followList = (ArrayList<User>) coverIntent.getSerializableExtra("userList");
 
         initToolbar();
         initAdapter();
@@ -108,6 +113,7 @@ public class PostView implements PostContract.iView {
         this.presenter.setPostAdapterModel(postAdapter);
         this.presenter.setPostAdapterView(postAdapter);
         this.presenter.loadPostContent(cover);
+        this.presenter.loadFollowing(followList);
     }
 
     @Override

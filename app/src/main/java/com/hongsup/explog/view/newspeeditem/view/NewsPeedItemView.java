@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -12,13 +13,23 @@ import android.widget.FrameLayout;
 import com.hongsup.explog.R;
 import com.hongsup.explog.data.Const;
 import com.hongsup.explog.data.post.PostCover;
+import com.hongsup.explog.data.user.User;
+import com.hongsup.explog.service.ServiceGenerator;
+import com.hongsup.explog.service.api.EditProfileAPI;
 import com.hongsup.explog.view.custom.PostItemDivider;
 import com.hongsup.explog.view.newspeeditem.adapter.NewsPeedItemAdapter;
 import com.hongsup.explog.view.newspeeditem.contract.NewsPeedItemContract;
 import com.hongsup.explog.view.post.PostActivity;
+import com.hongsup.explog.view.setting.editprofile.insuptest.UserInformation;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+import retrofit2.Response;
 
 /**
  * Created by Android Hong on 2017-11-30.
@@ -32,6 +43,7 @@ public class NewsPeedItemView extends FrameLayout implements NewsPeedItemContrac
     private Context context;
     private NewsPeedItemContract.iPresenter newsPeedItemPresenter;
     private NewsPeedItemAdapter newsPeedItemAdapter;
+    private ArrayList<User> userList;
 
     @BindView(R.id.recyclerView)
     public RecyclerView recyclerView;
@@ -71,13 +83,38 @@ public class NewsPeedItemView extends FrameLayout implements NewsPeedItemContrac
 
     @Override
     public void goToPost(PostCover postCover) {
+        loadFollowInfo();
         Intent intent = new Intent(context, PostActivity.class);
-
         /**
          * 값을 넘겨줘야 한다.
          */
         intent.putExtra(Const.INTENT_EXTRA_COVER,postCover);
+        intent.putExtra("userList", userList);
         context.startActivity(intent);
+    }
+
+    public void loadFollowInfo(){
+        EditProfileAPI profileEditAPI = ServiceGenerator.createInterceptor(EditProfileAPI.class);
+        Observable<Response<UserInformation>> getUserInfo = profileEditAPI.getUserInfo();
+        getUserInfo.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(data -> {
+                    if (data.isSuccessful()) {
+                        if (data.code() == 200) {
+                            Log.d("PostPresenter", "확인됨");
+
+                            userList = data.body().getFollowing_users();
+
+
+                        } else {
+                            Log.d("PostPresenter", "확인안됨");
+                        }
+                    } else {
+                        Log.d("PostPresenter", data.errorBody().string() + "data unsuccessful");
+                    }
+                }, throwable -> {
+                    Log.e("PostPresenter", throwable.getMessage());
+                });
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.hongsup.explog.view.setting.editprofile.insuptest;
 
 import com.hongsup.explog.data.post.PostCover;
+import com.hongsup.explog.data.user.User;
 
 import java.util.ArrayList;
 
@@ -21,11 +22,11 @@ public class UserInformation {
 
     private String email;
 
-    private ArrayList<Liked_posts> liked_posts;
+    private ArrayList<Posts> liked_posts;
 
     private ArrayList<Posts> posts;
 
-    private Following_users[] following_users;
+    private ArrayList<User> following_users;
 
     private String pk;
 
@@ -90,12 +91,12 @@ public class UserInformation {
         this.email = email;
     }
 
-    public ArrayList<Liked_posts> getLiked_posts ()
+    public ArrayList<Posts> getLiked_posts ()
     {
         return liked_posts;
     }
 
-    public void setLiked_posts (ArrayList<Liked_posts> liked_posts)
+    public void setLiked_posts (ArrayList<Posts> liked_posts)
     {
         this.liked_posts = liked_posts;
     }
@@ -110,12 +111,12 @@ public class UserInformation {
         this.posts = posts;
     }
 
-    public Following_users[] getFollowing_users ()
+    public ArrayList<User> getFollowing_users ()
     {
         return following_users;
     }
 
-    public void setFollowing_users (Following_users[] following_users)
+    public void setFollowing_users (ArrayList<User> following_users)
     {
         this.following_users = following_users;
     }

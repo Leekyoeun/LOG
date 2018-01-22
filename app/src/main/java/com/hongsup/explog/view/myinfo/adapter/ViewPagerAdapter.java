@@ -27,12 +27,12 @@ public class ViewPagerAdapter extends PagerAdapter {
     RecyclerViewPostAdapter recyclerViewPostAdapter;
     ArrayList<List> list = new ArrayList<>();
     ArrayList<Posts> postList;
-    ArrayList<Liked_posts> liked_postsList;
+    ArrayList<Posts> liked_postsList;
 
     public ViewPagerAdapter(ArrayList<List> list) {
         this.list = list;
         postList = (ArrayList<Posts>)list.get(0);
-        liked_postsList = (ArrayList<Liked_posts>)list.get(1);
+        liked_postsList = (ArrayList<Posts>)list.get(1);
         Log.d("PostList Size", postList.size()+"");
     }
 
@@ -59,7 +59,7 @@ public class ViewPagerAdapter extends PagerAdapter {
         recyclerViewLikeAdapter = new RecyclerViewLikeAdapter();
         recyclerViewPostAdapter = new RecyclerViewPostAdapter();
         recyclerViewPostAdapter.setList(postList, container.getContext());
-        recyclerViewLikeAdapter.setList(liked_postsList);
+        recyclerViewLikeAdapter.setList(liked_postsList, container.getContext());
         if(position==0){
             recyclerView.setAdapter(recyclerViewPostAdapter);
         }else{

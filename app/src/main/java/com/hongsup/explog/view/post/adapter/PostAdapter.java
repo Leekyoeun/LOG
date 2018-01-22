@@ -14,6 +14,7 @@ import com.hongsup.explog.data.user.User;
 import com.hongsup.explog.view.post.adapter.contract.PostAdapterContract;
 import com.hongsup.explog.view.post.adapter.viewholder.PostViewHolder;
 import com.hongsup.explog.view.post.listener.OnPostContentClickListener;
+import com.hongsup.explog.view.post.listener.OnPostFollowClickListener;
 import com.hongsup.explog.view.post.listener.OnPostLikeClickListener;
 
 import java.util.ArrayList;
@@ -31,7 +32,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostViewHolder> implements
     private List<PostContent> postContentList;
     private OnPostContentClickListener postContentClickListener;
     private OnPostLikeClickListener postLikeClickListener;
+    private OnPostFollowClickListener postFollowClickListener;
     private boolean checkMyPost;
+    private boolean checkIfFollowing;
 
     public PostAdapter(Context context, boolean checkMyPost) {
         postContentList = new ArrayList<>();
@@ -53,7 +56,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostViewHolder> implements
         holder.setPosition(position);
         holder.setContentClickListener(postContentClickListener);
         holder.setLikeClickListener(postLikeClickListener);
+        holder.setPostFollowClickListener(postFollowClickListener);
         holder.setCheckMyPost(checkMyPost);
+        holder.setCheckFollowing(checkIfFollowing);
         holder.bind(postContent.getContent());
     }
 
@@ -90,18 +95,30 @@ public class PostAdapter extends RecyclerView.Adapter<PostViewHolder> implements
     }
 
     @Override
+    public void setOnPostFollowClickListener(OnPostFollowClickListener postFollowClickListener) {
+        this.postFollowClickListener = postFollowClickListener;
+    }
+
+    @Override
     public void notifyAllAdapter() {
         notifyItemRangeChanged(0, postContentList.size());
     }
 
     @Override
     public void notifyLike(int position) {
+        Log.d("what is position", position+"");
         notifyItemChanged(position);
     }
 
     @Override
     public void setInit(int[] liked, int likeCount, User author) {
         postContentList.add(createContent(liked, likeCount, author, Const.CONTENT_TYPE_INIT));
+    }
+
+    @Override
+    public void setCheckIfFollowing(boolean check){
+        this.checkIfFollowing = check;
+        Log.d("setCheckIfFollowing", "follow me");
     }
 
     @Override
@@ -161,5 +178,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostViewHolder> implements
 
         return postContent;
     }
+
+
 
 }

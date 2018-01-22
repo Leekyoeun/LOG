@@ -118,7 +118,7 @@ public class MyInfoLayout extends FrameLayout {
                 .subscribe(data -> {
                     if (data.isSuccessful()) {
                         if (data.code() == 200) {
-                            Log.d("MainActivity", "확인됨");
+                            Log.d("MyInfoLayout", "확인됨");
 
 //                            Glide.with(getContext())
 //                                    .load(data.body().getImg_profile()).centerCrop().into(imgProfile);
