@@ -5,8 +5,11 @@ import com.hongsup.explog.data.post.PostContent;
 import com.hongsup.explog.data.post.PostContentResult;
 import com.hongsup.explog.data.post.PostCover;
 import com.hongsup.explog.data.post.PostResult;
+import com.hongsup.explog.data.post.Reply;
+import com.hongsup.explog.view.search.insuptest.Word;
 import com.hongsup.explog.view.setting.editprofile.insuptest.Following_users;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import io.reactivex.Observable;
@@ -58,7 +61,7 @@ public interface PostAPI {
      */
     @FormUrlEncoded
     @POST("/post/{post_pk}/text/")
-    Observable<Response<PostContent>> uploadPostText(@Path("post_pk") int postPk, @Field("content")String text, @Field("created_at")String date);
+    Observable<Response<PostContent>> uploadPostText(@Path("post_pk") int postPk, @Field("content")String text, @Field("created_at")String date, @Field("type") String type);
 
     /**
      *  Upload Post Path
@@ -84,5 +87,11 @@ public interface PostAPI {
 
     @POST("/member/following/")
     Observable<Response<Following>> following(@Body Following following);
+
+    @GET("/post/{post_pk}/reply/")
+    Observable<Response<ArrayList<Reply>>> reply(@Path("post_pk") int postPk);
+
+    @POST("/post/{post_pk}/reply/create/")
+    Observable<Response<Reply>> reply_input(@Path("post_pk") int postPk, @Field("content") String content);
 
 }

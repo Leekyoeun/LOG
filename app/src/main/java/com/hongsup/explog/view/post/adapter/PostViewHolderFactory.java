@@ -9,6 +9,8 @@ import com.hongsup.explog.view.post.adapter.viewholder.InitViewHolder;
 import com.hongsup.explog.view.post.adapter.viewholder.PathViewHolder;
 import com.hongsup.explog.view.post.adapter.viewholder.PhotoViewHolder;
 import com.hongsup.explog.view.post.adapter.viewholder.PostViewHolder;
+import com.hongsup.explog.view.post.adapter.viewholder.ReplyInputViewHolder;
+import com.hongsup.explog.view.post.adapter.viewholder.ReplyViewHolder;
 import com.hongsup.explog.view.post.adapter.viewholder.TextViewHolder;
 
 /**
@@ -41,6 +43,12 @@ public class PostViewHolderFactory {
             case Const.VIEW_TYPE_FOOTER:
                 layoutId = R.layout.item_post_footer;
                 break;
+            case Const.VIEW_TYPE_REPLY:
+                layoutId = R.layout.item_post_reply;
+                break;
+            case Const.VIEW_TYPE_REPLY_INPUT:
+                layoutId = R.layout.item_post_reply_input;
+                break;
             default:
                 throw new RuntimeException(type + "에 맞는 Layout 이 없습니다.");
         }
@@ -65,6 +73,12 @@ public class PostViewHolderFactory {
                 break;
             case Const.VIEW_TYPE_FOOTER:
                 viewHolder = new FooterViewHolder(itemView);
+                break;
+            case Const.VIEW_TYPE_REPLY:
+                viewHolder = new ReplyViewHolder(itemView);
+                break;
+            case Const.VIEW_TYPE_REPLY_INPUT:
+                viewHolder = new ReplyInputViewHolder(itemView);
                 break;
             default:
                 throw new RuntimeException(type + "에 맞는 ViewHolder 가 없습니다.");

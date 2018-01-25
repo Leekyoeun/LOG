@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 
 public class UserInformation {
-    private Followers[] followers;
+    private ArrayList<User> followers;
 
     private String username;
 
@@ -31,12 +31,12 @@ public class UserInformation {
     private String pk;
 
 
-    public Followers[] getFollowers ()
+    public ArrayList<User> getFollowers ()
     {
         return followers;
     }
 
-    public void setFollowers (Followers[] followers)
+    public void setFollowers (ArrayList<User> followers)
     {
         this.followers = followers;
     }

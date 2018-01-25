@@ -6,18 +6,17 @@ import com.hongsup.explog.data.post.Following;
 import com.hongsup.explog.data.post.PostContent;
 import com.hongsup.explog.data.post.PostContentResult;
 import com.hongsup.explog.data.post.PostCover;
+import com.hongsup.explog.data.post.Reply;
 import com.hongsup.explog.data.post.source.PostRepository;
 import com.hongsup.explog.data.user.User;
 import com.hongsup.explog.service.ServiceGenerator;
-import com.hongsup.explog.service.api.EditProfileAPI;
 import com.hongsup.explog.service.api.PostAPI;
-import com.hongsup.explog.view.myinfo.adapter.ViewPagerAdapter;
 import com.hongsup.explog.view.post.adapter.contract.PostAdapterContract;
 import com.hongsup.explog.view.post.contract.PostContract;
 import com.hongsup.explog.view.post.listener.OnPostContentClickListener;
 import com.hongsup.explog.view.post.listener.OnPostFollowClickListener;
 import com.hongsup.explog.view.post.listener.OnPostLikeClickListener;
-import com.hongsup.explog.view.setting.editprofile.insuptest.UserInformation;
+import com.hongsup.explog.view.post.listener.OnReplyButtonClickListener;
 
 import java.util.ArrayList;
 
@@ -32,7 +31,7 @@ import static com.bumptech.glide.gifdecoder.GifHeaderParser.TAG;
  * Created by Android Hong on 2017-12-14.
  */
 
-public class PostPresenter implements PostContract.iPresenter, OnPostContentClickListener, OnPostLikeClickListener, OnPostFollowClickListener {
+public class PostPresenter implements PostContract.iPresenter, OnPostContentClickListener, OnPostLikeClickListener, OnPostFollowClickListener, OnReplyButtonClickListener {
 
     private int postPk;
     private int userPk;
@@ -79,9 +78,10 @@ public class PostPresenter implements PostContract.iPresenter, OnPostContentClic
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(data -> {
                             if (data.isSuccessful()) {
-                                boolean checkIfFollowing = true;
+                                boolean checkIfFollowing = false;
                                 Log.e(TAG, "loadPostContent: 데이터 로드 완료");
                                 view.hideProgress();
+                                //list = loadReply(cover);
 
                                 if (data.body().getPostContentList() == null || data.body().getPostContentList().size() == 0) {
                                     adapterModel.setInit(cover.getLiked(), cover.getLikeCount(), cover.getAuthor());
@@ -89,6 +89,10 @@ public class PostPresenter implements PostContract.iPresenter, OnPostContentClic
                                     adapterModel.setItems(data.body().getPostContentList());
                                     adapterModel.setLikeAndFollow(cover.getLiked(), cover.getLikeCount(), cover.getAuthor());
                                 }
+
+                                loadReply(cover);
+
+                                Log.d("PostPresenter", list.size()+"");
                                 adapterView.notifyAllAdapter();
 
                                 for(User user : userList){
@@ -97,11 +101,15 @@ public class PostPresenter implements PostContract.iPresenter, OnPostContentClic
                                         Log.d("loadPostContent", user.getEmail());
                                         break;
                                     }else{
+                                        Log.d("loadPostContent", "false가 뜬다");
                                         checkIfFollowing = false;
                                     }
                                 }
                                 adapterModel.setCheckIfFollowing(checkIfFollowing);
+
                                 Log.d("loadPostContent", checkIfFollowing + "");
+
+
                             } else {
                                 Log.e(TAG, "loadPostContent: 데이터 로드 실패1");
                                 view.hideProgress();
@@ -112,6 +120,32 @@ public class PostPresenter implements PostContract.iPresenter, OnPostContentClic
                             Log.e(TAG, throwable.getMessage());
                             view.hideProgress();
                         });
+    }
+    ArrayList<Reply> list = new ArrayList<>();
+
+    public void loadReply(PostCover cover){
+
+        this.postPk = cover.getPk();
+        PostAPI postAPI = ServiceGenerator.createInterceptor(PostAPI.class);
+        Observable<Response<ArrayList<Reply>>> observable = postAPI.reply(postPk);
+        observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(data->{
+                    if(data.isSuccessful()){
+                     Log.e(TAG, "loadReply() 로드 완료 why?");
+                     list = data.body();
+                        for(int i=0; i<list.size(); i++){
+                            adapterModel.setReply(cover.getLiked(), cover.getLikeCount(), cover.getAuthor(), list.get(i));
+                        }
+                        adapterModel.setReplyInput(cover.getLiked(), cover.getLikeCount(), cover.getAuthor());
+
+
+                    }else{
+                        Log.e(TAG, data.errorBody().string());
+                    }
+                }, throwable -> {
+                    Log.e(TAG, throwable.getMessage());
+                });
     }
     ArrayList<User> userList;
 //    public void loadFollowInfo(){
@@ -141,7 +175,7 @@ public class PostPresenter implements PostContract.iPresenter, OnPostContentClic
     @Override
     public void uploadPostText(String text, String date) {
         view.showProgress();
-        Observable<Response<PostContent>> observable = repository.uploadPostText(postPk, text, date);
+        Observable<Response<PostContent>> observable = repository.uploadPostText(postPk, text, date, "b");
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(data -> {
@@ -150,8 +184,10 @@ public class PostPresenter implements PostContract.iPresenter, OnPostContentClic
                                 Log.e(TAG, "uploadPostText: 데이터 업로드 완료");
                                 view.hideProgress();
                                 adapterModel.addItems(data.body());
+                                adapterView.notifyAllAdapter();
                             } else {
                                 Log.e(TAG, "uploadPostText: 데이터 업로드 실패1");
+                                Log.e(TAG, data.errorBody().string());
                                 view.hideProgress();
                             }
                         },
@@ -210,6 +246,10 @@ public class PostPresenter implements PostContract.iPresenter, OnPostContentClic
                         });
     }
 
+    public void uploadReply(){
+
+    }
+
     @Override
     public void setOnLikeClick(int position) {
         view.showProgress();
@@ -259,5 +299,26 @@ public class PostPresenter implements PostContract.iPresenter, OnPostContentClic
                 }, throwable -> {
                     Log.e(TAG, "FollowClick: " + throwable.getMessage());
                 });
+    }
+
+    @Override
+    public void setOnReplyClick(String content) {
+        PostAPI postAPI = ServiceGenerator.createInterceptor(PostAPI.class);
+        Observable<Response<Reply>> reply_input = postAPI.reply_input(postPk, content);
+        reply_input.observeOn(Schedulers.io())
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .subscribe(data->{
+                    if(data.isSuccessful()){
+                        Log.d("setOnReplyClick()", "잘 들어옵니다");
+
+                    }else{
+                        Log.d("setOnReplyClick()", data.errorBody().string());
+                    }
+
+                }, throwable -> {
+                    Log.d("setOnReplyClick()", throwable.getMessage());
+
+                });
+
     }
 }

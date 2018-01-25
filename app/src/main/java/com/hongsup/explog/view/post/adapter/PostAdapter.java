@@ -10,12 +10,14 @@ import android.view.ViewGroup;
 import com.hongsup.explog.data.Const;
 import com.hongsup.explog.data.post.Content;
 import com.hongsup.explog.data.post.PostContent;
+import com.hongsup.explog.data.post.Reply;
 import com.hongsup.explog.data.user.User;
 import com.hongsup.explog.view.post.adapter.contract.PostAdapterContract;
 import com.hongsup.explog.view.post.adapter.viewholder.PostViewHolder;
 import com.hongsup.explog.view.post.listener.OnPostContentClickListener;
 import com.hongsup.explog.view.post.listener.OnPostFollowClickListener;
 import com.hongsup.explog.view.post.listener.OnPostLikeClickListener;
+import com.hongsup.explog.view.post.listener.OnReplyButtonClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +35,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostViewHolder> implements
     private OnPostContentClickListener postContentClickListener;
     private OnPostLikeClickListener postLikeClickListener;
     private OnPostFollowClickListener postFollowClickListener;
+    private OnReplyButtonClickListener replyButtonClickListener;
     private boolean checkMyPost;
     private boolean checkIfFollowing;
 
@@ -57,6 +60,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostViewHolder> implements
         holder.setContentClickListener(postContentClickListener);
         holder.setLikeClickListener(postLikeClickListener);
         holder.setPostFollowClickListener(postFollowClickListener);
+        holder.setReplyButtonClickListener(replyButtonClickListener);
         holder.setCheckMyPost(checkMyPost);
         holder.setCheckFollowing(checkIfFollowing);
         holder.bind(postContent.getContent());
@@ -80,6 +84,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostViewHolder> implements
             return Const.VIEW_TYPE_INIT;
         } else if (Const.CONTENT_TYPE_FOOTER.equals(postContent.getContentType())) {
             return Const.VIEW_TYPE_FOOTER;
+        } else if (Const.CONTENT_TYPE_REPLY.equals(postContent.getContentType())) {
+            return Const.VIEW_TYPE_REPLY;
+        } else if (Const.CONTENT_TYPE_REPLY_INPUT.equals(postContent.getContentType())) {
+            return Const.VIEW_TYPE_REPLY_INPUT;
         }
         throw new RuntimeException("there is no type that matches the type " + postContent.getContentType() + " + make sure your using types correctly");
     }
@@ -100,13 +108,18 @@ public class PostAdapter extends RecyclerView.Adapter<PostViewHolder> implements
     }
 
     @Override
+    public void setOnReplyButtonClickListener(OnReplyButtonClickListener replyButtonClickListener) {
+        this.replyButtonClickListener = replyButtonClickListener;
+    }
+
+    @Override
     public void notifyAllAdapter() {
         notifyItemRangeChanged(0, postContentList.size());
     }
 
     @Override
     public void notifyLike(int position) {
-        Log.d("what is position", position+"");
+        Log.d("what is position", position + "");
         notifyItemChanged(position);
     }
 
@@ -116,7 +129,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostViewHolder> implements
     }
 
     @Override
-    public void setCheckIfFollowing(boolean check){
+    public void setCheckIfFollowing(boolean check) {
         this.checkIfFollowing = check;
         Log.d("setCheckIfFollowing", "follow me");
     }
@@ -124,6 +137,17 @@ public class PostAdapter extends RecyclerView.Adapter<PostViewHolder> implements
     @Override
     public void setLikeAndFollow(int[] liked, int likeCount, User author) {
         postContentList.add(createContent(liked, likeCount, author, Const.CONTENT_TYPE_FOOTER));
+    }
+
+    @Override
+    public void setReply(int[] liked, int likeCount, User author, Reply reply) {
+        postContentList.add(createContent(liked, likeCount, author, Const.CONTENT_TYPE_REPLY, reply));
+    }
+
+    @Override
+    public void setReplyInput(int[] liked, int likeCount, User author){
+        postContentList.add(createContent(liked, likeCount, author, Const.CONTENT_TYPE_REPLY_INPUT));
+        notifyItemRangeChanged(0, postContentList.size());
     }
 
     @Override
@@ -172,6 +196,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostViewHolder> implements
         content.setLikeCount(likeCount);
         content.setLiked(liked);
         content.setAuthor(author);
+
         postContent.setContent(content);
 
         postContent.setContentType(type);
@@ -179,6 +204,23 @@ public class PostAdapter extends RecyclerView.Adapter<PostViewHolder> implements
         return postContent;
     }
 
+    private PostContent createContent(int[] liked, int likeCount, User author, String type, Reply reply) {
+        PostContent postContent = new PostContent();
+
+        /**
+         * Like 와 Author 설정
+         */
+        Content content = new Content();
+        content.setLikeCount(likeCount);
+        content.setLiked(liked);
+        content.setAuthor(author);
+        content.setReply(reply);
+        postContent.setContent(content);
+
+        postContent.setContentType(type);
+
+        return postContent;
+    }
 
 
 }

@@ -16,12 +16,16 @@ public class Const {
     public static final int VIEW_TYPE_PHOTO = 2;
     public static final int VIEW_TYPE_PATH = 3;
     public static final int VIEW_TYPE_FOOTER = 4;
+    public static final int VIEW_TYPE_REPLY = 5;
+    public static final int VIEW_TYPE_REPLY_INPUT = 6;
 
     public static final String CONTENT_TYPE_INIT = "init";
     public static final String CONTENT_TYPE_TEXT = "txt";
     public static final String CONTENT_TYPE_PHOTO = "img";
     public static final String CONTENT_TYPE_PATH = "path";
     public static final String CONTENT_TYPE_FOOTER = "footer";
+    public static final String CONTENT_TYPE_REPLY = "reply";
+    public static final String CONTENT_TYPE_REPLY_INPUT = "reply_input";
 
     public static final String INTENT_EXTRA_COVER = "COVER";
     public static final String INTENT_EXTRA_TEXT = "TEXT";

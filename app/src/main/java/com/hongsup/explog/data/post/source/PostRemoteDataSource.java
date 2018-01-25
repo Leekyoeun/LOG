@@ -84,8 +84,8 @@ public class PostRemoteDataSource implements PostSource {
     }
 
     @Override
-    public Observable<Response<PostContent>> uploadPostText(int postPk, String text, String date) {
-        return postTokenAPI.uploadPostText(postPk, text, date);
+    public Observable<Response<PostContent>> uploadPostText(int postPk, String text, String date, String type) {
+        return postTokenAPI.uploadPostText(postPk, text, date, type);
     }
 
     @Override

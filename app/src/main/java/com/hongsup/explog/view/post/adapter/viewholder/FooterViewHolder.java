@@ -53,7 +53,7 @@ public class FooterViewHolder extends PostViewHolder {
     @Override
     public void bind(Content data) {
         if (checkIfFollowing) {
-            Log.d("실험용", "실험용");
+            Log.d("실험용1", "실험용1");
             textFollow.setText("Unfollow");
         } else {
             Log.d("실험용2", "실험용2");

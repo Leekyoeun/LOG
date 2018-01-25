@@ -3,6 +3,7 @@ package com.hongsup.explog.view.main;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
@@ -38,5 +39,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onRestart() {
         super.onRestart();
         mainPresenter.refreshData(mainView);
+        Log.d("MainonRestart()", "operation");
     }
 }

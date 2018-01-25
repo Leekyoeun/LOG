@@ -83,17 +83,6 @@ public class NewsPeedItemView extends FrameLayout implements NewsPeedItemContrac
 
     @Override
     public void goToPost(PostCover postCover) {
-        loadFollowInfo();
-        Intent intent = new Intent(context, PostActivity.class);
-        /**
-         * 값을 넘겨줘야 한다.
-         */
-        intent.putExtra(Const.INTENT_EXTRA_COVER,postCover);
-        intent.putExtra("userList", userList);
-        context.startActivity(intent);
-    }
-
-    public void loadFollowInfo(){
         EditProfileAPI profileEditAPI = ServiceGenerator.createInterceptor(EditProfileAPI.class);
         Observable<Response<UserInformation>> getUserInfo = profileEditAPI.getUserInfo();
         getUserInfo.subscribeOn(Schedulers.io())
@@ -104,6 +93,14 @@ public class NewsPeedItemView extends FrameLayout implements NewsPeedItemContrac
                             Log.d("PostPresenter", "확인됨");
 
                             userList = data.body().getFollowing_users();
+                            Intent intent = new Intent(context, PostActivity.class);
+                            /**
+                             * 값을 넘겨줘야 한다.
+                             */
+                            intent.putExtra(Const.INTENT_EXTRA_COVER,postCover);
+                            intent.putExtra("userList", userList);
+                            context.startActivity(intent);
+                            Log.d("PostPresenter", userList.size()+"");
 
 
                         } else {
@@ -115,8 +112,8 @@ public class NewsPeedItemView extends FrameLayout implements NewsPeedItemContrac
                 }, throwable -> {
                     Log.e("PostPresenter", throwable.getMessage());
                 });
-    }
 
+    }
     @Override
     public void showError(String text) {
 

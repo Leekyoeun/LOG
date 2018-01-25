@@ -5,6 +5,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.hongsup.explog.data.post.PostCover;
+import com.hongsup.explog.data.post.Reply;
 import com.hongsup.explog.data.user.User;
 import com.hongsup.explog.view.post.adapter.contract.PostAdapterContract;
 

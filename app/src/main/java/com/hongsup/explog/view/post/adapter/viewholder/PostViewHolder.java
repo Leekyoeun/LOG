@@ -8,6 +8,7 @@ import com.hongsup.explog.data.post.Content;
 import com.hongsup.explog.view.post.listener.OnPostContentClickListener;
 import com.hongsup.explog.view.post.listener.OnPostFollowClickListener;
 import com.hongsup.explog.view.post.listener.OnPostLikeClickListener;
+import com.hongsup.explog.view.post.listener.OnReplyButtonClickListener;
 
 /**
  * Created by Android Hong on 2017-12-12.
@@ -21,6 +22,7 @@ public abstract class PostViewHolder extends RecyclerView.ViewHolder {
     OnPostContentClickListener postContentClickListener;
     OnPostLikeClickListener postLikeClickListener;
     OnPostFollowClickListener postFollowClickListener;
+    OnReplyButtonClickListener replyButtonClickListener;
     boolean checkIfFollowing;
 
     public PostViewHolder(View itemView) {
@@ -45,6 +47,10 @@ public abstract class PostViewHolder extends RecyclerView.ViewHolder {
 
     public void setPostFollowClickListener(OnPostFollowClickListener postFollowClickListener){
         this.postFollowClickListener = postFollowClickListener;
+    }
+
+    public void setReplyButtonClickListener(OnReplyButtonClickListener replyButtonClickListener){
+        this.replyButtonClickListener = replyButtonClickListener;
     }
 
     public void setPosition(int position) {
