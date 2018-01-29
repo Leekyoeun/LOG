@@ -67,7 +67,7 @@
         <activity
             android:name=".view.post.PostActivity"
             android:theme="@style/AppTheme.NoStatusBar"
-            />
+            android:windowSoftInputMode="adjustPan"/>
 
         <!-- Post Text 작성 페이지 -->
         <activity

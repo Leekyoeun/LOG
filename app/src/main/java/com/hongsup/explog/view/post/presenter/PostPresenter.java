@@ -2,6 +2,8 @@ package com.hongsup.explog.view.post.presenter;
 
 import android.util.Log;
 
+import com.hongsup.explog.data.Const;
+import com.hongsup.explog.data.post.Content;
 import com.hongsup.explog.data.post.Following;
 import com.hongsup.explog.data.post.PostContent;
 import com.hongsup.explog.data.post.PostContentResult;
@@ -60,6 +62,7 @@ public class PostPresenter implements PostContract.iPresenter, OnPostContentClic
         this.adapterView.setOnPostContentClickListener(this);
         this.adapterView.setOnPostLikeClickListener(this);
         this.adapterView.setOnPostFollowClickListener(this);
+        this.adapterView.setOnReplyButtonClickListener(this);
     }
 
     public void loadFollowing(ArrayList<User> list){
@@ -183,7 +186,7 @@ public class PostPresenter implements PostContract.iPresenter, OnPostContentClic
                             if (data.isSuccessful()) {
                                 Log.e(TAG, "uploadPostText: 데이터 업로드 완료");
                                 view.hideProgress();
-                                adapterModel.addItems(data.body());
+                                adapterModel.addItems(data.body(), data.body().getOrder());
                                 adapterView.notifyAllAdapter();
                             } else {
                                 Log.e(TAG, "uploadPostText: 데이터 업로드 실패1");
@@ -209,7 +212,7 @@ public class PostPresenter implements PostContract.iPresenter, OnPostContentClic
                             if (data.isSuccessful()) {
                                 Log.e(TAG, "uploadPostPath: 데이터 업로드 완료");
                                 view.hideProgress();
-                                adapterModel.addItems(data.body());
+                                adapterModel.addItems(data.body(), data.body().getOrder());
                             } else {
                                 Log.e(TAG, "uploadPostPath: 데이터 업로드 실패1");
                                 view.hideProgress();
@@ -233,7 +236,7 @@ public class PostPresenter implements PostContract.iPresenter, OnPostContentClic
                             if (data.isSuccessful()) {
                                 Log.e(TAG, "uploadPostPhoto: 데이터 업로드 완료");
                                 view.hideProgress();
-                                adapterModel.addItems(data.body());
+                                adapterModel.addItems(data.body(), data.body().getOrder());
                             } else {
                                 Log.e(TAG, "uploadPostPhoto: 데이터 업로드 실패1");
                                 view.hideProgress();
@@ -305,11 +308,18 @@ public class PostPresenter implements PostContract.iPresenter, OnPostContentClic
     public void setOnReplyClick(String content) {
         PostAPI postAPI = ServiceGenerator.createInterceptor(PostAPI.class);
         Observable<Response<Reply>> reply_input = postAPI.reply_input(postPk, content);
-        reply_input.observeOn(Schedulers.io())
-                .subscribeOn(AndroidSchedulers.mainThread())
+        reply_input.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(data->{
                     if(data.isSuccessful()){
                         Log.d("setOnReplyClick()", "잘 들어옵니다");
+                        PostContent postContent = new PostContent();
+                        Content content1 = new Content();
+                        content1.setReply(data.body());
+                        postContent.setContent(content1);
+                        postContent.setContentType(Const.CONTENT_TYPE_REPLY);
+                        adapterModel.addReply(postContent);
+                        view.recyclerDown(adapterModel.getListSize());
 
                     }else{
                         Log.d("setOnReplyClick()", data.errorBody().string());

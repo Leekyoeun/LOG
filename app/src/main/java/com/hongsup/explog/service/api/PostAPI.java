@@ -91,6 +91,7 @@ public interface PostAPI {
     @GET("/post/{post_pk}/reply/")
     Observable<Response<ArrayList<Reply>>> reply(@Path("post_pk") int postPk);
 
+    @FormUrlEncoded
     @POST("/post/{post_pk}/reply/create/")
     Observable<Response<Reply>> reply_input(@Path("post_pk") int postPk, @Field("content") String content);
 

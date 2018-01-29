@@ -31,6 +31,8 @@ public interface PostContract {
         void setMenu(Menu menu);
 
         void onMenuClick(MenuItem item);
+
+        void recyclerDown(int position);
     }
 
     interface iPresenter {

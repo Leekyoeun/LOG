@@ -41,6 +41,7 @@ public class ReplyInputViewHolder extends PostViewHolder {
                 if(!"".equals(edit_reply_input.getText().toString())){
 
                     replyButtonClickListener.setOnReplyClick(edit_reply_input.getText().toString());
+                    edit_reply_input.setText("");
 
                 }
             }

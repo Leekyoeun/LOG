@@ -38,7 +38,7 @@ public interface PostAdapterContract {
 
         void setLikeAndFollow(int[] liked, int likeCount, User author);
 
-        void addItems(PostContent postContent);
+        void addItems(PostContent postContent, int order);
 
         void modifyLike(int position, int[] liked, int likeCount);
 
@@ -47,5 +47,9 @@ public interface PostAdapterContract {
         void setReply(int[] liked, int likeCount, User author, Reply reply);
 
         void setReplyInput(int[] liked, int likeCount, User author);
+
+        void addReply(PostContent postContent);
+
+        int getListSize();
     }
 }

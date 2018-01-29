@@ -148,6 +148,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostViewHolder> implements
     public void setReplyInput(int[] liked, int likeCount, User author){
         postContentList.add(createContent(liked, likeCount, author, Const.CONTENT_TYPE_REPLY_INPUT));
         notifyItemRangeChanged(0, postContentList.size());
+
     }
 
     @Override
@@ -157,7 +158,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostViewHolder> implements
     }
 
     @Override
-    public void addItems(PostContent postContent) {
+    public void addItems(PostContent postContent, int order) {
         if (postContentList.get(0).getContentType().equals(Const.CONTENT_TYPE_INIT)) {
             // 첫번째 아이템이 init 인 경우
             PostContent footerContent = createContent(postContentList.get(0).getContent().getLiked(), postContentList.get(0).getContent().getLikeCount(), postContentList.get(0).getContent().getAuthor(), Const.CONTENT_TYPE_FOOTER);
@@ -167,15 +168,26 @@ public class PostAdapter extends RecyclerView.Adapter<PostViewHolder> implements
             notifyItemRangeChanged(0, postContentList.size());
         } else {
             // 아닌 경우
-            this.postContentList.add(postContentList.size() - 1, postContent);
-            notifyItemInserted(postContentList.size() - 1);
+            Log.d(TAG, "addItems() 실행");
+            this.postContentList.add(order-1, postContent);
+            notifyItemInserted(order-1);
         }
+    }
+
+    @Override
+    public void addReply(PostContent postContent){
+        this.postContentList.add(postContentList.size()-1, postContent);
+        notifyItemInserted(postContentList.size()-1);
     }
 
     @Override
     public void modifyLike(int position, int[] liked, int likeCount) {
         postContentList.get(position).getContent().setLikeCount(likeCount);
         postContentList.get(position).getContent().setLiked(liked);
+    }
+
+    public int getListSize(){
+        return postContentList.size()-1;
     }
 
     /**

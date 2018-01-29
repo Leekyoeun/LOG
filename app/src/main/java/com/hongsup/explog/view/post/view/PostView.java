@@ -118,6 +118,11 @@ public class PostView implements PostContract.iView {
     }
 
     @Override
+    public void recyclerDown(int position){
+        recyclerView.scrollToPosition(position);
+    }
+
+    @Override
     public View getView() {
         return view;
     }
