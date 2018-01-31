@@ -7,7 +7,6 @@ import android.support.annotation.NonNull;
 import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.internal.BottomNavigationMenuView;
 import android.support.design.widget.BottomNavigationView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,7 +20,7 @@ import com.hongsup.explog.view.main.contract.MainContract;
 import com.hongsup.explog.view.myinfo.MyInfoLayout;
 import com.hongsup.explog.view.myinfo.MyInfoNotLogInLayout;
 import com.hongsup.explog.view.newspeed.view.NewsPeedView;
-import com.hongsup.explog.view.search.SearchView;
+import com.hongsup.explog.view.search.view.SearchView;
 
 import java.lang.reflect.Field;
 

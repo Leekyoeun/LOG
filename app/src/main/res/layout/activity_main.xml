@@ -20,7 +20,6 @@
         android:id="@+id/navigation"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-
         app:elevation="8dp"
         app:itemIconTint="@color/color_navi_selected"
         app:itemTextColor="@color/color_navi_selected"
