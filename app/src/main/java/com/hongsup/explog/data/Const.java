@@ -10,6 +10,7 @@ public class Const {
     public static final int REQ_GALLERY = 101;
     public static final int REQ_TEXT = 102;
     public static final int REQ_PATH = 103;
+    public static final int REQ_GALLERY2 = 104;
 
     public static final int VIEW_TYPE_INIT = 0;
     public static final int VIEW_TYPE_TEXT = 1;
