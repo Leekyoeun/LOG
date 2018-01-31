@@ -20,7 +20,7 @@ import com.hongsup.explog.view.main.contract.MainContract;
 import com.hongsup.explog.view.myinfo.MyInfoLayout;
 import com.hongsup.explog.view.myinfo.MyInfoNotLogInLayout;
 import com.hongsup.explog.view.newspeed.view.NewsPeedView;
-import com.hongsup.explog.view.search.view.SearchView;
+import com.hongsup.explog.view.search.SearchView;
 
 import java.lang.reflect.Field;
 
