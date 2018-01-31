@@ -52,6 +52,7 @@ public class RecyclerViewPostAdapter extends RecyclerView.Adapter<RecyclerViewPo
         holder.textDate.setText(date);
         holder.posts = list.get(position);
         //holder.posts.setAuthor(userRepository.getUser());
+        holder.textLike.setText(list.get(position).getNum_liked()+"");
 
         Glide.with(context).load(list.get(position).getImg()).centerCrop().into(holder.imgCover);
     }
@@ -70,6 +71,9 @@ public class RecyclerViewPostAdapter extends RecyclerView.Adapter<RecyclerViewPo
         TextView textWriter;
         @BindView(R.id.imgCover)
         ImageView imgCover;
+        @BindView(R.id.textLike)
+        TextView textLike;
+
 
         Posts posts;
 
