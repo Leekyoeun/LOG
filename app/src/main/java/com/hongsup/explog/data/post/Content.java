@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 import com.hongsup.explog.data.user.User;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -27,6 +28,8 @@ public class Content implements Serializable{
     private int likeCount;
     private int[] liked;
     private User author;
+    private Reply reply;
+
 
     public int getPk() {
         return pk;
@@ -98,6 +101,14 @@ public class Content implements Serializable{
 
     public void setLiked(int[] liked) {
         this.liked = liked;
+    }
+
+    public Reply getReply() {
+        return reply;
+    }
+
+    public void setReply(Reply reply) {
+        this.reply = reply;
     }
 
     @Override

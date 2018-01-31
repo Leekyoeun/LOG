@@ -6,6 +6,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.hongsup.explog.R;
@@ -40,6 +41,8 @@ public class FooterViewHolder extends PostViewHolder {
     ImageButton imgLike;
     @BindView(R.id.textLikeCount)
     TextView textLikeCount;
+    @BindView(R.id.textFollow)
+    TextView textFollow;
 
 
     public FooterViewHolder(View itemView) {
@@ -49,10 +52,12 @@ public class FooterViewHolder extends PostViewHolder {
 
     @Override
     public void bind(Content data) {
-        if (onFollowing) {
-
+        if (checkIfFollowing) {
+            Log.d("실험용1", "실험용1");
+            textFollow.setText("Unfollow");
         } else {
-
+            Log.d("실험용2", "실험용2");
+            textFollow.setText("Follow");
         }
 
         /**
@@ -85,10 +90,14 @@ public class FooterViewHolder extends PostViewHolder {
 
     @OnClick(R.id.textFollow)
     public void onFollowClick() {
-        if (onFollowing) {
-
+        if (checkIfFollowing) {
+            postFollowClickListener.setOnFollowClick();
+            textFollow.setText("Follow");
+            checkIfFollowing = false;
         } else {
-
+            postFollowClickListener.setOnFollowClick();
+            textFollow.setText("Unfollow");
+            checkIfFollowing = true;
         }
     }
 

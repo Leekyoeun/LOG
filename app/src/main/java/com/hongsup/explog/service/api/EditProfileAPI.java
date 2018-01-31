@@ -12,6 +12,7 @@ import retrofit2.http.Header;
 import retrofit2.http.Multipart;
 import retrofit2.http.PATCH;
 import retrofit2.http.Part;
+import retrofit2.http.Path;
 
 /**
  * Created by 정인섭 on 2017-12-14.
@@ -24,4 +25,7 @@ public interface EditProfileAPI {
     @Multipart
     @PATCH("/member/userprofile/update/")
     Observable<Response<UserEditProfile>> userEditProfile(@Part MultipartBody.Part filePart, @Part("username") RequestBody username);
+
+    @GET("/member/userprofile/{userPK}")
+    Observable<Response<UserInformation>> getOtherUserInfo(@Path("userPK") String userPK);
 }

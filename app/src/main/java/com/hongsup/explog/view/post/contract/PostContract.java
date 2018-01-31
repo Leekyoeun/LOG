@@ -5,7 +5,11 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.hongsup.explog.data.post.PostCover;
+import com.hongsup.explog.data.post.Reply;
+import com.hongsup.explog.data.user.User;
 import com.hongsup.explog.view.post.adapter.contract.PostAdapterContract;
+
+import java.util.ArrayList;
 
 /**
  * Created by Android Hong on 2017-12-14.
@@ -27,6 +31,8 @@ public interface PostContract {
         void setMenu(Menu menu);
 
         void onMenuClick(MenuItem item);
+
+        void recyclerDown(int position);
     }
 
     interface iPresenter {
@@ -44,5 +50,7 @@ public interface PostContract {
         void uploadPostPath(double lat, double lng);
 
         void uploadPostPhoto(String photoPath);
+
+        void loadFollowing(ArrayList<User> list);
     }
 }

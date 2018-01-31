@@ -1,10 +1,12 @@
 package com.hongsup.explog.view.post.adapter.viewholder;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.hongsup.explog.R;
@@ -44,6 +46,8 @@ public class InitViewHolder extends PostViewHolder {
     ImageButton imgLike;
     @BindView(R.id.textLikeCount)
     TextView textLikeCount;
+    @BindView(R.id.textFollow)
+    TextView textFollow;
 
     public InitViewHolder(View itemView) {
         super(itemView);
@@ -53,10 +57,12 @@ public class InitViewHolder extends PostViewHolder {
     @Override
     public void bind(Content data) {
 
-        if (onFollowing) {
-
+        if (checkIfFollowing) {
+            Log.d("실험용", "실험용");
+            textFollow.setText("Unfollow");
         } else {
-
+            Log.d("실험용2", "실험용2");
+            textFollow.setText("Follow");
         }
 
         /**
@@ -81,6 +87,13 @@ public class InitViewHolder extends PostViewHolder {
 
             textAuthor.setText(data.getAuthor().getUsername());
             textEmail.setText(data.getAuthor().getEmail());
+            Log.d("checkIfFollowing", checkIfFollowing + "");
+            if(checkIfFollowing){
+                textFollow.setText("Unfollow");
+            }else{
+                textFollow.setText("Follow");
+            }
+
 
             Glide.with(context)
                     .load(data.getAuthor().getImg_profile())
@@ -95,10 +108,14 @@ public class InitViewHolder extends PostViewHolder {
 
     @OnClick(R.id.textFollow)
     public void onFollowClick() {
-        if (onFollowing) {
-
+        if (checkIfFollowing) {
+            postFollowClickListener.setOnFollowClick();
+            textFollow.setText("Follow");
+            checkIfFollowing = false;
         } else {
-
+            postFollowClickListener.setOnFollowClick();
+            textFollow.setText("Unfollow");
+            checkIfFollowing = true;
         }
     }
 

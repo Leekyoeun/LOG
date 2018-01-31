@@ -27,6 +27,9 @@ public class User implements Serializable{
     private String img_profile;
     @SerializedName("token")
     private String token;
+//    @SerializedName("apnsdevice_set")
+//    private Apnsdevice_set[] apnsdevice_set;
+
 
     /**
      * SignIn 오류 났을 경우
@@ -82,6 +85,16 @@ public class User implements Serializable{
     public void setMessage(String message) {
         this.message = message;
     }
+
+//    public Apnsdevice_set[] getApnsdevice_set ()
+//    {
+//        return apnsdevice_set;
+//    }
+//
+//    public void setApnsdevice_set (Apnsdevice_set[] apnsdevice_set)
+//    {
+//        this.apnsdevice_set = apnsdevice_set;
+//    }
 
 
 

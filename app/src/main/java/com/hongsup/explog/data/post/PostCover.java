@@ -2,6 +2,7 @@ package com.hongsup.explog.data.post;
 
 import com.google.gson.annotations.SerializedName;
 import com.hongsup.explog.data.user.User;
+import com.hongsup.explog.view.setting.editprofile.insuptest.Posts;
 
 import java.io.Serializable;
 import java.util.Arrays;
@@ -23,8 +24,8 @@ public class PostCover implements Serializable {
     private String endDate;
     @SerializedName("img")
     private String coverPath;
-    @SerializedName("created_at")
-    private String createdAt;
+//    @SerializedName("created_at")
+//    private String createdAt;
     @SerializedName("continent")
     private String continent;
     @SerializedName("num_liked")
@@ -76,13 +77,13 @@ public class PostCover implements Serializable {
         this.endDate = endDate;
     }
 
-    public String getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
-    }
+//    public String getCreatedAt() {
+//        return createdAt;
+//    }
+//
+//    public void setCreatedAt(String createdAt) {
+//        this.createdAt = createdAt;
+//    }
 
     public String getContinent() {
         return continent;
@@ -124,6 +125,17 @@ public class PostCover implements Serializable {
         this.detail = detail;
     }
 
+    public void makePostCover(Posts posts){
+        setContinent(posts.getContinent());
+        setCoverPath(posts.getImg());
+        setEndDate(posts.getEnd_date());
+        setStartDate(posts.getStart_date());
+        setLikeCount(posts.getNum_liked());
+        setLiked(posts.getLiked());
+        setPk(posts.getPk());
+        setTitle(posts.getTitle());
+    }
+
     @Override
     public String toString() {
         return "PostCover{" +
@@ -133,7 +145,7 @@ public class PostCover implements Serializable {
                 ", startDate='" + startDate + '\'' +
                 ", endDate='" + endDate + '\'' +
                 ", coverPath='" + coverPath + '\'' +
-                ", createdAt='" + createdAt + '\'' +
+//                ", createdAt='" + createdAt + '\'' +
                 ", continent='" + continent + '\'' +
                 ", likeCount=" + likeCount +
                 ", liked=" + Arrays.toString(liked) +

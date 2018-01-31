@@ -1,6 +1,7 @@
 package com.hongsup.explog.view.setting.editprofile.insuptest;
 
 import com.hongsup.explog.data.post.PostCover;
+import com.hongsup.explog.data.user.User;
 
 import java.util.ArrayList;
 
@@ -9,7 +10,7 @@ import java.util.ArrayList;
  */
 
 public class UserInformation {
-    private Followers[] followers;
+    private ArrayList<User> followers;
 
     private String username;
 
@@ -21,20 +22,21 @@ public class UserInformation {
 
     private String email;
 
-    private ArrayList<Liked_posts> liked_posts;
+    private ArrayList<Posts> liked_posts;
 
-    private ArrayList<PostCover> posts;
+    private ArrayList<Posts> posts;
 
-    private Following_users[] following_users;
+    private ArrayList<User> following_users;
 
     private String pk;
 
-    public Followers[] getFollowers ()
+
+    public ArrayList<User> getFollowers ()
     {
         return followers;
     }
 
-    public void setFollowers (Followers[] followers)
+    public void setFollowers (ArrayList<User> followers)
     {
         this.followers = followers;
     }
@@ -89,32 +91,32 @@ public class UserInformation {
         this.email = email;
     }
 
-    public ArrayList<Liked_posts> getLiked_posts ()
+    public ArrayList<Posts> getLiked_posts ()
     {
         return liked_posts;
     }
 
-    public void setLiked_posts (ArrayList<Liked_posts> liked_posts)
+    public void setLiked_posts (ArrayList<Posts> liked_posts)
     {
         this.liked_posts = liked_posts;
     }
 
-    public ArrayList<PostCover> getPosts ()
+    public ArrayList<Posts> getPosts ()
     {
         return posts;
     }
 
-    public void setPosts (ArrayList<PostCover> posts)
+    public void setPosts (ArrayList<Posts> posts)
     {
         this.posts = posts;
     }
 
-    public Following_users[] getFollowing_users ()
+    public ArrayList<User> getFollowing_users ()
     {
         return following_users;
     }
 
-    public void setFollowing_users (Following_users[] following_users)
+    public void setFollowing_users (ArrayList<User> following_users)
     {
         this.following_users = following_users;
     }

@@ -42,9 +42,10 @@ public interface PostSource {
      * @param postPk
      * @param text : 내용
      * @param date : 입력 날짜
+     * @param type : 하이라이트 글 구별 인자
      * @return
      */
-    Observable<Response<PostContent>> uploadPostText(int postPk, String text, String date);
+    Observable<Response<PostContent>> uploadPostText(int postPk, String text, String date, String type);
 
     /**
      * Post 에 대한 위치 추가하는 메소드
