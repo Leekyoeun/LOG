@@ -2,6 +2,8 @@ package com.hongsup.explog.view.search;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.PorterDuff;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +18,7 @@ import com.hongsup.explog.data.Const;
 import com.hongsup.explog.data.post.PostCover;
 import com.hongsup.explog.view.post.PostActivity;
 import com.hongsup.explog.view.search.insuptest.SearchResponse;
+import com.hongsup.explog.view.setting.editprofile.insuptest.Posts;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -43,7 +46,7 @@ public class SearchRecyclerResultAdapter extends RecyclerView.Adapter<SearchRecy
 
     @Override
     public MyHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_search_post, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_post, parent, false);
         return new MyHolder(view);
     }
 
@@ -53,8 +56,10 @@ public class SearchRecyclerResultAdapter extends RecyclerView.Adapter<SearchRecy
         holder.textTitle.setText(resultList.get(position).getTitle());
         String date = resultList.get(position).getStartDate() + " ~ " + resultList.get(position).getEndDate();
         holder.textDate.setText(date);
-        Glide.with(context).load(resultList.get(position).getCoverPath()).centerCrop().into(holder.imageSearch);
+        Glide.with(context).load(resultList.get(position).getCoverPath()).centerCrop().into(holder.imgCover);
+        holder.imgCover.setColorFilter(ContextCompat.getColor(context, R.color.colorMainTint), PorterDuff.Mode.SRC_OVER);
         holder.postCover = resultList.get(position);
+        holder.textLike.setText(resultList.get(position).getLikeCount() + "");
     }
 
     @Override
@@ -65,26 +70,38 @@ public class SearchRecyclerResultAdapter extends RecyclerView.Adapter<SearchRecy
 
     class MyHolder extends RecyclerView.ViewHolder {
 
-        //        @BindView(R.id.searchItemImageView)
-//        ImageView searchItemImageView;
-        @BindView(R.id.textWriter)
-        TextView textWriter;
+//        //        @BindView(R.id.searchItemImageView)
+////        ImageView searchItemImageView;
+//        @BindView(R.id.textWriter)
+//        TextView textWriter;
+//        @BindView(R.id.textTitle)
+//        TextView textTitle;
+//        //        @BindView(R.id.textContent)
+////        TextView textContent;
+//        @BindView(R.id.textDate)
+//        TextView textDate;
+//        @BindView(R.id.textComment)
+//        TextView textComment;
+//        @BindView(R.id.textLike)
+//        TextView textLike;
+//        String date;
+//
+//        @BindView(R.id.imageSearch)
+//        ImageView imageSearch;
+//
+//        PostCover postCover;
+
         @BindView(R.id.textTitle)
         TextView textTitle;
-        //        @BindView(R.id.textContent)
-//        TextView textContent;
         @BindView(R.id.textDate)
         TextView textDate;
-        @BindView(R.id.textCalcDate)
-        TextView textCalcDate;
-        @BindView(R.id.textComment)
-        TextView textComment;
+        @BindView(R.id.textWriter)
+        TextView textWriter;
+        @BindView(R.id.imgCover)
+        ImageView imgCover;
         @BindView(R.id.textLike)
         TextView textLike;
-        String date;
 
-        @BindView(R.id.imageSearch)
-        ImageView imageSearch;
 
         PostCover postCover;
 

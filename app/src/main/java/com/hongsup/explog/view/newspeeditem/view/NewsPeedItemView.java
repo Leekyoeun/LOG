@@ -67,10 +67,10 @@ public class NewsPeedItemView extends FrameLayout implements NewsPeedItemContrac
         newsPeedItemAdapter = new NewsPeedItemAdapter();
         recyclerView.setAdapter(newsPeedItemAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        /*
-        RecyclerView 사이에 여백 주는 Code
-         */
-        recyclerView.addItemDecoration(new PostItemDivider(48));
+//        /*
+//        RecyclerView 사이에 여백 주는 Code
+//         */
+//        recyclerView.addItemDecoration(new PostItemDivider(48));
     }
 
     @Override

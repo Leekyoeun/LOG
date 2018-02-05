@@ -81,7 +81,6 @@ public class MyInfoLayout extends FrameLayout {
         recyclerViewPostAdapter = new RecyclerViewPostAdapter();
         setProfileFromUserRepository();
         getDataFromDB();
-        myinfo_recyclerView.addItemDecoration(new PostItemDivider(48));
 
         setListener();
 

@@ -3,6 +3,8 @@ package com.hongsup.explog.view.myinfo.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,6 +57,7 @@ public class RecyclerViewPostAdapter extends RecyclerView.Adapter<RecyclerViewPo
         holder.textLike.setText(list.get(position).getNum_liked()+"");
 
         Glide.with(context).load(list.get(position).getImg()).centerCrop().into(holder.imgCover);
+        holder.imgCover.setColorFilter(ContextCompat.getColor(context, R.color.colorMainTint), PorterDuff.Mode.SRC_OVER);
     }
 
     @Override
