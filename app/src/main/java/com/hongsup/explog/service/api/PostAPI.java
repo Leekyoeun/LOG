@@ -16,6 +16,7 @@ import io.reactivex.Observable;
 import okhttp3.RequestBody;
 import retrofit2.Response;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -94,5 +95,8 @@ public interface PostAPI {
     @FormUrlEncoded
     @POST("/post/{post_pk}/reply/create/")
     Observable<Response<Reply>> reply_input(@Path("post_pk") int postPk, @Field("content") String content);
+
+    @DELETE("/post/{post_pk}/update/")
+    Observable<Response<Void>> delete(@Path("post_pk") int postPk);
 
 }

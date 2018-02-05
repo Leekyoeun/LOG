@@ -84,6 +84,7 @@ public class PostActivity extends AppCompatActivity implements OnPostContentClic
                     postPresenter.uploadPostPath(latLng.latitude, latLng.longitude);
                 }
                 break;
+
         }
     }
 }

@@ -135,7 +135,7 @@ public class MyInfoLayout extends FrameLayout {
                     Glide.with(getContext()).load(userRepository.getUser().getImg_profile()).centerCrop().into(imgProfile);
                     textUserNameMyInfo.setText(userRepository.getUser().getUsername());
                     textEmailMyInfo.setText(userRepository.getUser().getEmail());
-                    getFollowingDataFromDB();
+                    getDataFromDB();
 
                 }
             });
@@ -159,7 +159,6 @@ public class MyInfoLayout extends FrameLayout {
                             recyclerViewPostAdapter.setList(data.body().getPosts(), getContext());
                             myinfo_recyclerView.setAdapter(recyclerViewPostAdapter);
                             myinfo_recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-                            myinfo_recyclerView.addItemDecoration(new PostItemDivider(48));
 
                             followerUserList = data.body().getFollowers();
                             followingUserList = data.body().getFollowing_users();
@@ -177,32 +176,36 @@ public class MyInfoLayout extends FrameLayout {
 
     }
 
-    public void getFollowingDataFromDB(){
-        EditProfileAPI profileEditAPI = ServiceGenerator.createInterceptor(EditProfileAPI.class);
-        Observable<Response<UserInformation>> getUserInfo = profileEditAPI.getUserInfo();
-        getUserInfo.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(data -> {
-                    if (data.isSuccessful()) {
-                        if (data.code() == 200) {
-                            Log.d("MyInfoLayout", "확인됨");
-
-                            followerUserList = data.body().getFollowers();
-                            followingUserList = data.body().getFollowing_users();
-                            textFollowing.setText(followingUserList.size() + " Following");
-                            textFollower.setText(followerUserList.size() + " Follower");
-
-                        } else {
-                            Log.d("EditProfileActivity", "확인안됨");
-                        }
-                    } else {
-                        Log.d("EditProfileActivity", data.errorBody().string() + "data unsuccessful");
-                    }
-                }, throwable -> {
-                    Log.e("SearchView", throwable.getMessage());
-                });
-
-    }
+//    public void getFollowingDataFromDB(){
+//        EditProfileAPI profileEditAPI = ServiceGenerator.createInterceptor(EditProfileAPI.class);
+//        Observable<Response<UserInformation>> getUserInfo = profileEditAPI.getUserInfo();
+//        getUserInfo.subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(data -> {
+//                    if (data.isSuccessful()) {
+//                        if (data.code() == 200) {
+//                            Log.d("MyInfoLayout", "확인됨");
+//
+//                            recyclerViewPostAdapter.setList(data.body().getPosts(), getContext());
+//                            myinfo_recyclerView.setAdapter(recyclerViewPostAdapter);
+//                            myinfo_recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+//
+//                            followerUserList = data.body().getFollowers();
+//                            followingUserList = data.body().getFollowing_users();
+//                            textFollowing.setText(followingUserList.size() + " Following");
+//                            textFollower.setText(followerUserList.size() + " Follower");
+//
+//                        } else {
+//                            Log.d("EditProfileActivity", "확인안됨");
+//                        }
+//                    } else {
+//                        Log.d("EditProfileActivity", data.errorBody().string() + "data unsuccessful");
+//                    }
+//                }, throwable -> {
+//                    Log.e("SearchView", throwable.getMessage());
+//                });
+//
+//    }
 
     public boolean[] checkIsFollowing(){
        result = new boolean[followerUserList.size()];

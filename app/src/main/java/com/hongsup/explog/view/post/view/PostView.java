@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -41,6 +42,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
+
+import static com.hongsup.explog.data.Const.REQ_GALLERY;
+import static com.hongsup.explog.data.Const.REQ_GALLERY2;
 
 /**
  * Created by Android Hong on 2017-12-14.
@@ -157,6 +161,16 @@ public class PostView implements PostContract.iView {
     public void onMenuClick(MenuItem item) {
         if (menuId == R.menu.menu_my_post) {
             // 내 글이면
+            switch(item.getItemId()){
+                case R.id.action_cover_change :
+
+                    break;
+
+                case R.id.action_delete :
+                    presenter.setOnPostDelete();
+                    ((Activity) context).finish();
+                    break;
+            }
 
         } else {
             // 남 글이면

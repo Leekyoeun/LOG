@@ -331,4 +331,19 @@ public class PostPresenter implements PostContract.iPresenter, OnPostContentClic
                 });
 
     }
+
+    @Override
+    public void setOnPostDelete(){
+        PostAPI postAPI = ServiceGenerator.createInterceptor(PostAPI.class);
+        Observable<Response<Void>> delete = postAPI.delete(postPk);
+        delete.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(data->{
+                    Log.d("PostPresenter", "setOnPostDelete() work");
+
+                }, throwable -> {
+                    Log.d("PostPresenter", throwable.toString());
+
+                });
+    }
 }

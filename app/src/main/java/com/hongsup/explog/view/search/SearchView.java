@@ -2,20 +2,15 @@ package com.hongsup.explog.view.search;
 
 import android.app.Activity;
 import android.content.Context;
-import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -29,7 +24,7 @@ import com.hongsup.explog.data.post.source.PostCoverList;
 import com.hongsup.explog.data.search.dao.SearchHistoryDAO;
 import com.hongsup.explog.service.ServiceGenerator;
 import com.hongsup.explog.service.api.SearchAPI;
-import com.hongsup.explog.view.search.insuptest.SearchResponse;
+import com.hongsup.explog.view.custom.PostItemDivider;
 import com.hongsup.explog.view.search.insuptest.Word;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 
@@ -37,20 +32,10 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.OnTextChanged;
-import butterknife.OnTouch;
 import io.reactivex.Observable;
-import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.Body;
-import retrofit2.http.Headers;
-import retrofit2.http.POST;
 
 /**
  * Created by 정인섭 on 2017-12-08.
@@ -83,10 +68,10 @@ public class SearchView extends FrameLayout implements SearchRecyclerAdapter.Lis
         super(context);
         init(context);
         setRecyclerView();
-        readList();
+        executeList();
     }
 
-    private void init(Context context) {
+    private void init(@NonNull Context context) {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.view_search, null);
         ButterKnife.bind(this, view);
         dao = new SearchHistoryDAO(getContext());
@@ -104,7 +89,7 @@ public class SearchView extends FrameLayout implements SearchRecyclerAdapter.Lis
         String insertquery = "insert into history(word)" + " values('" + word + "')";
         dao.readQuery(deleteQuery);
         dao.readQuery(insertquery);
-        readList();
+        executeList();
         Log.d("SearchView", "readQuery() 작동");
     }
 
@@ -112,7 +97,9 @@ public class SearchView extends FrameLayout implements SearchRecyclerAdapter.Lis
         editSearch.setOnKeyListener(new OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (!"".equals(editSearch.getText().toString()) && keyCode == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_UP) {
+                if (!"".equals(editSearch.getText().toString())
+                        && keyCode == KeyEvent.KEYCODE_ENTER
+                        && event.getAction() == KeyEvent.ACTION_UP) {
                     insert();
                     // 키보드 사라짐
                     inputMethodManager.hideSoftInputFromWindow(editSearch.getWindowToken(), 0);
@@ -167,7 +154,7 @@ public class SearchView extends FrameLayout implements SearchRecyclerAdapter.Lis
         recyclerSearchHistory.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
-    private void readList() {
+    private void executeList() {
         searchRecyclerAdapter.historyNotifier(dao.read());
     }
 
@@ -181,7 +168,7 @@ public class SearchView extends FrameLayout implements SearchRecyclerAdapter.Lis
     public void deleteHistory(String word) {
         String deleteQuery = "delete from history where word = '" + word + "'";
         dao.readQuery(deleteQuery);
-        readList();
+        executeList();
     }
 
     ArrayList<PostCover> list = new ArrayList<>();
@@ -204,15 +191,7 @@ public class SearchView extends FrameLayout implements SearchRecyclerAdapter.Lis
                             if (list.size() == 0) {
                                 relativeSearching.setVisibility(VISIBLE);
                             }
-                            //Log.d("SearchView", "데이터 없음" + data.body().size());
-//                            Log.d("SearchView", "데이터 없음" + data.errorBody());
-//                            Log.d("SearchView", "데이터 없음" + data.message());
-//                            Log.d("SearchView", "데이터 없음" + data.raw());
-//                            Log.d("SearchView", "데이터 없음" + data.headers());
-//                            Log.d("SearchView", "데이터 없음" + data.code());
-//                            if(data.body().size()==0){
-//                                Log.d("SearchView", "뜬다 떠");
-//                            }
+
                             progressBar.setVisibility(INVISIBLE);
                         } else {
                             Log.d("SearchView", "data is not Successful");
@@ -223,6 +202,5 @@ public class SearchView extends FrameLayout implements SearchRecyclerAdapter.Lis
                 }, throwable -> {
                     Log.e("SearchView", throwable.getMessage());
                 });
-
     }
 }

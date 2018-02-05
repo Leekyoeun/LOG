@@ -52,5 +52,7 @@ public interface PostContract {
         void uploadPostPhoto(String photoPath);
 
         void loadFollowing(ArrayList<User> list);
+
+        void setOnPostDelete();
     }
 }
