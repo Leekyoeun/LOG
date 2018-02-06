@@ -37,12 +37,6 @@ public class SearchRecyclerAdapter extends RecyclerView.Adapter<ViewHolder> {
         flag = HISTORY;
     }
 
-//    public void resultNotifier(ArrayList<Result> resultList) {
-//        this.resultList = resultList;
-//        notifyDataSetChanged();
-//        flag = RESULT;
-//    }
-
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         switch (flag) {
@@ -50,10 +44,6 @@ public class SearchRecyclerAdapter extends RecyclerView.Adapter<ViewHolder> {
             case HISTORY:
                 View historyView = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_search_recycler_history, parent, false);
                 return new HistoryHolder(historyView);
-
-            // case RESULT :
-            //View resultView = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_search_recycler_result, parent, false);
-            //return new ResultHolder(resultView);
         }
         return null;
     }
@@ -71,9 +61,7 @@ public class SearchRecyclerAdapter extends RecyclerView.Adapter<ViewHolder> {
 
     @Override
     public int getItemCount() {
-        //if(flag==HISTORY)
         return historyList.size();
-        //else if(flag==RESULT)
     }
 
     class HistoryHolder extends ViewHolder {
@@ -98,12 +86,6 @@ public class SearchRecyclerAdapter extends RecyclerView.Adapter<ViewHolder> {
                     listAction.deleteHistory(word);
                 }
             });
-        }
-    }
-
-    class ResultHolder extends ViewHolder {
-        public ResultHolder(View itemView) {
-            super(itemView);
         }
     }
 

@@ -19,7 +19,7 @@ public class SearchHistoryDAO {
         helper = new DBHelperUtil(context);
     }
 
-    public void readQuery(String query){
+    public void executeQuery(String query){
         SQLiteDatabase connection = helper.getReadableDatabase();
 
         connection.execSQL(query);

@@ -70,27 +70,6 @@ public class SearchRecyclerResultAdapter extends RecyclerView.Adapter<SearchRecy
 
     class MyHolder extends RecyclerView.ViewHolder {
 
-//        //        @BindView(R.id.searchItemImageView)
-////        ImageView searchItemImageView;
-//        @BindView(R.id.textWriter)
-//        TextView textWriter;
-//        @BindView(R.id.textTitle)
-//        TextView textTitle;
-//        //        @BindView(R.id.textContent)
-////        TextView textContent;
-//        @BindView(R.id.textDate)
-//        TextView textDate;
-//        @BindView(R.id.textComment)
-//        TextView textComment;
-//        @BindView(R.id.textLike)
-//        TextView textLike;
-//        String date;
-//
-//        @BindView(R.id.imageSearch)
-//        ImageView imageSearch;
-//
-//        PostCover postCover;
-
         @BindView(R.id.textTitle)
         TextView textTitle;
         @BindView(R.id.textDate)

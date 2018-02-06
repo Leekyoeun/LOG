@@ -24,7 +24,6 @@ import com.hongsup.explog.data.post.source.PostCoverList;
 import com.hongsup.explog.data.search.dao.SearchHistoryDAO;
 import com.hongsup.explog.service.ServiceGenerator;
 import com.hongsup.explog.service.api.SearchAPI;
-import com.hongsup.explog.view.custom.PostItemDivider;
 import com.hongsup.explog.view.search.insuptest.Word;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 
@@ -87,10 +86,10 @@ public class SearchView extends FrameLayout implements SearchRecyclerAdapter.Lis
         SearchHistoryDAO dao = new SearchHistoryDAO(getContext());
         String deleteQuery = "delete from history where word = '" + word + "'";
         String insertquery = "insert into history(word)" + " values('" + word + "')";
-        dao.readQuery(deleteQuery);
-        dao.readQuery(insertquery);
+        dao.executeQuery(deleteQuery);
+        dao.executeQuery(insertquery);
         executeList();
-        Log.d("SearchView", "readQuery() 작동");
+        Log.d("SearchView", "executeQuery() 작동");
     }
 
     private void setListener() {
@@ -167,7 +166,7 @@ public class SearchView extends FrameLayout implements SearchRecyclerAdapter.Lis
     @Override
     public void deleteHistory(String word) {
         String deleteQuery = "delete from history where word = '" + word + "'";
-        dao.readQuery(deleteQuery);
+        dao.executeQuery(deleteQuery);
         executeList();
     }
 
