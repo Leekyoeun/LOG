@@ -33,7 +33,6 @@ public class DBHelperUtil extends SQLiteOpenHelper {
                 "'word' TEXT)";
 
         db.execSQL(createQuery);
-
     }
 
     @Override
