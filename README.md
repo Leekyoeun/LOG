@@ -36,7 +36,7 @@
 
 ### 위의 기능을 구현하는데 필요한 기술은 다음과 같다.
 
-### 1. Retrofit 2.0 및 Reactive X - 모든 기능을 구현하는데 다 쓰임
+### 1. Retrofit 2.0 및 Reactive X - 앱의 전반적인 기능을 구현하는데 다 쓰임
 
 #### - REST API로 GET, POST, PATCH 하기
 #### - Call을 안쓰고 Observable을 사용해보았다.
