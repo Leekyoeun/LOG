@@ -65,6 +65,8 @@ public class PostPresenter implements PostContract.iPresenter, OnPostContentClic
         this.adapterView.setOnReplyButtonClickListener(this);
     }
 
+    ArrayList<User> userList;
+
     public void loadFollowing(ArrayList<User> list){
         //ArrayList를 받는다.
         userList = list;
@@ -150,7 +152,7 @@ public class PostPresenter implements PostContract.iPresenter, OnPostContentClic
                     Log.e(TAG, throwable.getMessage());
                 });
     }
-    ArrayList<User> userList;
+
 //    public void loadFollowInfo(){
 //        EditProfileAPI profileEditAPI = ServiceGenerator.createInterceptor(EditProfileAPI.class);
 //        Observable<Response<UserInformation>> getUserInfo = profileEditAPI.getUserInfo();
@@ -264,8 +266,8 @@ public class PostPresenter implements PostContract.iPresenter, OnPostContentClic
                             if (data.isSuccessful()) {
                                 Log.e(TAG, "setOnLikeClick: '좋아요' 완료");
                                 view.hideProgress();
-                                adapterModel.modifyLike(position, data.body().getLiked(), data.body().getLikeCount());
-                                adapterView.notifyLike(position);//특정 위치의 데이터가 업데이트 되었을 때 호출된다.
+                                adapterModel.modifyLike(position, data.body().getLiked(), data.body().getLikeCount()); // DB를 새로운 데이터로 갱신한다.
+                                adapterView.notifyLike(position);//특정 위치의 데이터가 업데이트 되었을 때 호출하여 view를 업데이트 한다.
                             } else {
                                 Log.e(TAG, "setOnLikeClick: '좋아요' 실패1");
                                 view.hideProgress();

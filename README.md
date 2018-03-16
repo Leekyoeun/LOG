@@ -245,3 +245,32 @@ RxTextView.textChanges(editSearch)
     }
 ```
 
+### 10. Follower, Following 기능 개요
+##### My Info 페이지를 불러올 때 사용자 정보(Following, Follower)를 미리 불러온다.
+```java
+public void getDataFromDB() {
+        EditProfileAPI profileEditAPI = ServiceGenerator.createInterceptor(EditProfileAPI.class);
+        Observable<Response<UserInformation>> getUserInfo = profileEditAPI.getUserInfo();
+        getUserInfo.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(data -> {
+                    if (data.isSuccessful()) {
+                        if (data.code() == 200) {
+                            // 다른 코드 생략                         
+
+                            followerUserList = data.body().getFollowers();
+                            followingUserList = data.body().getFollowing_users();
+                            textFollowing.setText(followingUserList.size() + " Following");
+                            textFollower.setText(followerUserList.size() + " Follower");
+                            // 다른 코드 생략
+                        } 
+
+    }
+
+```
+
+### 11. 댓글이나 Follow, Unfollow 했을 때 실시간 데이터 업데이트
+```java
+adapterModel.modifyLike(position, data.body().getLiked(), data.body().getLikeCount()); // DB를 새로운 데이터로 갱신한다.
+adapterView.notifyLike(position);//특정 위치의 데이터가 업데이트 되었을 때 호출하여 view를 업데이트 한다.
+```
