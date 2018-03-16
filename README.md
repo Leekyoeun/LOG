@@ -5,20 +5,39 @@
 - #### 안드로이드 스튜디오를 이용해 여행 어플리케이션인 Explog(Explore + Log)를 개발하였다.
 - #### 앱의 전체적인 기능은 여행앱인 '여행노트'와 'VOLO'를 참고하였고, UI는 카카오플레이스를 참고하였다.
 
+## 프로젝트 목적
+
+- #### MVP 구조를 이해하고 실제 사용
+- #### Git Flow 개념 이해
+- #### 다른 파트(ios, Back-end)와의 협업을 통해 앱이 나오기까지의 전체 과정을 이해
+
 ## Explog 화면
-![pic1](https://github.com/jis1218/ProjectStudy/blob/master/Explog%20화면/pic1.png)
-![pic2](https://github.com/jis1218/ProjectStudy/blob/master/Explog%20화면/pic2.png)
-![pic3](https://github.com/jis1218/ProjectStudy/blob/master/Explog%20화면/pic3.png)
-![pic4](https://github.com/jis1218/ProjectStudy/blob/master/Explog%20화면/pic4.png)
-![pic5](https://github.com/jis1218/ProjectStudy/blob/master/Explog%20화면/pic5.png)
-![pic6](https://github.com/jis1218/ProjectStudy/blob/master/Explog%20화면/pic6.png)
-![pic7](https://github.com/jis1218/ProjectStudy/blob/master/Explog%20화면/pic7.png)
+![pic1](https://github.com/jis1218/Explog/blob/master/img/pic1.png)
+![pic2](https://github.com/jis1218/Explog/blob/master/img/pic2.png)
+![pic3](https://github.com/jis1218/Explog/blob/master/img/pic3.png)
+![pic4](https://github.com/jis1218/Explog/blob/master/img/pic4.png)
+![pic5](https://github.com/jis1218/Explog/blob/master/img/pic5.png)
+![pic6](https://github.com/jis1218/Explog/blob/master/img/pic6.png)
+![pic7](https://github.com/jis1218/Explog/blob/master/img/pic7.png)
+![pic8](https://github.com/jis1218/Explog/blob/master/img/pic8.png)
+![pic9](https://github.com/jis1218/Explog/blob/master/img/pic9.png)
 
 ## API 문서 링크
 [API 링크](https://gangbok119.gitbooks.io/explog-api/content/)
 
-## 사용된 코드 및 배운 것들
+## 담당한 부분
 ### by Insup Jung
+
+#### 1. 회원가입 기능
+
+
+
+
+
+
+
+
+
 
 ### 1. Retrofit 2.0 및 Reactive X
 
