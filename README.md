@@ -10,8 +10,9 @@
 - #### MVP 구조를 이해하고 실제 사용
 - #### Git Flow 개념 이해
 - #### 다른 파트(ios, Back-end)와의 협업을 통해 앱이 나오기까지의 전체 과정을 이해
+- #### Retrofit, Reactive X, Glide, ButterKnife 등을 실제로 적용해봄
 
-## Explog 화면
+## 스크린샷
 ![pic1](https://github.com/jis1218/Explog/blob/master/img/pic1.png)
 ![pic2](https://github.com/jis1218/Explog/blob/master/img/pic2.png)
 ![pic3](https://github.com/jis1218/Explog/blob/master/img/pic3.png)
@@ -28,21 +29,17 @@
 ## 담당한 부분
 ### by Insup Jung
 
-#### 1. 회원가입 기능
+### 1. 회원가입 기능
+### 2. 검색 화면
+### 3. 댓글 및 Following, Follower 기능
+### 4. 나의 정보(My profile) 페이지 (정보 수정 및 로그아웃)
 
+#### 위의 기능을 구현하는데 필요한 기술은 다음과 같다.
 
-
-
-
-
-
-
-
-
-### 1. Retrofit 2.0 및 Reactive X
+### 1. Retrofit 2.0 및 Reactive X - 모든 기능을 구현하는데 다 쓰임
 
 #### - REST API로 GET, POST, PATCH 하기
-#### - Call을 안쓰고 Observable을 사용해보았다. 연습 겸 해서
+#### - 연습도 할겸 하여 Call을 안쓰고 Observable을 사용해보았다.
 ```java
 @GET("/member/userprofile/{userPK}")
     Observable<Response<UserInformation>> getOtherUserInfo(@Path("userPK") String userPK);
@@ -54,8 +51,8 @@
 @POST("/member/login/")
     Observable<Response<User>> signIn(@Body SignIn signIn);
 ```
-#### - PUT과 PATCH의 차이점
-#### - PUT은 전체 데이터를 다 보내주지만 PATCH는 변경된 데이터만 보낼 수 있다.
+
+#### - PUT과 PATCH의 차이점은 PUT은 전체 데이터를 다 보내주지만 PATCH는 변경된 데이터만 보낼 수 있다.
 #### - PATCH와 Multipart로 데이터 보내는 방법
 ```java
     @Multipart
@@ -93,6 +90,77 @@ java.lang.IllegalStateException: Expected BEGIN_OBJECT but was BEGIN_ARRAY at li
 ```java
 Observable<Response<SearchResponse>> observable -> Observable<ArrayList<Response<SearchResponse>>> observable
 ```
+
+### 2. SQLiteDB - 검색 히스토리 기능 구현
+#### - SQLiteOpenHelper를 상속하는 클래스를 이용해 SQLiteDB table 생성하고 검색어를 저장할 수 있도록 함
+```java
+public class DBHelperUtil extends SQLiteOpenHelper {
+@Override
+    public void onCreate(SQLiteDatabase db) {
+        String createQuery = "CREATE TABLE 'history' ('id' INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "'word' TEXT)";
+
+        db.execSQL(createQuery);
+    }
+}
+```
+#### - SQLite DB 생성 후 DB에 있는 내용을 ArrayList에 담는다. 담을 때는 list.add(0, data)로 하여 recyclerView에서 가장 나중에 add된 data가 먼저 보여지도록 한다.
+```java
+Cursor cursor = connection.rawQuery(query, null);
+        while(cursor.moveToNext()){
+            String word = cursor.getString(1);
+            list.add(0, word);
+        }
+```
+#### - 검색을 하였을 때는 delete Query와 insert Query가 동시에 실행이 되도록 한다. 그 이유는 이미 기록에 내가 검색한 값이 있다면 그 값을 없애고 맨 처음 History로 올리기 위해서이다. 혹시라도 기록에 없다하더라도 delete Query에 맞는 검색어가 없으므로 실행되어도 상관없다.
+```java
+    private void insert() {
+        String word = editSearch.getText().toString();
+        SearchHistoryDAO dao = new SearchHistoryDAO(getContext());
+        String deleteQuery = "delete from history where word = '" + word + "'";
+        String insertquery = "insert into history(word)" + " values('" + word + "')";
+        dao.executeQuery(deleteQuery);
+        dao.executeQuery(insertquery);
+        executeList();
+    }
+
+        private void executeList() {
+        searchRecyclerAdapter.historyNotifier(dao.read()); //dao.read()함수는 DB에 있는 모든 데이터를 list로 반환하는 함수이다.
+    }
+```
+
+### 3. Follower, Following 기능 개요
+##### My Info 페이지를 불러올 때 사용자 정보(Following, Follower)를 미리 불러온다.
+![pic10](https://github.com/jis1218/Explog/blob/master/img/pic6.png)
+```java
+public void getDataFromDB() {
+        EditProfileAPI profileEditAPI = ServiceGenerator.createInterceptor(EditProfileAPI.class);
+        Observable<Response<UserInformation>> getUserInfo = profileEditAPI.getUserInfo();
+        getUserInfo.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(data -> {
+                    if (data.isSuccessful()) {
+                        if (data.code() == 200) {
+                            // 다른 코드 생략                         
+
+                            followerUserList = data.body().getFollowers();
+                            followingUserList = data.body().getFollowing_users();
+                            textFollowing.setText(followingUserList.size() + " Following");
+                            textFollower.setText(followerUserList.size() + " Follower");
+                            // 다른 코드 생략
+                        } 
+
+    }
+
+```
+
+### 4. 댓글이나 Follow, Unfollow 했을 때 실시간 데이터 업데이트
+```java
+adapterModel.modifyLike(position, data.body().getLiked(), data.body().getLikeCount()); // DB를 새로운 데이터로 갱신한다.
+adapterView.notifyLike(position);//특정 위치의 데이터가 업데이트 되었을 때 호출하여 view를 업데이트 한다.
+```
+
+
 ### 2. ButterKnife
 
 #### - 코드의 양을 조금이라도 줄이기 위해 ButterKnife 사용하였다.
