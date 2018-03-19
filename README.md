@@ -61,18 +61,28 @@
     Observable<Response<UserEditProfile>> userEditProfile(@Header("Authorization") String token,
     @Part MultipartBody.Part filePart, @Part("username") RequestBody username);
 ```
-#### - 이미지를 선택했을 경우 filepart에 이미지를 넣어준다.
+#### - 파일(이미지 등등) url과 다른 String data가 한 클래스에 있고 같이 보내야 한다면 Map에 넣어 보내준다.
 ```java
-        File file = new File(photoList.get(0).getImagePath());
-        MultipartBody.Part filePart = MultipartBody.Part
-        .createFormData("img_profile", file.getName(), RequestBody.create(MediaType.parse("image/*"), file));
+    Map<String, RequestBody> requestBodyMap = new HashMap<>();
+        requestBodyMap.put("email", toRequestBody(signUp.getEmail()));
+        requestBodyMap.put("password", toRequestBody(signUp.getPassword()));
+        requestBodyMap.put("username", toRequestBody(signUp.getUsername()));
 
-        RequestBody username = RequestBody.create(MediaType.parse("text/plain"), 
-        editNameEditProfile.getText().toString());
+        if(signUp.getImg_profile() != null){
+            File file = new File(signUp.getImg_profile());
+            // create RequestBody instance from file
+            RequestBody requestFile = RequestBody.create(MediaType.parse("image/*"), file);
+            requestBodyMap.put("img_profile\"; filename=\""+file.getName(), requestFile);
+        }else{
+            RequestBody requestFile = RequestBody.create(MediaType.parse(""),"");
+            requestBodyMap.put("img_profile\"; filename=\"", requestFile);
+        }
+        return signAPI.signUp(requestBodyMap);
 ```
+
 #### - Retrofit과 Observable을 사용하여 Post를 날리고 그 결과값을 받으려고 하는데 그것이 잘 안됨
 ```java
-DataService dataService = getDataFromDB().create(DataService.class);
+    DataService dataService = getDataFromDB().create(DataService.class);
         Observable<Response<SearchResponse>> observable = dataService.observable(word);
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -133,7 +143,115 @@ Cursor cursor = connection.rawQuery(query, null);
     }
 ```
 
-### 3. Follower, Following 기능 개요
+### 3. MVP Pattern 적용
+##### MVP Pattern을 적용한 후의 구조
+![pic11](https://github.com/jis1218/Explog/blob/master/img/pic11.png)
+
+##### Contract 작성
+```java
+public interface PostContract {
+
+    interface iView {
+
+        void setPresenter(iPresenter presenter);
+
+        void recyclerDown(int position);
+    }
+
+    interface iPresenter {
+
+        void loadFollowing(ArrayList<User> list);
+
+        void setOnPostDelete();
+    }
+}
+```
+
+##### Adapter에도 Contract 작성
+```java
+public interface PostAdapterContract {
+
+    interface iView {
+
+        void setOnReplyButtonClickListener(OnReplyButtonClickListener replyButtonClickListener);
+
+        void notifyAllAdapter();
+
+        void notifyLike(int position); // RecyclerView에서 특정 위치의 데이터가 바뀌었을 때 호출된다.
+    }
+
+    interface iModel {
+
+        void setCheckIfFollowing(boolean check);
+
+        void setReply(int[] liked, int likeCount, User author, Reply reply);
+
+        void setReplyInput(int[] liked, int likeCount, User author);
+
+        void addReply(PostContent postContent);
+
+        int getListSize();
+    }
+}
+```
+
+##### Presenter의 예시
+```java
+public class PostPresenter implements PostContract.iPresenter, OnPostContentClickListener, OnPostLikeClickListener, OnPostFollowClickListener, OnReplyButtonClickListener {
+        @Override
+    public void setOnReplyClick(String content) {
+        PostAPI postAPI = ServiceGenerator.createInterceptor(PostAPI.class);
+        Observable<Response<Reply>> reply_input = postAPI.reply_input(postPk, content);
+        reply_input.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(data->{
+                    if(data.isSuccessful()){
+                        Log.d("setOnReplyClick()", "잘 들어옵니다");
+                        PostContent postContent = new PostContent();
+                        Content content1 = new Content();
+                        content1.setReply(data.body());
+                        postContent.setContent(content1);
+                        postContent.setContentType(Const.CONTENT_TYPE_REPLY);
+                        adapterModel.addReply(postContent);
+                        view.recyclerDown(adapterModel.getListSize());
+
+                    }else{
+                        Log.d("setOnReplyClick()", data.errorBody().string());
+                    }
+
+                }, throwable -> {
+                    Log.d("setOnReplyClick()", throwable.getMessage());
+
+                });
+    }
+
+        @Override
+    public void setOnPostDelete(){
+        PostAPI postAPI = ServiceGenerator.createInterceptor(PostAPI.class);
+        Observable<Response<Void>> delete = postAPI.delete(postPk);
+        delete.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(data->{
+                    Log.d("PostPresenter", "setOnPostDelete() work");
+
+                }, throwable -> {
+                    Log.d("PostPresenter", throwable.toString());
+
+                });
+    }
+```
+
+##### View 예시
+```java
+public class PostView implements PostContract.iView {
+        @Override
+    public void recyclerDown(int position){
+        recyclerView.scrollToPosition(position);
+    }
+```
+
+
+### 4. Follower, Following 기능 개요
 ##### My Info 페이지를 불러올 때 사용자 정보(Following, Follower)를 미리 불러온다.
 ![pic10](https://github.com/jis1218/Explog/blob/master/img/pic6.png)
 ```java
@@ -158,7 +276,7 @@ public void getDataFromDB() {
 
 ```
 
-### 4. 댓글이나 Follow, Unfollow 했을 때 실시간 데이터 업데이트
+### 5. 댓글이나 Follow, Unfollow 했을 때 실시간 데이터 업데이트
 ```java
 adapterModel.modifyLike(position, data.body().getLiked(), data.body().getLikeCount()); // DB를 새로운 데이터로 갱신한다.
 adapterView.notifyLike(position);//특정 위치의 데이터가 업데이트 되었을 때 호출하여 view를 업데이트 한다.

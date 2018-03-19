@@ -2,16 +2,12 @@ package com.hongsup.explog.view.setting;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
 import com.hongsup.explog.R;
@@ -48,7 +44,7 @@ public class SettingActivity extends AppCompatActivity implements SettingRecycle
     public void reflection(){
 
         try {
-            Class<?> cls = Class.forName("com.hongsup.explog.view.myinfo.MyInfoLayout");
+            Class<?> cls = Class.forName("com.hongsup.explog.view.myinfo.view.MyInfoLayout");
             Class[] constructorParamClass = new Class[] {Context.class};
             Object[] constructorParamObject = new Object[] {this};
             Constructor constructor = cls.getConstructor(constructorParamClass);

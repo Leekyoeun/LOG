@@ -331,7 +331,6 @@ public class PostPresenter implements PostContract.iPresenter, OnPostContentClic
                     Log.d("setOnReplyClick()", throwable.getMessage());
 
                 });
-
     }
 
     @Override
